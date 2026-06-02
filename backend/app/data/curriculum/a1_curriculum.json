@@ -1,0 +1,1464 @@
+{
+  "modules": [
+    {
+      "slug": "survival",
+      "title_es": "Supervivencia",
+      "title_en": "Survival English",
+      "description_es": "Lo más básico para presentarte y entender al otro.",
+      "level": "A1",
+      "order_index": 0,
+      "lessons": [
+        {
+          "slug": "greetings",
+          "title_es": "Saludos y presentación",
+          "title_en": "Greetings and introductions",
+          "objective_es": "Presentarte sin trabarte y sostener un mini-saludo.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "say-hello",
+              "prompt_es": "Saludá a alguien que recién conocés y presentate (nombre, de dónde sos).",
+              "prompt_en": "Say hello to someone you just met and introduce yourself.",
+              "example_en": "Hi! My name is William. I'm from El Salvador. Nice to meet you.",
+              "key_vocabulary": [
+                {"en": "hi", "es": "hola"},
+                {"en": "hello", "es": "hola (formal)"},
+                {"en": "my name is", "es": "me llamo"},
+                {"en": "I'm from", "es": "soy de"},
+                {"en": "nice to meet you", "es": "mucho gusto"}
+              ],
+              "connectors": ["and"],
+              "socratic_hints": ["What is your name?", "Where are you from?", "How are you today?"],
+              "difficulty": 1,
+              "order_index": 0
+            },
+            {
+              "slug": "ask-questions",
+              "prompt_es": "Preguntale a la otra persona su nombre, de dónde es y cómo está.",
+              "prompt_en": "Ask the other person their name, where they're from, and how they are.",
+              "example_en": "What's your name? Where are you from? How are you today?",
+              "key_vocabulary": [
+                {"en": "what", "es": "qué"},
+                {"en": "where", "es": "dónde"},
+                {"en": "how", "es": "cómo"},
+                {"en": "your", "es": "tu"}
+              ],
+              "connectors": ["and"],
+              "socratic_hints": ["Can you ask me one more question?"],
+              "difficulty": 1,
+              "order_index": 1
+            },
+            {
+              "slug": "say-goodbye",
+              "prompt_es": "Despedite de alguien de manera amable.",
+              "prompt_en": "Say goodbye to someone in a friendly way.",
+              "example_en": "Goodbye! It was nice talking to you. See you tomorrow!",
+              "key_vocabulary": [
+                {"en": "goodbye", "es": "adiós"},
+                {"en": "bye", "es": "chau"},
+                {"en": "see you", "es": "nos vemos"},
+                {"en": "tomorrow", "es": "mañana"},
+                {"en": "take care", "es": "cuidate"}
+              ],
+              "connectors": ["and"],
+              "socratic_hints": ["When will you see them again?", "How do you feel after the talk?"],
+              "difficulty": 1,
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "slug": "about-me",
+          "title_es": "Sobre mí",
+          "title_en": "About me",
+          "objective_es": "Hablar de vos: edad, trabajo, familia, en oraciones simples.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "my-age",
+              "prompt_es": "Decí tu edad y cómo te sentís con esa edad.",
+              "prompt_en": "Tell your age and how you feel about it.",
+              "example_en": "I am 30 years old. I feel young and energetic.",
+              "key_vocabulary": [
+                {"en": "I am", "es": "yo soy / tengo"},
+                {"en": "years old", "es": "años (de edad)"},
+                {"en": "young", "es": "joven"},
+                {"en": "old", "es": "viejo"}
+              ],
+              "connectors": ["and"],
+              "socratic_hints": ["When is your birthday?", "Do you feel old or young?"],
+              "difficulty": 1,
+              "order_index": 0
+            },
+            {
+              "slug": "my-job",
+              "prompt_es": "Contá en qué trabajás y qué hacés en tu trabajo.",
+              "prompt_en": "Talk about your job and what you do at work.",
+              "example_en": "I work as a developer. I write code every day. I like my job because I learn new things.",
+              "key_vocabulary": [
+                {"en": "I work", "es": "yo trabajo"},
+                {"en": "as a", "es": "como"},
+                {"en": "every day", "es": "todos los días"},
+                {"en": "because", "es": "porque"}
+              ],
+              "connectors": ["and", "because", "but"],
+              "socratic_hints": ["What do you like about your job?", "How long have you been working there?", "What is the hardest part?"],
+              "difficulty": 2,
+              "order_index": 1
+            },
+            {
+              "slug": "my-family",
+              "prompt_es": "Describí a tu familia: cuántos son, cómo se llaman, qué hacen.",
+              "prompt_en": "Describe your family.",
+              "example_en": "I have a small family. My mom is a teacher and my dad works at a store. I have one brother.",
+              "key_vocabulary": [
+                {"en": "I have", "es": "yo tengo"},
+                {"en": "mom", "es": "mamá"},
+                {"en": "dad", "es": "papá"},
+                {"en": "brother", "es": "hermano"},
+                {"en": "sister", "es": "hermana"}
+              ],
+              "connectors": ["and", "also"],
+              "socratic_hints": ["Do you live with them?", "Who is the oldest?"],
+              "difficulty": 2,
+              "order_index": 2
+            },
+            {
+              "slug": "where-i-live",
+              "prompt_es": "Decí dónde vivís: ciudad, país, tipo de casa.",
+              "prompt_en": "Say where you live: city, country, type of home.",
+              "example_en": "I live in San Salvador, El Salvador. I live in a small house with my family.",
+              "key_vocabulary": [
+                {"en": "I live in", "es": "vivo en"},
+                {"en": "city", "es": "ciudad"},
+                {"en": "country", "es": "país"},
+                {"en": "house", "es": "casa"},
+                {"en": "apartment", "es": "apartamento"}
+              ],
+              "connectors": ["and", "with"],
+              "socratic_hints": ["How big is your house?", "Do you like your neighborhood?"],
+              "difficulty": 2,
+              "order_index": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "numbers-time",
+      "title_es": "Números y tiempo",
+      "title_en": "Numbers and time",
+      "description_es": "Pedir precios, decir horas, días, fechas. Esencial para sobrevivir.",
+      "level": "A1",
+      "order_index": 1,
+      "lessons": [
+        {
+          "slug": "numbers",
+          "title_es": "Números",
+          "title_en": "Numbers",
+          "objective_es": "Contar y decir precios con confianza.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "count-to-ten",
+              "prompt_es": "Contá del uno al diez en inglés.",
+              "prompt_en": "Count from one to ten in English.",
+              "example_en": "One, two, three, four, five, six, seven, eight, nine, ten.",
+              "key_vocabulary": [
+                {"en": "one", "es": "uno"},
+                {"en": "five", "es": "cinco"},
+                {"en": "ten", "es": "diez"}
+              ],
+              "connectors": [],
+              "socratic_hints": ["Can you count to twenty?"],
+              "difficulty": 1,
+              "order_index": 0
+            },
+            {
+              "slug": "say-price",
+              "prompt_es": "Decí cuánto cuesta algo. Por ejemplo: un café cuesta dos dólares.",
+              "prompt_en": "Say how much something costs.",
+              "example_en": "A coffee costs two dollars. A bottle of water is one dollar.",
+              "key_vocabulary": [
+                {"en": "costs", "es": "cuesta"},
+                {"en": "dollar", "es": "dólar"},
+                {"en": "how much", "es": "cuánto"},
+                {"en": "price", "es": "precio"}
+              ],
+              "connectors": ["and"],
+              "socratic_hints": ["How much is your favorite drink?", "Is it cheap or expensive?"],
+              "difficulty": 2,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "time",
+          "title_es": "La hora y el tiempo",
+          "title_en": "Time",
+          "objective_es": "Decir qué hora es y cuándo hacés cosas.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "what-time",
+              "prompt_es": "Decí qué hora es ahora y qué hora te gusta más del día.",
+              "prompt_en": "Say what time it is and your favorite time of the day.",
+              "example_en": "It is three in the afternoon. My favorite time is the morning because I feel fresh.",
+              "key_vocabulary": [
+                {"en": "morning", "es": "mañana"},
+                {"en": "afternoon", "es": "tarde"},
+                {"en": "evening", "es": "noche temprana"},
+                {"en": "night", "es": "noche"},
+                {"en": "o'clock", "es": "en punto"}
+              ],
+              "connectors": ["because"],
+              "socratic_hints": ["What time do you wake up?", "What time do you go to bed?"],
+              "difficulty": 2,
+              "order_index": 0
+            },
+            {
+              "slug": "days-week",
+              "prompt_es": "Decí los días de la semana y cuál es tu favorito y por qué.",
+              "prompt_en": "Say the days of the week and your favorite.",
+              "example_en": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. My favorite is Saturday because I don't work.",
+              "key_vocabulary": [
+                {"en": "Monday", "es": "lunes"},
+                {"en": "Saturday", "es": "sábado"},
+                {"en": "Sunday", "es": "domingo"},
+                {"en": "weekend", "es": "fin de semana"}
+              ],
+              "connectors": ["because"],
+              "socratic_hints": ["What do you do on weekends?", "Which day is the worst?"],
+              "difficulty": 2,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "daily-life",
+      "title_es": "Vida diaria",
+      "title_en": "Daily life",
+      "description_es": "Hablar de tu día a día. Acá empezás a ENLAZAR ideas con conectores.",
+      "level": "A1",
+      "order_index": 2,
+      "lessons": [
+        {
+          "slug": "routine",
+          "title_es": "Mi rutina diaria",
+          "title_en": "My daily routine",
+          "objective_es": "Conectar acciones con first / then / after that / finally.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "morning-routine",
+              "prompt_es": "Explicá tu rutina de la mañana paso a paso (al menos 4 pasos).",
+              "prompt_en": "Explain your morning routine step by step.",
+              "example_en": "First, I wake up at 6. Then I take a shower. After that, I have breakfast. Finally, I go to work.",
+              "key_vocabulary": [
+                {"en": "wake up", "es": "despertarse"},
+                {"en": "take a shower", "es": "ducharse"},
+                {"en": "have breakfast", "es": "desayunar"},
+                {"en": "go to work", "es": "ir al trabajo"}
+              ],
+              "connectors": ["first", "then", "after that", "finally"],
+              "socratic_hints": ["What time do you wake up?", "What do you eat for breakfast?", "How do you go to work?"],
+              "difficulty": 2,
+              "order_index": 0
+            },
+            {
+              "slug": "evening-routine",
+              "prompt_es": "Explicá qué hacés después del trabajo hasta que te dormís.",
+              "prompt_en": "Explain what you do after work until you go to sleep.",
+              "example_en": "After work, I go home. Then I have dinner with my family. Later I watch TV. Finally, I go to bed at 10.",
+              "key_vocabulary": [
+                {"en": "after work", "es": "después del trabajo"},
+                {"en": "have dinner", "es": "cenar"},
+                {"en": "watch TV", "es": "ver tele"},
+                {"en": "go to bed", "es": "irse a dormir"}
+              ],
+              "connectors": ["after", "then", "later", "finally"],
+              "socratic_hints": ["What time do you go to bed?", "Who do you have dinner with?"],
+              "difficulty": 2,
+              "order_index": 1
+            },
+            {
+              "slug": "weekend-routine",
+              "prompt_es": "Contá qué hacés un sábado típico.",
+              "prompt_en": "Tell what you do on a typical Saturday.",
+              "example_en": "On Saturday, I wake up late. I clean my house. Then I meet my friends in the afternoon. At night, we watch a movie.",
+              "key_vocabulary": [
+                {"en": "wake up late", "es": "despertarse tarde"},
+                {"en": "clean", "es": "limpiar"},
+                {"en": "meet friends", "es": "juntarse con amigos"},
+                {"en": "watch a movie", "es": "ver una peli"}
+              ],
+              "connectors": ["then", "later", "at night"],
+              "socratic_hints": ["What do you do for fun?", "Who do you spend time with?"],
+              "difficulty": 2,
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "slug": "food",
+          "title_es": "Comida",
+          "title_en": "Food",
+          "objective_es": "Hablar de gustos y preferencias usando 'because'.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "favorite-food",
+              "prompt_es": "Contá cuál es tu comida favorita y POR QUÉ te gusta.",
+              "prompt_en": "Talk about your favorite food and WHY you like it.",
+              "example_en": "My favorite food is pupusas because they are delicious and remind me of home.",
+              "key_vocabulary": [
+                {"en": "favorite", "es": "favorita"},
+                {"en": "delicious", "es": "deliciosa"},
+                {"en": "spicy", "es": "picante"},
+                {"en": "sweet", "es": "dulce"}
+              ],
+              "connectors": ["because", "and", "also"],
+              "socratic_hints": ["When do you usually eat it?", "Who makes it for you?", "Can you describe how it tastes?"],
+              "difficulty": 2,
+              "order_index": 0
+            },
+            {
+              "slug": "order-food",
+              "prompt_es": "Estás en un restaurante. Pedí una comida y una bebida.",
+              "prompt_en": "You are at a restaurant. Order food and a drink.",
+              "example_en": "Hi! I would like a chicken sandwich, please. And a glass of water. Thank you.",
+              "key_vocabulary": [
+                {"en": "I would like", "es": "me gustaría"},
+                {"en": "please", "es": "por favor"},
+                {"en": "menu", "es": "menú"},
+                {"en": "drink", "es": "bebida"},
+                {"en": "the check", "es": "la cuenta"}
+              ],
+              "connectors": ["and"],
+              "socratic_hints": ["Can you ask for the check?", "What if you want something spicy?"],
+              "difficulty": 3,
+              "order_index": 1
+            },
+            {
+              "slug": "food-i-hate",
+              "prompt_es": "Decí qué comida NO te gusta y por qué.",
+              "prompt_en": "Say what food you DON'T like and why.",
+              "example_en": "I don't like onions because they have a strong taste. I always remove them from my food.",
+              "key_vocabulary": [
+                {"en": "I don't like", "es": "no me gusta"},
+                {"en": "strong taste", "es": "sabor fuerte"},
+                {"en": "remove", "es": "sacar / quitar"}
+              ],
+              "connectors": ["because", "but"],
+              "socratic_hints": ["Have you ever tried it?", "Why don't you like it?"],
+              "difficulty": 2,
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "slug": "weather",
+          "title_es": "Clima",
+          "title_en": "Weather",
+          "objective_es": "Hablar del clima del día.",
+          "order_index": 2,
+          "topics": [
+            {
+              "slug": "todays-weather",
+              "prompt_es": "Describí cómo está el clima HOY en tu ciudad.",
+              "prompt_en": "Describe how the weather is TODAY in your city.",
+              "example_en": "Today is sunny and warm. It's a beautiful day. I want to go outside.",
+              "key_vocabulary": [
+                {"en": "sunny", "es": "soleado"},
+                {"en": "rainy", "es": "lluvioso"},
+                {"en": "cloudy", "es": "nublado"},
+                {"en": "warm", "es": "cálido"},
+                {"en": "cold", "es": "frío"},
+                {"en": "hot", "es": "caluroso"}
+              ],
+              "connectors": ["and", "but"],
+              "socratic_hints": ["Do you like this weather?", "What is your favorite season?"],
+              "difficulty": 2,
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "feelings-places",
+      "title_es": "Emociones y lugares",
+      "title_en": "Feelings and places",
+      "description_es": "Expresar cómo te sentís y describir lugares cotidianos.",
+      "level": "A1",
+      "order_index": 3,
+      "lessons": [
+        {
+          "slug": "feelings",
+          "title_es": "Emociones",
+          "title_en": "Feelings",
+          "objective_es": "Decir cómo te sentís y por qué.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "how-i-feel",
+              "prompt_es": "Decí cómo te sentís hoy y por qué.",
+              "prompt_en": "Say how you feel today and why.",
+              "example_en": "I feel happy today because I learned something new. Yesterday I felt tired, but today is better.",
+              "key_vocabulary": [
+                {"en": "happy", "es": "feliz"},
+                {"en": "sad", "es": "triste"},
+                {"en": "tired", "es": "cansado"},
+                {"en": "excited", "es": "emocionado"},
+                {"en": "nervous", "es": "nervioso"}
+              ],
+              "connectors": ["because", "but"],
+              "socratic_hints": ["What made you feel this way?", "How do you feel when you speak English?"],
+              "difficulty": 2,
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "slug": "places",
+          "title_es": "Lugares",
+          "title_en": "Places",
+          "objective_es": "Describir lugares de tu ciudad.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "my-favorite-place",
+              "prompt_es": "Describí tu lugar favorito de tu ciudad y qué hacés ahí.",
+              "prompt_en": "Describe your favorite place in your city and what you do there.",
+              "example_en": "My favorite place is the park. It is big and green. I go there on weekends to relax and walk.",
+              "key_vocabulary": [
+                {"en": "park", "es": "parque"},
+                {"en": "beach", "es": "playa"},
+                {"en": "mall", "es": "centro comercial"},
+                {"en": "library", "es": "biblioteca"},
+                {"en": "relax", "es": "relajarse"}
+              ],
+              "connectors": ["and", "because"],
+              "socratic_hints": ["When was the last time you went?", "Who do you go with?"],
+              "difficulty": 2,
+              "order_index": 0
+            },
+            {
+              "slug": "ask-directions",
+              "prompt_es": "Estás perdido. Preguntale a alguien cómo llegar a la estación de tren.",
+              "prompt_en": "You are lost. Ask someone how to get to the train station.",
+              "example_en": "Excuse me, how can I get to the train station? Is it far from here?",
+              "key_vocabulary": [
+                {"en": "excuse me", "es": "disculpá"},
+                {"en": "how can I get to", "es": "cómo llego a"},
+                {"en": "far", "es": "lejos"},
+                {"en": "near", "es": "cerca"},
+                {"en": "turn left", "es": "girar a la izquierda"},
+                {"en": "turn right", "es": "girar a la derecha"}
+              ],
+              "connectors": ["and"],
+              "socratic_hints": ["What if it's far? Ask about transportation.", "Can you thank them?"],
+              "difficulty": 3,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "connecting-ideas",
+      "title_es": "Conectar ideas (¡tu zona clave!)",
+      "title_en": "Connecting ideas",
+      "description_es": "Entrenás justo lo que te cuesta: enlazar pensamientos en inglés sin perderte.",
+      "level": "A1",
+      "order_index": 4,
+      "lessons": [
+        {
+          "slug": "cause-effect",
+          "title_es": "Causa y efecto",
+          "title_en": "Cause and effect",
+          "objective_es": "Dominar 'because', 'so', 'that's why'.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "why-i-learn-english",
+              "prompt_es": "Explicá POR QUÉ querés aprender inglés y QUÉ va a cambiar en tu vida.",
+              "prompt_en": "Explain WHY you want to learn English and WHAT will change.",
+              "example_en": "I want to learn English because I want better job opportunities. I'm bad at speaking, so I practice every day. When I speak fluently, I will be more confident and travel more.",
+              "key_vocabulary": [
+                {"en": "because", "es": "porque"},
+                {"en": "so", "es": "entonces"},
+                {"en": "that's why", "es": "por eso"},
+                {"en": "opportunities", "es": "oportunidades"},
+                {"en": "confident", "es": "seguro de mí mismo"}
+              ],
+              "connectors": ["because", "so", "that's why", "when"],
+              "socratic_hints": ["What is the hardest part for you?", "How will your life change?", "Why is speaking difficult for you?"],
+              "difficulty": 3,
+              "order_index": 0
+            },
+            {
+              "slug": "why-i-like",
+              "prompt_es": "Elegí algo (música, deporte, comida) y explicá tres razones por las que te gusta.",
+              "prompt_en": "Pick something and explain three reasons why you like it.",
+              "example_en": "I like soccer because it is exciting. Also, I play it with my friends, so it is fun. That's why it's my favorite sport.",
+              "key_vocabulary": [
+                {"en": "reason", "es": "razón"},
+                {"en": "exciting", "es": "emocionante"},
+                {"en": "boring", "es": "aburrido"}
+              ],
+              "connectors": ["because", "also", "so", "that's why"],
+              "socratic_hints": ["Can you add one more reason?", "When did you start liking it?"],
+              "difficulty": 3,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "contrast",
+          "title_es": "Contrastar ideas",
+          "title_en": "Contrasting ideas",
+          "objective_es": "Usar 'but', 'however', 'although' para contrastar.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "but-i-like",
+              "prompt_es": "Decí algo que NO te gusta hacer pero igual lo hacés. Explicá por qué.",
+              "prompt_en": "Say something you DON'T like but still do, and explain why.",
+              "example_en": "I don't like waking up early, but I do it every day because I have to go to work. It's hard, but it pays the bills.",
+              "key_vocabulary": [
+                {"en": "but", "es": "pero"},
+                {"en": "however", "es": "sin embargo"},
+                {"en": "have to", "es": "tener que"}
+              ],
+              "connectors": ["but", "however", "because"],
+              "socratic_hints": ["What would you do if you didn't have to?", "How do you feel about it?"],
+              "difficulty": 3,
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "past-simple",
+      "title_es": "El pasado simple",
+      "title_en": "Past simple",
+      "description_es": "Contar qué hiciste ayer, el finde, en la infancia. Verbos regulares e irregulares. Esto desbloquea contar TU vida.",
+      "level": "A2",
+      "order_index": 5,
+      "lessons": [
+        {
+          "slug": "yesterday",
+          "title_es": "Ayer",
+          "title_en": "Yesterday",
+          "objective_es": "Usar pasado simple para contar las acciones de ayer.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "what-i-did-yesterday",
+              "prompt_es": "Contá qué hiciste ayer, paso por paso, usando pasado simple.",
+              "prompt_en": "Tell what you did yesterday, step by step, using past simple.",
+              "example_en": "Yesterday I woke up at 7. I worked from home. Then I cooked dinner and watched a movie with my partner.",
+              "key_vocabulary": [
+                {"en": "yesterday", "es": "ayer"},
+                {"en": "I woke up", "es": "me desperté"},
+                {"en": "I worked", "es": "trabajé"},
+                {"en": "I cooked", "es": "cociné"},
+                {"en": "I watched", "es": "miré"}
+              ],
+              "connectors": ["then", "after that", "later", "finally"],
+              "socratic_hints": ["What time did you wake up?", "Did you go out?", "What did you eat?"],
+              "difficulty": 2,
+              "order_index": 0
+            },
+            {
+              "slug": "last-weekend",
+              "prompt_es": "Contá qué hiciste el fin de semana pasado. Al menos 4 actividades distintas.",
+              "prompt_en": "Tell what you did last weekend. At least 4 different activities.",
+              "example_en": "Last weekend I visited my parents. On Saturday we had lunch together. Later I met friends for coffee. On Sunday I rested and read a book.",
+              "key_vocabulary": [
+                {"en": "last weekend", "es": "el finde pasado"},
+                {"en": "I visited", "es": "visité"},
+                {"en": "we had lunch", "es": "almorzamos"},
+                {"en": "I met", "es": "me encontré con"},
+                {"en": "I rested", "es": "descansé"}
+              ],
+              "connectors": ["on Saturday", "on Sunday", "later", "after that"],
+              "socratic_hints": ["Who did you see?", "Where did you go?", "Was it relaxing?"],
+              "difficulty": 2,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "irregular-past",
+          "title_es": "Verbos irregulares (los más usados)",
+          "title_en": "Irregular verbs",
+          "objective_es": "Practicar went, did, had, saw, took, made, said, got, came.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "trip-i-took",
+              "prompt_es": "Contá un viaje que hayas hecho. Adónde fuiste, qué viste, qué te gustó.",
+              "prompt_en": "Tell about a trip you took. Where you went, what you saw, what you liked.",
+              "example_en": "Last year I went to Mexico. I saw the pyramids and I ate amazing food. I took a lot of photos. It was an unforgettable trip.",
+              "key_vocabulary": [
+                {"en": "I went", "es": "fui"},
+                {"en": "I saw", "es": "vi"},
+                {"en": "I ate", "es": "comí"},
+                {"en": "I took photos", "es": "saqué fotos"},
+                {"en": "unforgettable", "es": "inolvidable"}
+              ],
+              "connectors": ["first", "then", "after that", "finally"],
+              "socratic_hints": ["Who did you go with?", "What was the best part?", "Would you go back?"],
+              "difficulty": 3,
+              "order_index": 0
+            },
+            {
+              "slug": "childhood-memory",
+              "prompt_es": "Contá un recuerdo de tu infancia (algo que hacías o algo puntual que pasó).",
+              "prompt_en": "Tell a childhood memory (something you used to do, or one specific event).",
+              "example_en": "When I was a kid, I lived in a small town. We had a big garden. Every Sunday my grandfather came to visit and he told us stories.",
+              "key_vocabulary": [
+                {"en": "when I was a kid", "es": "cuando era niño"},
+                {"en": "I lived", "es": "vivía"},
+                {"en": "we had", "es": "teníamos"},
+                {"en": "he came", "es": "venía / vino"},
+                {"en": "he told us", "es": "nos contaba / contó"}
+              ],
+              "connectors": ["when", "every", "and", "but"],
+              "socratic_hints": ["Where did you grow up?", "Who was your favorite person?", "What did you like to play?"],
+              "difficulty": 3,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "abilities-permissions",
+      "title_es": "Poder, deber, consejos (can / could / should / must)",
+      "title_en": "Can, could, should, must",
+      "description_es": "Decir qué sabés hacer, qué podías hacer de chico, dar consejos, hablar de obligaciones.",
+      "level": "A2",
+      "order_index": 6,
+      "lessons": [
+        {
+          "slug": "what-i-can",
+          "title_es": "Lo que puedo hacer",
+          "title_en": "What I can do",
+          "objective_es": "Usar 'can' / 'can't' para habilidades.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "things-i-can-do",
+              "prompt_es": "Decí 3 cosas que sabés hacer bien y 1 que no.",
+              "prompt_en": "Say 3 things you can do well and 1 you can't.",
+              "example_en": "I can code in Python. I can cook simple meals. I can drive a car. But I can't swim very well — it's something I want to learn.",
+              "key_vocabulary": [
+                {"en": "I can", "es": "puedo / sé"},
+                {"en": "I can't", "es": "no puedo / no sé"},
+                {"en": "very well", "es": "muy bien"},
+                {"en": "a little", "es": "un poco"}
+              ],
+              "connectors": ["and", "but", "also"],
+              "socratic_hints": ["What do you want to learn?", "What are you proud of?"],
+              "difficulty": 2,
+              "order_index": 0
+            },
+            {
+              "slug": "when-i-was-a-kid",
+              "prompt_es": "Contá qué podías hacer cuando eras chico que ahora no, o al revés.",
+              "prompt_en": "Say what you could do as a kid that you can't now, or the other way around.",
+              "example_en": "When I was 10, I could run for hours without getting tired. Now I can't! But now I can speak English, which I couldn't before.",
+              "key_vocabulary": [
+                {"en": "I could", "es": "podía / sabía"},
+                {"en": "I couldn't", "es": "no podía / no sabía"},
+                {"en": "without", "es": "sin"}
+              ],
+              "connectors": ["when", "now", "but"],
+              "socratic_hints": ["What's something you wish you could still do?", "What did you learn as an adult?"],
+              "difficulty": 3,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "advice-rules",
+          "title_es": "Dar consejos y reglas",
+          "title_en": "Advice and rules",
+          "objective_es": "Usar 'should', 'shouldn't', 'must', 'have to'.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "give-advice",
+              "prompt_es": "Tu amigo está estresado por trabajo. Dale 3 consejos usando 'should'.",
+              "prompt_en": "Your friend is stressed about work. Give them 3 pieces of advice using 'should'.",
+              "example_en": "You should sleep more. You shouldn't drink so much coffee. You should take a walk every day. And maybe you should talk to your boss.",
+              "key_vocabulary": [
+                {"en": "you should", "es": "deberías"},
+                {"en": "you shouldn't", "es": "no deberías"},
+                {"en": "you must", "es": "tenés que (fuerte)"},
+                {"en": "you have to", "es": "tenés que"}
+              ],
+              "connectors": ["also", "and", "maybe"],
+              "socratic_hints": ["What worked for you?", "What's the most important one?"],
+              "difficulty": 3,
+              "order_index": 0
+            },
+            {
+              "slug": "rules-at-work",
+              "prompt_es": "Explicá 3 reglas de tu trabajo que tenés que cumplir.",
+              "prompt_en": "Explain 3 rules at your job you have to follow.",
+              "example_en": "I have to start work at 9. I must reply to emails within 24 hours. I shouldn't share confidential information with anyone outside the company.",
+              "key_vocabulary": [
+                {"en": "I have to", "es": "tengo que"},
+                {"en": "I must", "es": "debo"},
+                {"en": "I shouldn't", "es": "no debería"},
+                {"en": "within 24 hours", "es": "en menos de 24 horas"}
+              ],
+              "connectors": ["also", "and"],
+              "socratic_hints": ["Which rule is hardest to follow?", "Is there one you disagree with?"],
+              "difficulty": 3,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "comparing",
+      "title_es": "Comparar cosas",
+      "title_en": "Comparing things",
+      "description_es": "Más grande, menos caro, el mejor, tan bueno como. Para elegir, opinar, recomendar.",
+      "level": "A2",
+      "order_index": 7,
+      "lessons": [
+        {
+          "slug": "comparatives",
+          "title_es": "Más X que",
+          "title_en": "More X than",
+          "objective_es": "Usar comparativos: bigger than, more expensive than, less...",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "two-options",
+              "prompt_es": "Compará dos cosas que estés pensando comprar (dos celulares, dos autos, dos laptops).",
+              "prompt_en": "Compare two things you're thinking of buying.",
+              "example_en": "The iPhone is more expensive than the Samsung, but the Samsung has a bigger screen. The iPhone is faster, but the Samsung lasts longer with the battery.",
+              "key_vocabulary": [
+                {"en": "more expensive than", "es": "más caro que"},
+                {"en": "bigger than", "es": "más grande que"},
+                {"en": "faster", "es": "más rápido"},
+                {"en": "lasts longer", "es": "dura más"}
+              ],
+              "connectors": ["but", "however", "on the other hand"],
+              "socratic_hints": ["Which would you choose?", "What matters most to you?"],
+              "difficulty": 3,
+              "order_index": 0
+            },
+            {
+              "slug": "before-and-now",
+              "prompt_es": "Compará tu vida de hace 5 años con la de ahora.",
+              "prompt_en": "Compare your life 5 years ago with now.",
+              "example_en": "Five years ago I had more free time but less money. Now I work more, but I'm happier with what I do. My English is much better now too.",
+              "key_vocabulary": [
+                {"en": "more time", "es": "más tiempo"},
+                {"en": "less money", "es": "menos plata"},
+                {"en": "happier", "es": "más feliz"},
+                {"en": "much better", "es": "mucho mejor"}
+              ],
+              "connectors": ["but", "now", "back then"],
+              "socratic_hints": ["What's better now?", "What do you miss from before?"],
+              "difficulty": 3,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "superlatives",
+          "title_es": "El mejor de todos",
+          "title_en": "The best",
+          "objective_es": "Usar superlativos: the best, the most, the worst.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "best-thing",
+              "prompt_es": "Decí cuál fue lo mejor de tu año hasta ahora y por qué.",
+              "prompt_en": "Tell what the best thing of your year so far was, and why.",
+              "example_en": "The best thing this year was a trip I took with my family. It was the most relaxing week I had in years. Honestly, it changed how I see things.",
+              "key_vocabulary": [
+                {"en": "the best", "es": "lo mejor"},
+                {"en": "the worst", "es": "lo peor"},
+                {"en": "the most", "es": "el más"},
+                {"en": "in years", "es": "en años"}
+              ],
+              "connectors": ["because", "honestly"],
+              "socratic_hints": ["What made it special?", "Who shared it with you?"],
+              "difficulty": 3,
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "habits-routines-past",
+      "title_es": "Hábitos pasados y simultáneos",
+      "title_en": "Past habits and ongoing actions",
+      "description_es": "Used to / would (hábitos pasados) y past continuous (lo que estaba pasando cuando algo ocurrió).",
+      "level": "A2",
+      "order_index": 8,
+      "lessons": [
+        {
+          "slug": "used-to",
+          "title_es": "Solía / antes hacía",
+          "title_en": "Used to",
+          "objective_es": "Usar 'used to' para hábitos pasados que ya no existen.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "what-i-used-to-do",
+              "prompt_es": "Decí 3 cosas que SOLÍAS hacer y ya no hacés.",
+              "prompt_en": "Say 3 things you used to do but don't anymore.",
+              "example_en": "I used to play video games every night. I used to smoke, but I quit two years ago. I also used to live with my parents, but now I rent my own place.",
+              "key_vocabulary": [
+                {"en": "I used to", "es": "yo solía / antes"},
+                {"en": "I quit", "es": "dejé"},
+                {"en": "anymore", "es": "ya no"}
+              ],
+              "connectors": ["but", "now", "anymore"],
+              "socratic_hints": ["Why did you stop?", "Do you miss it?"],
+              "difficulty": 3,
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "slug": "past-continuous",
+          "title_es": "Estaba haciendo",
+          "title_en": "Past continuous",
+          "objective_es": "Usar past continuous + past simple: 'I was walking when I saw...'.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "interrupted-action",
+              "prompt_es": "Contá una vez en que algo te interrumpió: estabas haciendo X cuando pasó Y.",
+              "prompt_en": "Tell about a time when something interrupted you: you were doing X when Y happened.",
+              "example_en": "I was driving home when my car broke down. I was trying to call a tow truck, but my phone was dying. Luckily, someone stopped to help.",
+              "key_vocabulary": [
+                {"en": "I was driving", "es": "estaba manejando"},
+                {"en": "broke down", "es": "se rompió"},
+                {"en": "I was trying", "es": "estaba intentando"},
+                {"en": "luckily", "es": "por suerte"}
+              ],
+              "connectors": ["when", "but", "luckily"],
+              "socratic_hints": ["How did it end?", "Did it scare you?"],
+              "difficulty": 4,
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "present-perfect",
+      "title_es": "Present Perfect — el cambio clave a B1",
+      "title_en": "Present Perfect",
+      "description_es": "El tiempo que NO existe en español igual. 'Have you ever...?', 'I've been working since...'. Es el desbloqueo de B1.",
+      "level": "B1",
+      "order_index": 9,
+      "lessons": [
+        {
+          "slug": "have-you-ever",
+          "title_es": "¿Alguna vez...? (experiencias de vida)",
+          "title_en": "Have you ever?",
+          "objective_es": "Usar 'have you ever + past participle' para preguntar experiencias.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "life-experiences",
+              "prompt_es": "Contá 3 experiencias importantes que hayas tenido en tu vida.",
+              "prompt_en": "Tell 3 important experiences you've had in your life.",
+              "example_en": "I've traveled to three countries. I've worked in two different companies. And I've recently bought my first car. All of these have changed how I see the world.",
+              "key_vocabulary": [
+                {"en": "I've traveled", "es": "he viajado"},
+                {"en": "I've worked", "es": "he trabajado"},
+                {"en": "I've bought", "es": "he comprado"},
+                {"en": "have changed", "es": "han cambiado"}
+              ],
+              "connectors": ["and", "also", "recently"],
+              "socratic_hints": ["Which one was the most meaningful?", "What did you learn?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "have-you-ever-questions",
+              "prompt_es": "Hacé 3 preguntas tipo 'Have you ever...?' a alguien que conocés poco.",
+              "prompt_en": "Ask 3 'Have you ever' questions to someone you don't know well.",
+              "example_en": "Have you ever traveled to South America? Have you ever tried Salvadoran food? Have you ever worked from another country?",
+              "key_vocabulary": [
+                {"en": "have you ever", "es": "¿alguna vez has...?"},
+                {"en": "have you tried", "es": "¿has probado?"},
+                {"en": "have you been", "es": "¿has estado?"}
+              ],
+              "connectors": [],
+              "socratic_hints": ["What if they say yes — what's your follow-up?", "What's your most interesting answer?"],
+              "difficulty": 4,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "since-for",
+          "title_es": "Desde / por (since vs for)",
+          "title_en": "Since and for",
+          "objective_es": "Usar present perfect continuous con since/for.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "how-long",
+              "prompt_es": "Decí cuánto hace que hacés 3 cosas en tu vida actual (trabajo, hobby, lugar donde vivís).",
+              "prompt_en": "Say how long you've been doing 3 things in your current life.",
+              "example_en": "I've been working as a developer for 5 years. I've been living in this city since 2020. And I've been learning English for about a year now.",
+              "key_vocabulary": [
+                {"en": "I've been working", "es": "vengo trabajando"},
+                {"en": "I've been living", "es": "vengo viviendo"},
+                {"en": "I've been learning", "es": "vengo aprendiendo"},
+                {"en": "since", "es": "desde"},
+                {"en": "for", "es": "por / hace"}
+              ],
+              "connectors": ["and", "also"],
+              "socratic_hints": ["What changed recently?", "Are you happy with it?"],
+              "difficulty": 4,
+              "order_index": 0
+            }
+          ]
+        },
+        {
+          "slug": "just-already-yet",
+          "title_es": "Just / already / yet",
+          "title_en": "Just / already / yet",
+          "objective_es": "Tres palabras que cambian todo en present perfect.",
+          "order_index": 2,
+          "topics": [
+            {
+              "slug": "just-finished",
+              "prompt_es": "Contá 3 cosas que recién terminaste o que ya hiciste hoy, y 1 que todavía no.",
+              "prompt_en": "Say 3 things you've just done or already done today, and 1 you haven't done yet.",
+              "example_en": "I've just finished a meeting. I've already had lunch and answered all my emails. But I haven't called my mom yet — I should do that soon.",
+              "key_vocabulary": [
+                {"en": "I've just", "es": "recién"},
+                {"en": "I've already", "es": "ya"},
+                {"en": "I haven't ... yet", "es": "todavía no"}
+              ],
+              "connectors": ["and", "but"],
+              "socratic_hints": ["What's left for today?", "What are you putting off?"],
+              "difficulty": 4,
+              "order_index": 0
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "conditionals",
+      "title_es": "Condicionales (si pasa X, hago Y)",
+      "title_en": "Conditionals",
+      "description_es": "Hipótesis reales y posibles. Promesas, advertencias, planes con 'if'.",
+      "level": "B1",
+      "order_index": 10,
+      "lessons": [
+        {
+          "slug": "first-conditional",
+          "title_es": "Si hacés X, va a pasar Y",
+          "title_en": "First conditional",
+          "objective_es": "Usar 'if + present, will + verb' para situaciones reales.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "if-i-finish",
+              "prompt_es": "Decí 3 cosas que vas a hacer SI termina algo (terminás el trabajo, ahorrás plata, aprendés inglés).",
+              "prompt_en": "Say 3 things you'll do IF something happens.",
+              "example_en": "If I finish work early today, I'll go to the gym. If I save enough money, I'll travel to Europe next year. And if I keep practicing, I'll speak English fluently in six months.",
+              "key_vocabulary": [
+                {"en": "if I finish", "es": "si termino"},
+                {"en": "I'll go", "es": "voy a ir"},
+                {"en": "if I save", "es": "si ahorro"},
+                {"en": "if I keep", "es": "si sigo"}
+              ],
+              "connectors": ["and", "then"],
+              "socratic_hints": ["Which is most likely?", "What's stopping you?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "promises-warnings",
+              "prompt_es": "Hacele una promesa y una advertencia a alguien usando 'if'.",
+              "prompt_en": "Make one promise and one warning to someone using 'if'.",
+              "example_en": "If you help me with this project, I'll buy you dinner. But if you don't reply to my email by tomorrow, I'll have to escalate this to my manager.",
+              "key_vocabulary": [
+                {"en": "I'll buy you", "es": "te invito"},
+                {"en": "if you don't", "es": "si no"},
+                {"en": "I'll have to", "es": "voy a tener que"}
+              ],
+              "connectors": ["but", "if"],
+              "socratic_hints": ["What's the consequence?", "Are you serious about it?"],
+              "difficulty": 4,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "second-conditional",
+          "title_es": "Si yo fuera... haría... (irreal)",
+          "title_en": "Second conditional",
+          "objective_es": "'If I were / had, I would' — situaciones imaginarias.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "if-i-were-rich",
+              "prompt_es": "Imaginá que ganás la lotería. ¿Qué harías?",
+              "prompt_en": "Imagine you won the lottery. What would you do?",
+              "example_en": "If I won the lottery, I would buy a house for my parents first. I'd also travel around the world. But I wouldn't quit my job — I actually like what I do.",
+              "key_vocabulary": [
+                {"en": "if I won", "es": "si ganara"},
+                {"en": "I would", "es": "yo haría"},
+                {"en": "I'd", "es": "yo (contracción)"},
+                {"en": "I wouldn't", "es": "no haría"}
+              ],
+              "connectors": ["also", "but", "first"],
+              "socratic_hints": ["Would you tell anyone?", "Where would you live?"],
+              "difficulty": 5,
+              "order_index": 0
+            },
+            {
+              "slug": "if-i-had-more-time",
+              "prompt_es": "Si tuvieras una hora extra cada día, ¿qué harías con ella?",
+              "prompt_en": "If you had one extra hour every day, what would you do with it?",
+              "example_en": "If I had one extra hour, I would read more books. I'd probably exercise too. Honestly, I might just sleep — I never have enough sleep.",
+              "key_vocabulary": [
+                {"en": "if I had", "es": "si tuviera"},
+                {"en": "I would read", "es": "leería"},
+                {"en": "I'd probably", "es": "probablemente"},
+                {"en": "I might", "es": "tal vez"}
+              ],
+              "connectors": ["also", "probably", "honestly"],
+              "socratic_hints": ["Is sleep the real answer?", "What would change in your life?"],
+              "difficulty": 4,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "reported-speech",
+      "title_es": "Reported speech (contar lo que otro dijo)",
+      "title_en": "Reported speech",
+      "description_es": "'Ella dijo que...', 'Él me preguntó si...'. Lo que usás todo el día sin darte cuenta.",
+      "level": "B1",
+      "order_index": 11,
+      "lessons": [
+        {
+          "slug": "he-said-that",
+          "title_es": "Dijo que",
+          "title_en": "Said that",
+          "objective_es": "Convertir directo a reportado: said, told, asked.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "what-my-boss-said",
+              "prompt_es": "Contá algo que te dijo tu jefe o un compañero esta semana.",
+              "prompt_en": "Tell something your boss or coworker said to you this week.",
+              "example_en": "My boss told me that the deadline had changed. She said we needed to finish the report by Friday. She also asked me if I could help the new developer.",
+              "key_vocabulary": [
+                {"en": "he/she told me", "es": "me dijo"},
+                {"en": "he/she said that", "es": "dijo que"},
+                {"en": "asked me if", "es": "me preguntó si"},
+                {"en": "needed to", "es": "necesitaba / había que"}
+              ],
+              "connectors": ["and", "also", "then"],
+              "socratic_hints": ["How did you react?", "What did you reply?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "telling-news",
+              "prompt_es": "Pasaste por un evento (boda, accidente, noticia rara). Contale a alguien lo que pasó.",
+              "prompt_en": "Tell someone what happened at an event you witnessed.",
+              "example_en": "You won't believe what happened. I went to my friend's wedding, and the best man said the wrong name during his speech. The bride told everyone to ignore it, but it was so awkward.",
+              "key_vocabulary": [
+                {"en": "you won't believe", "es": "no me vas a creer"},
+                {"en": "told everyone", "es": "le dijo a todos"},
+                {"en": "awkward", "es": "incómodo"}
+              ],
+              "connectors": ["and", "but", "then"],
+              "socratic_hints": ["How did it end?", "What did people do?"],
+              "difficulty": 5,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "narrative-skills",
+      "title_es": "Contar historias (skills narrativas B1)",
+      "title_en": "Narrative skills",
+      "description_es": "Estructura para contar una experiencia completa: situación → problema → solución → aprendizaje.",
+      "level": "B1",
+      "order_index": 12,
+      "lessons": [
+        {
+          "slug": "tell-story",
+          "title_es": "Una vez que...",
+          "title_en": "One time when...",
+          "objective_es": "Narrar con tiempos mezclados (past simple + past continuous + past perfect simple).",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "a-problem-i-solved",
+              "prompt_es": "Contá un problema que resolviste en el trabajo: cuál era, qué hiciste, cómo salió.",
+              "prompt_en": "Tell about a problem you solved at work: what it was, what you did, how it went.",
+              "example_en": "Last month, our main dashboard stopped showing data. At first, I thought it was a network issue, but after investigating, I realized that the database connection had timed out. I fixed the config and added an alert so it wouldn't happen again. Everyone was happy.",
+              "key_vocabulary": [
+                {"en": "at first", "es": "al principio"},
+                {"en": "I thought", "es": "pensé"},
+                {"en": "I realized", "es": "me di cuenta"},
+                {"en": "had timed out", "es": "se había caído"},
+                {"en": "I fixed", "es": "arreglé"}
+              ],
+              "connectors": ["at first", "but", "after that", "so", "finally"],
+              "socratic_hints": ["What did you learn?", "Would you do anything differently?"],
+              "difficulty": 5,
+              "order_index": 0
+            },
+            {
+              "slug": "embarrassing-moment",
+              "prompt_es": "Contá un momento vergonzoso que viviste. Sé honesto y dramático.",
+              "prompt_en": "Tell an embarrassing moment you lived through. Be honest and dramatic.",
+              "example_en": "Once I was in a video call with my whole team. I thought my camera was off, so I started singing. Suddenly, my boss said 'nice voice'. Everyone was laughing. I wanted to disappear.",
+              "key_vocabulary": [
+                {"en": "I thought", "es": "pensé"},
+                {"en": "suddenly", "es": "de repente"},
+                {"en": "I wanted to disappear", "es": "quería desaparecer"}
+              ],
+              "connectors": ["once", "suddenly", "then", "but"],
+              "socratic_hints": ["How did people react after?", "Do you laugh about it now?"],
+              "difficulty": 5,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "phrasal-verbs",
+      "title_es": "Phrasal verbs (lo que te falta para no sonar traducido)",
+      "title_en": "Phrasal verbs",
+      "description_es": "Verbos + preposición que cambian completamente el significado. Sin esto, sonás libro. Con esto, sonás nativo.",
+      "level": "B1",
+      "order_index": 13,
+      "lessons": [
+        {
+          "slug": "phrasal-daily",
+          "title_es": "Vida diaria",
+          "title_en": "Daily life",
+          "objective_es": "Phrasal verbs para describir tu día y resolver problemas cotidianos.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "morning-with-phrasals",
+              "prompt_es": "Contá tu mañana usando AL MENOS 4 phrasal verbs (wake up, get up, pick up, run out of, look for...).",
+              "prompt_en": "Tell your morning using AT LEAST 4 phrasal verbs.",
+              "example_en": "I wake up at 6, get up at 6:15. I look for my phone (always lost). I pick up my coffee on the way out. Sometimes I run out of milk, so I stop by the store.",
+              "key_vocabulary": [
+                {"en": "wake up", "es": "despertarse"},
+                {"en": "get up", "es": "levantarse de la cama"},
+                {"en": "look for", "es": "buscar"},
+                {"en": "pick up", "es": "agarrar / recoger"},
+                {"en": "run out of", "es": "quedarse sin"},
+                {"en": "stop by", "es": "pasar por"}
+              ],
+              "connectors": ["then", "after that", "sometimes"],
+              "socratic_hints": ["What do you always run out of?", "What do you pick up on the way?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "give-up-vs-keep-going",
+              "prompt_es": "Contá algo en que estuviste por darte por vencido pero seguiste adelante. Usá 'give up', 'keep going', 'work out'.",
+              "prompt_en": "Tell about something where you almost gave up but kept going.",
+              "example_en": "Last year I almost gave up on learning English. I was tired and it wasn't working out. But I kept going, and now it's paying off. I figured out a routine that fits my life.",
+              "key_vocabulary": [
+                {"en": "give up", "es": "darse por vencido"},
+                {"en": "keep going", "es": "seguir adelante"},
+                {"en": "work out", "es": "funcionar / salir bien"},
+                {"en": "pay off", "es": "valer la pena"},
+                {"en": "figure out", "es": "darse cuenta / resolver"}
+              ],
+              "connectors": ["but", "now", "finally"],
+              "socratic_hints": ["What made you keep going?", "What's paying off now?"],
+              "difficulty": 4,
+              "order_index": 1
+            },
+            {
+              "slug": "running-into-people",
+              "prompt_es": "Contá una vez que te cruzaste con alguien por casualidad. Usá 'run into', 'catch up', 'hang out', 'show up'.",
+              "prompt_en": "Tell about a time you bumped into someone by chance.",
+              "example_en": "Last week I ran into an old friend at the supermarket. We caught up for like 20 minutes. We agreed to hang out on Saturday, but he didn't show up. He completely forgot.",
+              "key_vocabulary": [
+                {"en": "run into", "es": "cruzarse con (por casualidad)"},
+                {"en": "catch up", "es": "ponerse al día"},
+                {"en": "hang out", "es": "pasar el rato"},
+                {"en": "show up", "es": "aparecerse / presentarse"},
+                {"en": "let down", "es": "decepcionar"}
+              ],
+              "connectors": ["then", "but", "later"],
+              "socratic_hints": ["What did you talk about?", "Were you upset?"],
+              "difficulty": 4,
+              "order_index": 2
+            }
+          ]
+        },
+        {
+          "slug": "phrasal-work",
+          "title_es": "En el trabajo",
+          "title_en": "At work",
+          "objective_es": "Phrasal verbs profesionales: follow up, come up with, deal with, take over, hand in.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "problem-at-work-phrasal",
+              "prompt_es": "Contá cómo resolviste un problema en el trabajo usando 'figure out', 'come up with', 'deal with', 'follow up'.",
+              "prompt_en": "Tell how you solved a work problem using these phrasal verbs.",
+              "example_en": "Last week the database kept crashing. I had to figure out what was wrong. I came up with a fix in two hours and dealt with the angry users. I'm going to follow up with the team tomorrow to make sure it doesn't happen again.",
+              "key_vocabulary": [
+                {"en": "figure out", "es": "darse cuenta / averiguar"},
+                {"en": "come up with", "es": "inventar / proponer"},
+                {"en": "deal with", "es": "manejar / lidiar con"},
+                {"en": "follow up", "es": "hacer seguimiento"},
+                {"en": "look into", "es": "investigar"}
+              ],
+              "connectors": ["then", "so", "after that"],
+              "socratic_hints": ["What was the root cause?", "What did you learn?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "team-stuff-phrasal",
+              "prompt_es": "Contá sobre tu equipo usando 'get along', 'take over', 'back up', 'count on'.",
+              "prompt_en": "Tell about your team using these phrasal verbs.",
+              "example_en": "I get along well with most of my team. When someone is sick, we back each other up. My manager is great — I can count on her for anything. Next month, I'll take over a new project.",
+              "key_vocabulary": [
+                {"en": "get along with", "es": "llevarse bien con"},
+                {"en": "back up", "es": "respaldar / cubrir"},
+                {"en": "count on", "es": "contar con"},
+                {"en": "take over", "es": "tomar el control / encargarse"}
+              ],
+              "connectors": ["when", "and", "next month"],
+              "socratic_hints": ["Who do you count on the most?", "Why?"],
+              "difficulty": 4,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "relative-clauses",
+      "title_es": "Cláusulas relativas (encadenar información)",
+      "title_en": "Relative clauses",
+      "description_es": "Pegar info extra a un sustantivo en la misma oración. Sin esto hablás como Tarzán: oración corta + oración corta. Con esto fluís.",
+      "level": "B1",
+      "order_index": 14,
+      "lessons": [
+        {
+          "slug": "describing-people",
+          "title_es": "Describir personas (who / that)",
+          "title_en": "Describing people",
+          "objective_es": "Usar 'who' y 'that' para dar info sobre personas.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "describe-someone",
+              "prompt_es": "Describí a 3 personas que conocés usando 'who': qué hacen, dónde viven, qué les gusta.",
+              "prompt_en": "Describe 3 people you know using 'who'.",
+              "example_en": "I have a friend who lives in Mexico. I work with a guy who knows everything about databases. And my neighbor, who has 4 dogs, is the kindest person I've ever met.",
+              "key_vocabulary": [
+                {"en": "who lives", "es": "que vive"},
+                {"en": "who works", "es": "que trabaja"},
+                {"en": "who has", "es": "que tiene"},
+                {"en": "the kindest", "es": "el más amable"}
+              ],
+              "connectors": ["and", "also"],
+              "socratic_hints": ["Who's the most interesting?", "Who would you like to be more like?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "people-I-admire",
+              "prompt_es": "Hablá de una persona que admirás. Usá al menos 2 cláusulas con 'who' / 'whose'.",
+              "prompt_en": "Talk about someone you admire. Use at least 2 'who' / 'whose' clauses.",
+              "example_en": "I admire my dad, who worked two jobs his whole life to support us. He's also someone whose patience never runs out. He's the person who taught me to never give up.",
+              "key_vocabulary": [
+                {"en": "who taught me", "es": "que me enseñó"},
+                {"en": "whose patience", "es": "cuya paciencia"},
+                {"en": "the person who", "es": "la persona que"}
+              ],
+              "connectors": ["and", "also"],
+              "socratic_hints": ["What's the biggest lesson they gave you?", "How are you similar?"],
+              "difficulty": 4,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "describing-things-places",
+          "title_es": "Describir cosas y lugares (which / that / where)",
+          "title_en": "Describing things and places",
+          "objective_es": "Usar 'which', 'that', 'where' para objetos y lugares.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "describe-favorite-place",
+              "prompt_es": "Describí tu lugar favorito usando 'where': qué hay, qué se siente, por qué te gusta.",
+              "prompt_en": "Describe your favorite place using 'where'.",
+              "example_en": "My favorite place is a small café where I go every Sunday. It's a quiet spot where you can read for hours. It's the kind of place where time slows down.",
+              "key_vocabulary": [
+                {"en": "where I go", "es": "donde voy"},
+                {"en": "where you can", "es": "donde podés"},
+                {"en": "the kind of place", "es": "el tipo de lugar"}
+              ],
+              "connectors": ["and", "because"],
+              "socratic_hints": ["When did you find it?", "Who do you go with?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "describe-an-object",
+              "prompt_es": "Describí un objeto que tiene valor sentimental usando 'which' o 'that'.",
+              "prompt_en": "Describe an object with sentimental value using 'which' or 'that'.",
+              "example_en": "I have a watch which belonged to my grandfather. It's the only thing that I have from him. It's something which I'll never sell, no matter what.",
+              "key_vocabulary": [
+                {"en": "which belonged to", "es": "que perteneció a"},
+                {"en": "that I have", "es": "que tengo"},
+                {"en": "no matter what", "es": "pase lo que pase"}
+              ],
+              "connectors": ["and", "no matter what"],
+              "socratic_hints": ["When did you get it?", "Where do you keep it?"],
+              "difficulty": 4,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "slug": "modals-deduction",
+      "title_es": "Modales de deducción (hipótesis: must be / can't be / might)",
+      "title_en": "Modals of deduction",
+      "description_es": "Cómo opinás sobre algo sin estar seguro. La diferencia entre 'tiene que ser X', 'no puede ser X', 'tal vez sea X'.",
+      "level": "B1",
+      "order_index": 15,
+      "lessons": [
+        {
+          "slug": "present-deduction",
+          "title_es": "Deducción del presente",
+          "title_en": "Present deduction",
+          "objective_es": "Usar must be / can't be / might be / could be.",
+          "order_index": 0,
+          "topics": [
+            {
+              "slug": "guess-about-someone",
+              "prompt_es": "Mirás a alguien en un café y hacés 3 hipótesis sobre quién es y qué hace.",
+              "prompt_en": "You look at someone in a café and make 3 guesses about who they are.",
+              "example_en": "She must be a writer — she's been typing for 2 hours. She can't be from here — her clothes look really different. She might be working remotely, or she could be on vacation.",
+              "key_vocabulary": [
+                {"en": "must be", "es": "tiene que ser"},
+                {"en": "can't be", "es": "no puede ser"},
+                {"en": "might be", "es": "tal vez sea"},
+                {"en": "could be", "es": "podría ser"}
+              ],
+              "connectors": ["or", "but", "and"],
+              "socratic_hints": ["Why do you think that?", "What would you ask her if you could?"],
+              "difficulty": 4,
+              "order_index": 0
+            },
+            {
+              "slug": "explain-strange-situation",
+              "prompt_es": "Tu compañero no llegó a la reunión. Da 3 hipótesis de por qué (sin saberlo).",
+              "prompt_en": "Your coworker didn't show up to the meeting. Give 3 hypotheses why.",
+              "example_en": "He must be sick. Or his bus might be running late. He can't be ignoring the meeting on purpose — he never does that. He could be in another call, actually.",
+              "key_vocabulary": [
+                {"en": "must be sick", "es": "tiene que estar enfermo"},
+                {"en": "running late", "es": "atrasado"},
+                {"en": "on purpose", "es": "a propósito"}
+              ],
+              "connectors": ["or", "actually"],
+              "socratic_hints": ["What's the most likely?", "Should you message him?"],
+              "difficulty": 4,
+              "order_index": 1
+            }
+          ]
+        },
+        {
+          "slug": "past-deduction",
+          "title_es": "Deducción del pasado",
+          "title_en": "Past deduction",
+          "objective_es": "Usar must have / can't have / might have / could have done.",
+          "order_index": 1,
+          "topics": [
+            {
+              "slug": "what-happened",
+              "prompt_es": "Llegás a tu casa y la luz está prendida. Vos no la dejaste. Hacé 3 hipótesis de qué pasó.",
+              "prompt_en": "You get home and the light is on. You didn't leave it on. Make 3 hypotheses.",
+              "example_en": "My partner must have come home and left it on. Or someone could have come in earlier. It can't have been me, because I remember turning it off. Maybe a friend stopped by.",
+              "key_vocabulary": [
+                {"en": "must have", "es": "tiene que haber"},
+                {"en": "could have", "es": "podría haber"},
+                {"en": "can't have", "es": "no puede haber"},
+                {"en": "might have", "es": "tal vez haya"}
+              ],
+              "connectors": ["or", "because", "maybe"],
+              "socratic_hints": ["What's the most logical explanation?", "Would you check the cameras?"],
+              "difficulty": 5,
+              "order_index": 0
+            },
+            {
+              "slug": "regret-deduction",
+              "prompt_es": "Algo te salió mal en el trabajo. Decí qué CREÉS que hiciste mal usando 'must have', 'should have', 'could have'.",
+              "prompt_en": "Something went wrong at work. Say what you think you did wrong.",
+              "example_en": "I must have missed an important detail in the requirements. I should have asked more questions before starting. I could have run more tests, but I was in a hurry. Lesson learned.",
+              "key_vocabulary": [
+                {"en": "must have missed", "es": "tengo que haber pasado por alto"},
+                {"en": "should have asked", "es": "tendría que haber preguntado"},
+                {"en": "could have run", "es": "podría haber corrido"},
+                {"en": "lesson learned", "es": "lección aprendida"}
+              ],
+              "connectors": ["and", "but"],
+              "socratic_hints": ["What's the lesson?", "How will you avoid it next time?"],
+              "difficulty": 5,
+              "order_index": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

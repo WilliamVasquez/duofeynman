@@ -1,0 +1,33 @@
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+sqlalchemy==2.0.35
+pymysql==1.1.1
+cryptography==43.0.1
+alembic==1.13.3
+pydantic==2.9.2
+pydantic-settings==2.5.2
+email-validator==2.2.0
+python-dotenv==1.0.1
+python-jose[cryptography]==3.3.0
+bcrypt==4.2.0
+python-multipart==0.0.12
+httpx==0.27.2
+language-tool-python==2.8.1
+python-dateutil==2.9.0
+
+# Seguridad: rate limiting para proteger auth y endpoints públicos
+slowapi==0.1.9
+
+# STT offline (Firefox + cualquier navegador sin Web Speech API)
+vosk==0.3.45
+
+# TTS: voces neurales naturales
+# Edge TTS (online, gratis, sin clave) - voces Microsoft Neural
+# IMPORTANTE: versión ≥7.0.2 (las anteriores reciben 403 por cambio en la API).
+edge-tts>=7.0.2
+
+# Piper TTS (offline neural) - OPCIONAL, NO instalar en Windows con pip:
+# el paquete `piper-phonemize` no tiene wheels para Windows.
+# Si querés voz offline en Windows, ver README sección "Piper offline en Windows"
+# (se usa el binario standalone, no el paquete pip).
+# piper-tts==1.2.0    ← dejarlo comentado en Windows
