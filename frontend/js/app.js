@@ -4,6 +4,24 @@
   let currentAttemptId = null;
   let currentMode = "speak";
 
+  // ---- Tema claro/oscuro ----
+  function _applyTheme(dark) {
+    if (dark) document.documentElement.setAttribute("data-theme", "dark");
+    else document.documentElement.removeAttribute("data-theme");
+    localStorage.setItem("duofeynman_theme", dark ? "dark" : "light");
+    document.querySelectorAll(".theme-toggle").forEach(b => { b.textContent = dark ? "☀️" : "🌙"; });
+  }
+  // Inyectar botón 🌙 en cada topbar
+  document.querySelectorAll(".topbar").forEach(tb => {
+    const btn = document.createElement("button");
+    btn.className = "theme-toggle";
+    btn.title = "Cambiar tema claro/oscuro";
+    btn.setAttribute("aria-label", "Cambiar tema");
+    btn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
+    btn.onclick = () => _applyTheme(document.documentElement.getAttribute("data-theme") !== "dark");
+    (tb.querySelector(".user-info") || tb).appendChild(btn);
+  });
+
   // ---- Auth ----
   document.querySelectorAll(".tab").forEach(t => {
     t.onclick = () => {
@@ -281,7 +299,7 @@
       const att = await API.startAttempt(currentTopic.id, currentMode);
       currentAttemptId = att.id;
     } catch (err) {
-      alert("No se pudo iniciar el intento: " + err.message);
+      UI.toast("No se pudo iniciar el intento: " + err.message, { type: "error", duration: 4000 });
     }
   }
 
@@ -395,7 +413,7 @@
 
   document.getElementById("btn-submit-write").onclick = async () => {
     const text = writeArea.value.trim();
-    if (text.length < 3) { alert("Escribí al menos una oración."); return; }
+    if (text.length < 3) { UI.toast("Escribí al menos una oración.", { type: "warn" }); return; }
     document.getElementById("feedback").classList.add("hidden");
     await sendRound(text, 0, "write");
   };
@@ -410,13 +428,14 @@
       await refreshHeader();
       window.scrollTo({ top: document.getElementById("feedback").offsetTop - 20, behavior: "smooth" });
     } catch (err) {
-      alert("Error al enviar: " + err.message);
+      UI.toast("Error al enviar: " + err.message, { type: "error", duration: 4000 });
     }
   }
 
   function _showAchievementsToast(achs) {
     const t = document.getElementById("achievements-toast");
     if (!achs || !achs.length) { t.classList.add("hidden"); return; }
+    UI.confetti();
     t.classList.remove("hidden");
     t.innerHTML = `
       <div class="toast-title">🎉 ¡Logro${achs.length > 1 ? "s" : ""} desbloqueado${achs.length > 1 ? "s" : ""}!</div>

@@ -1,7 +1,17 @@
 // TTS unificado: backend (Edge → Piper) con caché, fallback a speechSynthesis.
 const TTS = (() => {
   const cache = new Map();   // key="voice|text" → blobUrl
+  const CACHE_MAX = 40;      // tope: al superarlo se libera el blob más viejo
   let currentAudio = null;
+
+  function _cachePut(key, url) {
+    if (cache.size >= CACHE_MAX) {
+      const oldestKey = cache.keys().next().value;
+      URL.revokeObjectURL(cache.get(oldestKey));
+      cache.delete(oldestKey);
+    }
+    cache.set(key, url);
+  }
   let preferredVoice = localStorage.getItem("duofeynman_voice") || "aria";
   let availableVoices = ["aria", "jenny", "guy", "davis", "sonia", "ryan", "natasha"];
 
@@ -61,7 +71,7 @@ const TTS = (() => {
     try {
       const blob = await API.tts(text, voice);
       const url = URL.createObjectURL(blob);
-      cache.set(key, url);
+      _cachePut(key, url);
       currentAudio = new Audio(url);
       await currentAudio.play();
     } catch (e) {

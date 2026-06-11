@@ -2,7 +2,12 @@
 const SRS = (() => {
   async function render(openTopicFn) {
     const root = document.getElementById("srs-content");
-    root.innerHTML = "<p style='text-align:center;color:#888'>Cargando...</p>";
+    root.innerHTML = `
+      <div class="skeleton skeleton-line" style="width:70%"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+    `;
     try {
       const cards = await API.srsDue();
       if (!cards.length) {

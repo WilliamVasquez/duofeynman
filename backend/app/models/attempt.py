@@ -1,6 +1,6 @@
 """Intentos del usuario explicando un Topic (ciclo Feynman)."""
 from datetime import datetime
-from sqlalchemy import String, Integer, Text, ForeignKey, DateTime, Float, JSON
+from sqlalchemy import String, Integer, Text, ForeignKey, DateTime, Float, JSON, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -13,6 +13,9 @@ class Attempt(Base):
     `rounds` como JSON: [{"transcript":"...", "feedback":"...", "score":0.7}]
     """
     __tablename__ = "attempts"
+    # Índice compuesto: racha (update_streak) e insights filtran por
+    # user_id + completed_at en cada intento masterizado.
+    __table_args__ = (Index("ix_attempts_user_completed", "user_id", "completed_at"),)
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)

@@ -1,6 +1,7 @@
 """Núcleo del producto: ciclo Feynman (modo hablar o escribir)."""
 from datetime import datetime, date
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -180,7 +181,9 @@ async def transcribe_audio(
     if len(audio) > 10 * 1024 * 1024:
         raise HTTPException(413, "Audio demasiado grande (máx 10MB)")
     try:
-        text = vosk_stt.transcribe(audio)
+        # Vosk es síncrono y puede tardar segundos: correrlo en threadpool
+        # para no bloquear el event loop del resto de los requests.
+        text = await run_in_threadpool(vosk_stt.transcribe, audio)
     except vosk_stt.STTUnavailable as e:
         raise HTTPException(503, str(e))
     return {"transcript": text}

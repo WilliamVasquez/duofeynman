@@ -1,7 +1,7 @@
 """Lógica de gamificación: racha y logros."""
 from __future__ import annotations
 import logging
-from datetime import date
+from datetime import date, datetime, timedelta
 
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -17,68 +17,53 @@ log = logging.getLogger(__name__)
 def update_streak(db: Session, user: User) -> int:
     """Recalcula la racha de días consecutivos practicados.
 
-    Llamar después de completar un intento. Devuelve la nueva racha.
+    Llamar después de completar un intento (el intento de hoy ya tiene
+    completed_at, así que hoy siempre cuenta). La racha se recalcula
+    completa desde el historial: es idempotente, no depende del valor
+    anterior de streak_days.
     """
-    # Última fecha en que cerró un intento, EXCLUYENDO la sesión actual.
+    # Fechas distintas con práctica, más recientes primero.
+    # 400 días alcanza para cualquier racha humanamente posible.
     rows = (
         db.query(func.date(Attempt.completed_at))
         .filter(Attempt.user_id == user.id, Attempt.completed_at.isnot(None))
-        .order_by(Attempt.completed_at.desc())
-        .limit(5)
+        .distinct()
+        .order_by(func.date(Attempt.completed_at).desc())
+        .limit(400)
         .all()
     )
-    dates = sorted({r[0] for r in rows if r[0]}, reverse=True)
-    today = date.today()
+    dates = []
+    for (d,) in rows:
+        if d is None:
+            continue
+        if isinstance(d, str):
+            d = datetime.strptime(d, "%Y-%m-%d").date()
+        dates.append(d)
+    dates = sorted(set(dates), reverse=True)
 
+    today = date.today()
     if not dates:
         user.streak_days = 1
         return user.streak_days
 
-    last = dates[0]
-    if isinstance(last, str):
-        from datetime import datetime as _dt
-        last = _dt.strptime(last, "%Y-%m-%d").date()
-
-    delta = (today - last).days
-    if delta == 0:
-        # Hoy ya practicó — la racha no cambia.
-        if user.streak_days < 1:
-            user.streak_days = 1
-        # Pero verificar si las fechas previas son consecutivas
-        # (por si es la primera vez que entra a esta función)
-        if user.streak_days <= 1:
-            user.streak_days = _count_consecutive_days(dates)
-    elif delta == 1:
-        user.streak_days += 1
-    else:
-        user.streak_days = 1
-
-    return user.streak_days
-
-
-def _count_consecutive_days(dates: list) -> int:
-    """Cuenta días consecutivos hacia atrás desde hoy."""
-    if not dates:
-        return 0
-    today = date.today()
+    # Contar días consecutivos hacia atrás. La racha sigue viva si la
+    # última práctica fue hoy o ayer (ayer = todavía no la perdió).
+    expected = today if dates[0] == today else today - timedelta(days=1)
     streak = 0
-    expected = today
     for d in dates:
-        from datetime import datetime as _dt
-        if isinstance(d, str):
-            d = _dt.strptime(d, "%Y-%m-%d").date()
         if d == expected:
             streak += 1
-            from datetime import timedelta
-            expected = expected - timedelta(days=1)
+            expected -= timedelta(days=1)
         elif d < expected:
             break
-    return max(streak, 1)
+
+    user.streak_days = max(streak, 1)
+    return user.streak_days
 
 
 # Cada chequeo recibe (db, user, attempt) y devuelve True si desbloquea.
 ACHIEVEMENT_CHECKS = {
-    "first_steps":    lambda db, u, a: True,
+    "first_steps":    lambda db, u, a: a.completed_at is not None,
     "first_mastered": lambda db, u, a: bool(a.mastered),
     "no_spanish":     lambda db, u, a: bool(a.mastered) and a.code_switch_rate == 0,
     "streak_7":       lambda db, u, a: u.streak_days >= 7,

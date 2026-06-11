@@ -2,7 +2,14 @@
 const Dashboard = (() => {
   async function render() {
     const root = document.getElementById("dashboard-content");
-    root.innerHTML = "<p style='text-align:center;color:#888'>Cargando...</p>";
+    root.innerHTML = `
+      <div class="dash-stats">
+        <div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>
+      </div>
+      <div class="skeleton skeleton-card" style="height:140px"></div>
+      <div class="skeleton skeleton-card" style="height:140px"></div>
+    `;
     try {
       const data = await API.dashboard();
       const s = data.summary;

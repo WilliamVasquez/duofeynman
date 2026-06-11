@@ -48,7 +48,12 @@ const Dialogues = (() => {
 
   async function renderList() {
     const root = document.getElementById("dialogues-list");
-    root.innerHTML = "<p style='color:#888;text-align:center'>Cargando...</p>";
+    root.innerHTML = `
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+    `;
     try {
       allDialogues = await API.dialoguesList();
       _renderFiltered();
@@ -525,7 +530,10 @@ const Dialogues = (() => {
     btn.addEventListener("mouseleave", () => { if (chatRecording) stop(); });
   }
 
+  let _inited = false;
   function init() {
+    if (_inited) return;   // evitar listeners duplicados si se llama de nuevo
+    _inited = true;
     document.getElementById("show-adult").addEventListener("change", _renderFiltered);
     document.getElementById("btn-chat-send").onclick = _submitUserTurn;
     document.getElementById("chat-input").addEventListener("keydown", (e) => {

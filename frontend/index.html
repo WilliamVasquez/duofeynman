@@ -12,6 +12,16 @@
   <link rel="apple-touch-icon" href="/static/assets/icon-192.png" />
   <title>DuoFeynman — Aprendé inglés hablándolo y escribiéndolo</title>
   <link rel="stylesheet" href="/static/css/styles.css" />
+  <script>
+    // Aplicar tema guardado ANTES de pintar para evitar flash blanco/negro
+    (function () {
+      const saved = localStorage.getItem("duofeynman_theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (saved === "dark" || (!saved && prefersDark)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
 </head>
 <body>
   <div id="app">
@@ -52,8 +62,11 @@
 
       <main class="container">
         <div class="hero">
-          <h3>Hola, <span id="user-name">amigo</span> 👋</h3>
-          <p class="hero-sub">Elegí qué querés hacer hoy.</p>
+          <div class="mascot" aria-hidden="true">🧑‍🔬</div>
+          <div class="hero-text">
+            <h3>Hola, <span id="user-name">amigo</span> 👋</h3>
+            <p class="hero-sub">Elegí qué querés hacer hoy.</p>
+          </div>
         </div>
 
         <!-- Acciones rápidas -->

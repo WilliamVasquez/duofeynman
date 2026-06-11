@@ -204,6 +204,8 @@ const UI = (() => {
   function toast(message, opts = {}) {
     const { type = "success", duration = 3000, icon = null } = opts;
     const container = _ensureToastContainer();
+    // Máximo 3 toasts visibles: el más viejo se va (FIFO)
+    while (container.children.length >= 3) container.firstElementChild.remove();
     const el = document.createElement("div");
     el.className = `toast toast-${type}`;
     const defaultIcons = { success: "✓", error: "✕", info: "ℹ", warn: "⚠️" };
@@ -219,5 +221,21 @@ const UI = (() => {
     }, duration);
   }
 
-  return { show, setUserHeader, renderModules, renderTopic, renderFeedback, authError, toast };
+  function confetti(count = 50) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const colors = ["#0ea5e9", "#f97316", "#10b981", "#8b5cf6", "#f59e0b", "#ef4444"];
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement("div");
+      p.className = "confetti-piece";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (1.8 + Math.random() * 1.6) + "s";
+      p.style.animationDelay = (Math.random() * 0.4) + "s";
+      p.style.transform = `rotate(${Math.random() * 360}deg)`;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 4200);
+    }
+  }
+
+  return { show, setUserHeader, renderModules, renderTopic, renderFeedback, authError, toast, confetti };
 })();
