@@ -19,8 +19,11 @@ App estilo Duolingo basada en el **Método Feynman + Output Hypothesis**: en vez
 | TTS último recurso | `speechSynthesis` del navegador | gratis (robótico) |
 | Gramática | LanguageTool API pública | gratis (20 req/min) |
 | Feedback Feynman | Motor rule-based propio | gratis |
+| Seguridad | JWT + bcrypt + rate limiting (slowapi) | gratis |
 
 **Sin IA generativa = comportamiento determinístico, explicable, sin alucinaciones.**
+
+> 🔒 Antes de exponer la app a internet, leé **[SECURITY.md](SECURITY.md)** — checklist completo de hardening (HTTPS, firewall, CORS, secretos, backups).
 
 ## Cómo aprende el usuario (motor Feynman)
 
@@ -38,6 +41,8 @@ Cada **Topic** del curriculum se ataca con un ciclo de 5 etapas:
    - Cobertura de conectores sugeridos del topic
 4. **REFINE** — Preguntas socráticas: combinación de `socratic_hints` fijas del curriculum + sugerencias generadas por templates (ej: *"Try saying it again using 'because'"*).
 5. **CONSOLIDATE** — Si dominó (score ≥ 0.78), creamos una card SRS (algoritmo SM-2) que vuelve a aparecer en 1d, 3d, 7d, 21d...
+
+Además del ciclo Feynman, hay **diálogos guionados** (51 escenarios): conversás por turnos con un personaje (NPC rule-based), con modos hablar / escribir / ordenar-palabras. La UI está en **inmersión total en inglés**, con la traducción al español disponible al hacer clic/hover en cada línea.
 
 ## Setup paso a paso
 
@@ -129,40 +134,57 @@ Crear cuenta → elegir un tema → elegir 🎤 Hablar o ✍️ Escribir → pro
 duofeynman/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py
-│   │   ├── config.py
+│   │   ├── main.py                 ← FastAPI + middlewares de seguridad
+│   │   ├── config.py               ← Settings, valida config crítica al arranque
 │   │   ├── database.py
-│   │   ├── seed.py
-│   │   ├── models/
-│   │   ├── schemas/
-│   │   ├── routers/
+│   │   ├── seed.py                 ← carga curriculum + diálogos (idempotente)
+│   │   ├── models/                 ← user, curriculum, attempt, progress, srs, dialogue, profile
+│   │   ├── schemas/                ← Pydantic v2
+│   │   ├── routers/                ← auth, users, curriculum, attempts, progress,
+│   │   │                              srs, dictation, dialogues, tts, profile
 │   │   ├── services/
 │   │   │   ├── feynman_engine.py   ← núcleo pedagógico rule-based
-│   │   │   ├── vosk_stt.py         ← STT offline con Vosk
-│   │   │   ├── analyzer.py         ← métricas + LanguageTool
+│   │   │   ├── dialogue_engine.py  ← motor de diálogos guionados (NPC)
+│   │   │   ├── analyzer.py         ← métricas + code-switching + LanguageTool
+│   │   │   ├── gamification.py     ← racha + logros desbloqueables
 │   │   │   ├── srs.py              ← repetición espaciada SM-2
+│   │   │   ├── vosk_stt.py         ← STT offline con Vosk
+│   │   │   ├── tts.py              ← Edge TTS → Piper → fallback navegador
+│   │   │   ├── rate_limit.py       ← slowapi (límites por IP)
 │   │   │   └── security.py         ← JWT + bcrypt
-│   │   └── data/curriculum/        ← lecciones en JSON
+│   │   └── data/curriculum/        ← a1_curriculum.json + dialogues.json
 │   ├── models/vosk-en-small/       ← (descargar manualmente, ver paso 3)
+│   ├── piper/ + models/piper/      ← (opcional, ver paso 3a)
 │   ├── requirements.txt
 │   └── .env.example
 └── frontend/
-    ├── index.html                  ← responsive, mobile-first
-    ├── css/styles.css
+    ├── index.html                  ← responsive, mobile-first, inmersión EN
+    ├── css/styles.css              ← variables CSS, dark mode, animaciones
     └── js/
-        ├── app.js                  ← orquestador
+        ├── app.js                  ← orquestador + toggle de tema
         ├── api.js                  ← cliente HTTP
-        ├── speech.js               ← WebSpeech / MediaRecorder
-        └── ui.js                   ← rendering
+        ├── speech.js               ← WebSpeech / MediaRecorder → Vosk
+        ├── tts.js                  ← reproducción de audio con caché
+        ├── dialogues.js            ← UI de diálogos guionados
+        ├── dashboard.js            ← stats + gráficos + insights
+        ├── srs.js                  ← panel de repaso SRS
+        ├── dictation.js            ← modo dictado
+        ├── profile.js              ← estado de perfil (localStorage + server)
+        ├── profile-view.js         ← vista de edición de perfil
+        └── ui.js                   ← rendering, toasts, confetti
 ```
 
-## Curriculum incluido (A1 principiante)
+## Curriculum incluido (A1 → B1)
 
-- **Survival** — saludos, presentación, sobre mí
-- **Daily life** — rutina diaria (mañana/tarde), comida
-- **Connecting ideas** ← tu zona clave: enlazar pensamientos con `because`, `so`, `that's why`, `when`...
+**16 módulos · 32 lecciones · 62 topics · 51 diálogos guionados**
 
-Agregar más temas: editar `app/data/curriculum/a1_curriculum.json` y correr `python -m app.seed` (es idempotente).
+| Nivel | Módulos |
+|---|---|
+| **A1** (5) | Survival English · Numbers & time · Daily life · Feelings & places · **Connecting ideas** ← tu zona clave (`because`, `so`, `that's why`, `when`...) |
+| **A2** (4) | Past simple · Can/could/should/must · Comparing things · Past habits & ongoing actions |
+| **B1** (7) | Present Perfect · Conditionals · Reported speech · Narrative skills · Phrasal verbs · Relative clauses · Modals of deduction |
+
+Agregar más temas: editar `app/data/curriculum/a1_curriculum.json` (o `dialogues.json`) y correr `python -m app.seed` (es idempotente).
 
 ## Migración a Android (WebView)
 
@@ -176,17 +198,22 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 - [x] Backend rule-based sin IA externa
 - [x] Modo Hablar (Chrome/Edge + Firefox vía Vosk)
 - [x] Modo Escribir
-- [x] Curriculum A1 (5 módulos, 20+ topics)
+- [x] Curriculum completo **A1 → B1** (16 módulos, 62 topics)
 - [x] TTS neural (Edge TTS + Piper offline + fallback navegador)
 - [x] Selector de voz (7 voces US/UK/AU)
-- [x] **Dashboard de progreso con gráficos de 7 días**
-- [x] **Cálculo correcto de racha**
-- [x] **Logros desbloqueables automáticos**
-- [x] **Panel SRS de repaso diario (SM-2)**
-- [x] **Modo Dictado para entrenar el oído**
-- [x] **PWA: instalable en celu como app**
-- [ ] Modo Conversación / Diálogos guionados (próximo)
-- [ ] Más curriculum (A2, B1)
+- [x] Dashboard de progreso con gráficos de 7 días + insights
+- [x] Cálculo correcto de racha
+- [x] Logros desbloqueables automáticos + confetti
+- [x] Panel SRS de repaso diario (SM-2)
+- [x] Modo Dictado para entrenar el oído
+- [x] **Diálogos guionados (51 escenarios, hablar/escribir/ordenar palabras)**
+- [x] **Inmersión total en inglés con traducción al clic/hover**
+- [x] **Dark mode + animaciones + skeleton loaders + mascota**
+- [x] **Hardening de seguridad (ver SECURITY.md)**
+- [x] PWA: instalable en celu como app
+- [ ] Listening comprehension (audio → opción múltiple)
+- [ ] Dificultad adaptativa (topics con bajo score salen más seguido)
+- [ ] Curriculum B2
 - [ ] Build de Android (WebView wrapper)
 
 ## Endpoints REST disponibles
@@ -201,6 +228,8 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 | `GET /api/progress/summary` `/dashboard` | Stats + gráficos + logros |
 | `GET /api/srs/due` `/stats` | Cards SRS que vencen hoy |
 | `GET /api/dictation/next` `POST /check` | Modo escucha-y-escribí |
+| `GET /api/dialogues` `POST /check` | Diálogos guionados (turnos con NPC) |
+| `GET/PUT /api/me/profile` | Perfil personalizado (contexto Feynman) |
 | `GET /api/tts?text=...&voice=aria` | TTS neural (MP3 o WAV) |
 | `GET /api/tts/status` | Qué backends TTS están disponibles |
 
