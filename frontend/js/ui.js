@@ -98,6 +98,13 @@ const UI = (() => {
     const el = document.getElementById("feedback");
     el.classList.remove("hidden");
 
+    // Feedback emocional: latido si le fue bien, shake si conviene reintentar.
+    const good = fb.next_action === "MASTERED" || fb.overall_score >= 0.78;
+    el.classList.remove("feedback-pass", "feedback-fail");
+    // reflow para reiniciar la animación si se renderiza otra vez
+    void el.offsetWidth;
+    el.classList.add(good ? "feedback-pass" : "feedback-fail");
+
     document.getElementById("score-fill").style.width = pct(fb.overall_score);
     document.getElementById("encouragement").textContent = fb.encouragement_es || "";
 
@@ -116,10 +123,23 @@ const UI = (() => {
     if (!fb.errors || fb.errors.length === 0) {
       errs.innerHTML = `<li style="background:#ecfdf5;border-left-color:#10b981">¡Sin errores graves! 🎉</li>`;
     } else {
-      fb.errors.slice(0, 8).forEach(e => {
+      // Niveles de severidad: 3 = grave, 2 = medio, 1 = leve.
+      const SEV = {
+        3: { cls: "sev-high", label: "Grave" },
+        2: { cls: "sev-mid", label: "Medio" },
+        1: { cls: "sev-low", label: "Leve" },
+      };
+      // Mostrar los más graves primero para que el usuario priorice.
+      const ordered = [...fb.errors].sort((a, b) => (b.severity || 1) - (a.severity || 1));
+      ordered.slice(0, 8).forEach(e => {
+        const sev = SEV[e.severity] || SEV[1];
         const li = document.createElement("li");
-        const fix = e.suggestion ? ` → <em>${e.suggestion}</em>` : "";
-        li.innerHTML = `<strong>${e.span_text}</strong>${fix}<br><small>${e.explanation_es || ""}</small>`;
+        li.className = `err-item ${sev.cls}`;
+        const fix = e.suggestion ? ` → <em>${escape(e.suggestion)}</em>` : "";
+        li.innerHTML =
+          `<span class="err-badge">${sev.label}</span>` +
+          `<strong>${escape(e.span_text)}</strong>${fix}` +
+          `<br><small>${escape(e.explanation_es || "")}</small>`;
         errs.appendChild(li);
       });
     }
@@ -221,6 +241,12 @@ const UI = (() => {
     }, duration);
   }
 
+  // Escapa texto para insertar como contenido HTML sin riesgo de inyección.
+  function escape(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
   function confetti(count = 50) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const colors = ["#0ea5e9", "#f97316", "#10b981", "#8b5cf6", "#f59e0b", "#ef4444"];
@@ -237,5 +263,5 @@ const UI = (() => {
     }
   }
 
-  return { show, setUserHeader, renderModules, renderTopic, renderFeedback, authError, toast, confetti };
+  return { show, setUserHeader, renderModules, renderTopic, renderFeedback, authError, toast, confetti, escape };
 })();

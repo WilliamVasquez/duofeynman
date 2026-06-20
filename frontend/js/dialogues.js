@@ -41,7 +41,7 @@ const Dialogues = (() => {
     return LIFE_AXES.find(a => a.slugs.includes(slug));
   }
   // Modo de input: "type" | "order"
-  let inputMode = localStorage.getItem("duofeynman_input_mode") || "type";
+  let inputMode = Store.get("duofeynman_input_mode") || "type";
   // Estado del word-order
   let bankWords = [];      // palabras disponibles {id, text}
   let outputWords = [];    // palabras seleccionadas en orden
@@ -58,7 +58,7 @@ const Dialogues = (() => {
       allDialogues = await API.dialoguesList();
       _renderFiltered();
     } catch (err) {
-      root.innerHTML = `<p style='color:red'>${err.message}</p>`;
+      root.innerHTML = `<p style='color:red'>${_escapeHtml(err.message)}</p>`;
     }
   }
 
@@ -181,7 +181,7 @@ const Dialogues = (() => {
         setting.insertAdjacentHTML("afterend", `
           <div class="profile-banner-wrap" id="profile-banner">
             <button type="button" class="profile-banner-chip" title="${_escapeAttr(banner.en)}">👤 Your profile</button>
-            <div class="profile-banner-text hidden translatable" title="${_escapeAttr(banner.es)} (click for Spanish)">${banner.en}</div>
+            <div class="profile-banner-text hidden translatable" title="${_escapeAttr(banner.es)} (click for Spanish)">${_escapeHtml(banner.en)}</div>
           </div>
         `);
         const wrap = document.getElementById("profile-banner");
@@ -229,6 +229,11 @@ const Dialogues = (() => {
 
   function _escapeAttr(s) {
     return String(s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // Escapa texto que se inyecta como contenido HTML (no atributo).
+  function _escapeHtml(s) {
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   /** Hace clickeable un elemento que tiene texto en inglés.
@@ -423,7 +428,7 @@ const Dialogues = (() => {
 
   function _setInputMode(mode) {
     inputMode = mode;
-    localStorage.setItem("duofeynman_input_mode", mode);
+    Store.set("duofeynman_input_mode", mode);
     _applyInputMode();
   }
 
@@ -468,7 +473,7 @@ const Dialogues = (() => {
     fb.classList.toggle("fail", !r.passed);
     let html = `<strong>${Math.round(r.score * 100)}%</strong> · <span class="translatable" title="${_escapeAttr(r.feedback_es)}">${r.passed ? "Good!" : "Try again"}</span>`;
     if (!r.passed && r.example_en) {
-      html += `<div style='margin-top:6px;font-size:13px'>💡 <em class="translatable" title="Ejemplo">${Profile.personalize(r.example_en)}</em></div>`;
+      html += `<div style='margin-top:6px;font-size:13px'>💡 <em class="translatable" title="Ejemplo">${_escapeHtml(Profile.personalize(r.example_en))}</em></div>`;
     }
     fb.innerHTML = html;
   }

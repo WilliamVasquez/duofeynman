@@ -1459,6 +1459,30 @@ input { font-family: inherit; font-size: 16px; }
 #errors-list li strong { color: var(--danger); }
 #errors-list li em { color: var(--success-dark); font-style: normal; }
 
+/* Severidad de errores: color + badge para que el usuario priorice */
+#errors-list li.sev-high { background: #fef2f2; border-left-color: var(--danger); }
+#errors-list li.sev-mid  { background: #fef3c7; border-left-color: var(--warn); }
+#errors-list li.sev-low  { background: var(--bg); border-left-color: var(--text-muted); }
+:root[data-theme="dark"] #errors-list li.sev-high { background: rgba(239, 68, 68, 0.12); }
+:root[data-theme="dark"] #errors-list li.sev-mid  { background: rgba(245, 158, 11, 0.12); }
+:root[data-theme="dark"] #errors-list li.sev-low  { background: rgba(148, 163, 184, 0.10); }
+
+.err-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  margin-right: 6px;
+  vertical-align: middle;
+  color: #fff;
+}
+.sev-high .err-badge { background: var(--danger); }
+.sev-mid  .err-badge { background: var(--warn); }
+.sev-low  .err-badge { background: var(--text-muted); }
+
 #socratic-list li {
   background: var(--primary-light);
   padding: 10px 12px;
@@ -1565,4 +1589,65 @@ input { font-family: inherit; font-size: 16px; }
 
 @media (prefers-reduced-motion: reduce) {
   .mascot, .skeleton, .confetti-piece { animation: none; }
+}
+
+/* ============================================================
+   Quick wins: botón ocupado, foco de teclado, touch targets,
+   feedback emocional (shake / celebrate)
+   ============================================================ */
+
+/* --- Botón en proceso de envío (spinner) --- */
+.btn-busy { position: relative; color: transparent !important; pointer-events: none; }
+.btn-busy::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 18px; height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: btnSpin 0.6s linear infinite;
+}
+@keyframes btnSpin { to { transform: rotate(360deg); } }
+
+/* --- Foco visible para teclado (accesibilidad) --- */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-light), 0 0 0 4px var(--primary);
+  border-radius: 8px;
+}
+
+/* --- Touch targets ≥44px en móvil (WebView Android) --- */
+@media (max-width: 600px) {
+  .word-chip, .helper-chip, .input-mode-btn, .mode-btn,
+  .btn-ghost, .quick-btn, .theme-toggle {
+    min-height: 44px;
+  }
+  .word-chip, .helper-chip { padding: 11px 15px; }
+}
+
+/* --- Feedback emocional: shake al errar, latido al acertar --- */
+.feedback.feedback-fail { animation: fbShake 0.4s ease; }
+.feedback.feedback-pass { animation: fbPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes fbShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+@keyframes fbPop {
+  0% { transform: scale(0.97); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-busy::after,
+  .feedback.feedback-fail,
+  .feedback.feedback-pass { animation: none; }
 }

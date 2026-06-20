@@ -15,8 +15,10 @@
   <script>
     // Aplicar tema guardado ANTES de pintar para evitar flash blanco/negro
     (function () {
-      const saved = localStorage.getItem("duofeynman_theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      // try/catch: localStorage lanza en modo privado / WebView restringido.
+      var saved = null;
+      try { saved = localStorage.getItem("duofeynman_theme"); } catch (e) {}
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       if (saved === "dark" || (!saved && prefersDark)) {
         document.documentElement.setAttribute("data-theme", "dark");
       }
@@ -149,7 +151,7 @@
         </div>
         <div id="dict-feedback" class="feedback hidden">
           <div class="score-bar"><div class="score-fill" id="dict-score-fill"></div></div>
-          <p class="encouragement" id="dict-encouragement"></p>
+          <p class="encouragement" id="dict-encouragement" aria-live="polite"></p>
           <div id="dict-diff"></div>
           <div class="feedback-actions">
             <button id="btn-dict-next" class="btn-primary">Otra frase →</button>
@@ -261,7 +263,7 @@
       </header>
       <main class="container chat-container">
         <div class="chat-setting" id="chat-setting"></div>
-        <div id="chat-messages" class="chat-messages"></div>
+        <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
         <div id="chat-input-zone" class="chat-input-zone hidden">
           <p class="user-hint" id="user-hint"></p>
           <div class="helper-chips" id="helper-chips"></div>
@@ -346,10 +348,10 @@
             <span class="mic-icon">🎤</span>
             <span class="record-label">Mantené presionado para hablar</span>
           </button>
-          <p class="record-hint" id="record-hint">Hablá en inglés. Lo más simple que puedas.</p>
+          <p class="record-hint" id="record-hint" aria-live="polite">Hablá en inglés. Lo más simple que puedas.</p>
           <div class="transcript-box">
             <p class="transcript-label">Lo que dijiste:</p>
-            <p id="transcript" class="transcript"></p>
+            <p id="transcript" class="transcript" aria-live="polite"></p>
           </div>
         </div>
 
@@ -363,7 +365,7 @@
 
         <div id="feedback" class="feedback hidden">
           <div class="score-bar"><div class="score-fill" id="score-fill"></div></div>
-          <p class="encouragement" id="encouragement"></p>
+          <p class="encouragement" id="encouragement" aria-live="polite"></p>
           <div class="metrics">
             <div class="metric"><span class="metric-label">Score</span><span id="m-score">–</span></div>
             <div class="metric"><span class="metric-label">Palabras</span><span id="m-words">–</span></div>
@@ -395,6 +397,7 @@
     </section>
   </div>
 
+  <script src="/static/js/store.js"></script>
   <script src="/static/js/api.js"></script>
   <script src="/static/js/speech.js"></script>
   <script src="/static/js/tts.js"></script>

@@ -63,9 +63,12 @@ const ProfileView = (() => {
     });
   }
 
+  let _inited = false;
   function init() {
+    if (_inited) return;   // evitar listeners duplicados
     const form = document.getElementById("profile-form");
     if (!form) return;
+    _inited = true;
 
     form.onsubmit = async (e) => {
       e.preventDefault();

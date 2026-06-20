@@ -12,12 +12,12 @@ const TTS = (() => {
     }
     cache.set(key, url);
   }
-  let preferredVoice = localStorage.getItem("duofeynman_voice") || "aria";
+  let preferredVoice = Store.get("duofeynman_voice") || "aria";
   let availableVoices = ["aria", "jenny", "guy", "davis", "sonia", "ryan", "natasha"];
 
   function setVoice(v) {
     preferredVoice = v;
-    localStorage.setItem("duofeynman_voice", v);
+    Store.set("duofeynman_voice", v);
   }
   function getVoice() { return preferredVoice; }
   function getVoices() { return availableVoices; }

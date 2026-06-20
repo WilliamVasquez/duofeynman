@@ -58,7 +58,7 @@ const Dictation = (() => {
       });
       _renderFeedback(res);
     } catch (err) {
-      alert("Error: " + err.message);
+      UI.toast("Error: " + err.message, { type: "error", duration: 4000 });
     }
   }
 
@@ -69,22 +69,26 @@ const Dictation = (() => {
     document.getElementById("dict-encouragement").textContent = r.feedback_es;
 
     const diff = document.getElementById("dict-diff");
+    const esc = UI.escape;
     let html = `
       <h4>Frase correcta:</h4>
-      <p style="background:#ecfdf5;padding:10px;border-radius:8px;font-style:italic">${r.target}</p>
+      <p style="background:#ecfdf5;padding:10px;border-radius:8px;font-style:italic">${esc(r.target)}</p>
       <h4 style="margin-top:12px">Tu respuesta:</h4>
-      <p style="background:#fef3c7;padding:10px;border-radius:8px">${r.you_wrote}</p>
+      <p style="background:#fef3c7;padding:10px;border-radius:8px">${esc(r.you_wrote)}</p>
     `;
     if (r.word_diff.missing && r.word_diff.missing.length) {
-      html += `<p style="margin-top:10px"><strong>Te faltaron:</strong> <span style="color:#ef4444">${r.word_diff.missing.join(", ")}</span></p>`;
+      html += `<p style="margin-top:10px"><strong>Te faltaron:</strong> <span style="color:#ef4444">${esc(r.word_diff.missing.join(", "))}</span></p>`;
     }
     if (r.word_diff.extra && r.word_diff.extra.length) {
-      html += `<p><strong>De más:</strong> <span style="color:#f59e0b">${r.word_diff.extra.join(", ")}</span></p>`;
+      html += `<p><strong>De más:</strong> <span style="color:#f59e0b">${esc(r.word_diff.extra.join(", "))}</span></p>`;
     }
     diff.innerHTML = html;
   }
 
+  let _inited = false;
   function init() {
+    if (_inited) return;   // evitar listeners duplicados
+    _inited = true;
     document.getElementById("btn-dict-play").onclick = play;
     document.getElementById("btn-dict-slow").onclick = playSlow;
     document.getElementById("btn-dict-check").onclick = check;

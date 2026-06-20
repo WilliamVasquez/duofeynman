@@ -17,6 +17,7 @@ class AttemptRoundIn(BaseModel):
 
 class ErrorOut(BaseModel):
     category: str
+    rule_id: str | None = None
     span_text: str
     suggestion: str
     explanation_es: str
@@ -30,6 +31,7 @@ class FeedbackOut(BaseModel):
     overall_score: float
     fluency_score: float
     code_switch_rate: float
+    self_correction_rate: float = 0.0
     error_density: float
     word_count: int
     vocab_coverage: float = 0.0

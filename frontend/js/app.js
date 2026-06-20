@@ -8,7 +8,7 @@
   function _applyTheme(dark) {
     if (dark) document.documentElement.setAttribute("data-theme", "dark");
     else document.documentElement.removeAttribute("data-theme");
-    localStorage.setItem("duofeynman_theme", dark ? "dark" : "light");
+    Store.set("duofeynman_theme", dark ? "dark" : "light");
     document.querySelectorAll(".theme-toggle").forEach(b => { b.textContent = dark ? "☀️" : "🌙"; });
   }
   // Inyectar botón 🌙 en cada topbar
@@ -419,6 +419,18 @@
   };
 
   async function sendRound(transcript, duration, mode) {
+    // Si el intento no se pudo crear antes (error de red), reintentar acá.
+    if (!currentAttemptId) {
+      await ensureAttempt();
+      if (!currentAttemptId) {
+        UI.toast("No hay un intento activo. Reintentá en unos segundos.", { type: "error", duration: 4000 });
+        return;
+      }
+    }
+    const sendBtn = mode === "write"
+      ? document.getElementById("btn-submit-write")
+      : null;
+    if (sendBtn) { sendBtn.disabled = true; sendBtn.classList.add("btn-busy"); }
     try {
       const fb = await API.submitRound({
         attempt_id: currentAttemptId, transcript, duration_seconds: duration || 0, mode,
@@ -429,6 +441,8 @@
       window.scrollTo({ top: document.getElementById("feedback").offsetTop - 20, behavior: "smooth" });
     } catch (err) {
       UI.toast("Error al enviar: " + err.message, { type: "error", duration: 4000 });
+    } finally {
+      if (sendBtn) { sendBtn.disabled = false; sendBtn.classList.remove("btn-busy"); }
     }
   }
 
@@ -439,7 +453,7 @@
     t.classList.remove("hidden");
     t.innerHTML = `
       <div class="toast-title">🎉 ¡Logro${achs.length > 1 ? "s" : ""} desbloqueado${achs.length > 1 ? "s" : ""}!</div>
-      <div class="toast-list">${achs.map(a => `<strong>${a.title_es}</strong> (+${a.xp} XP)`).join(" · ")}</div>
+      <div class="toast-list">${achs.map(a => `<strong>${UI.escape(a.title_es)}</strong> (+${UI.escape(a.xp)} XP)`).join(" · ")}</div>
     `;
   }
 

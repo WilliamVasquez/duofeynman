@@ -40,6 +40,18 @@ PROPER_NOUNS_WHITELIST = {
 
 FILLERS_EN = {"um", "uh", "er", "hmm"}
 
+# Marcadores de autocorrección: el hablante nota un error y reformula.
+# Es señal POSITIVA (monitoreo lingüístico, clave en la Output Hypothesis):
+# no penaliza, pero lo medimos para mostrarle al usuario que se está corrigiendo.
+SELF_CORRECTION_MARKERS = [
+    r"\bi mean\b",
+    r"\bno,?\s+wait\b",
+    r"\bwait,?\s+no\b",
+    r"\bsorry,?\s+i mean\b",
+    r"\bactually,?\s+no\b",
+    r"\bor rather\b",
+]
+
 # Reglas custom para errores típicos A1 que LanguageTool a veces no atrapa.
 # Cada regla: (regex, sugerencia, explicación_es, severity)
 CUSTOM_RULES = [
@@ -123,6 +135,24 @@ def detect_code_switching(text: str) -> tuple[float, list[str]]:
 def count_fillers(text: str) -> int:
     lowered = " " + text.lower() + " "
     return sum(lowered.count(f" {f} ") for f in FILLERS_EN)
+
+
+def detect_self_corrections(text: str) -> tuple[int, float]:
+    """Cuenta autocorrecciones: el usuario nota un error y reformula sobre la marcha.
+
+    Detecta marcadores ("I mean", "no wait"...), falsos arranques con guión
+    ("go— I went") y repeticiones inmediatas de palabra ("I I went").
+    Devuelve (count, rate) con rate = correcciones / oraciones (cap 1.0).
+    """
+    low = text.lower()
+    count = sum(len(re.findall(pat, low)) for pat in SELF_CORRECTION_MARKERS)
+    # Falsos arranques marcados con guión de interrupción
+    count += len(re.findall(r"\w+\s*[—–-]{1,2}\s+\w+", text))
+    # Tartamudeo/reinicio: misma palabra repetida ("the the", "I I")
+    count += len(re.findall(r"\b(\w+)\s+\1\b", low))
+    sentences = max(1, len([p for p in re.split(r"[.!?]+", text) if p.strip()]))
+    rate = min(1.0, count / sentences)
+    return count, round(rate, 3)
 
 
 def compute_fluency(word_count: int, duration_seconds: int) -> float:
@@ -254,6 +284,7 @@ def analyze_transcript(text: str, duration_seconds: int) -> dict:
     cs_rate, cs_words = detect_code_switching(text)
     fluency = compute_fluency(word_count, duration_seconds)
     fillers = count_fillers(text)
+    sc_count, sc_rate = detect_self_corrections(text)
     lex_div = lexical_diversity(text)
     sentence_count = count_sentences(text)
     tenses = tense_diversity(text)
@@ -275,6 +306,8 @@ def analyze_transcript(text: str, duration_seconds: int) -> dict:
         "word_count": word_count,
         "fluency_score": fluency,
         "code_switch_rate": cs_rate,
+        "self_correction_count": sc_count,
+        "self_correction_rate": sc_rate,
         "fillers": fillers,
         "lexical_diversity": lex_div,
         "sentence_count": sentence_count,

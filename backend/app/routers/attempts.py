@@ -81,6 +81,7 @@ async def submit_round(
     attempt.overall_score = result["overall_score"]
     attempt.fluency_score = result["fluency_score"]
     attempt.code_switch_rate = result["code_switch_rate"]
+    attempt.self_correction_rate = result.get("self_correction_rate", 0.0)
     attempt.error_density = result["error_density"]
     attempt.word_count = result["word_count"]
     attempt.duration_seconds = (attempt.duration_seconds or 0) + payload.duration_seconds
@@ -90,6 +91,7 @@ async def submit_round(
         db.add(AttemptError(
             attempt_id=attempt.id,
             category=e["category"],
+            rule_id=e.get("rule_id"),
             span_text=e["span_text"],
             suggestion=e["suggestion"],
             explanation_es=e["explanation_es"],
@@ -153,6 +155,7 @@ async def submit_round(
         overall_score=result["overall_score"],
         fluency_score=result["fluency_score"],
         code_switch_rate=result["code_switch_rate"],
+        self_correction_rate=result.get("self_correction_rate", 0.0),
         error_density=result["error_density"],
         word_count=result["word_count"],
         vocab_coverage=result["vocab_coverage"],

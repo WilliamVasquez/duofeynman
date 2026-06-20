@@ -44,7 +44,7 @@ const SRS = (() => {
         list.appendChild(div);
       });
     } catch (err) {
-      root.innerHTML = `<p style='color:red'>Error: ${err.message}</p>`;
+      root.innerHTML = `<p style='color:red'>Error: ${UI.escape(err.message)}</p>`;
     }
   }
 

@@ -4,18 +4,17 @@ const API = (() => {
   const USER_KEY = "duofeynman_user";
   const base = ""; // mismo dominio
 
-  function getToken() { return localStorage.getItem(TOKEN_KEY); }
+  function getToken() { return Store.get(TOKEN_KEY); }
   function setSession(token, user) {
-    localStorage.setItem(TOKEN_KEY, token);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    Store.set(TOKEN_KEY, token);
+    Store.setJSON(USER_KEY, user);
   }
   function getUser() {
-    const raw = localStorage.getItem(USER_KEY);
-    return raw ? JSON.parse(raw) : null;
+    return Store.getJSON(USER_KEY, null);
   }
   function clear() {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
+    Store.remove(TOKEN_KEY);
+    Store.remove(USER_KEY);
   }
 
   async function request(path, { method = "GET", body, auth = true } = {}) {

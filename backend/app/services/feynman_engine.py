@@ -191,6 +191,7 @@ def build_corrections(
     for g in grammar_errors[:8]:
         out.append({
             "category": "GRAMMAR",
+            "rule_id": g.get("rule_id"),
             "span_text": g["span_text"][:500],
             "suggestion": g["suggestion"][:500],
             "explanation_es": g.get("explanation_en", "")[:1000],
@@ -247,6 +248,7 @@ async def evaluate_round(
         "overall_score": score,
         "fluency_score": local_metrics["fluency_score"],
         "code_switch_rate": local_metrics["code_switch_rate"],
+        "self_correction_rate": local_metrics.get("self_correction_rate", 0.0),
         "error_density": error_density,
         "word_count": local_metrics["word_count"],
         "vocab_coverage": round(vocab_cov, 2),

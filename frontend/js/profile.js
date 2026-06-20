@@ -28,26 +28,22 @@ const Profile = (() => {
   };
 
   function _readCache() {
-    try {
-      const raw = localStorage.getItem(CACHE_KEY);
-      return raw ? { ...DEFAULT, ...JSON.parse(raw) } : { ...DEFAULT };
-    } catch {
-      return { ...DEFAULT };
-    }
+    const cached = Store.getJSON(CACHE_KEY, null);
+    return cached ? { ...DEFAULT, ...cached } : { ...DEFAULT };
   }
 
   function _writeCache(data) {
     const merged = { ...DEFAULT, ..._readCache(), ...data };
-    localStorage.setItem(CACHE_KEY, JSON.stringify(merged));
+    Store.setJSON(CACHE_KEY, merged);
   }
 
   function _markDirty(flag) {
-    if (flag) localStorage.setItem(DIRTY_KEY, "1");
-    else localStorage.removeItem(DIRTY_KEY);
+    if (flag) Store.set(DIRTY_KEY, "1");
+    else Store.remove(DIRTY_KEY);
   }
 
   function _isDirty() {
-    return !!localStorage.getItem(DIRTY_KEY);
+    return !!Store.get(DIRTY_KEY);
   }
 
   // === API pública ===
@@ -93,7 +89,7 @@ const Profile = (() => {
   }
 
   function reset() {
-    localStorage.removeItem(CACHE_KEY);
+    Store.remove(CACHE_KEY);
     _markDirty(false);
     // Persistimos el reset también en server
     return save(DEFAULT);

@@ -46,7 +46,7 @@ const Dashboard = (() => {
       // Cargar insights después (independiente)
       _renderInsights();
     } catch (err) {
-      root.innerHTML = `<p style='color:red'>Error: ${err.message}</p>`;
+      root.innerHTML = `<p style='color:red'>Error: ${UI.escape(err.message)}</p>`;
     }
   }
 
