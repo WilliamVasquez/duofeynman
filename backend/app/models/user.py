@@ -1,5 +1,6 @@
 """Usuario de la app."""
 from datetime import datetime
+from app.timeutils import utcnow
 from sqlalchemy import String, DateTime, Integer, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -20,7 +21,7 @@ class User(Base):
     streak_days: Mapped[int] = mapped_column(Integer, default=0)
     total_xp: Mapped[int] = mapped_column(Integer, default=0)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
     attempts = relationship("Attempt", back_populates="user", cascade="all, delete-orphan")

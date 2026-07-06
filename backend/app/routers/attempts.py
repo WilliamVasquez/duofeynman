@@ -1,5 +1,6 @@
 """Núcleo del producto: ciclo Feynman (modo hablar o escribir)."""
 from datetime import datetime, date
+from app.timeutils import utcnow
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
@@ -40,7 +41,7 @@ def start_attempt(
         Attempt.user_id == user.id,
         Attempt.topic_id == topic.id,
         Attempt.completed_at.is_(None),
-    ).update({"completed_at": datetime.utcnow(), "stage": "ABANDONED"})
+    ).update({"completed_at": utcnow(), "stage": "ABANDONED"})
 
     attempt = Attempt(user_id=user.id, topic_id=topic.id, stage="EXPLAIN")
     db.add(attempt)
@@ -63,9 +64,25 @@ async def submit_round(
 
     topic = db.get(Topic, attempt.topic_id)
 
+    # Evaluar ANTES de tomar el lock: evaluate_round puede llamar a LanguageTool
+    # (HTTP externo, varios segundos) y no queremos sostener un lock de fila mientras.
     result = await feynman_engine.evaluate_round(
         topic, payload.transcript, payload.duration_seconds, mode=payload.mode
     )
+
+    # Lock de fila (SELECT ... FOR UPDATE): dos requests simultáneos sobre el
+    # mismo attempt se serializan; sin esto el segundo pisa los rounds del primero.
+    db.expire(attempt)
+    attempt = (
+        db.query(Attempt)
+        .filter(Attempt.id == payload.attempt_id)
+        .with_for_update()
+        .first()
+    )
+    if not attempt:
+        raise HTTPException(404, "Intento no encontrado")
+    if attempt.completed_at:
+        raise HTTPException(400, "Intento ya cerrado")
 
     rounds = list(attempt.rounds or [])
     rounds.append({
@@ -75,7 +92,7 @@ async def submit_round(
         "score": result["overall_score"],
         "feedback_es": result["encouragement_es"],
         "next_action": result["next_action"],
-        "ts": datetime.utcnow().isoformat(),
+        "ts": utcnow().isoformat(),
     })
     attempt.rounds = rounds
     attempt.overall_score = result["overall_score"]
@@ -102,7 +119,7 @@ async def submit_round(
     if result["next_action"] == "MASTERED":
         attempt.stage = "DONE"
         attempt.mastered = True
-        attempt.completed_at = datetime.utcnow()
+        attempt.completed_at = utcnow()
 
         progress = (
             db.query(UserProgress)
@@ -116,7 +133,7 @@ async def submit_round(
         progress.last_score = result["overall_score"]
         progress.best_score = max(progress.best_score, result["overall_score"])
         progress.mastery_level = min(5, progress.mastery_level + 1)
-        progress.last_practiced_at = datetime.utcnow()
+        progress.last_practiced_at = utcnow()
 
         user.total_xp += 10
 
@@ -129,7 +146,7 @@ async def submit_round(
         if existing:
             quality = srs_service.score_to_quality(result["overall_score"])
             srs_service.review_card(existing, quality)
-            existing.last_reviewed_at = datetime.utcnow()
+            existing.last_reviewed_at = utcnow()
             existing.payload = {**(existing.payload or {}), "last_transcript": payload.transcript, "mode": payload.mode}
         else:
             db.add(SrsCard(

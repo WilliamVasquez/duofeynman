@@ -68,13 +68,17 @@ const TTS = (() => {
       return;
     }
 
+    let url = null;
     try {
       const blob = await API.tts(text, voice);
-      const url = URL.createObjectURL(blob);
-      _cachePut(key, url);
+      url = URL.createObjectURL(blob);
       currentAudio = new Audio(url);
       await currentAudio.play();
+      // Cachear recién DESPUÉS de que play() funcione: si falla, revocamos
+      // el blob URL (sino queda huérfano en memoria — leak progresivo).
+      _cachePut(key, url);
     } catch (e) {
+      if (url && !cache.has(key)) URL.revokeObjectURL(url);
       console.warn("TTS backend no disponible, usando navegador:", e.message);
       _fallbackBrowser(text);
     }

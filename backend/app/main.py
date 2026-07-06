@@ -109,6 +109,17 @@ async def security_headers(request: Request, call_next):
 
 @app.on_event("startup")
 def on_startup():
+    # Fail-fast: verificar conectividad a la BD antes de aceptar requests.
+    # Sin esto, la app arranca "sana" y cada request falla con errores genéricos.
+    from sqlalchemy import text
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+    except Exception as e:
+        logging.getLogger("duofeynman").critical(
+            "No se pudo conectar a la base de datos: %s. Revisá DB_* en .env y que MySQL esté corriendo.", e
+        )
+        raise
     # Crear tablas si no existen (en dev). En prod usar Alembic.
     Base.metadata.create_all(bind=engine)
 

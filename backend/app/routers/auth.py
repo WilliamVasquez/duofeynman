@@ -1,6 +1,7 @@
 """Registro y login."""
 import logging
 from datetime import datetime
+from app.timeutils import utcnow
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
@@ -14,6 +15,10 @@ from app.services.rate_limit import limiter
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 audit_log = logging.getLogger("duofeynman.audit")
+
+# Hash dummy para igualar tiempos cuando el email no existe (evita timing attack
+# que permitiría enumerar emails registrados midiendo latencia de respuesta).
+_DUMMY_HASH = hash_password("dummy-password-for-timing")
 
 
 @router.post("/register", response_model=Token, status_code=201)
@@ -44,12 +49,14 @@ def register(request: Request, payload: UserCreate, db: Session = Depends(get_db
 def login(request: Request, payload: UserLogin, db: Session = Depends(get_db)):
     client_ip = request.client.host if request.client else "?"
     user = db.query(User).filter(User.email == payload.email).first()
-    if not user or not verify_password(payload.password, user.password_hash):
+    # Siempre verificar un hash (dummy si no existe el user) → tiempo constante
+    password_ok = verify_password(payload.password, user.password_hash if user else _DUMMY_HASH)
+    if not user or not password_ok:
         audit_log.warning("login_fail email=%s ip=%s", payload.email, client_ip)
         # Mensaje genérico para no leakear si el email existe o no
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Credenciales inválidas")
 
-    user.last_login_at = datetime.utcnow()
+    user.last_login_at = utcnow()
     db.commit()
     db.refresh(user)
     audit_log.info("login_ok user_id=%s ip=%s", user.id, client_ip)

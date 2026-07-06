@@ -107,12 +107,13 @@ const Speech = (() => {
         if (onStatus) onStatus("Grabando... se transcribirá al soltar (Vosk).");
         return true;
       } catch (e) {
-        alert("No pude acceder al micrófono: " + e.message);
+        // Toast, no alert(): alert() puede no funcionar en WebView Android
+        UI.toast("No pude acceder al micrófono: " + e.message, { type: "error", duration: 5000 });
         return false;
       }
     }
 
-    alert("Tu navegador no permite grabar audio. Usá el modo Escribir.");
+    UI.toast("Tu navegador no permite grabar audio. Usá el modo Escribir.", { type: "warn", duration: 5000 });
     return false;
   }
 

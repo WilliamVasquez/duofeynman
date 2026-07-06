@@ -1,4 +1,5 @@
 from datetime import date, timedelta, datetime
+from app.timeutils import utcnow
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc
@@ -61,7 +62,7 @@ def dashboard(
     summary_data = summary(db, user)
 
     # Últimos 7 días: agrupar por fecha
-    seven_days_ago = datetime.utcnow() - timedelta(days=7)
+    seven_days_ago = utcnow() - timedelta(days=7)
     daily_rows = (
         db.query(
             func.date(Attempt.completed_at).label("d"),

@@ -295,6 +295,9 @@
   }
 
   async function ensureAttempt() {
+    // Resetear ANTES: si falla, no queremos que quede el attempt del topic anterior
+    // (sendRound mandaría rounds al intento equivocado).
+    currentAttemptId = null;
     try {
       const att = await API.startAttempt(currentTopic.id, currentMode);
       currentAttemptId = att.id;

@@ -191,7 +191,9 @@ async def check_grammar(text: str) -> list[dict]:
     lt_errors: list[dict] = []
     url = f"{settings.LANGUAGETOOL_URL}/check"
     try:
-        async with httpx.AsyncClient(timeout=25) as cli:
+        # Timeout corto: si LanguageTool está caído, no queremos que cada round
+        # espere 25s — con 8s el fallback a reglas custom llega rápido.
+        async with httpx.AsyncClient(timeout=8) as cli:
             r = await cli.post(
                 url,
                 data={

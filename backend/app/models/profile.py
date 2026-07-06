@@ -5,6 +5,7 @@ La data acá NO se usa para autenticación, solo para personalizar prompts
 y filtrar contenido en el frontend.
 """
 from datetime import datetime
+from app.timeutils import utcnow
 from sqlalchemy import String, Integer, Boolean, JSON, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -32,5 +33,5 @@ class UserProfile(Base):
     # JSON: {"dialogues": ["slug1", ...], "topics": [...]}
     hidden_items: Mapped[dict] = mapped_column(JSON, default=dict)
 
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, onupdate=utcnow)

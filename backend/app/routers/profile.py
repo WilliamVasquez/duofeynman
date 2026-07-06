@@ -1,6 +1,6 @@
 """Endpoints del perfil del usuario."""
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -31,6 +31,24 @@ class ProfileIn(BaseModel):
     daily_goal_minutes: int = Field(default=15, ge=5, le=120)
     interests: dict = Field(default_factory=dict)
     hidden_items: dict = Field(default_factory=dict)
+
+    @field_validator("interests")
+    @classmethod
+    def _validate_interests(cls, v: dict) -> dict:
+        # Solo keys conocidas y valores bool — evita persistir JSON basura
+        return {k: bool(val) for k, val in (v or {}).items() if k in DEFAULT_INTERESTS}
+
+    @field_validator("hidden_items")
+    @classmethod
+    def _validate_hidden_items(cls, v: dict) -> dict:
+        # Estructura fija: {"dialogues": [str], "topics": [int|str]} — el frontend
+        # espera listas; cualquier otra cosa crashea el render del perfil.
+        out = {"dialogues": [], "topics": []}
+        for key in out:
+            items = (v or {}).get(key, [])
+            if isinstance(items, list):
+                out[key] = [i for i in items[:500] if isinstance(i, (str, int))]
+        return out
 
 
 class ProfileOut(ProfileIn):

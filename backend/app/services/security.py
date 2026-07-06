@@ -4,6 +4,7 @@ Usamos `bcrypt` directamente en vez de `passlib` porque passlib está
 abandonado y rompe con bcrypt >= 4.x.
 """
 from datetime import datetime, timedelta
+from app.timeutils import utcnow
 
 import bcrypt
 from jose import jwt, JWTError
@@ -30,7 +31,7 @@ def verify_password(plain: str, hashed: str) -> bool:
 
 
 def create_access_token(subject: str | int) -> str:
-    expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     payload = {"sub": str(subject), "exp": expire}
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 

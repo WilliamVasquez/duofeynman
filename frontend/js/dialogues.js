@@ -270,8 +270,8 @@ const Dialogues = (() => {
     // Inmersión total: SOLO inglés visible. La traducción aparece DEBAJO
     // (sin ocultar el inglés) al click del mensaje. Tooltip nativo en hover.
     div.innerHTML = `
-      <span class="speaker">${npcName}</span>
-      <div class="msg-en translatable"${hasTrans ? ` title="${_escapeAttr(textEs)} (click for translation)"` : ""}>${textEn}</div>
+      <span class="speaker">${_escapeHtml(npcName)}</span>
+      <div class="msg-en translatable"${hasTrans ? ` title="${_escapeAttr(textEs)} (click for translation)"` : ""}>${_escapeHtml(textEn)}</div>
       <div class="msg-actions">
         <button class="listen-btn" title="Escuchar">🔊 Listen</button>
       </div>
@@ -288,7 +288,8 @@ const Dialogues = (() => {
     const list = document.getElementById("chat-messages");
     const div = document.createElement("div");
     div.className = "chat-msg user";
-    div.innerHTML = `<span class="speaker">Vos</span>${text}`;
+    // Escapar input del usuario: sin esto, HTML tipeado se inyecta (XSS)
+    div.innerHTML = `<span class="speaker">Vos</span>${_escapeHtml(text)}`;
     list.appendChild(div);
     _scrollChat();
   }

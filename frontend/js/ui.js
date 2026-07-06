@@ -39,7 +39,7 @@ const UI = (() => {
           const btn = document.createElement("button");
           btn.className = "topic-btn";
           btn.innerHTML = `
-            <span>🗣️✍️ ${t.prompt_es}</span>
+            <span>🗣️✍️ ${escape(t.prompt_es)}</span>
             <span class="difficulty">${"●".repeat(t.difficulty)}</span>
           `;
           btn.onclick = () => onTopicClick(t);
@@ -58,7 +58,7 @@ const UI = (() => {
     const promptEs = Profile.personalize(topic.prompt_es);
     const promptEnEl = document.getElementById("prompt-en");
     const promptEsEl = document.getElementById("prompt-es");
-    promptEnEl.innerHTML = `<span class="translatable" title="${promptEs.replace(/"/g, "&quot;")} (click for translation)">${promptEn}</span>`;
+    promptEnEl.innerHTML = `<span class="translatable" title="${escape(promptEs).replace(/"/g, "&quot;")} (click for translation)">${escape(promptEn)}</span>`;
     promptEsEl.innerHTML = "";  // se llena dinámicamente al hacer click en el prompt
     // Click handler: inserta el ES debajo
     const enSpan = promptEnEl.querySelector(".translatable");
@@ -79,7 +79,7 @@ const UI = (() => {
     vocab.innerHTML = "";
     (topic.key_vocabulary || []).forEach(v => {
       const li = document.createElement("li");
-      li.innerHTML = `<strong>${v.en}</strong> — ${v.es}`;
+      li.innerHTML = `<strong>${escape(v.en)}</strong> — ${escape(v.es)}`;
       vocab.appendChild(li);
     });
 
@@ -231,7 +231,7 @@ const UI = (() => {
     const defaultIcons = { success: "✓", error: "✕", info: "ℹ", warn: "⚠️" };
     el.innerHTML = `
       <span class="toast-icon">${icon || defaultIcons[type] || ""}</span>
-      <span class="toast-msg">${message}</span>
+      <span class="toast-msg">${escape(message)}</span>
     `;
     container.appendChild(el);
     requestAnimationFrame(() => el.classList.add("show"));

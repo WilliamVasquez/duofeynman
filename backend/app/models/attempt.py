@@ -1,5 +1,6 @@
 """Intentos del usuario explicando un Topic (ciclo Feynman)."""
 from datetime import datetime
+from app.timeutils import utcnow
 from sqlalchemy import String, Integer, Text, ForeignKey, DateTime, Float, JSON, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -37,7 +38,7 @@ class Attempt(Base):
     duration_seconds: Mapped[int] = mapped_column(Integer, default=0)
     word_count: Mapped[int] = mapped_column(Integer, default=0)
 
-    started_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    started_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
     completed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="attempts")

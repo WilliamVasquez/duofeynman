@@ -1,5 +1,6 @@
 """Progreso del usuario y gamificación."""
 from datetime import datetime, date
+from app.timeutils import utcnow
 from sqlalchemy import String, Integer, Text, ForeignKey, DateTime, Date, Float, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -45,7 +46,7 @@ class UserAchievement(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
     achievement_id: Mapped[int] = mapped_column(ForeignKey("achievements.id"), index=True)
-    unlocked_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    unlocked_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
     user = relationship("User", back_populates="achievements")
 
