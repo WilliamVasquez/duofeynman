@@ -9,17 +9,10 @@ Rule-based, sin IA. Por turno verifica:
 Devuelve score 0-1, feedback en español, y si "aprobó" para avanzar.
 """
 from __future__ import annotations
-import re
 from difflib import SequenceMatcher
 
 from app.services.analyzer import detect_code_switching
-
-
-def _normalize(s: str) -> str:
-    s = s.lower()
-    s = re.sub(r"[^\w\s']", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
+from app.services.text_utils import normalize as _normalize
 
 
 def _keyword_coverage(text_norm: str, groups: list) -> tuple[float, list[list[str]]]:

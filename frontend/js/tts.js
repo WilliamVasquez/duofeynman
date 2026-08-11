@@ -15,6 +15,12 @@ const TTS = (() => {
   let preferredVoice = Store.get("duofeynman_voice") || "aria";
   let availableVoices = ["aria", "jenny", "guy", "davis", "sonia", "ryan", "natasha"];
 
+  // Nivel del usuario: el backend lo usa para la velocidad de habla, así que
+  // entra en la clave del cache. Si no, al subir de nivel seguiríamos oyendo
+  // el audio viejo (más lento) mientras dure la sesión.
+  let level = "";
+  function setLevel(l) { level = l || ""; }
+
   function setVoice(v) {
     preferredVoice = v;
     Store.set("duofeynman_voice", v);
@@ -59,7 +65,7 @@ const TTS = (() => {
     if (!text) return;
     stop();
     const voice = voiceOverride || preferredVoice;
-    const key = `${voice}|${text}`;
+    const key = `${voice}|${level}|${text}`;
 
     // Cache hit
     if (cache.has(key)) {
@@ -70,7 +76,7 @@ const TTS = (() => {
 
     let url = null;
     try {
-      const blob = await API.tts(text, voice);
+      const blob = await API.tts(text, voice, level);
       url = URL.createObjectURL(blob);
       currentAudio = new Audio(url);
       await currentAudio.play();
@@ -84,5 +90,5 @@ const TTS = (() => {
     }
   }
 
-  return { speak, stop, setVoice, getVoice, getVoices, refreshStatus };
+  return { speak, stop, setVoice, getVoice, getVoices, setLevel, refreshStatus };
 })();

@@ -74,6 +74,18 @@ CREATE DATABASE duofeynman CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
    - `en_US-amy-medium.onnx.json` (~5 KB)
 4. Crear `backend/models/piper/` y poner los dos archivos ahí.
 
+No importa si dejás el `piper.exe` en `backend/piper/` o junto a los modelos en
+`backend/models/piper/`: la app busca en las dos rutas. Igual con los modelos —
+si hay varios `.onnx`, elige el de mejor calidad (`high` > `medium` > `low`) y
+lee el sample rate del `.json`, así que no hay que tocar el `.env` para cambiarlo.
+
+**Voz más natural (opcional):** un modelo `high` suena bastante mejor que `medium`.
+Bajá los dos archivos de
+https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/lessac/high
+(`en_US-lessac-high.onnx` ~110 MB + su `.json`) a `backend/models/piper/` y la app
+lo empieza a usar sola. Esto solo afecta al fallback offline: con internet manda
+Edge TTS, que es más natural que cualquier Piper.
+
 **Verificación rápida** (opcional):
 ```powershell
 echo "hello world" | .\backend\piper\piper.exe --model .\backend\models\piper\en_US-amy-medium.onnx --output_file test.wav

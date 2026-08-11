@@ -24,9 +24,80 @@ const Speech = (() => {
   let recognition = null;
   let onResultCb = null;
   let onEndCb = null;
-  let webSpeechActive = false;
-  let webSpeechFinal = "";
+  let webSpeechActive = false;    // el usuario sigue queriendo grabar
+  let webSpeechFinal = "";        // final acumulado ENTRE re-starts
+  let webSpeechSession = "";      // final de la sesión de reconocimiento actual
   let webSpeechStart = 0;
+  let webSpeechFinished = false;  // evita disparar onEnd dos veces
+  let restartCount = 0;
+
+  // Chrome corta el reconocimiento tras unos segundos de silencio aunque
+  // continuous=true. Reiniciamos, pero con techo: si el mic muere en silencio
+  // no queremos un loop infinito de start/end.
+  const MAX_RESTARTS = 20;
+
+  // Errores que NO tienen sentido reintentar (sin permiso, sin micrófono...).
+  const FATAL_ERRORS = new Set([
+    "not-allowed", "service-not-allowed", "audio-capture",
+    "language-not-supported", "bad-grammar",
+  ]);
+
+  // --- Sesgo por vocabulario esperado ---
+  // Chrome devuelve varias hipótesis de transcripción. Con el vocabulario del
+  // ejercicio actual podemos elegir la que más se le parece, en vez de confiar
+  // ciegamente en la primera. Ayuda mucho con acento no nativo.
+  let expectedTerms = [];
+
+  function _norm(s) {
+    return String(s)
+      .toLowerCase()
+      .replace(/[^a-z0-9'\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function _escapeRe(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function setExpectedVocab(terms) {
+    expectedTerms = (Array.isArray(terms) ? terms : [])
+      .filter(t => typeof t === "string")
+      .map(_norm)
+      .filter(Boolean);
+  }
+
+  // Elige la alternativa con más términos esperados presentes.
+  // Empate => gana la primera, que es la de mayor confianza según Chrome.
+  function _pickAlternative(result) {
+    if (!result || result.length === 0) return "";
+    if (result.length === 1 || expectedTerms.length === 0) return result[0].transcript;
+
+    let best = result[0].transcript;
+    let bestScore = -1;
+    for (let i = 0; i < result.length; i++) {
+      const text = result[i].transcript;
+      const norm = _norm(text);
+      let score = 0;
+      for (const term of expectedTerms) {
+        // Frases de varias palabras: substring. Palabra sola: límite de palabra,
+        // para que "go" no matchee dentro de "going".
+        const hit = term.includes(" ")
+          ? norm.includes(term)
+          : new RegExp(`\\b${_escapeRe(term)}\\b`).test(norm);
+        if (hit) score++;
+      }
+      if (score > bestScore) { bestScore = score; best = text; }
+    }
+    return best;
+  }
+
+  function _finishWebSpeech() {
+    if (webSpeechFinished) return;
+    webSpeechFinished = true;
+    const duration = Math.round((Date.now() - webSpeechStart) / 1000);
+    if (onEndCb) onEndCb({ transcript: webSpeechFinal.trim(), duration });
+  }
 
   function initWebSpeech() {
     if (!SR) return false;
@@ -34,23 +105,51 @@ const Speech = (() => {
     recognition.lang = "en-US";
     recognition.interimResults = true;
     recognition.continuous = true;
-    recognition.maxAlternatives = 1;
+    recognition.maxAlternatives = 3;
 
     recognition.onresult = (e) => {
       let interim = "";
-      webSpeechFinal = "";
+      let sessionFinal = "";
       for (let i = 0; i < e.results.length; i++) {
-        const t = e.results[i][0].transcript;
-        if (e.results[i].isFinal) webSpeechFinal += t + " ";
-        else interim += t;
+        const res = e.results[i];
+        if (res.isFinal) sessionFinal += _pickAlternative(res) + " ";
+        else interim += res[0].transcript;
       }
-      if (onResultCb) onResultCb({ final: webSpeechFinal.trim(), interim: interim.trim() });
+      webSpeechSession = sessionFinal.trim();
+      // Hubo audio real: el contador de re-starts no debe agotarse por hablar mucho.
+      restartCount = 0;
+      const full = (webSpeechFinal + " " + webSpeechSession).trim();
+      if (onResultCb) onResultCb({ final: full, interim: interim.trim() });
     };
-    recognition.onerror = (e) => console.warn("STT error:", e.error);
+
+    recognition.onerror = (e) => {
+      console.warn("STT error:", e.error);
+      if (FATAL_ERRORS.has(e.error)) webSpeechActive = false;
+    };
+
     recognition.onend = () => {
-      const duration = Math.round((Date.now() - webSpeechStart) / 1000);
+      // Consolidar lo transcripto en esta sesión antes de un posible re-start:
+      // al reiniciar, e.results arranca vacío.
+      if (webSpeechSession) {
+        webSpeechFinal = (webSpeechFinal + " " + webSpeechSession).trim();
+        webSpeechSession = "";
+      }
+      if (webSpeechActive && restartCount < MAX_RESTARTS) {
+        restartCount++;
+        setTimeout(() => {
+          if (!webSpeechActive) { _finishWebSpeech(); return; }
+          try {
+            recognition.start();
+          } catch (err) {
+            console.warn("No se pudo reiniciar STT:", err);
+            webSpeechActive = false;
+            _finishWebSpeech();
+          }
+        }, 120);
+        return;
+      }
       webSpeechActive = false;
-      if (onEndCb) onEndCb({ transcript: webSpeechFinal.trim(), duration });
+      _finishWebSpeech();
     };
     return true;
   }
@@ -97,8 +196,19 @@ const Speech = (() => {
     if (sttMode === "webspeech") {
       if (!recognition && !initWebSpeech()) return false;
       webSpeechActive = true;
+      webSpeechFinal = "";
+      webSpeechSession = "";
+      webSpeechFinished = false;
+      restartCount = 0;
       webSpeechStart = Date.now();
-      try { recognition.start(); return true; } catch (e) { console.warn(e); return false; }
+      try {
+        recognition.start();
+        return true;
+      } catch (e) {
+        console.warn(e);
+        webSpeechActive = false;
+        return false;
+      }
     }
 
     if (sttMode === "recorder") {
@@ -119,7 +229,9 @@ const Speech = (() => {
 
   async function stop({ uploadFn, onStatus } = {}) {
     if (sttMode === "webspeech") {
-      if (recognition && webSpeechActive) {
+      // Bajar la bandera PRIMERO: así onend no reinicia el reconocimiento.
+      webSpeechActive = false;
+      if (recognition) {
         try { recognition.stop(); } catch {}
       }
       return;
@@ -172,6 +284,7 @@ const Speech = (() => {
     stop,
     speak,
     canUseMic,
+    setExpectedVocab,
     setServerVoskAvailable,
     getServerVoskAvailable,
   };

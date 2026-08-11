@@ -72,6 +72,8 @@
       TTS.stop();
       await refreshHeader();
       UI.show("view-home");
+      // Refrescar path/continue al volver (el progreso pudo cambiar)
+      _loadPath().catch(() => {});
     };
   });
 
@@ -90,17 +92,53 @@
     }
     _renderProfileCard();
     try {
-      const [modules, dueCount, dialogues] = await Promise.all([
-        API.modules(),
+      const [dueCount, dialogues] = await Promise.all([
         SRS.dueCount(),
         API.dialoguesList().catch(() => []),
       ]);
-      UI.renderModules(modules, openTopic);
+      await _loadPath();
       document.getElementById("srs-due-count").textContent = dueCount;
       _renderWeekPanel(dialogues);
     } catch (err) {
       console.error(err);
     }
+  }
+
+  // Carga el camino guiado + tarjeta "Continue"
+  async function _loadPath() {
+    const data = await API.path();
+    UI.renderPath(data, openTopicFromPath);
+    _renderContinueCard(data.next_topic);
+  }
+
+  // Los topics del path vienen livianos (sin vocabulario/ejemplo):
+  // buscamos el topic completo antes de abrir la práctica.
+  async function openTopicFromPath(t) {
+    try {
+      const full = await API.topic(t.topic_id || t.id);
+      await openTopic(full);
+    } catch (err) {
+      UI.toast("No se pudo abrir el tema: " + err.message, { type: "error" });
+    }
+  }
+
+  function _renderContinueCard(next) {
+    const el = document.getElementById("continue-card");
+    if (!el) return;
+    if (!next) {
+      el.innerHTML = `<div class="continue-done">🎓 ¡Completaste todo el camino hasta B1!</div>`;
+      return;
+    }
+    el.innerHTML = `
+      <button class="continue-btn">
+        <span class="continue-play">▶</span>
+        <span class="continue-body">
+          <span class="continue-label">CONTINUE · ${UI.escape(next.level)} · ${UI.escape(next.lesson_title_en)}</span>
+          <span class="continue-prompt">${UI.escape(next.prompt_en)}</span>
+        </span>
+      </button>
+    `;
+    el.querySelector(".continue-btn").onclick = () => openTopicFromPath(next);
   }
 
   function _renderProfileCard() {
@@ -246,8 +284,11 @@
     try {
       const me = await API.me();
       UI.setUserHeader(me);
+      TTS.setLevel(me.current_level);
     } catch {
-      UI.setUserHeader(API.getUser());
+      const cached = API.getUser();
+      UI.setUserHeader(cached);
+      if (cached) TTS.setLevel(cached.current_level);
     }
   }
 
@@ -288,6 +329,12 @@
   async function openTopic(topic) {
     currentTopic = topic;
     currentMode = "speak";
+    // Sesgar el STT hacia el vocabulario del topic: Chrome elige entre sus
+    // alternativas la que más se parece a lo que esperamos escuchar.
+    Speech.setExpectedVocab([
+      ...(topic.key_vocabulary || []),
+      ...(topic.connectors || []),
+    ]);
     setMode("speak");
     UI.renderTopic(topic);
     UI.show("view-practice");
@@ -468,13 +515,36 @@
     await ensureAttempt();
   };
 
+  // Contador de temas dominados en la sesión: cada 3, cambio de ritmo (dictado)
+  let _masteredStreak = 0;
+
   document.getElementById("btn-next").onclick = async () => {
     Speech.stop().catch(() => {});
     TTS.stop();
     await refreshHeader();
+    _masteredStreak++;
+
+    // Variedad tipo Duolingo: cada 3 temas seguidos, un dictado corto
+    if (_masteredStreak % 3 === 0) {
+      UI.toast("Cambio de ritmo: entrená el oído 🎧", { duration: 3500 });
+      UI.show("view-dictation");
+      await Dictation.load();
+      return;
+    }
+
+    // Encadenar directo al próximo topic del camino (sin pasar por Home)
+    try {
+      const data = await API.path();
+      if (data.next_topic) {
+        UI.toast(`Next: ${data.next_topic.prompt_en}`, { duration: 2500 });
+        await openTopicFromPath(data.next_topic);
+        return;
+      }
+    } catch { /* si falla, caemos a Home */ }
+
     UI.show("view-home");
-    const [modules, dueCount] = await Promise.all([API.modules(), SRS.dueCount()]);
-    UI.renderModules(modules, openTopic);
+    await _loadPath().catch(() => {});
+    const dueCount = await SRS.dueCount().catch(() => 0);
     document.getElementById("srs-due-count").textContent = dueCount;
   };
 

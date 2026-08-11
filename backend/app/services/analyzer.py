@@ -18,15 +18,17 @@ log = logging.getLogger(__name__)
 # Palabras españolas comunes (detección de code-switching)
 COMMON_SPANISH = {
     "el", "la", "los", "las", "un", "una", "unos", "unas", "y", "o", "pero", "porque",
+    # OJO: no incluir palabras que también son inglés válido:
+    # "son" (my son), "sin" (a sin), "come", "no", "a", "he", "me", "mi"...
     "que", "como", "cuando", "donde", "muy", "mas", "más", "yo", "tu",
-    "tú", "él", "ella", "nosotros", "ellos", "ellas", "es", "son", "está",
+    "tú", "él", "ella", "nosotros", "ellos", "ellas", "es", "está",
     "esta", "estoy", "tengo", "tiene", "hace", "hacer", "voy", "vamos",
     "trabajo", "casa", "comida", "agua", "tiempo", "día", "dia", "noche",
     "bueno", "buena", "malo", "mala", "siempre", "nunca", "también", "tambien",
     "entonces", "después", "despues", "antes", "ahora", "aquí", "aqui",
     "allá", "alla", "hola", "adiós", "adios", "gracias", "por", "favor",
     "sí", "ser", "estar", "del",
-    "con", "sin", "para",
+    "con", "para",
 }
 
 # Lugares y nombres propios comunes que NO deben marcarse como español

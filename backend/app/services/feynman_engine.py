@@ -25,6 +25,7 @@ from typing import Any
 
 from app.models.curriculum import Topic
 from app.services import analyzer
+from app.services.text_utils import normalize as _tnorm
 
 
 log = logging.getLogger(__name__)
@@ -62,12 +63,16 @@ ENCOURAGEMENT_POOL = {
 
 
 def _coverage(text: str, items: list[str]) -> tuple[float, list[str]]:
-    """Cuántos items aparecen en text (case-insensitive). Devuelve (ratio, faltantes)."""
+    """Cuántos items aparecen en text. Devuelve (ratio, faltantes).
+
+    Usa normalización compartida: apóstrofes curvos y contracciones
+    (don't ↔ do not) matchean entre sí.
+    """
     if not items:
         return 1.0, []
-    t = text.lower()
-    found = [it for it in items if it.lower() in t]
-    missing = [it for it in items if it.lower() not in t]
+    t = _tnorm(text)
+    found = [it for it in items if _tnorm(it) in t]
+    missing = [it for it in items if _tnorm(it) not in t]
     return len(found) / len(items), missing
 
 
@@ -80,23 +85,31 @@ def _vocab_strings(topic: Topic) -> list[str]:
     return out
 
 
-def compute_subscores(metrics: dict, vocab_cov: float, connector_cov: float) -> dict:
+def compute_subscores(
+    metrics: dict, vocab_cov: float, connector_cov: float, difficulty: int = 3
+) -> dict:
     """Calcula 4 sub-scores (0-1) que se le muestran al usuario.
 
     - vocabulary: cobertura de vocab del topic + diversidad léxica
     - structure:  conectores + tiempos verbales + cantidad de oraciones
     - naturalness: sin code-switching + pocos errores gramaticales
     - fluency:    velocidad/longitud adecuada
+
+    `difficulty` (1-5) del topic: en niveles bajos (≤2) no exigimos
+    3 oraciones ni 3 tiempos verbales — una respuesta A1 corta y correcta
+    debe poder aprobar.
     """
     # Vocabulario
     lex_div_norm = min(metrics.get("lexical_diversity", 0) / 0.7, 1.0)
     vocabulary = (vocab_cov * 0.6 + lex_div_norm * 0.4)
 
-    # Estructura
+    # Estructura: objetivos escalados por dificultad
+    tense_target = 2.0 if difficulty <= 2 else 3.0
+    sentence_target = 2.0 if difficulty <= 2 else 3.0
     tenses = metrics.get("tense_diversity", 0)
-    tense_score = min(tenses / 3.0, 1.0)  # 3+ tiempos = full score
+    tense_score = min(tenses / tense_target, 1.0)
     sentences = metrics.get("sentence_count", 1)
-    sentence_score = min(sentences / 3.0, 1.0)
+    sentence_score = min(sentences / sentence_target, 1.0)
     structure = (connector_cov * 0.4 + tense_score * 0.3 + sentence_score * 0.3)
 
     # Naturalidad
@@ -105,7 +118,9 @@ def compute_subscores(metrics: dict, vocab_cov: float, connector_cov: float) -> 
     grammar_errors = metrics.get("grammar_errors_count", 0)
     word_count = max(metrics.get("word_count", 1), 1)
     err_density = grammar_errors / word_count
-    grammar_score = max(0.0, 1 - err_density * 10)
+    # *4 (antes *10): con *10 un error cada 10 palabras dejaba gramática en 0.
+    # LanguageTool marca bastante ruido (mayúsculas, comas) — no castigar tanto.
+    grammar_score = max(0.0, 1 - err_density * 4)
     naturalness = (cs_score * 0.6 + grammar_score * 0.4)
 
     # Fluidez (longitud + velocidad)
@@ -137,22 +152,36 @@ def compute_overall_score(subscores: dict) -> float:
     return round(max(0.0, min(1.0, score)), 2)
 
 
-def decide_next_action(score: float, word_count: int) -> str:
+def mastery_threshold(difficulty: int) -> float:
+    """Umbral de MASTERED según dificultad del topic (1-5).
+
+    En A1 (dificultad 1-2) el usuario recién arranca: exigir 0.78 con
+    sub-scores que castigan fuerte hacía imposible aprobar respuestas
+    cortas correctas.
+    """
+    if difficulty <= 2:
+        return 0.68
+    if difficulty == 3:
+        return 0.72
+    return 0.78
+
+
+def decide_next_action(score: float, word_count: int, difficulty: int = 3) -> str:
     if word_count < 5:
         return "CONTINUE"
-    if score >= 0.78:
+    if score >= mastery_threshold(difficulty):
         return "MASTERED"
     if score >= 0.55:
         return "REFINE"
     return "CONTINUE"
 
 
-def pick_encouragement(score: float, metrics: dict) -> str:
+def pick_encouragement(score: float, metrics: dict, threshold: float = 0.78) -> str:
     if metrics["word_count"] < 8:
         return random.choice(ENCOURAGEMENT_POOL["too_short"])
     if metrics["code_switch_rate"] >= 0.15:
         return random.choice(ENCOURAGEMENT_POOL["code_switch"])
-    if score >= 0.78:
+    if score >= threshold:
         return random.choice(ENCOURAGEMENT_POOL["high"])
     if score >= 0.55:
         return random.choice(ENCOURAGEMENT_POOL["mid"])
@@ -160,7 +189,8 @@ def pick_encouragement(score: float, metrics: dict) -> str:
 
 
 def build_socratic_questions(
-    topic: Topic, score: float, missing_vocab: list[str], missing_connectors: list[str]
+    topic: Topic, score: float, missing_vocab: list[str], missing_connectors: list[str],
+    threshold: float = 0.78,
 ) -> list[str]:
     """Selecciona preguntas socráticas del topic + sugerencias dinámicas simples."""
     questions: list[str] = []
@@ -171,7 +201,7 @@ def build_socratic_questions(
     questions.extend(hints[:2])
 
     # Sugerencias generadas con plantillas (no es IA, son templates)
-    if score < 0.78 and missing_connectors:
+    if score < threshold and missing_connectors:
         c = missing_connectors[0]
         questions.append(f"Try saying it again using '{c}' to connect your ideas.")
 
@@ -228,11 +258,15 @@ async def evaluate_round(
     vocab_cov, missing_vocab = _coverage(transcript, vocab_list)
     connector_cov, missing_connectors = _coverage(transcript, connectors)
 
-    subscores = compute_subscores(local_metrics, vocab_cov, connector_cov)
+    difficulty = int(topic.difficulty or 3)
+    threshold = mastery_threshold(difficulty)
+    subscores = compute_subscores(local_metrics, vocab_cov, connector_cov, difficulty)
     score = compute_overall_score(subscores)
-    action = decide_next_action(score, local_metrics["word_count"])
-    encouragement = pick_encouragement(score, local_metrics)
-    socratic = build_socratic_questions(topic, score, missing_vocab, missing_connectors)
+    action = decide_next_action(score, local_metrics["word_count"], difficulty)
+    encouragement = pick_encouragement(score, local_metrics, threshold)
+    socratic = build_socratic_questions(
+        topic, score, missing_vocab, missing_connectors, threshold
+    )
 
     errors = build_corrections(
         grammar_errors,

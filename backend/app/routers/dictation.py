@@ -19,11 +19,8 @@ from app.routers.deps import get_current_user
 router = APIRouter(prefix="/api/dictation", tags=["dictation"])
 
 
-def _normalize(s: str) -> str:
-    s = s.lower()
-    s = re.sub(r"[^\w\s']", " ", s)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s
+# Normalización compartida: maneja apóstrofes curvos y contracciones
+from app.services.text_utils import normalize as _normalize
 
 
 def _similarity(a: str, b: str) -> float:

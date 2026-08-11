@@ -19,8 +19,11 @@ async def synthesize(
     voice: str | None = Query(None),
     _user: User = Depends(get_current_user),
 ):
+    # La velocidad sale del nivel del usuario: A1 escucha más lento que B1.
     try:
-        audio, mime = await tts_service.synthesize(text, voice)
+        audio, mime = await tts_service.synthesize(
+            text, voice, level=_user.current_level
+        )
     except tts_service.TTSError as e:
         raise HTTPException(503, str(e))
     return Response(

@@ -63,6 +63,7 @@ const API = (() => {
     login: (data) => request("/api/auth/login", { method: "POST", body: data, auth: false }),
     me: () => request("/api/me"),
     modules: () => request("/api/curriculum/modules"),
+    path: () => request("/api/curriculum/path"),
     topic: (id) => request(`/api/curriculum/topics/${id}`),
     startAttempt: (topicId, mode = "speak") => request("/api/attempts/start", { method: "POST", body: { topic_id: topicId, mode } }),
     submitRound: (data) => request("/api/attempts/round", { method: "POST", body: data }),
@@ -80,10 +81,13 @@ const API = (() => {
     getProfile: () => request("/api/me/profile"),
     putProfile: (data) => request("/api/me/profile", { method: "PUT", body: data }),
     uploadAudio,
-    async tts(text, voice) {
+    async tts(text, voice, level) {
       const t = getToken();
       const params = new URLSearchParams({ text });
       if (voice) params.set("voice", voice);
+      // El nivel va en la URL solo para diferenciar el cache del navegador: la
+      // velocidad real la decide el backend con el nivel del usuario logueado.
+      if (level) params.set("lvl", level);
       const res = await fetch(`/api/tts?${params.toString()}`, {
         headers: t ? { "Authorization": `Bearer ${t}` } : {},
       });

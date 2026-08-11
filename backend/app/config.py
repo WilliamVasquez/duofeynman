@@ -24,12 +24,19 @@ class Settings(BaseSettings):
     # Vosk STT (offline)
     VOSK_MODEL_PATH: str = "models/vosk-en-small"
 
-    # Piper TTS (offline fallback) — binario standalone + modelo
+    # Piper TTS (offline fallback) — binario standalone + modelo.
+    # Si estas rutas no existen, tts.py autodetecta el binario y elige el
+    # modelo .onnx de mayor calidad disponible (high > medium > low).
     PIPER_BINARY_PATH: str = "piper/piper.exe"
     PIPER_MODEL_PATH: str = "models/piper/en_US-amy-medium.onnx"
 
     # Voz TTS por defecto (clave en VOICES_EDGE)
     DEFAULT_VOICE: str = "aria"
+
+    # Cache de audio TTS en disco: evita re-pedirle a Microsoft la misma frase
+    # y hace que el replay funcione sin internet.
+    TTS_CACHE_DIR: str = "cache/tts"
+    TTS_CACHE_MAX_MB: int = 200
 
     # App
     APP_ENV: str = "development"

@@ -51,6 +51,60 @@ const UI = (() => {
     });
   }
 
+  // Camino guiado tipo Duolingo: módulos → lecciones (colapsables) → topics con estado.
+  // `data` viene de GET /api/curriculum/path: cada topic trae status
+  // ("mastered" | "current" | "new") y cada lección done_count/total_count.
+  function renderPath(data, onTopicClick) {
+    const root = document.getElementById("modules");
+    root.innerHTML = "";
+    const STATUS_ICON = { mastered: "✅", current: "▶️", new: "⚪" };
+
+    data.modules.forEach(m => {
+      const card = document.createElement("div");
+      card.className = "module-card";
+      card.innerHTML = `
+        <span class="module-level">${escape(m.level)}</span>
+        <h4>${escape(m.title_es)}</h4>
+        <div class="lesson-list"></div>
+      `;
+      const lessonList = card.querySelector(".lesson-list");
+
+      m.lessons.forEach(l => {
+        const hasCurrent = l.topics.some(t => t.status === "current");
+        const det = document.createElement("details");
+        det.className = "lesson-item path-lesson"
+          + (l.completed ? " lesson-done" : "")
+          + (hasCurrent ? " lesson-current" : "");
+        // Abierta solo la lección donde está el topic actual — menos abrumador
+        det.open = hasCurrent;
+        det.innerHTML = `
+          <summary>
+            <span class="lesson-check">${l.completed ? "✅" : (hasCurrent ? "▶️" : "○")}</span>
+            <span class="lesson-summary-title">${escape(l.title_es)}</span>
+            <span class="lesson-progress-count">${l.done_count}/${l.total_count}</span>
+            <span class="lesson-progress-bar"><span style="width:${l.total_count ? Math.round(l.done_count / l.total_count * 100) : 0}%"></span></span>
+          </summary>
+          <p class="lesson-obj">${escape(l.objective_es)}</p>
+          <div class="topic-list"></div>
+        `;
+        const topicList = det.querySelector(".topic-list");
+        l.topics.forEach(t => {
+          const btn = document.createElement("button");
+          btn.className = `topic-btn topic-${t.status}`;
+          btn.innerHTML = `
+            <span class="topic-status">${STATUS_ICON[t.status] || "⚪"}</span>
+            <span class="topic-prompt">${escape(t.prompt_es)}</span>
+            <span class="difficulty">${"●".repeat(t.difficulty)}</span>
+          `;
+          btn.onclick = () => onTopicClick(t);
+          topicList.appendChild(btn);
+        });
+        lessonList.appendChild(det);
+      });
+      root.appendChild(card);
+    });
+  }
+
   function renderTopic(topic) {
     document.getElementById("practice-title").textContent = "Practice";
     // Inmersión total: prompt EN protagonista. Click sobre el texto inglés → muestra ES inline DEBAJO.
@@ -99,7 +153,8 @@ const UI = (() => {
     el.classList.remove("hidden");
 
     // Feedback emocional: latido si le fue bien, shake si conviene reintentar.
-    const good = fb.next_action === "MASTERED" || fb.overall_score >= 0.78;
+    // El backend decide el umbral según dificultad del topic — no hardcodear acá.
+    const good = fb.next_action === "MASTERED";
     el.classList.remove("feedback-pass", "feedback-fail");
     // reflow para reiniciar la animación si se renderiza otra vez
     void el.offsetWidth;
@@ -263,5 +318,5 @@ const UI = (() => {
     }
   }
 
-  return { show, setUserHeader, renderModules, renderTopic, renderFeedback, authError, toast, confetti, escape };
+  return { show, setUserHeader, renderModules, renderPath, renderTopic, renderFeedback, authError, toast, confetti, escape };
 })();

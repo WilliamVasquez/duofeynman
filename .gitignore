@@ -75,6 +75,8 @@ backend/models/vosk-*/
 # Piper TTS (binario + modelo .onnx)
 backend/piper/
 backend/models/piper/
+# Cache de audio TTS (se regenera solo)
+backend/cache/
 # Cualquier archivo de modelo grande
 *.onnx
 *.bin

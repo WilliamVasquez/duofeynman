@@ -322,7 +322,15 @@ const Dialogues = (() => {
     document.getElementById("chat-turn-feedback").classList.add("hidden");
 
     // Preparar word bank desde la respuesta modelo (personalizada)
-    _setupWordBank(Profile.personalize(turn.user_example_en || ""));
+    const exampleEn = Profile.personalize(turn.user_example_en || "");
+    _setupWordBank(exampleEn);
+
+    // Sesgar el STT hacia lo que esperamos en este turno: frases de ayuda +
+    // palabras de la respuesta modelo. Se recalcula en cada turno.
+    Speech.setExpectedVocab([
+      ...(turn.helper_phrases || []).map(p => Profile.personalize(p)),
+      ...exampleEn.split(/\s+/).filter(w => w.length > 2),
+    ]);
     _applyInputMode();
 
     if (inputMode === "type") document.getElementById("chat-input").focus();
