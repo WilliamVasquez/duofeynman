@@ -83,12 +83,12 @@
     UI.show("view-home");
     // Cargar perfil del server (con fallback a localStorage si no hay internet)
     await Profile.loadFromServer();
-    // Saber si el server tiene Vosk para guiar al usuario con el micrófono
+    // Saber si el server puede transcribir, para guiar al usuario con el micrófono
     try {
       const stt = await API.sttStatus();
-      Speech.setServerVoskAvailable(stt.vosk_available);
+      Speech.setServerSttAvailable(stt.available);
     } catch {
-      Speech.setServerVoskAvailable(false);
+      Speech.setServerSttAvailable(false);
     }
     _renderProfileCard();
     try {
@@ -380,8 +380,8 @@
       const hint = document.getElementById("record-hint");
       if (Speech.mode === "webspeech") {
         hint.textContent = "🎤 Hablá en inglés. El texto aparece en vivo.";
-      } else if (Speech.mode === "recorder" && Speech.getServerVoskAvailable()) {
-        hint.textContent = "🎤 Transcripción offline (Vosk). El texto aparece al soltar.";
+      } else if (Speech.mode === "recorder" && Speech.getServerSttAvailable()) {
+        hint.textContent = "🎤 Transcripción offline en el server. El texto aparece al soltar.";
       } else if (Speech.mode === "recorder") {
         hint.innerHTML = "⚠️ El micrófono no está configurado en este navegador. <strong>Usá Chrome/Edge</strong>, o activá <strong>el modo Escribir</strong>.";
       } else {
@@ -402,7 +402,7 @@
     }
     if (!Speech.canUseMic()) {
       UI.toast(
-        "Mic unavailable: Firefox needs server-side Vosk (not configured). Use Chrome/Edge, or switch to Write mode.",
+        "Mic unavailable: Firefox needs server-side transcription (not configured). Use Chrome/Edge, or switch to Write mode.",
         { type: "warn", duration: 5000 }
       );
       return;

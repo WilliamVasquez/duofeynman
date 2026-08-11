@@ -1,4 +1,4 @@
-// Wrapper de voz: STT (Web Speech API o MediaRecorder→Vosk) + TTS.
+// Wrapper de voz: STT (Web Speech API o MediaRecorder→server) + TTS.
 // Detecta automáticamente qué método usar según el navegador.
 const Speech = (() => {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -7,16 +7,16 @@ const Speech = (() => {
 
   const sttMode = SR ? "webspeech" : (hasMediaRecorder ? "recorder" : "none");
 
-  // Estado externo: si el server tiene Vosk corriendo.
+  // Estado externo: si el server puede transcribir (Whisper o Vosk).
   // Se setea desde app.js llamando a API.sttStatus() al boot.
-  let serverVoskAvailable = null;
-  function setServerVoskAvailable(v) { serverVoskAvailable = !!v; }
-  function getServerVoskAvailable() { return serverVoskAvailable; }
+  let serverSttAvailable = null;
+  function setServerSttAvailable(v) { serverSttAvailable = !!v; }
+  function getServerSttAvailable() { return serverSttAvailable; }
 
   // Devuelve true si el usuario PUEDE usar el micrófono según el modo + estado server.
   function canUseMic() {
     if (sttMode === "webspeech") return true;
-    if (sttMode === "recorder") return serverVoskAvailable === true;
+    if (sttMode === "recorder") return serverSttAvailable === true;
     return false;
   }
 
@@ -214,7 +214,7 @@ const Speech = (() => {
     if (sttMode === "recorder") {
       try {
         await startRecorder();
-        if (onStatus) onStatus("Grabando... se transcribirá al soltar (Vosk).");
+        if (onStatus) onStatus("Grabando... se transcribirá al soltar.");
         return true;
       } catch (e) {
         // Toast, no alert(): alert() puede no funcionar en WebView Android
@@ -247,7 +247,7 @@ const Speech = (() => {
       } catch (e) {
         console.warn(e);
         const msg = String(e.message || "");
-        if (msg.includes("503") || msg.toLowerCase().includes("vosk")) {
+        if (msg.includes("503") || /vosk|whisper|stt/i.test(msg)) {
           if (window.UI && UI.toast) {
             UI.toast(
               "Server transcription not configured. Use Chrome/Edge or the Write mode.",
@@ -285,7 +285,7 @@ const Speech = (() => {
     speak,
     canUseMic,
     setExpectedVocab,
-    setServerVoskAvailable,
-    getServerVoskAvailable,
+    setServerSttAvailable,
+    getServerSttAvailable,
   };
 })();

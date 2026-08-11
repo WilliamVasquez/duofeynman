@@ -72,6 +72,8 @@ dmypy.json
 # Vosk model (~40-128MB según versión)
 backend/models/vosk-en-small/
 backend/models/vosk-*/
+# Modelos de faster-whisper (se descargan solos, ~150 MB base.en)
+backend/models/whisper/
 # Piper TTS (binario + modelo .onnx)
 backend/piper/
 backend/models/piper/

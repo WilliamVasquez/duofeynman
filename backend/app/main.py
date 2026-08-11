@@ -126,11 +126,12 @@ def on_startup():
 
 @app.get("/api/health")
 def health():
-    from app.services import vosk_stt
+    from app.services import stt
     return {
         "status": "ok",
         "env": settings.APP_ENV,
-        "vosk_stt_available": vosk_stt.available(),
+        "stt_available": stt.available(),
+        "stt_engine": stt.diagnose()["engine_preference"],
     }
 
 

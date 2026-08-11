@@ -16,7 +16,7 @@ from app.schemas.attempt import (
 )
 from app.routers.deps import get_current_user
 from app.services import feynman_engine
-from app.services import vosk_stt
+from app.services import stt
 from app.services import srs as srs_service
 from app.services import gamification
 from app.services.rate_limit import limiter
@@ -201,14 +201,14 @@ async def transcribe_audio(
     if len(audio) > 10 * 1024 * 1024:
         raise HTTPException(413, "Audio demasiado grande (máx 10MB)")
     try:
-        # Vosk es síncrono y puede tardar segundos: correrlo en threadpool
-        # para no bloquear el event loop del resto de los requests.
-        text = await run_in_threadpool(vosk_stt.transcribe, audio)
-    except vosk_stt.STTUnavailable as e:
+        # El STT es síncrono y tarda segundos: correrlo en threadpool para no
+        # bloquear el event loop del resto de los requests.
+        text, engine = await run_in_threadpool(stt.transcribe, audio)
+    except stt.STTUnavailable as e:
         raise HTTPException(503, str(e))
-    return {"transcript": text}
+    return {"transcript": text, "engine": engine}
 
 
 @router.get("/stt-status")
 def stt_status(_user: User = Depends(get_current_user)):
-    return vosk_stt.diagnose()
+    return stt.diagnose()

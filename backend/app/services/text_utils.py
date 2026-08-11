@@ -39,14 +39,47 @@ _CONTRACTION_RE = re.compile(
 )
 
 
+# Números en palabras. Hace falta porque Whisper transcribe "at six" como
+# "at 6", mientras el usuario escribiendo pone "six": sin esto, la misma
+# respuesta cuenta como distinta según si la habló o la escribió.
+_UNITS = [
+    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+    "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+    "sixteen", "seventeen", "eighteen", "nineteen",
+]
+_TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
+         "eighty", "ninety"]
+
+
+def _number_to_words(n: int) -> str | None:
+    """0-100 a palabras. Fuera de rango → None (años, cantidades: se dejan)."""
+    if n < 20:
+        return _UNITS[n]
+    if n < 100:
+        tens, unit = divmod(n, 10)
+        return _TENS[tens] + ((" " + _UNITS[unit]) if unit else "")
+    if n == 100:
+        return "one hundred"
+    return None
+
+
+def _digits_to_words(s: str) -> str:
+    def repl(m):
+        word = _number_to_words(int(m.group(0)))
+        return word if word is not None else m.group(0)
+    return re.sub(r"\b\d{1,3}\b", repl, s)
+
+
 def normalize(s: str) -> str:
     """lowercase + apóstrofes unificados + contracciones expandidas
-    + sin puntuación + espacios colapsados."""
+    + números a palabras + sin puntuación + espacios colapsados."""
     s = s.lower()
     # Apóstrofes curvos/backtick → apóstrofe recto ANTES de limpiar puntuación
     s = s.replace("’", "'").replace("‘", "'").replace("`", "'")
     # Expandir contracciones a forma larga (don't → do not)
     s = _CONTRACTION_RE.sub(lambda m: CONTRACTIONS[m.group(1)], s)
     s = re.sub(r"[^\w\s]", " ", s)
+    # Después de limpiar puntuación: "6:30" ya es "6 30" → "six thirty"
+    s = _digits_to_words(s)
     s = re.sub(r"\s+", " ", s).strip()
     return s

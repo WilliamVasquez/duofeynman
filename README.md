@@ -13,7 +13,8 @@ App estilo Duolingo basada en el **Método Feynman + Output Hypothesis**: en vez
 | Backend | Python 3.11 + FastAPI + SQLAlchemy + MySQL | gratis |
 | Frontend | HTML/CSS/JS vanilla, mobile-first responsive (listo para WebView Android) | gratis |
 | STT (Chrome / Edge) | Web Speech API nativa del navegador | gratis |
-| STT (Firefox + fallback) | **Vosk offline** + ffmpeg | gratis, 1× descarga 40 MB |
+| STT (Firefox + fallback) | **faster-whisper offline** (MIT) | gratis, 1× descarga ~150 MB |
+| STT (fallback del fallback) | **Vosk offline** + ffmpeg | gratis, 1× descarga 40 MB |
 | TTS primario | **Edge TTS** (voces Microsoft Neural: Aria, Jenny, Guy...) | gratis, sin clave |
 | TTS fallback offline | **Piper TTS** (neural local) | gratis, 1× descarga 63 MB |
 | TTS último recurso | `speechSynthesis` del navegador | gratis (robótico) |
@@ -31,7 +32,7 @@ Cada **Topic** del curriculum se ataca con un ciclo de 5 etapas:
 
 1. **EXPOSE** — Mostramos el tema, vocabulario clave y un ejemplo modelo en audio
 2. **EXPLAIN** — El usuario elige modo y produce inglés:
-   - 🎤 **Hablar** — micrófono → texto (Web Speech en Chrome/Edge, Vosk en Firefox)
+   - 🎤 **Hablar** — micrófono → texto (Web Speech en Chrome/Edge, Whisper en Firefox)
    - ✍️ **Escribir** — textarea (mejor para gramática, sin presión de pronunciación)
 3. **DETECT** — Análisis rule-based:
    - Fluidez (palabras por minuto en modo Hablar; densidad en Escribir)
@@ -52,7 +53,7 @@ Además del ciclo Feynman, hay **diálogos guionados** (51 escenarios): convers�
 CREATE DATABASE duofeynman CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-### 2. Instalar ffmpeg (necesario para Vosk con audio de navegador)
+### 2. Instalar ffmpeg (recomendado: limpia el audio antes de transcribir)
 
 - Descargá desde https://ffmpeg.org/download.html (build de Windows)
 - Descomprimí y agregá la carpeta `bin/` al PATH del sistema
@@ -94,14 +95,35 @@ Si genera `test.wav`, Piper está listo.
 
 Si saltás este paso, el TTS funciona igual con Edge TTS (online) y como último recurso usa el TTS del navegador.
 
-### 3b. Descargar modelo Vosk inglés (40 MB, una sola vez)
+### 3b. STT offline: faster-whisper (automático)
+
+Es el motor principal de transcripción en el server y **no requiere ningún paso
+manual**: viene en `requirements.txt` y baja el modelo solo la primera vez que
+alguien usa el micrófono sin Web Speech API. Queda en `backend/models/whisper/`.
+
+Configurable en `.env`:
+
+| Variable | Default | Para qué |
+|---|---|---|
+| `STT_ENGINE` | `auto` | `auto` \| `whisper` \| `vosk`. `auto` usa Whisper si está instalado |
+| `WHISPER_MODEL` | `base.en` | `base.en` (~150 MB) o `small.en` (~500 MB, más preciso y 2-3× más lento) |
+| `WHISPER_COMPUTE_TYPE` | `int8` | `int8` para CPU; `float16` solo con GPU |
+| `WHISPER_MODEL_DIR` | `models/whisper` | Dónde cachear el modelo |
+
+Whisper entiende bastante mejor a hablantes no nativos que Vosk (que confundía
+"yes that's right" con "yes that's why"), devuelve puntuación y mayúsculas, y en
+esta máquina resultó además **más rápido**: ~0,8 s contra ~5,5 s de Vosk para un
+audio de 4,5 s. Necesita internet **una sola vez** para bajar el modelo.
+
+### 3c. Descargar modelo Vosk inglés (40 MB, opcional)
+
+Solo como fallback del fallback — si Whisper no está instalado o falla.
 
 1. Ir a https://alphacephei.com/vosk/models
 2. Descargar **vosk-model-small-en-us-0.15** (~40 MB)
 3. Descomprimir en `backend/models/vosk-en-small/` (que el `model.conf` quede en esa ruta)
 
 > Si solo usás Chrome/Edge, este paso es opcional — Web Speech API alcanza.
-> Pero recomendado para que Firefox también funcione.
 
 ### 4. Backend Python
 
@@ -137,7 +159,7 @@ Crear cuenta → elegir un tema → elegir 🎤 Hablar o ✍️ Escribir → pro
 | Navegador | Modo Hablar | Modo Escribir |
 |---|---|---|
 | **Chrome / Edge** | Web Speech API (transcripción en vivo) | ✅ |
-| **Firefox** | MediaRecorder → Vosk en el server (al soltar) | ✅ |
+| **Firefox** | MediaRecorder → Whisper en el server (al soltar) | ✅ |
 | **Android WebView** (futuro) | Web Speech API (Chrome WebView) | ✅ |
 
 ## Estructura del proyecto
@@ -160,12 +182,16 @@ duofeynman/
 │   │   │   ├── analyzer.py         ← métricas + code-switching + LanguageTool
 │   │   │   ├── gamification.py     ← racha + logros desbloqueables
 │   │   │   ├── srs.py              ← repetición espaciada SM-2
-│   │   │   ├── vosk_stt.py         ← STT offline con Vosk
-│   │   │   ├── tts.py              ← Edge TTS → Piper → fallback navegador
+│   │   │   ├── stt.py               ← orquestador STT (whisper → vosk)
+│   │   │   ├── whisper_stt.py       ← STT offline con faster-whisper
+│   │   │   ├── vosk_stt.py          ← STT offline con Vosk (fallback)
+│   │   │   ├── audio_utils.py       ← ffmpeg: conversion + limpieza de audio
+│   │   │   ├── tts.py               ← Edge TTS → Piper → navegador (+ cache en disco)
 │   │   │   ├── rate_limit.py       ← slowapi (límites por IP)
 │   │   │   └── security.py         ← JWT + bcrypt
 │   │   └── data/curriculum/        ← a1_curriculum.json + dialogues.json
-│   ├── models/vosk-en-small/       ← (descargar manualmente, ver paso 3)
+│   ├── models/whisper/             ← (se descarga solo, ver paso 3b)
+│   ├── models/vosk-en-small/       ← (descargar manualmente, ver paso 3c)
 │   ├── piper/ + models/piper/      ← (opcional, ver paso 3a)
 │   ├── requirements.txt
 │   └── .env.example
@@ -175,7 +201,7 @@ duofeynman/
     └── js/
         ├── app.js                  ← orquestador + toggle de tema
         ├── api.js                  ← cliente HTTP
-        ├── speech.js               ← WebSpeech / MediaRecorder → Vosk
+        ├── speech.js               ← WebSpeech / MediaRecorder → server
         ├── tts.js                  ← reproducción de audio con caché
         ├── dialogues.js            ← UI de diálogos guionados
         ├── dashboard.js            ← stats + gráficos + insights
@@ -208,7 +234,7 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 ## Roadmap
 
 - [x] Backend rule-based sin IA externa
-- [x] Modo Hablar (Chrome/Edge + Firefox vía Vosk)
+- [x] Modo Hablar (Chrome/Edge + Firefox vía faster-whisper)
 - [x] Modo Escribir
 - [x] Curriculum completo **A1 → B1** (16 módulos, 62 topics)
 - [x] TTS neural (Edge TTS + Piper offline + fallback navegador)
@@ -236,7 +262,7 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 | `GET /api/me` | Perfil del usuario |
 | `GET /api/curriculum/modules` | Lista de módulos + lecciones + topics |
 | `POST /api/attempts/start` `/round` | Ciclo Feynman: iniciar + enviar respuesta |
-| `POST /api/attempts/transcribe` | Sube audio → Vosk transcribe (Firefox) |
+| `POST /api/attempts/transcribe` | Sube audio → Whisper/Vosk transcribe (Firefox) |
 | `GET /api/progress/summary` `/dashboard` | Stats + gráficos + logros |
 | `GET /api/srs/due` `/stats` | Cards SRS que vencen hoy |
 | `GET /api/dictation/next` `POST /check` | Modo escucha-y-escribí |

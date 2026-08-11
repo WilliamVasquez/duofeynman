@@ -19,6 +19,11 @@ python-dateutil==2.9.0
 slowapi==0.1.9
 
 # STT offline (Firefox + cualquier navegador sin Web Speech API)
+# faster-whisper es el motor principal: entiende mucho mejor a hablantes no
+# nativos que Vosk. MIT, gratis, sin clave. Baja el modelo (~150 MB para
+# base.en) la primera vez que se usa.
+faster-whisper>=1.1.0
+# Vosk queda como fallback (más liviano y más rápido, pero menos preciso).
 vosk==0.3.45
 
 # TTS: voces neurales naturales

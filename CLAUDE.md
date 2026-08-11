@@ -29,8 +29,10 @@ y huecos de vocabulario.
 - **Auth:** JWT (python-jose) + **bcrypt directo** (NO passlib — rompe con bcrypt 4.x).
   El hash trunca a 72 bytes: `_to_bytes(plain)[:72]`.
 - **Frontend:** HTML/CSS/JS **vanilla** (sin framework). Mobile-first, listo para WebView Android.
-- **STT:** Web Speech API (Chrome/Edge) → **Vosk offline** + ffmpeg (Firefox/fallback).
+- **STT:** Web Speech API (Chrome/Edge) → **faster-whisper offline** → **Vosk** (fallback).
+  Orquestado en `services/stt.py`; `STT_ENGINE=auto|whisper|vosk` en `.env`.
 - **TTS:** **Edge TTS** (online, gratis) → **Piper** (offline) → `speechSynthesis` (último recurso).
+  Velocidad según nivel del usuario y caché de audio en disco (`services/tts.py`).
 - **Gramática:** LanguageTool API pública (~20 req/min).
 - **Rate limiting:** slowapi (por IP).
 - **SRS:** algoritmo SM-2 simplificado.
@@ -44,8 +46,15 @@ y huecos de vocabulario.
 - **MySQL TEXT/BLOB no admite DEFAULT:** para columnas TEXT usar `nullable=True`, no `default=""`.
   En ALTER: `ALTER TABLE ... ADD COLUMN x TEXT` + `UPDATE` aparte (no `DEFAULT ''`).
 - **Vosk small (40MB)** confunde palabras ("yes that's right" → "yes that's why"). El usuario
-  usa **vosk-model-en-us-0.22-lgraph** (128MB), renombrado a `vosk-en-small`.
-- **Vosk es síncrono:** en endpoints async, llamarlo con `run_in_threadpool` (sino bloquea el loop).
+  usa **vosk-model-en-us-0.22-lgraph** (128MB), renombrado a `vosk-en-small`. Ya es solo fallback:
+  el motor principal es faster-whisper (`base.en`), más preciso Y más rápido (~0,8 s vs ~5,5 s).
+- **Whisper alucina con silencio:** devuelve "Thank you.", "Thanks for watching!" y similares.
+  Va con `vad_filter=True`, `condition_on_previous_text=False` y el filtro `_HALLUCINATIONS`.
+- **Whisper devuelve dígitos** ("at 6", no "at six") y puntuación. Por eso `text_utils.normalize()`
+  convierte números 0-100 a palabras: sin eso, hablar y escribir la misma respuesta no matchean.
+- **STT y Piper son síncronos:** en endpoints async, llamarlos con `run_in_threadpool`
+  (sino bloquean el loop). Cargar el modelo Whisper además va con lock: no es thread-safe.
+- **edge-tts exige signo en el rate:** `"0%"` lanza `ValueError`, va `"+0%"`.
 - **Code-switch detector:** cuidado con falsos positivos en nombres propios ("El Salvador").
   Hay PROPER_NOUNS_WHITELIST + chequeo de mayúsculas.
 - **Detección de "passed":** los keywords requeridos NO deben ser demasiado estrictos. Se relajó

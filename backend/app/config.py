@@ -21,7 +21,17 @@ class Settings(BaseSettings):
     # LanguageTool
     LANGUAGETOOL_URL: str = "https://api.languagetool.org/v2"
 
-    # Vosk STT (offline)
+    # STT: qué motor usar — auto | whisper | vosk
+    # auto = faster-whisper si está instalado, sino Vosk.
+    STT_ENGINE: str = "auto"
+
+    # faster-whisper (offline). base.en ~150 MB, small.en ~500 MB (más preciso
+    # pero 2-3× más lento en CPU). Se descarga solo la primera vez.
+    WHISPER_MODEL: str = "base.en"
+    WHISPER_COMPUTE_TYPE: str = "int8"  # int8 en CPU; float16 solo con GPU
+    WHISPER_MODEL_DIR: str = "models/whisper"
+
+    # Vosk STT (offline, fallback)
     VOSK_MODEL_PATH: str = "models/vosk-en-small"
 
     # Piper TTS (offline fallback) — binario standalone + modelo.
