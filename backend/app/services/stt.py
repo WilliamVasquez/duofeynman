@@ -58,8 +58,17 @@ def _preprocess(audio_bytes: bytes) -> bytes:
         return audio_bytes
 
 
-def transcribe(audio_bytes: bytes) -> tuple[str, str]:
-    """Transcribe audio a inglés. Devuelve (texto, motor_usado)."""
+def transcribe(audio_bytes: bytes, hints: list[str] | None = None) -> tuple[str, str]:
+    """Transcribe audio a inglés. Devuelve (texto, motor_usado).
+
+    `hints` son los términos que esperamos oír en este ejercicio. Solo Whisper
+    los usa, vía `hotwords`, que es un sesgo blando.
+
+    Vosk queda SIN sesgar a propósito: su reconfiguración de vocabulario es una
+    restricción DURA — todo lo que el usuario diga fuera de la lista vuelve como
+    `[unk]`, así que borraría justo lo que necesitamos analizar. En una app donde
+    el punto es detectar los errores del usuario, eso hace más daño que bien.
+    """
     pref = _engine_pref()
     errors: list[str] = []
 
@@ -68,7 +77,7 @@ def transcribe(audio_bytes: bytes) -> tuple[str, str]:
         if w.available():
             clean = _preprocess(audio_bytes)
             try:
-                return w.transcribe(clean), "whisper"
+                return w.transcribe(clean, hints), "whisper"
             except w.STTUnavailable as e:
                 errors.append(f"whisper: {e}")
                 if pref == "whisper":

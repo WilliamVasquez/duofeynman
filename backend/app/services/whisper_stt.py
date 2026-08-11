@@ -110,13 +110,54 @@ def _clean(text: str) -> str:
     return text
 
 
-def transcribe(audio_bytes: bytes) -> str:
+# Techos para las pistas de vocabulario. Whisper igual trunca solo a la mitad
+# de su ventana, pero recortamos antes para que entren los términos que importan
+# y para no confiar en un input que viene del cliente.
+MAX_HINTS = 32
+MAX_HINTS_CHARS = 300
+
+
+def build_hotwords(hints: list[str] | None) -> str | None:
+    """Convierte la lista de términos esperados en el string que espera Whisper.
+
+    Es un sesgo BLANDO: sube la probabilidad de esas palabras, pero el modelo
+    puede transcribir cualquier otra cosa. Si el usuario dice algo distinto,
+    se transcribe lo que dijo.
+    """
+    if not hints:
+        return None
+    seen: set[str] = set()
+    terms: list[str] = []
+    for h in hints:
+        if not isinstance(h, str):
+            continue
+        t = " ".join(h.split())          # colapsa espacios y saltos de línea
+        if not t or len(t) > 40:
+            continue
+        low = t.lower()
+        if low in seen:
+            continue
+        seen.add(low)
+        terms.append(t)
+        if len(terms) >= MAX_HINTS:
+            break
+    if not terms:
+        return None
+    out = " ".join(terms)[:MAX_HINTS_CHARS].strip()
+    return out or None
+
+
+def transcribe(audio_bytes: bytes, hints: list[str] | None = None) -> str:
     """Transcribe audio (webm/opus/wav/ogg) a texto inglés.
 
     Whisper decodifica el audio por su cuenta con PyAV, así que no hace falta
     ffmpeg. Igual aceptamos WAV ya convertido: da lo mismo.
+
+    `hints` sesga el reconocimiento hacia el vocabulario esperado del ejercicio
+    (equivalente server-side de lo que hace Web Speech con sus alternativas).
     """
     model = get_model()
+    hotwords = build_hotwords(hints)
     try:
         segments, info = model.transcribe(
             BytesIO(audio_bytes),
@@ -127,6 +168,7 @@ def transcribe(audio_bytes: bytes) -> str:
             condition_on_previous_text=False,  # sin esto se engancha repitiendo frases
             no_speech_threshold=0.6,
             temperature=0.0,            # determinístico
+            hotwords=hotwords,
         )
         parts = [seg.text for seg in segments]
     except STTUnavailable:
@@ -138,8 +180,9 @@ def transcribe(audio_bytes: bytes) -> str:
     text = _clean(" ".join(p.strip() for p in parts if p and p.strip()))
     if text:
         log.info(
-            "Whisper: %d segmento(s), prob. de habla en inglés=%.2f",
+            "Whisper: %d segmento(s), prob. de habla en inglés=%.2f, hints=%s",
             len(parts), getattr(info, "language_probability", 0.0) or 0.0,
+            "sí" if hotwords else "no",
         )
     return text
 

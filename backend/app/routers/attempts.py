@@ -1,7 +1,7 @@
 """Núcleo del producto: ciclo Feynman (modo hablar o escribir)."""
 from datetime import datetime, date
 from app.timeutils import utcnow
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi import APIRouter, Depends, Form, HTTPException, UploadFile, File
 from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
 
@@ -195,15 +195,19 @@ async def submit_round(
 async def transcribe_audio(
     request: Request,
     file: UploadFile = File(...),
+    # Vocabulario esperado del ejercicio, separado por "|". Sesga el
+    # reconocimiento hacia esos términos sin impedir transcribir otra cosa.
+    hints: str | None = Form(None, max_length=1000),
     _user: User = Depends(get_current_user),
 ):
     audio = await file.read()
     if len(audio) > 10 * 1024 * 1024:
         raise HTTPException(413, "Audio demasiado grande (máx 10MB)")
+    hint_list = [h for h in (hints or "").split("|") if h.strip()] or None
     try:
         # El STT es síncrono y tarda segundos: correrlo en threadpool para no
         # bloquear el event loop del resto de los requests.
-        text, engine = await run_in_threadpool(stt.transcribe, audio)
+        text, engine = await run_in_threadpool(stt.transcribe, audio, hint_list)
     except stt.STTUnavailable as e:
         raise HTTPException(503, str(e))
     return {"transcript": text, "engine": engine}

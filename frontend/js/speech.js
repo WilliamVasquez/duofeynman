@@ -47,6 +47,7 @@ const Speech = (() => {
   // ejercicio actual podemos elegir la que más se le parece, en vez de confiar
   // ciegamente en la primera. Ayuda mucho con acento no nativo.
   let expectedTerms = [];
+  let rawExpectedTerms = [];
 
   function _norm(s) {
     return String(s)
@@ -61,10 +62,12 @@ const Speech = (() => {
   }
 
   function setExpectedVocab(terms) {
-    expectedTerms = (Array.isArray(terms) ? terms : [])
-      .filter(t => typeof t === "string")
-      .map(_norm)
-      .filter(Boolean);
+    const clean = (Array.isArray(terms) ? terms : []).filter(t => typeof t === "string");
+    // Normalizados para comparar contra las alternativas de Chrome...
+    expectedTerms = clean.map(_norm).filter(Boolean);
+    // ...y tal cual vinieron para mandarlos al STT del server, que los usa
+    // como hotwords y aprovecha la ortografía real ("El Salvador").
+    rawExpectedTerms = clean.map(t => t.trim()).filter(Boolean);
   }
 
   // Elige la alternativa con más términos esperados presentes.
@@ -243,7 +246,9 @@ const Speech = (() => {
       if (onStatus) onStatus("Transcribiendo... 🎧");
       let transcript = "";
       try {
-        transcript = await uploadFn(result.blob);
+        // Le pasamos el vocabulario esperado: el STT del server lo usa para
+        // sesgar el reconocimiento, igual que hacemos con Web Speech.
+        transcript = await uploadFn(result.blob, rawExpectedTerms);
       } catch (e) {
         console.warn(e);
         const msg = String(e.message || "");

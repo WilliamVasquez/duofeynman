@@ -52,6 +52,14 @@ y huecos de vocabulario.
   Va con `vad_filter=True`, `condition_on_previous_text=False` y el filtro `_HALLUCINATIONS`.
 - **Whisper devuelve dígitos** ("at 6", no "at six") y puntuación. Por eso `text_utils.normalize()`
   convierte números 0-100 a palabras: sin eso, hablar y escribir la misma respuesta no matchean.
+- **Biasing de vocabulario:** el frontend manda los términos esperados (`hints`, separados por `|`)
+  a `/api/attempts/transcribe` y Whisper los usa como `hotwords` — sesgo BLANDO.
+  **NO usar la reconfiguración de vocabulario de Vosk:** es restricción DURA, lo que el usuario
+  diga fuera de la lista vuelve como `[unk]` y se pierde justo lo que hay que analizar.
+  Por el mismo motivo, nunca sesgar con la frase objetivo completa: el ejercicio se autoaprueba
+  y le esconde al usuario sus propios errores.
+- **El dictado NO usa micrófono:** es escuchar (TTS) y *escribir*. Cualquier idea de "sesgar el STT
+  en dictado" no aplica.
 - **STT y Piper son síncronos:** en endpoints async, llamarlos con `run_in_threadpool`
   (sino bloquean el loop). Cargar el modelo Whisper además va con lock: no es thread-safe.
 - **edge-tts exige signo en el rate:** `"0%"` lanza `ValueError`, va `"+0%"`.

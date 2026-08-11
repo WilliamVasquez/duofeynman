@@ -40,9 +40,12 @@ const API = (() => {
     return res.json();
   }
 
-  async function uploadAudio(blob) {
+  async function uploadAudio(blob, hints) {
     const fd = new FormData();
     fd.append("file", blob, "audio.webm");
+    // Vocabulario esperado del ejercicio: sesga el STT del server hacia esos
+    // términos. Separador "|" porque las frases llevan espacios.
+    if (hints && hints.length) fd.append("hints", hints.join("|"));
     const t = getToken();
     const res = await fetch(base + "/api/attempts/transcribe", {
       method: "POST",
