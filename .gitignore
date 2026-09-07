@@ -132,3 +132,13 @@ _backup/
 # --- Config y contexto de agentes (local, no se comparte) ---
 .claude/
 AGENTS.md
+
+# --- graphify: caché y sidecars locales de la máquina ---
+# cache/ cambia de carpeta en cada versión del extractor (churn puro en el
+# historial). .graphify_python y .graphify_root guardan rutas ABSOLUTAS de la
+# máquina que corrió el build: en otro clon apuntan a algo que no existe.
+# graphify los regenera solo. Los outputs (graph.json, graph.html,
+# GRAPH_REPORT.md, manifest.json, cost.json) SÍ se commitean.
+graphify-out/cache/
+graphify-out/.graphify_python
+graphify-out/.graphify_root
