@@ -260,8 +260,19 @@
           <div class="helper-chips" id="helper-chips"></div>
 
           <div class="input-mode-toggle">
-            <button class="input-mode-btn active" data-input-mode="type" title="Escribir o hablar">✍️🎤 Write / Speak</button>
+            <button class="input-mode-btn active" data-input-mode="choose" title="Elegir una respuesta">💬 Choose</button>
+            <button class="input-mode-btn" data-input-mode="type" title="Escribir o hablar">✍️🎤 Write / Speak</button>
             <button class="input-mode-btn" data-input-mode="order" title="Ordenar palabras">🧩 Order words</button>
+          </div>
+
+          <!-- Modo: elegir respuesta (default, estilo Duolingo) -->
+          <div id="chat-toolbar-choose" class="choose-zone">
+            <div class="choose-label" title="Tocá la respuesta que querés dar. Tocá de nuevo para ver el español.">What do you say?</div>
+            <div class="choose-options" id="choose-options" role="listbox"></div>
+            <div class="choose-actions">
+              <button id="btn-choose-listen" class="btn-ghost" title="Escuchar la respuesta elegida">🔊 Listen</button>
+              <button id="btn-choose-send" class="btn-primary" title="Enviar">Say it →</button>
+            </div>
           </div>
 
           <!-- Modo: escribir / hablar -->

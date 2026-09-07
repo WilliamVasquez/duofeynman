@@ -31,9 +31,38 @@ ACHIEVEMENTS = [
 ]
 
 
+def _add_column_if_missing(table: str, column: str, ddl_type: str) -> None:
+    """ALTER TABLE idempotente. `create_all` crea tablas nuevas pero NUNCA
+    agrega columnas a tablas que ya existen, así que las columnas nuevas se
+    migran acá. Ojo (ver CLAUDE.md): en MySQL las columnas TEXT/BLOB/JSON no
+    admiten DEFAULT — se agregan NULL y, si hace falta, se rellenan con un
+    UPDATE aparte.
+    """
+    from sqlalchemy import text
+    with engine.begin() as conn:
+        existing = {
+            row[0]
+            for row in conn.execute(
+                text(
+                    "SELECT COLUMN_NAME FROM information_schema.COLUMNS "
+                    "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :t"
+                ),
+                {"t": table},
+            )
+        }
+        if not existing:
+            return  # la tabla no existe todavía: create_all la crea completa
+        if column in existing:
+            return
+        conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {ddl_type}"))
+        log.info("  + columna %s.%s", table, column)
+
+
 def seed():
     log.info("Creando tablas...")
     Base.metadata.create_all(bind=engine)
+    # Migraciones de columnas agregadas después de la creación original
+    _add_column_if_missing("dialogue_turns", "answer_options", "JSON NULL")
 
     db = SessionLocal()
     try:
@@ -159,6 +188,7 @@ def seed():
                         user_example_en=t.get("user_example_en", ""),
                         required_keywords=t.get("required_keywords", []),
                         helper_phrases=t.get("helper_phrases", []),
+                        answer_options=t.get("answer_options", []),
                     ))
 
         db.commit()

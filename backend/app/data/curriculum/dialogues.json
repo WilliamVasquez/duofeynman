@@ -58,6 +58,20 @@
             "It was good",
             "I'm tired",
             "How about you?"
+          ],
+          "answer_options": [
+            {
+              "en": "It was good, but I'm really tired. How about you?",
+              "es": "Estuvo bien, pero estoy muy cansado. ¿Y vos?"
+            },
+            {
+              "en": "It was pretty busy. I had a lot of work today. And your day?",
+              "es": "Fue bastante movido. Tuve mucho trabajo hoy. ¿Y tu día?"
+            },
+            {
+              "en": "Honestly, it was a hard day. I don't want to talk about work. How was yours?",
+              "es": "La verdad, fue un día difícil. No quiero hablar del trabajo. ¿Cómo fue el tuyo?"
+            }
           ]
         },
         {
@@ -79,6 +93,20 @@
             "I fixed...",
             "We talked about...",
             "I learned..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I fixed a problem with the database. My boss was happy.",
+              "es": "Sí, arreglé un problema con la base de datos. Mi jefe estaba contento."
+            },
+            {
+              "en": "Not really. It was a normal day, just emails and meetings.",
+              "es": "No mucho. Fue un día normal, solo mails y reuniones."
+            },
+            {
+              "en": "Yes, I learned something new about our system. I want to show you later.",
+              "es": "Sí, aprendí algo nuevo de nuestro sistema. Te lo quiero mostrar después."
+            }
           ]
         },
         {
@@ -119,6 +147,20 @@
             "I'm hungry / starving",
             "After dinner, let's...",
             "I want to watch..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I'm starving. After dinner, let's watch a movie together.",
+              "es": "Sí, me muero de hambre. Después de comer, veamos una película juntos."
+            },
+            {
+              "en": "I'm a little hungry. After dinner I want to rest on the sofa with you.",
+              "es": "Tengo un poco de hambre. Después de comer quiero descansar en el sillón con vos."
+            },
+            {
+              "en": "Not very hungry, but I'll eat. After dinner, can we go for a walk?",
+              "es": "No tengo mucha hambre, pero voy a comer. ¿Después de comer podemos salir a caminar?"
+            }
           ]
         }
       ],
@@ -182,6 +224,20 @@
           "helper_phrases": [
             "Yes, that's right",
             "I'm going to..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, that's right. I'm going to the airport. Terminal 2, please.",
+              "es": "Sí, correcto. Voy al aeropuerto. Terminal 2, por favor."
+            },
+            {
+              "en": "Yes, I'm William. The airport is correct, thank you.",
+              "es": "Sí, soy William. El aeropuerto es correcto, gracias."
+            },
+            {
+              "en": "That's me. We're going to the airport, but I need the international terminal.",
+              "es": "Ese soy yo. Vamos al aeropuerto, pero necesito la terminal internacional."
+            }
           ]
         },
         {
@@ -206,6 +262,20 @@
             "My flight is at...",
             "I have time",
             "Please drive fast"
+          ],
+          "answer_options": [
+            {
+              "en": "A little. My flight is at 6 pm, so we have some time.",
+              "es": "Un poco. Mi vuelo es a las 6 de la tarde, así que tenemos algo de tiempo."
+            },
+            {
+              "en": "Yes, I'm in a hurry. My flight leaves in two hours.",
+              "es": "Sí, tengo apuro. Mi vuelo sale en dos horas."
+            },
+            {
+              "en": "No, I have time. I always arrive early at the airport.",
+              "es": "No, tengo tiempo. Siempre llego temprano al aeropuerto."
+            }
           ]
         },
         {
@@ -226,6 +296,20 @@
             "Where are you from?",
             "How long...?",
             "Do you...?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, it is. Where are you from originally?",
+              "es": "Sí, es la primera vez. ¿De dónde sos originalmente?"
+            },
+            {
+              "en": "No, I fly a few times a year for work. How long have you been driving?",
+              "es": "No, vuelo unas cuantas veces al año por trabajo. ¿Hace cuánto que manejás?"
+            },
+            {
+              "en": "It's my second time this year. Do you like driving for Uber?",
+              "es": "Es mi segunda vez este año. ¿Te gusta manejar para Uber?"
+            }
           ]
         }
       ],
@@ -295,6 +379,20 @@
           "helper_phrases": [
             "I'd like...",
             "Can I have..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I'd like a glass of water and a Coke, please.",
+              "es": "Sí, quisiera un vaso de agua y una Coca, por favor."
+            },
+            {
+              "en": "Can I have a coffee, please? No sugar.",
+              "es": "¿Me trae un café, por favor? Sin azúcar."
+            },
+            {
+              "en": "Just water for now, thank you.",
+              "es": "Solo agua por ahora, gracias."
+            }
           ]
         },
         {
@@ -316,6 +414,20 @@
           "helper_phrases": [
             "What do you recommend?",
             "A few minutes please"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, please. Also, what do you recommend?",
+              "es": "Sí, por favor. Además, ¿qué me recomienda?"
+            },
+            {
+              "en": "What do you recommend? I can't decide.",
+              "es": "¿Qué me recomienda? No me decido."
+            },
+            {
+              "en": "No, thanks. I'm ready to order now.",
+              "es": "No, gracias. Ya estoy listo para pedir."
+            }
           ]
         },
         {
@@ -339,6 +451,20 @@
           "helper_phrases": [
             "I'll have...",
             "Give me the..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I'll have the chicken sandwich with fries, please.",
+              "es": "Sí, voy a pedir el sándwich de pollo con papas, por favor."
+            },
+            {
+              "en": "I don't really like chicken. What else do you have?",
+              "es": "No me gusta mucho el pollo. ¿Qué más tienen?"
+            },
+            {
+              "en": "It sounds good, but is it spicy? I can't eat spicy food.",
+              "es": "Suena bien, pero ¿es picante? No puedo comer picante."
+            }
           ]
         },
         {
@@ -360,6 +486,20 @@
           "helper_phrases": [
             "For here",
             "To go"
+          ],
+          "answer_options": [
+            {
+              "en": "For here, please.",
+              "es": "Para acá, por favor."
+            },
+            {
+              "en": "To go, please. I'm in a hurry.",
+              "es": "Para llevar, por favor. Tengo apuro."
+            },
+            {
+              "en": "For here. And can I have the check when you have time?",
+              "es": "Para acá. ¿Y me trae la cuenta cuando pueda?"
+            }
           ]
         }
       ],
@@ -421,6 +561,20 @@
             "Where can I find...?",
             "Where is...?",
             "I'm looking for..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, where can I find the milk?",
+              "es": "Sí, ¿dónde puedo encontrar la leche?"
+            },
+            {
+              "en": "Yes, please. I'm looking for the bread.",
+              "es": "Sí, por favor. Estoy buscando el pan."
+            },
+            {
+              "en": "No, thank you. I'm just looking.",
+              "es": "No, gracias. Solo estoy mirando."
+            }
           ]
         },
         {
@@ -441,6 +595,20 @@
           "helper_phrases": [
             "Thank you",
             "How much is...?"
+          ],
+          "answer_options": [
+            {
+              "en": "Thanks! And how much is the milk today?",
+              "es": "¡Gracias! ¿Y cuánto está la leche hoy?"
+            },
+            {
+              "en": "Thank you. Is there any discount this week?",
+              "es": "Gracias. ¿Hay algún descuento esta semana?"
+            },
+            {
+              "en": "Thank you very much. Do you also have soy milk?",
+              "es": "Muchas gracias. ¿También tienen leche de soja?"
+            }
           ]
         },
         {
@@ -464,6 +632,20 @@
             "That's all",
             "Just that",
             "Also..."
+          ],
+          "answer_options": [
+            {
+              "en": "No, that's all. Thank you very much.",
+              "es": "No, eso es todo. Muchas gracias."
+            },
+            {
+              "en": "Yes, I also need eggs and coffee.",
+              "es": "Sí, también necesito huevos y café."
+            },
+            {
+              "en": "That's all for now. Where is the checkout?",
+              "es": "Eso es todo por ahora. ¿Dónde está la caja?"
+            }
           ]
         }
       ],
@@ -533,6 +715,20 @@
           "helper_phrases": [
             "Here you go",
             "Here it is"
+          ],
+          "answer_options": [
+            {
+              "en": "Good morning. Here you go, my passport and ticket.",
+              "es": "Buen día. Acá tiene, mi pasaporte y el pasaje."
+            },
+            {
+              "en": "Good morning. Here is my passport. My ticket is on my phone.",
+              "es": "Buen día. Acá está mi pasaporte. El pasaje lo tengo en el celular."
+            },
+            {
+              "en": "Sure, here it is. Am I at the right counter for Miami?",
+              "es": "Claro, acá tiene. ¿Estoy en el mostrador correcto para Miami?"
+            }
           ]
         },
         {
@@ -558,6 +754,20 @@
             "One suitcase",
             "Just a carry-on",
             "No bags"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, one suitcase. And one carry-on.",
+              "es": "Sí, una valija. Y un bolso de mano."
+            },
+            {
+              "en": "No bags today, just my carry-on.",
+              "es": "Hoy sin valijas, solo mi bolso de mano."
+            },
+            {
+              "en": "Yes, two suitcases. How much do I have to pay?",
+              "es": "Sí, dos valijas. ¿Cuánto tengo que pagar?"
+            }
           ]
         },
         {
@@ -578,6 +788,20 @@
           "helper_phrases": [
             "Window please",
             "Aisle please"
+          ],
+          "answer_options": [
+            {
+              "en": "A window seat, please.",
+              "es": "Un asiento de ventanilla, por favor."
+            },
+            {
+              "en": "An aisle seat, please. I like to walk around.",
+              "es": "Un asiento de pasillo, por favor. Me gusta caminar un poco."
+            },
+            {
+              "en": "Whatever is available, but near the front if possible.",
+              "es": "El que haya disponible, pero adelante si se puede."
+            }
           ]
         },
         {
@@ -598,6 +822,20 @@
           "helper_phrases": [
             "Thank you",
             "Thanks a lot"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you very much! Have a good day.",
+              "es": "¡Muchas gracias! Que tenga un buen día."
+            },
+            {
+              "en": "Thanks a lot. Where is gate B12, exactly?",
+              "es": "Muchas gracias. ¿Dónde queda exactamente la puerta B12?"
+            },
+            {
+              "en": "Thank you. Is the flight on time?",
+              "es": "Gracias. ¿El vuelo sale en horario?"
+            }
           ]
         }
       ],
@@ -658,6 +896,20 @@
           "helper_phrases": [
             "Yes, under...",
             "My name is..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I have a reservation under William Vasquez.",
+              "es": "Sí, tengo una reserva a nombre de William Vasquez."
+            },
+            {
+              "en": "Yes, under my name. I booked two nights online.",
+              "es": "Sí, a mi nombre. Reservé dos noches por internet."
+            },
+            {
+              "en": "No, I don't. Do you have any rooms available tonight?",
+              "es": "No, no tengo. ¿Tienen habitaciones disponibles para esta noche?"
+            }
           ]
         },
         {
@@ -679,6 +931,20 @@
           "helper_phrases": [
             "Here you go",
             "Here is my..."
+          ],
+          "answer_options": [
+            {
+              "en": "Sure, here is my passport.",
+              "es": "Claro, acá está mi pasaporte."
+            },
+            {
+              "en": "Of course. Here you go. Do you need a credit card too?",
+              "es": "Por supuesto. Acá tiene. ¿También necesita una tarjeta de crédito?"
+            },
+            {
+              "en": "Here it is. Sorry, my ID is in my suitcase — is the passport okay?",
+              "es": "Acá está. Perdón, mi documento está en la valija, ¿sirve el pasaporte?"
+            }
           ]
         },
         {
@@ -701,6 +967,20 @@
           "helper_phrases": [
             "What's the Wi-Fi password?",
             "Can I have an extra...?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, what's the Wi-Fi password?",
+              "es": "Sí, ¿cuál es la contraseña del Wi-Fi?"
+            },
+            {
+              "en": "Yes, can I have an extra towel and a late checkout?",
+              "es": "Sí, ¿me puede dar una toalla extra y salida tardía?"
+            },
+            {
+              "en": "No, that's everything. Thank you very much.",
+              "es": "No, eso es todo. Muchas gracias."
+            }
           ]
         }
       ],
@@ -778,6 +1058,20 @@
           "helper_phrases": [
             "I'm...",
             "Nice to meet you"
+          ],
+          "answer_options": [
+            {
+              "en": "Hi Alex, I'm William. Nice to meet you.",
+              "es": "Hola Alex, soy William. Un gusto conocerte."
+            },
+            {
+              "en": "Hey Alex! I'm William. I don't know many people here.",
+              "es": "¡Hola Alex! Soy William. No conozco a mucha gente acá."
+            },
+            {
+              "en": "Nice to meet you, Alex. I'm William. Great party, right?",
+              "es": "Un gusto, Alex. Soy William. Buena fiesta, ¿no?"
+            }
           ]
         },
         {
@@ -800,6 +1094,20 @@
             "I'm a...",
             "I work as...",
             "What about you?"
+          ],
+          "answer_options": [
+            {
+              "en": "I'm a software developer. What about you?",
+              "es": "Soy desarrollador de software. ¿Y vos?"
+            },
+            {
+              "en": "I work with computers — I build web applications. And you?",
+              "es": "Trabajo con computadoras, hago aplicaciones web. ¿Y vos?"
+            },
+            {
+              "en": "I'm a developer, but tonight I don't want to talk about work! What do you do?",
+              "es": "Soy desarrollador, pero esta noche no quiero hablar de trabajo. ¿Vos qué hacés?"
+            }
           ]
         },
         {
@@ -824,6 +1132,20 @@
           "helper_phrases": [
             "We met at...",
             "We're friends from..."
+          ],
+          "answer_options": [
+            {
+              "en": "We were friends in college. We've known each other for ten years.",
+              "es": "Fuimos amigos en la facultad. Nos conocemos desde hace diez años."
+            },
+            {
+              "en": "We work together. He invited the whole team.",
+              "es": "Trabajamos juntos. Invitó a todo el equipo."
+            },
+            {
+              "en": "Actually, I came with a friend. I just met the host tonight.",
+              "es": "En realidad vine con un amigo. Al anfitrión lo conocí esta noche."
+            }
           ]
         },
         {
@@ -859,6 +1181,20 @@
             "You have a great smile",
             "I like your energy",
             "Thanks, same to you"
+          ],
+          "answer_options": [
+            {
+              "en": "Thanks, that's really nice of you. I like your energy too — and you have a great smile.",
+              "es": "Gracias, muy amable. Me gusta tu energía también, y tenés una sonrisa hermosa."
+            },
+            {
+              "en": "Thank you! Same to you. You're easy to talk to.",
+              "es": "¡Gracias! Lo mismo digo. Es fácil hablar con vos."
+            },
+            {
+              "en": "That's very kind. I like your style tonight.",
+              "es": "Muy amable. Me gusta tu estilo esta noche."
+            }
           ]
         },
         {
@@ -884,6 +1220,20 @@
             "I'd love to",
             "Let's go",
             "Sure, let's dance"
+          ],
+          "answer_options": [
+            {
+              "en": "I'd love to. Let's go.",
+              "es": "Me encantaría. Vamos."
+            },
+            {
+              "en": "Sure, let's dance. But I'm a terrible dancer!",
+              "es": "Claro, bailemos. ¡Pero bailo horrible!"
+            },
+            {
+              "en": "Maybe in a minute. Can we talk a little more first?",
+              "es": "Quizá en un rato. ¿Podemos charlar un poco más primero?"
+            }
           ]
         },
         {
@@ -916,6 +1266,20 @@
             "I'm single",
             "I'm seeing someone",
             "I'm not really looking"
+          ],
+          "answer_options": [
+            {
+              "en": "No, I'm single. Honestly, I'm enjoying tonight a lot.",
+              "es": "No, estoy soltero. La verdad, estoy disfrutando mucho esta noche."
+            },
+            {
+              "en": "I'm single, but I'm not really looking right now.",
+              "es": "Estoy soltero, pero no estoy buscando nada ahora."
+            },
+            {
+              "en": "Actually, I'm seeing someone. But it's nice talking to you.",
+              "es": "En realidad estoy saliendo con alguien. Pero es lindo charlar con vos."
+            }
           ]
         },
         {
@@ -947,6 +1311,20 @@
             "Let's grab a coffee",
             "How about dinner?",
             "Let me give you my number"
+          ],
+          "answer_options": [
+            {
+              "en": "Not at all. Let me give you my number. Maybe we can grab a coffee this weekend?",
+              "es": "Para nada. Te doy mi número. ¿Quizá tomamos un café este fin de semana?"
+            },
+            {
+              "en": "Of course not. Here's my number — how about dinner next week?",
+              "es": "Claro que no. Acá está mi número. ¿Qué tal una cena la semana que viene?"
+            },
+            {
+              "en": "I'd like that. Let's grab a beer sometime — I'll give you my number.",
+              "es": "Me gustaría. Tomemos una cerveza algún día, te doy mi número."
+            }
           ]
         },
         {
@@ -973,6 +1351,20 @@
             "Saturday works",
             "I'll text you",
             "Looking forward to it"
+          ],
+          "answer_options": [
+            {
+              "en": "Saturday at 4 works for me. I'll text you to confirm. Looking forward to it.",
+              "es": "El sábado a las 4 me sirve. Te escribo para confirmar. Con ganas."
+            },
+            {
+              "en": "Saturday sounds great. I'll text you in the morning.",
+              "es": "El sábado suena bien. Te escribo a la mañana."
+            },
+            {
+              "en": "Saturday afternoon is hard for me. Could we do Sunday instead?",
+              "es": "El sábado a la tarde me complica. ¿Podemos el domingo?"
+            }
           ]
         }
       ],
@@ -1030,6 +1422,20 @@
             "Speaking",
             "Yes, this is he/she",
             "Who's calling?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, speaking. Who's calling?",
+              "es": "Sí, habla él. ¿Quién habla?"
+            },
+            {
+              "en": "Yes, this is William. How can I help you?",
+              "es": "Sí, habla William. ¿En qué lo puedo ayudar?"
+            },
+            {
+              "en": "Speaking. Sorry, I can't hear you very well.",
+              "es": "Habla él. Perdón, no lo escucho muy bien."
+            }
           ]
         },
         {
@@ -1054,6 +1460,20 @@
             "Sure, go ahead",
             "Sorry, I'm busy",
             "Can you call later?"
+          ],
+          "answer_options": [
+            {
+              "en": "Sure, I have a few minutes. What's this about?",
+              "es": "Claro, tengo unos minutos. ¿De qué se trata?"
+            },
+            {
+              "en": "Sorry, I'm busy right now. Can you call me later?",
+              "es": "Perdón, ahora estoy ocupado. ¿Me puede llamar más tarde?"
+            },
+            {
+              "en": "Go ahead, but please be quick. I'm at work.",
+              "es": "Dígame, pero por favor sea breve. Estoy en el trabajo."
+            }
           ]
         },
         {
@@ -1076,6 +1496,20 @@
           "helper_phrases": [
             "Yes, that's right",
             "No, it's now..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, that's still my address. Anything else?",
+              "es": "Sí, sigue siendo mi dirección. ¿Algo más?"
+            },
+            {
+              "en": "No, it's not. I moved last month. Can I give you the new one?",
+              "es": "No, no es. Me mudé el mes pasado. ¿Le doy la nueva?"
+            },
+            {
+              "en": "Sorry, I prefer not to confirm personal information by phone.",
+              "es": "Perdón, prefiero no confirmar datos personales por teléfono."
+            }
           ]
         }
       ],
@@ -1150,6 +1584,20 @@
             "I'm a...",
             "I have X years of experience",
             "I work with..."
+          ],
+          "answer_options": [
+            {
+              "en": "Hi, thanks for having me. I'm William, a software developer with five years of experience in web applications.",
+              "es": "Hola, gracias por recibirme. Soy William, desarrollador de software con cinco años de experiencia en aplicaciones web."
+            },
+            {
+              "en": "Thanks for the invitation. I'm a developer from El Salvador and I mostly work with Python and databases.",
+              "es": "Gracias por la invitación. Soy desarrollador de El Salvador y trabajo sobre todo con Python y bases de datos."
+            },
+            {
+              "en": "Of course. I have five years of experience building internal systems, and I'm looking for a bigger challenge.",
+              "es": "Por supuesto. Tengo cinco años de experiencia haciendo sistemas internos, y busco un desafío más grande."
+            }
           ]
         },
         {
@@ -1172,6 +1620,20 @@
           "helper_phrases": [
             "I'm interested because...",
             "I want to grow in..."
+          ],
+          "answer_options": [
+            {
+              "en": "I'm interested because your company works on interesting projects, and I want to grow my skills in cloud systems.",
+              "es": "Me interesa porque su empresa trabaja en proyectos interesantes, y quiero crecer en sistemas en la nube."
+            },
+            {
+              "en": "I want to work in a bigger team. Right now I work alone and I want to learn from other developers.",
+              "es": "Quiero trabajar en un equipo más grande. Ahora trabajo solo y quiero aprender de otros desarrolladores."
+            },
+            {
+              "en": "Honestly, two reasons: the product looks useful, and I want to grow professionally.",
+              "es": "La verdad, dos razones: el producto parece útil, y quiero crecer profesionalmente."
+            }
           ]
         },
         {
@@ -1203,6 +1665,20 @@
             "I led...",
             "I built...",
             "We improved..."
+          ],
+          "answer_options": [
+            {
+              "en": "I led a team that automated a manual process, which saved the company 20 hours per week.",
+              "es": "Lideré un equipo que automatizó un proceso manual, y eso le ahorró a la empresa 20 horas por semana."
+            },
+            {
+              "en": "I built a reporting system from zero. Before, the reports took three days; now they take ten minutes.",
+              "es": "Hice un sistema de reportes desde cero. Antes los reportes tardaban tres días; ahora tardan diez minutos."
+            },
+            {
+              "en": "We improved our website speed by fifty percent. I found the problem in the database queries.",
+              "es": "Mejoramos la velocidad del sitio un cincuenta por ciento. Encontré el problema en las consultas a la base de datos."
+            }
           ]
         },
         {
@@ -1223,6 +1699,20 @@
             "What does a typical day look like?",
             "How is the team structured?",
             "What are the next steps?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, what does a typical day look like for this role?",
+              "es": "Sí, ¿cómo es un día típico en este puesto?"
+            },
+            {
+              "en": "Yes, two questions. How is the team structured, and what are the next steps?",
+              "es": "Sí, dos preguntas. ¿Cómo está estructurado el equipo, y cuáles son los próximos pasos?"
+            },
+            {
+              "en": "Yes. What would you expect from me in the first three months?",
+              "es": "Sí. ¿Qué esperarían de mí en los primeros tres meses?"
+            }
           ]
         }
       ],
@@ -1307,6 +1797,20 @@
             "Let me check",
             "Can you tell me more?",
             "Which numbers?"
+          ],
+          "answer_options": [
+            {
+              "en": "Sure, let me check. What numbers look wrong and from which date?",
+              "es": "Claro, dejame revisar. ¿Qué números están mal y de qué fecha?"
+            },
+            {
+              "en": "Yes, I'm on it. Can you tell me more? Which dashboard exactly?",
+              "es": "Sí, me pongo con eso. ¿Me contás más? ¿Qué dashboard exactamente?"
+            },
+            {
+              "en": "Let me check right now. Can you send me a screenshot?",
+              "es": "Dejame revisar ahora. ¿Me mandás una captura?"
+            }
           ]
         },
         {
@@ -1340,6 +1844,20 @@
             "Maybe the job failed",
             "It could be the pipeline",
             "Let me check the logs"
+          ],
+          "answer_options": [
+            {
+              "en": "It could be. Maybe the ETL job did not run last night. Let me check the logs.",
+              "es": "Puede ser. Quizá el job de ETL no corrió anoche. Voy a revisar los logs."
+            },
+            {
+              "en": "Maybe. It could also be the connection to the database. Let me look at the pipeline.",
+              "es": "Quizá. También podría ser la conexión a la base de datos. Voy a mirar el pipeline."
+            },
+            {
+              "en": "I don't think so. I think the file never arrived. Let me confirm first.",
+              "es": "No creo. Creo que el archivo nunca llegó. Dejame confirmar primero."
+            }
           ]
         },
         {
@@ -1363,6 +1881,20 @@
             "Give me X minutes",
             "I'll let you know",
             "I'll send you a message"
+          ],
+          "answer_options": [
+            {
+              "en": "Give me 30 minutes. I'll send you a message once it's fixed.",
+              "es": "Dame 30 minutos. Te mando un mensaje cuando esté arreglado."
+            },
+            {
+              "en": "About an hour, maybe less. I'll let you know when it's ready.",
+              "es": "Como una hora, quizá menos. Te aviso cuando esté listo."
+            },
+            {
+              "en": "I can't say yet. Let me find the cause first, then I'll give you an estimate.",
+              "es": "Todavía no puedo decir. Primero busco la causa y después te doy una estimación."
+            }
           ]
         },
         {
@@ -1395,6 +1927,20 @@
             "I can add alerts",
             "We could automate...",
             "Let's add monitoring"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I can add an alert when the job fails, so we know right away. Also, I want to add automatic retries.",
+              "es": "Sí, puedo agregar una alerta cuando el job falla, así nos enteramos enseguida. También quiero agregar reintentos automáticos."
+            },
+            {
+              "en": "Yes. Let's add monitoring on the dashboard, so it shows a warning when the data is missing.",
+              "es": "Sí. Agreguemos monitoreo al dashboard, así muestra un aviso cuando faltan datos."
+            },
+            {
+              "en": "We could automate a daily check. If the numbers are zero, the system sends an email.",
+              "es": "Podríamos automatizar un chequeo diario. Si los números son cero, el sistema manda un mail."
+            }
           ]
         }
       ],
@@ -1467,6 +2013,20 @@
             "I'd like to propose...",
             "We can automate...",
             "This will help us..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, thanks. I'd like to propose automating the daily report. Right now the team spends two hours preparing it manually.",
+              "es": "Sí, gracias. Quisiera proponer automatizar el reporte diario. Hoy el equipo pierde dos horas armándolo a mano."
+            },
+            {
+              "en": "Yes. I'd like to propose a change in how we prepare the daily report, because it takes too much time.",
+              "es": "Sí. Quisiera proponer un cambio en cómo armamos el reporte diario, porque lleva demasiado tiempo."
+            },
+            {
+              "en": "Thanks. We can automate the daily report. This will help us save time and reduce mistakes.",
+              "es": "Gracias. Podemos automatizar el reporte diario. Esto nos va a ayudar a ahorrar tiempo y reducir errores."
+            }
           ]
         },
         {
@@ -1491,6 +2051,20 @@
             "First...",
             "Then...",
             "Finally..."
+          ],
+          "answer_options": [
+            {
+              "en": "First, we collect the data from the database. Then a script generates the report and sends it by email every morning.",
+              "es": "Primero, juntamos los datos de la base de datos. Después un script genera el reporte y lo manda por mail cada mañana."
+            },
+            {
+              "en": "It's three steps. First a job reads the sales data, then it builds the file, and finally it sends it to the team.",
+              "es": "Son tres pasos. Primero un job lee los datos de ventas, después arma el archivo, y finalmente lo manda al equipo."
+            },
+            {
+              "en": "The script runs every night. It takes the data, checks it, and puts the report in a shared folder.",
+              "es": "El script corre cada noche. Toma los datos, los valida y pone el reporte en una carpeta compartida."
+            }
           ]
         },
         {
@@ -1514,6 +2088,20 @@
           "helper_phrases": [
             "X hours per week",
             "It will save..."
+          ],
+          "answer_options": [
+            {
+              "en": "About ten hours per week for the team, so they can focus on other tasks.",
+              "es": "Unas diez horas por semana para el equipo, así pueden enfocarse en otras tareas."
+            },
+            {
+              "en": "It will save around two hours every day. That's ten hours per week.",
+              "es": "Va a ahorrar unas dos horas por día. Eso es diez horas por semana."
+            },
+            {
+              "en": "Maybe eight hours per week, and we will also have fewer mistakes in the numbers.",
+              "es": "Quizá ocho horas por semana, y también vamos a tener menos errores en los números."
+            }
           ]
         },
         {
@@ -1537,6 +2125,20 @@
             "I need access to...",
             "Can you give me...?",
             "I need one week"
+          ],
+          "answer_options": [
+            {
+              "en": "I need access to the production database, and one week to build the first version.",
+              "es": "Necesito acceso a la base de datos de producción, y una semana para hacer la primera versión."
+            },
+            {
+              "en": "Two things: your approval, and one week without other urgent tasks.",
+              "es": "Dos cosas: tu aprobación, y una semana sin otras tareas urgentes."
+            },
+            {
+              "en": "Can you give me access to the server? And I need help from someone in operations for one day.",
+              "es": "¿Me podés dar acceso al servidor? Y necesito ayuda de alguien de operaciones por un día."
+            }
           ]
         }
       ],
@@ -1634,6 +2236,20 @@
           "helper_phrases": [
             "Do you want to go somewhere more private?",
             "We could go to a hotel."
+          ],
+          "answer_options": [
+            {
+              "en": "Me too. Do you want to go somewhere more private? Maybe a hotel nearby?",
+              "es": "Yo también. ¿Querés ir a algún lugar más privado? ¿Quizá un hotel cerca?"
+            },
+            {
+              "en": "So am I. We could go to a hotel, if you want to.",
+              "es": "Yo también. Podríamos ir a un hotel, si querés."
+            },
+            {
+              "en": "Me too. Would you like to go somewhere quieter, just the two of us?",
+              "es": "Yo también. ¿Te gustaría ir a un lugar más tranquilo, solo nosotros dos?"
+            }
           ]
         },
         {
@@ -1663,6 +2279,20 @@
             "Of course",
             "I want you to feel comfortable",
             "We can talk about anything"
+          ],
+          "answer_options": [
+            {
+              "en": "Of course. I want you to feel comfortable. We can talk about anything.",
+              "es": "Por supuesto. Quiero que te sientas cómoda. Podemos hablar de lo que sea."
+            },
+            {
+              "en": "Of course it's ok. I'd rather talk first than guess.",
+              "es": "Claro que está bien. Prefiero hablar antes que suponer."
+            },
+            {
+              "en": "Please do. Your comfort matters more to me than anything else tonight.",
+              "es": "Dale, por favor. Tu comodidad me importa más que cualquier otra cosa esta noche."
+            }
           ]
         },
         {
@@ -1691,6 +2321,20 @@
             "Yes, I have condoms",
             "Good idea",
             "Are you on birth control?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I have condoms. I think that's a good idea. Are you on birth control too?",
+              "es": "Sí, tengo preservativos. Me parece buena idea. ¿Vos también usás anticonceptivos?"
+            },
+            {
+              "en": "Yes, I have protection with me. I always prefer to use a condom.",
+              "es": "Sí, tengo protección conmigo. Siempre prefiero usar preservativo."
+            },
+            {
+              "en": "I don't have any right now, but we can stop and buy some. I'm not doing this without protection.",
+              "es": "Ahora no tengo, pero podemos parar y comprar. No lo hago sin protección."
+            }
           ]
         },
         {
@@ -1720,6 +2364,20 @@
             "Of course",
             "Whatever you prefer",
             "Your call"
+          ],
+          "answer_options": [
+            {
+              "en": "Of course, that's totally fine. Whatever makes you feel safe.",
+              "es": "Por supuesto, está perfecto. Lo que te haga sentir segura."
+            },
+            {
+              "en": "Of course. It's your call, and I respect it.",
+              "es": "Por supuesto. Vos decidís, y lo respeto."
+            },
+            {
+              "en": "That's completely fine with me. Whatever you prefer.",
+              "es": "Para mí está completamente bien. Lo que vos prefieras."
+            }
           ]
         },
         {
@@ -1750,6 +2408,20 @@
             "We can stop anytime",
             "Agreed",
             "I want you to feel safe"
+          ],
+          "answer_options": [
+            {
+              "en": "Absolutely. We can stop anytime, no questions asked. I want this to feel good for both of us.",
+              "es": "Absolutamente. Podemos parar en cualquier momento, sin preguntas. Quiero que esto se sienta bien para los dos."
+            },
+            {
+              "en": "Agreed. If you want to stop, we stop. That's a promise.",
+              "es": "De acuerdo. Si querés parar, paramos. Es una promesa."
+            },
+            {
+              "en": "Yes, agreed. I want you to feel safe with me the whole time.",
+              "es": "Sí, de acuerdo. Quiero que te sientas segura conmigo todo el tiempo."
+            }
           ]
         }
       ],
@@ -1850,6 +2522,20 @@
             "I'd like to discuss my compensation",
             "I want to talk about my salary",
             "I believe I deserve a review"
+          ],
+          "answer_options": [
+            {
+              "en": "Thanks for the time. I'd like to discuss my compensation. I believe my contributions this year deserve a review.",
+              "es": "Gracias por el tiempo. Quisiera hablar de mi compensación. Creo que mis aportes de este año merecen una revisión."
+            },
+            {
+              "en": "Thanks for meeting with me. I want to talk about my salary and where I stand.",
+              "es": "Gracias por recibirme. Quiero hablar de mi sueldo y de cómo estoy hoy."
+            },
+            {
+              "en": "I'd like to discuss my compensation. I've taken on more responsibility this year.",
+              "es": "Quisiera hablar de mi compensación. Este año tomé más responsabilidades."
+            }
           ]
         },
         {
@@ -1885,6 +2571,20 @@
             "I built a dashboard",
             "I automated the pipeline",
             "I delivered three projects"
+          ],
+          "answer_options": [
+            {
+              "en": "I delivered three big projects. First, I built the financial dashboard that the leadership team uses every week. Second, I automated the data pipeline for operations, and third, I created a reporting tool for the sales team.",
+              "es": "Entregué tres proyectos grandes. Primero, hice el dashboard financiero que usa la dirección cada semana. Segundo, automaticé el pipeline de datos de operaciones, y tercero, hice una herramienta de reportes para ventas."
+            },
+            {
+              "en": "Three main things. I built the financial dashboard, I automated the monthly reports, and I trained two new people on our systems.",
+              "es": "Tres cosas principales. Hice el dashboard financiero, automaticé los reportes mensuales, y capacité a dos personas nuevas en nuestros sistemas."
+            },
+            {
+              "en": "I delivered the dashboard project, I fixed the data pipeline that was failing every week, and I documented the whole system.",
+              "es": "Entregué el proyecto del dashboard, arreglé el pipeline de datos que fallaba cada semana, y documenté todo el sistema."
+            }
           ]
         },
         {
@@ -1920,6 +2620,20 @@
             "It saves X hours per week",
             "It generated X dollars",
             "It reduced errors by X%"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes. The automation saves the operations team about 15 hours per week. The dashboard reduced reporting time from 2 days to 10 minutes. In total, I estimate the savings at around 40 thousand dollars per year.",
+              "es": "Sí. La automatización le ahorra a operaciones unas 15 horas por semana. El dashboard bajó el tiempo de reporte de 2 días a 10 minutos. En total, estimo el ahorro en unos 40 mil dólares al año."
+            },
+            {
+              "en": "Yes. It saves about 15 hours per week, and it reduced errors in the reports by almost eighty percent.",
+              "es": "Sí. Ahorra unas 15 horas por semana, y bajó los errores en los reportes casi un ochenta por ciento."
+            },
+            {
+              "en": "It generated real savings. Around 3 thousand dollars per month in hours we don't pay anymore, and the team makes decisions faster.",
+              "es": "Generó ahorros reales. Unos 3 mil dólares por mes en horas que ya no pagamos, y el equipo decide más rápido."
+            }
           ]
         },
         {
@@ -1951,6 +2665,20 @@
             "I'm asking for a 20% increase",
             "I'd like a raise of $X",
             "Based on market rate..."
+          ],
+          "answer_options": [
+            {
+              "en": "Based on my impact and the market rate for my role, I'm asking for a 20% increase.",
+              "es": "En base a mi impacto y al valor de mercado de mi puesto, pido un aumento del 20%."
+            },
+            {
+              "en": "I'd like a raise of 500 dollars per month. Based on market rate, that's fair for this role.",
+              "es": "Quisiera un aumento de 500 dólares por mes. Según el mercado, es justo para este puesto."
+            },
+            {
+              "en": "I'm asking for a 15% increase, and I'd also like to discuss a bonus for the projects I delivered.",
+              "es": "Pido un aumento del 15%, y también quisiera hablar de un bono por los proyectos que entregué."
+            }
           ]
         },
         {
@@ -1982,6 +2710,20 @@
             "Sounds good",
             "I'll follow up",
             "Thanks for considering"
+          ],
+          "answer_options": [
+            {
+              "en": "Of course, that works for me. I'll follow up on Monday. Thank you for considering it.",
+              "es": "Por supuesto, me sirve. Hago seguimiento el lunes. Gracias por considerarlo."
+            },
+            {
+              "en": "Sounds good. I'll send you a summary by email, and I'll follow up next week.",
+              "es": "Suena bien. Te mando un resumen por mail, y hago seguimiento la semana que viene."
+            },
+            {
+              "en": "That works. Can we put a date on the calendar now, so it doesn't get lost?",
+              "es": "Me sirve. ¿Podemos poner una fecha en el calendario ahora, así no se pierde?"
+            }
           ]
         }
       ],
@@ -2066,6 +2808,20 @@
             "Excuse me, I'm lost",
             "How do I get to...?",
             "Where is the...?"
+          ],
+          "answer_options": [
+            {
+              "en": "Excuse me, I'm a bit lost. How do I get to the train station?",
+              "es": "Perdón, estoy un poco perdido. ¿Cómo llego a la estación de tren?"
+            },
+            {
+              "en": "Excuse me, can you help me? I'm looking for the museum.",
+              "es": "Perdón, ¿me puede ayudar? Estoy buscando el museo."
+            },
+            {
+              "en": "Excuse me, where is the nearest coffee shop? I don't know this area.",
+              "es": "Perdón, ¿dónde está el café más cercano? No conozco esta zona."
+            }
           ]
         },
         {
@@ -2090,6 +2846,20 @@
             "So I go straight then left?",
             "Two blocks and turn left?",
             "Is that correct?"
+          ],
+          "answer_options": [
+            {
+              "en": "Okay, so straight for two blocks, then left on Main Street. Is that right?",
+              "es": "Bien, entonces derecho dos cuadras, y después a la izquierda en Main Street. ¿Está bien?"
+            },
+            {
+              "en": "Two blocks and turn left. Did I understand correctly?",
+              "es": "Dos cuadras y doblo a la izquierda. ¿Entendí bien?"
+            },
+            {
+              "en": "Sorry, can you repeat that? So I go straight, and then I turn left?",
+              "es": "Perdón, ¿me lo repite? Entonces voy derecho, y después doblo a la izquierda."
+            }
           ]
         },
         {
@@ -2113,6 +2883,20 @@
             "How long does it take?",
             "How far is it?",
             "Is it walking distance?"
+          ],
+          "answer_options": [
+            {
+              "en": "Great. How long does it take to walk there?",
+              "es": "Genial. ¿Cuánto se tarda caminando?"
+            },
+            {
+              "en": "Perfect. Is it walking distance, or should I take a bus?",
+              "es": "Perfecto. ¿Se puede ir caminando, o mejor tomo un colectivo?"
+            },
+            {
+              "en": "Thanks. Do I have to cross any big street?",
+              "es": "Gracias. ¿Tengo que cruzar alguna calle grande?"
+            }
           ]
         },
         {
@@ -2135,6 +2919,20 @@
             "Thank you so much",
             "Thanks a lot",
             "Have a great day"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you so much for your help. Have a great day!",
+              "es": "¡Muchas gracias por su ayuda. Que tenga un buen día!"
+            },
+            {
+              "en": "Thanks a lot. You saved me. Have a good one!",
+              "es": "Muchas gracias. Me salvó. ¡Que le vaya bien!"
+            },
+            {
+              "en": "Perfect, thank you very much. Take care!",
+              "es": "Perfecto, muchas gracias. ¡Cuídese!"
+            }
           ]
         }
       ],
@@ -2243,6 +3041,20 @@
             "I have a headache",
             "I don't feel well",
             "My throat hurts"
+          ],
+          "answer_options": [
+            {
+              "en": "Hi doctor. I don't feel well. I have a strong headache and a sore throat.",
+              "es": "Hola doctor. No me siento bien. Tengo un dolor de cabeza fuerte y me duele la garganta."
+            },
+            {
+              "en": "Hi. I don't feel well. My stomach hurts and I feel very weak.",
+              "es": "Hola. No me siento bien. Me duele el estómago y me siento muy débil."
+            },
+            {
+              "en": "Good morning, doctor. I have a bad cough and I can't sleep at night.",
+              "es": "Buen día, doctor. Tengo mucha tos y no puedo dormir de noche."
+            }
           ]
         },
         {
@@ -2269,6 +3081,20 @@
             "Since yesterday",
             "For two days",
             "Since this morning"
+          ],
+          "answer_options": [
+            {
+              "en": "Since yesterday morning. About 24 hours.",
+              "es": "Desde ayer a la mañana. Unas 24 horas."
+            },
+            {
+              "en": "For two days now. It started slowly and got worse.",
+              "es": "Hace dos días. Empezó despacio y fue empeorando."
+            },
+            {
+              "en": "Since this morning, but I felt tired all week.",
+              "es": "Desde esta mañana, pero me sentí cansado toda la semana."
+            }
           ]
         },
         {
@@ -2297,6 +3123,20 @@
             "Yes, I have a fever",
             "No nausea",
             "A little dizzy"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I have a small fever, around 38 degrees. No nausea, but I feel a bit dizzy when I stand up.",
+              "es": "Sí, tengo un poco de fiebre, unos 38 grados. Sin náuseas, pero me marea un poco cuando me paro."
+            },
+            {
+              "en": "No fever, but I have some nausea. No dizziness.",
+              "es": "Sin fiebre, pero tengo algo de náuseas. Sin mareos."
+            },
+            {
+              "en": "Yes to all three. I have a fever, I feel nauseous, and I'm dizzy.",
+              "es": "Sí a las tres cosas. Tengo fiebre, tengo náuseas, y estoy mareado."
+            }
           ]
         },
         {
@@ -2321,6 +3161,20 @@
           "helper_phrases": [
             "No, I'm not allergic",
             "Yes, I'm allergic to..."
+          ],
+          "answer_options": [
+            {
+              "en": "No, I'm not allergic to anything that I know of.",
+              "es": "No, no soy alérgico a nada que yo sepa."
+            },
+            {
+              "en": "Yes, I'm allergic to penicillin. It gives me a rash.",
+              "es": "Sí, soy alérgico a la penicilina. Me da sarpullido."
+            },
+            {
+              "en": "I'm not sure. I've never had a reaction, but I've never taken antibiotics.",
+              "es": "No estoy seguro. Nunca tuve una reacción, pero nunca tomé antibióticos."
+            }
           ]
         },
         {
@@ -2348,6 +3202,20 @@
             "Got it. Three times a day",
             "Should I take it with food?",
             "What if I'm not better?"
+          ],
+          "answer_options": [
+            {
+              "en": "Got it. Three times a day for seven days. Should I take it with food? And what if I don't feel better in two days?",
+              "es": "Entendido. Tres veces al día por siete días. ¿Lo tomo con comida? ¿Y si no me siento mejor en dos días?"
+            },
+            {
+              "en": "Okay, three times a day. Can I drink alcohol with this medicine?",
+              "es": "Bien, tres veces al día. ¿Puedo tomar alcohol con este remedio?"
+            },
+            {
+              "en": "Understood. Should I come back if I'm not better? And can I go to work tomorrow?",
+              "es": "Entendido. ¿Tengo que volver si no mejoro? ¿Y puedo ir a trabajar mañana?"
+            }
           ]
         }
       ],
@@ -2427,6 +3295,20 @@
             "Can we talk for a minute?",
             "Something has been on my mind",
             "I need to talk to you"
+          ],
+          "answer_options": [
+            {
+              "en": "Sofia, can we talk for a minute? It's nothing bad, but something has been on my mind.",
+              "es": "Sofía, ¿podemos hablar un minuto? No es nada malo, pero hay algo que me viene dando vueltas."
+            },
+            {
+              "en": "Can we talk? I need to tell you something, and I don't want to fight about it.",
+              "es": "¿Podemos hablar? Necesito contarte algo, y no quiero que sea una pelea."
+            },
+            {
+              "en": "Do you have a minute? Something has been on my mind for a few days.",
+              "es": "¿Tenés un minuto? Hay algo que me viene dando vueltas hace unos días."
+            }
           ]
         },
         {
@@ -2455,6 +3337,20 @@
             "I love you",
             "I feel lonely when...",
             "I've been feeling..."
+          ],
+          "answer_options": [
+            {
+              "en": "Don't worry, I love you. I've been feeling lonely lately. When you're on your phone all evening, I feel like we don't connect.",
+              "es": "No te preocupes, te amo. Últimamente me siento solo. Cuando estás con el celular toda la noche, siento que no conectamos."
+            },
+            {
+              "en": "Don't worry, it's nothing terrible. I've been feeling a bit far from you lately, and I miss our time together.",
+              "es": "No te preocupes, no es nada terrible. Últimamente me siento un poco lejos de vos, y extraño nuestro tiempo juntos."
+            },
+            {
+              "en": "It's okay, I love you. I feel sad when we don't talk in the evenings. I'm not angry, I just miss you.",
+              "es": "Está todo bien, te amo. Me pone triste cuando no hablamos a la noche. No estoy enojado, solo te extraño."
+            }
           ]
         },
         {
@@ -2484,6 +3380,20 @@
             "I was afraid to bring it up",
             "I'm not blaming you",
             "I just want us to..."
+          ],
+          "answer_options": [
+            {
+              "en": "I was afraid of making you upset. I'm not blaming you, I just want us to spend more real time together.",
+              "es": "Tenía miedo de que te enojaras. No te estoy culpando, solo quiero que pasemos más tiempo real juntos."
+            },
+            {
+              "en": "I was afraid to bring it up. I didn't want you to think I was complaining.",
+              "es": "Tenía miedo de sacar el tema. No quería que pensaras que me estaba quejando."
+            },
+            {
+              "en": "Honestly, I hoped it would get better on its own. That was my mistake.",
+              "es": "La verdad, esperaba que mejorara solo. Ese fue mi error."
+            }
           ]
         },
         {
@@ -2517,6 +3427,20 @@
             "Maybe we can...",
             "Let's try...",
             "What if we..."
+          ],
+          "answer_options": [
+            {
+              "en": "Maybe we can have dinner without phones, three nights a week. Or take a walk together after work.",
+              "es": "Quizá podemos cenar sin celulares, tres noches por semana. O caminar juntos después del trabajo."
+            },
+            {
+              "en": "What if we keep the phones in another room during dinner? Just that would help me a lot.",
+              "es": "¿Y si dejamos los celulares en otra habitación durante la cena? Solo eso me ayudaría mucho."
+            },
+            {
+              "en": "Let's try one night a week that is only for us. No phones, no TV, just us.",
+              "es": "Probemos una noche por semana que sea solo nuestra. Sin celulares, sin tele, solo nosotros."
+            }
           ]
         },
         {
@@ -2544,6 +3468,20 @@
             "Thank you for listening",
             "I love you too",
             "We're a team"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you for listening. I love you too. We're a team.",
+              "es": "Gracias por escucharme. Yo también te amo. Somos un equipo."
+            },
+            {
+              "en": "Thank you for listening without getting angry. That means a lot to me.",
+              "es": "Gracias por escucharme sin enojarte. Eso significa mucho para mí."
+            },
+            {
+              "en": "I love you too. And thank you — this conversation was hard but good.",
+              "es": "Yo también te amo. Y gracias, esta conversación fue difícil pero buena."
+            }
           ]
         }
       ],
@@ -2630,6 +3568,20 @@
             "I'm here for tourism",
             "Visiting family",
             "Business meeting"
+          ],
+          "answer_options": [
+            {
+              "en": "Here is my passport. I'm here for tourism.",
+              "es": "Acá está mi pasaporte. Vengo por turismo."
+            },
+            {
+              "en": "Here you go. I'm here for business meetings.",
+              "es": "Acá tiene. Vengo por reuniones de trabajo."
+            },
+            {
+              "en": "Here is my passport. I'm visiting family for a few days.",
+              "es": "Acá está mi pasaporte. Vengo a visitar a mi familia unos días."
+            }
           ]
         },
         {
@@ -2653,6 +3605,20 @@
             "Ten days",
             "Two weeks",
             "Until..."
+          ],
+          "answer_options": [
+            {
+              "en": "Ten days, until the 25th of this month.",
+              "es": "Diez días, hasta el 25 de este mes."
+            },
+            {
+              "en": "Two weeks. I go back on the 30th.",
+              "es": "Dos semanas. Vuelvo el 30."
+            },
+            {
+              "en": "Just five days. It's a short trip.",
+              "es": "Solo cinco días. Es un viaje corto."
+            }
           ]
         },
         {
@@ -2678,6 +3644,20 @@
             "At a hotel",
             "With a friend",
             "An Airbnb downtown"
+          ],
+          "answer_options": [
+            {
+              "en": "At the Hilton hotel in downtown Miami. I have my reservation here if you need it.",
+              "es": "En el hotel Hilton en el centro de Miami. Tengo la reserva acá si la necesita."
+            },
+            {
+              "en": "With a friend. I have the address written down if you need it.",
+              "es": "En casa de un amigo. Tengo la dirección anotada si la necesita."
+            },
+            {
+              "en": "In an Airbnb downtown. I can show you the booking on my phone.",
+              "es": "En un Airbnb en el centro. Le puedo mostrar la reserva en el celular."
+            }
           ]
         },
         {
@@ -2700,6 +3680,20 @@
             "Yes, I do",
             "I have it on my phone",
             "Here it is"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I do. I can show it on my phone if you want.",
+              "es": "Sí, tengo. Se lo puedo mostrar en el celular si quiere."
+            },
+            {
+              "en": "Yes, I fly back on the 25th. Here it is.",
+              "es": "Sí, vuelvo el 25. Acá está."
+            },
+            {
+              "en": "Yes, I have it. Do you want the printed copy or the phone?",
+              "es": "Sí, lo tengo. ¿Quiere la copia impresa o el celular?"
+            }
           ]
         },
         {
@@ -2722,6 +3716,20 @@
             "Nothing to declare",
             "Just personal items",
             "Only my clothes"
+          ],
+          "answer_options": [
+            {
+              "en": "No, nothing to declare. Just personal items.",
+              "es": "No, nada que declarar. Solo cosas personales."
+            },
+            {
+              "en": "Nothing to declare. Only my clothes and my laptop.",
+              "es": "Nada que declarar. Solo mi ropa y mi notebook."
+            },
+            {
+              "en": "Yes, I have some coffee as a gift. Do I need to declare that?",
+              "es": "Sí, traigo café de regalo. ¿Tengo que declararlo?"
+            }
           ]
         }
       ],
@@ -2816,6 +3824,20 @@
             "I'd like to open an account",
             "I need to withdraw cash",
             "Can I make a deposit?"
+          ],
+          "answer_options": [
+            {
+              "en": "Hi. I'd like to open a checking account, please.",
+              "es": "Hola. Quisiera abrir una cuenta corriente, por favor."
+            },
+            {
+              "en": "Hi. I'd like to open a savings account. What do I need?",
+              "es": "Hola. Quisiera abrir una caja de ahorro. ¿Qué necesito?"
+            },
+            {
+              "en": "Good morning. I need to withdraw cash and ask about opening an account.",
+              "es": "Buen día. Necesito sacar efectivo y preguntar por abrir una cuenta."
+            }
           ]
         },
         {
@@ -2843,6 +3865,20 @@
             "Here is my passport",
             "Yes, I have them",
             "Here's my ID"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, here is my passport and a recent utility bill.",
+              "es": "Sí, acá están mi pasaporte y una factura de servicios reciente."
+            },
+            {
+              "en": "Yes, I have them. Here's my ID and my rent contract as proof of address.",
+              "es": "Sí, los tengo. Acá está mi documento y el contrato de alquiler como prueba de domicilio."
+            },
+            {
+              "en": "I have my ID, but not the proof of address. Can I bring it tomorrow?",
+              "es": "Tengo mi documento, pero no la prueba de domicilio. ¿La puedo traer mañana?"
+            }
           ]
         },
         {
@@ -2863,6 +3899,20 @@
             "Will I get a debit card?",
             "Are there ATM fees?",
             "Is there a mobile app?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, sounds good. Will I get a debit card? And is there a fee to withdraw from ATMs?",
+              "es": "Sí, suena bien. ¿Me van a dar tarjeta de débito? ¿Y hay comisión por sacar plata de los cajeros?"
+            },
+            {
+              "en": "Sounds good. Is there a mobile app? And what happens if my balance goes below 500 dollars?",
+              "es": "Suena bien. ¿Hay app para el celular? ¿Y qué pasa si mi saldo baja de 500 dólares?"
+            },
+            {
+              "en": "Yes, that works. Are there any other fees I should know about?",
+              "es": "Sí, me sirve. ¿Hay otras comisiones que deba saber?"
+            }
           ]
         },
         {
@@ -2886,6 +3936,20 @@
             "I'd like to deposit...",
             "That's all, thanks",
             "Can I activate the app?"
+          ],
+          "answer_options": [
+            {
+              "en": "Great. I'd like to deposit 200 dollars to start the account, please.",
+              "es": "Genial. Quisiera depositar 200 dólares para arrancar la cuenta, por favor."
+            },
+            {
+              "en": "That's all, thanks. Can I activate the mobile app today?",
+              "es": "Eso es todo, gracias. ¿Puedo activar la app hoy?"
+            },
+            {
+              "en": "Just one more thing. Can I get a document that shows I opened the account?",
+              "es": "Solo una cosa más. ¿Me puede dar un comprobante de que abrí la cuenta?"
+            }
           ]
         }
       ],
@@ -2972,6 +4036,20 @@
             "It looks great",
             "How much is the rent?",
             "What's the price?"
+          ],
+          "answer_options": [
+            {
+              "en": "It looks great, very bright. How much is the monthly rent?",
+              "es": "Se ve muy bien, muy luminoso. ¿Cuánto es el alquiler mensual?"
+            },
+            {
+              "en": "I like it. It's bigger than I expected. What's the price per month?",
+              "es": "Me gusta. Es más grande de lo que esperaba. ¿Cuál es el precio por mes?"
+            },
+            {
+              "en": "It's nice, but smaller than in the photos. How much is the rent?",
+              "es": "Está lindo, pero más chico que en las fotos. ¿Cuánto es el alquiler?"
+            }
           ]
         },
         {
@@ -3002,6 +4080,20 @@
             "Are utilities included?",
             "Is internet included?",
             "What's included?"
+          ],
+          "answer_options": [
+            {
+              "en": "Are utilities included? Like water, electricity, and internet?",
+              "es": "¿Los servicios están incluidos? ¿Agua, luz e internet?"
+            },
+            {
+              "en": "What's included in that price? Is internet included?",
+              "es": "¿Qué está incluido en ese precio? ¿Internet está incluido?"
+            },
+            {
+              "en": "Is water included? And how much do people usually pay for electricity here?",
+              "es": "¿El agua está incluida? ¿Y cuánto se paga normalmente de luz acá?"
+            }
           ]
         },
         {
@@ -3022,6 +4114,20 @@
             "Are pets allowed?",
             "How long is the lease?",
             "When can I move in?"
+          ],
+          "answer_options": [
+            {
+              "en": "Got it. Are pets allowed? And how long is the lease?",
+              "es": "Entendido. ¿Se permiten mascotas? ¿Y cuánto dura el contrato?"
+            },
+            {
+              "en": "Okay. How long is the lease, and when can I move in?",
+              "es": "Bien. ¿Cuánto dura el contrato, y cuándo me puedo mudar?"
+            },
+            {
+              "en": "Understood. Are pets allowed? I have a small dog.",
+              "es": "Entendido. ¿Se permiten mascotas? Tengo un perro chico."
+            }
           ]
         },
         {
@@ -3052,6 +4158,20 @@
             "I'm interested",
             "Can we schedule another visit?",
             "Let me think about it"
+          ],
+          "answer_options": [
+            {
+              "en": "Sounds good. I'd like to bring my partner to see it tomorrow. Can we schedule it?",
+              "es": "Suena bien. Quisiera traer a mi pareja a verlo mañana. ¿Lo podemos agendar?"
+            },
+            {
+              "en": "I'm interested. Let me think about it tonight and I'll call you tomorrow.",
+              "es": "Me interesa. Dejame pensarlo esta noche y lo llamo mañana."
+            },
+            {
+              "en": "I'm very interested. What do I need to sign the lease?",
+              "es": "Me interesa mucho. ¿Qué necesito para firmar el contrato?"
+            }
           ]
         }
       ],
@@ -3144,6 +4264,20 @@
             "Can we look at the budget?",
             "We need to talk about money",
             "I'm a bit worried"
+          ],
+          "answer_options": [
+            {
+              "en": "Hey, can we look at the credit card together? We spent more than we earned this month, and I'm a bit worried.",
+              "es": "Ey, ¿podemos mirar la tarjeta juntos? Este mes gastamos más de lo que ganamos, y estoy un poco preocupado."
+            },
+            {
+              "en": "Can we talk about money for a minute? I looked at the statement and I'm a bit worried.",
+              "es": "¿Podemos hablar de plata un minuto? Miré el resumen y estoy un poco preocupado."
+            },
+            {
+              "en": "Can we look at the budget together tonight? I want us to see the real numbers.",
+              "es": "¿Podemos mirar el presupuesto juntos esta noche? Quiero que veamos los números reales."
+            }
           ]
         },
         {
@@ -3176,6 +4310,20 @@
             "We earn X",
             "We spent X on...",
             "Most of it goes to..."
+          ],
+          "answer_options": [
+            {
+              "en": "We earn around 2,500 dollars per month, but we spent 2,800. A lot is going to fancy coffee, Shein orders, and food delivery.",
+              "es": "Ganamos unos 2.500 dólares por mes, pero gastamos 2.800. Mucho se va en café caro, pedidos de Shein y delivery."
+            },
+            {
+              "en": "We earn 2,500 and we spent 2,800 this month. Most of it goes to delivery and online shopping.",
+              "es": "Ganamos 2.500 y gastamos 2.800 este mes. La mayoría se va en delivery y compras online."
+            },
+            {
+              "en": "It's 300 dollars over. Not terrible, but we spent 400 on food delivery alone.",
+              "es": "Nos pasamos 300 dólares. No es terrible, pero gastamos 400 solo en delivery."
+            }
           ]
         },
         {
@@ -3208,6 +4356,20 @@
             "We can make coffee at home",
             "Let's cook more",
             "No more Shein for a while"
+          ],
+          "answer_options": [
+            {
+              "en": "I think we can make coffee at home — no more Starbucks every day. And maybe no more Shein for two months. We can cook more instead of ordering.",
+              "es": "Creo que podemos hacer café en casa, no más Starbucks todos los días. Y quizá nada de Shein por dos meses. Podemos cocinar más en vez de pedir."
+            },
+            {
+              "en": "Let's cook more and order less. Maybe delivery only on Fridays.",
+              "es": "Cocinemos más y pidamos menos. Quizá delivery solo los viernes."
+            },
+            {
+              "en": "We can make coffee at home and cancel two subscriptions we never use.",
+              "es": "Podemos hacer café en casa y cancelar dos suscripciones que nunca usamos."
+            }
           ]
         },
         {
@@ -3231,6 +4393,20 @@
             "About X dollars per month",
             "We could save...",
             "In six months we'd have..."
+          ],
+          "answer_options": [
+            {
+              "en": "About 400 dollars per month. If we keep that for six months, we'll have a real emergency fund.",
+              "es": "Unos 400 dólares por mes. Si lo mantenemos seis meses, vamos a tener un fondo de emergencia real."
+            },
+            {
+              "en": "Around 300 dollars per month. In one year we could save enough for a trip.",
+              "es": "Unos 300 dólares por mes. En un año podríamos ahorrar para un viaje."
+            },
+            {
+              "en": "We could save about 400 per month. That's almost 5,000 dollars in a year.",
+              "es": "Podríamos ahorrar unos 400 por mes. Eso es casi 5.000 dólares en un año."
+            }
           ]
         },
         {
@@ -3260,6 +4436,20 @@
             "Thanks for being open",
             "Let's review every week",
             "We're a team"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you for being open to this. Let's review the numbers together every Sunday.",
+              "es": "Gracias por estar abierta a esto. Revisemos los números juntos todos los domingos."
+            },
+            {
+              "en": "Thanks for being open. Let's check in every week, just ten minutes.",
+              "es": "Gracias por estar abierta. Hagamos un chequeo cada semana, solo diez minutos."
+            },
+            {
+              "en": "Thank you. We're a team, and I feel better after talking about it.",
+              "es": "Gracias. Somos un equipo, y me siento mejor después de hablarlo."
+            }
           ]
         }
       ],
@@ -3347,6 +4537,20 @@
             "Please come in",
             "Let me take your coats",
             "Make yourselves at home"
+          ],
+          "answer_options": [
+            {
+              "en": "Merry Christmas! Please come in. Let me take your coats. Make yourselves at home.",
+              "es": "¡Feliz Navidad! Pasen, por favor. Déjenme llevarles los abrigos. Están en su casa."
+            },
+            {
+              "en": "Merry Christmas! Come in, please. Can I take your coats?",
+              "es": "¡Feliz Navidad! Pasen, por favor. ¿Les llevo los abrigos?"
+            },
+            {
+              "en": "Merry Christmas to you too! Please come in and make yourselves at home.",
+              "es": "¡Feliz Navidad para ustedes también! Pasen y están en su casa."
+            }
           ]
         },
         {
@@ -3376,6 +4580,20 @@
             "Great to meet you too",
             "I've heard so much about you",
             "The pleasure is mine"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you, it's great to meet you too. I've heard so many wonderful things about you both.",
+              "es": "Gracias, para mí también es un gusto conocerlos. Escuché tantas cosas lindas de ustedes dos."
+            },
+            {
+              "en": "The pleasure is mine. Sofia talks about you all the time too.",
+              "es": "El placer es mío. Sofía también habla de ustedes todo el tiempo."
+            },
+            {
+              "en": "Great to meet you too. I've heard so much about you — all good things, I promise.",
+              "es": "Un gusto conocerlos también. Escuché mucho de ustedes, todo bueno, se lo prometo."
+            }
           ]
         },
         {
@@ -3405,6 +4623,20 @@
             "We're having...",
             "Would you like a drink?",
             "Dinner is almost ready"
+          ],
+          "answer_options": [
+            {
+              "en": "Roast turkey with potatoes and salad. Dinner is almost ready. Would you like a glass of wine or some water?",
+              "es": "Pavo al horno con papas y ensalada. La cena está casi lista. ¿Quieren una copa de vino o agua?"
+            },
+            {
+              "en": "We're having roast chicken and vegetables. Dinner is almost ready. Would you like a drink first?",
+              "es": "Vamos a comer pollo al horno con verduras. La cena está casi lista. ¿Quieren tomar algo primero?"
+            },
+            {
+              "en": "Sofia made her mother's recipe! While we wait, would you like some wine?",
+              "es": "¡Sofía hizo la receta de su madre! Mientras esperamos, ¿quieren un poco de vino?"
+            }
           ]
         },
         {
@@ -3428,6 +4660,20 @@
             "I'm a developer",
             "I work in IT",
             "I work with data"
+          ],
+          "answer_options": [
+            {
+              "en": "Coming right up. I'm a software developer. I work on data systems for a company in IT.",
+              "es": "Enseguida se lo traigo. Soy desarrollador de software. Trabajo en sistemas de datos para una empresa de IT."
+            },
+            {
+              "en": "One glass of red, coming up. I work in IT — I build software for a local company.",
+              "es": "Una copa de tinto, enseguida. Trabajo en IT, hago software para una empresa local."
+            },
+            {
+              "en": "Of course. I'm a developer. I work with data and automation, mostly for the finance team.",
+              "es": "Por supuesto. Soy desarrollador. Trabajo con datos y automatización, sobre todo para el área de finanzas."
+            }
           ]
         },
         {
@@ -3457,6 +4703,20 @@
             "Cheers!",
             "To family",
             "Thank you, that means a lot"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you, that means a lot. Cheers — to family, and to a wonderful Christmas together.",
+              "es": "Gracias, eso significa mucho. Salud, por la familia y por una linda Navidad juntos."
+            },
+            {
+              "en": "That means a lot to me, thank you. Cheers to family!",
+              "es": "Eso significa mucho para mí, gracias. ¡Salud por la familia!"
+            },
+            {
+              "en": "Thank you for saying that. Cheers — I'm glad you're here tonight.",
+              "es": "Gracias por decir eso. Salud, me alegra que estén acá esta noche."
+            }
           ]
         }
       ],
@@ -3550,6 +4810,20 @@
             "I feel alive when...",
             "I love doing...",
             "What makes me happy is..."
+          ],
+          "answer_options": [
+            {
+              "en": "Honestly, building something with my hands. When I finish a project and it works, I feel really alive. What about you?",
+              "es": "La verdad, construir algo con mis manos. Cuando termino un proyecto y funciona, me siento muy vivo. ¿Y vos?"
+            },
+            {
+              "en": "I feel alive when I'm learning something hard. Right now it's English. What about you?",
+              "es": "Me siento vivo cuando aprendo algo difícil. Ahora es el inglés. ¿Y vos?"
+            },
+            {
+              "en": "Music, honestly. When I play, I forget the time. What makes you feel alive?",
+              "es": "La música, la verdad. Cuando toco, me olvido del tiempo. ¿Qué te hace sentir viva?"
+            }
           ]
         },
         {
@@ -3574,6 +4848,20 @@
             "My dream is to...",
             "One day I'd like to...",
             "I hope to..."
+          ],
+          "answer_options": [
+            {
+              "en": "I want to speak English fluently and live in another country for a year. It scares me, but I really want it.",
+              "es": "Quiero hablar inglés con fluidez y vivir un año en otro país. Me da miedo, pero lo quiero de verdad."
+            },
+            {
+              "en": "My dream is to start my own company. I've never told many people that.",
+              "es": "Mi sueño es armar mi propia empresa. Nunca se lo conté a mucha gente."
+            },
+            {
+              "en": "One day I'd like to write a book about my family. I don't know if I ever will.",
+              "es": "Algún día me gustaría escribir un libro sobre mi familia. No sé si algún día lo voy a hacer."
+            }
           ]
         },
         {
@@ -3599,6 +4887,20 @@
             "My biggest fear is...",
             "I'm afraid of...",
             "I worry about..."
+          ],
+          "answer_options": [
+            {
+              "en": "My biggest fear is wasting my life on things that don't matter. Or being alone when I'm old.",
+              "es": "Mi mayor miedo es gastar mi vida en cosas que no importan. O estar solo cuando sea viejo."
+            },
+            {
+              "en": "I'm afraid of not being good enough. It follows me at work and in my relationships.",
+              "es": "Tengo miedo de no ser suficiente. Me persigue en el trabajo y en mis relaciones."
+            },
+            {
+              "en": "I worry about losing the people I love. That's my real fear.",
+              "es": "Me preocupa perder a las personas que amo. Ese es mi verdadero miedo."
+            }
           ]
         },
         {
@@ -3625,6 +4927,20 @@
             "I would tell myself...",
             "I'd say: don't be afraid",
             "Start sooner"
+          ],
+          "answer_options": [
+            {
+              "en": "I would tell myself: don't be afraid to start. The best things in my life came from being uncomfortable.",
+              "es": "Me diría: no tengas miedo de empezar. Lo mejor de mi vida vino de estar incómodo."
+            },
+            {
+              "en": "I'd say: don't be afraid of what people think. You waste too much time on that.",
+              "es": "Le diría: no tengas miedo de lo que piensen los demás. Perdés demasiado tiempo en eso."
+            },
+            {
+              "en": "I would tell myself to start sooner. I waited too long for the perfect moment.",
+              "es": "Me diría que empiece antes. Esperé demasiado el momento perfecto."
+            }
           ]
         },
         {
@@ -3654,6 +4970,20 @@
             "Thank you for being real",
             "Same here",
             "This was the best part of my day"
+          ],
+          "answer_options": [
+            {
+              "en": "Same here. Thank you for being real with me. This was the best part of my day.",
+              "es": "Yo tampoco. Gracias por ser real conmigo. Esto fue lo mejor de mi día."
+            },
+            {
+              "en": "Same here. Thank you for being real. I don't open up like this often.",
+              "es": "Yo tampoco. Gracias por ser real. No me abro así muy seguido."
+            },
+            {
+              "en": "Thank you for listening. This was the best conversation I've had in months.",
+              "es": "Gracias por escuchar. Esta fue la mejor conversación que tuve en meses."
+            }
           ]
         }
       ],
@@ -3751,6 +5081,20 @@
             "Hi everyone, thanks for having me",
             "I'm a developer with X years of experience",
             "Looking forward to working with you"
+          ],
+          "answer_options": [
+            {
+              "en": "Hi everyone, thanks for having me. I'm William. I'm a developer with five years of experience in backend and data systems. I'm really looking forward to working with you.",
+              "es": "Hola a todos, gracias por recibirme. Soy William. Soy desarrollador con cinco años de experiencia en backend y sistemas de datos. Tengo muchas ganas de trabajar con ustedes."
+            },
+            {
+              "en": "Hi everyone. I'm William, a developer from El Salvador. I've worked mostly with Python and databases. Looking forward to working with you all.",
+              "es": "Hola a todos. Soy William, desarrollador de El Salvador. Trabajé sobre todo con Python y bases de datos. Con ganas de trabajar con ustedes."
+            },
+            {
+              "en": "Thanks for having me. I'm William. I have five years of experience, mostly in automation. I'm excited to learn how this team works.",
+              "es": "Gracias por recibirme. Soy William. Tengo cinco años de experiencia, sobre todo en automatización. Me entusiasma aprender cómo trabaja este equipo."
+            }
           ]
         },
         {
@@ -3771,6 +5115,20 @@
             "Who's my buddy?",
             "Where can I find the onboarding doc?",
             "When is the daily standup?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, a couple. Who's my buddy for the first weeks? And is there an onboarding doc I should read?",
+              "es": "Sí, un par. ¿Quién es mi padrino las primeras semanas? ¿Y hay algún documento de onboarding que deba leer?"
+            },
+            {
+              "en": "Yes. When is the daily standup, and where can I find the onboarding doc?",
+              "es": "Sí. ¿A qué hora es el daily, y dónde encuentro el documento de onboarding?"
+            },
+            {
+              "en": "Just one for now. Who should I ask when I get stuck in my first week?",
+              "es": "Solo una por ahora. ¿A quién le pregunto cuando me trabe en mi primera semana?"
+            }
           ]
         },
         {
@@ -3800,6 +5158,20 @@
             "When will I have access?",
             "Is there a first ticket I can pick up?",
             "What should I focus on first?"
+          ],
+          "answer_options": [
+            {
+              "en": "Got it. When will I have access to the repos? And is there a small first ticket I can pick up to start?",
+              "es": "Entendido. ¿Cuándo voy a tener acceso a los repos? ¿Y hay un ticket chico que pueda agarrar para arrancar?"
+            },
+            {
+              "en": "Perfect. When will I have access to the systems, and what should I focus on first?",
+              "es": "Perfecto. ¿Cuándo voy a tener acceso a los sistemas, y en qué me enfoco primero?"
+            },
+            {
+              "en": "Sounds good. Is there a first ticket I can pick up this week, even something small?",
+              "es": "Suena bien. ¿Hay un primer ticket que pueda tomar esta semana, aunque sea algo chico?"
+            }
           ]
         },
         {
@@ -3828,6 +5200,20 @@
             "Thanks for the warm welcome",
             "Excited to be here",
             "I'll keep you posted"
+          ],
+          "answer_options": [
+            {
+              "en": "Sounds great. Thanks for the warm welcome — I'm excited to be here.",
+              "es": "Suena genial. Gracias por la bienvenida, estoy entusiasmado de estar acá."
+            },
+            {
+              "en": "Thanks for the warm welcome. I'll read the docs this week and keep you posted.",
+              "es": "Gracias por la bienvenida. Voy a leer la documentación esta semana y te voy contando."
+            },
+            {
+              "en": "Perfect, thank you. I'm excited to be here and I'll ask a lot of questions.",
+              "es": "Perfecto, gracias. Estoy entusiasmado de estar acá y voy a preguntar mucho."
+            }
           ]
         }
       ],
@@ -3916,6 +5302,20 @@
             "I understand your concern",
             "Can you share your budget?",
             "What's flexible on your side?"
+          ],
+          "answer_options": [
+            {
+              "en": "I understand your concern. Our price reflects the scope and quality of what we'll deliver. Can you tell me what your budget looks like?",
+              "es": "Entiendo su preocupación. Nuestro precio refleja el alcance y la calidad de lo que vamos a entregar. ¿Me puede decir cuál es su presupuesto?"
+            },
+            {
+              "en": "I understand your concern. Before we talk about price, can you share your budget? Then I can see what's possible.",
+              "es": "Entiendo su preocupación. Antes de hablar de precio, ¿me comparte su presupuesto? Así veo qué es posible."
+            },
+            {
+              "en": "I hear you. The price includes the full scope and support. What's flexible on your side?",
+              "es": "Lo escucho. El precio incluye todo el alcance y el soporte. ¿Qué es flexible de su lado?"
+            }
           ]
         },
         {
@@ -3947,6 +5347,20 @@
             "I can match it, but we'd need to reduce scope",
             "We could remove X and add it later",
             "What if we extend the timeline?"
+          ],
+          "answer_options": [
+            {
+              "en": "I can match that price, but we'd need to reduce the scope. For example, we could remove the analytics module and add it in phase two. Would that work?",
+              "es": "Puedo igualar ese precio, pero tendríamos que reducir el alcance. Por ejemplo, podríamos sacar el módulo de analítica y agregarlo en una segunda fase. ¿Le sirve?"
+            },
+            {
+              "en": "I can match it, but we'd need to reduce scope. We could deliver the core system first and add the reports later.",
+              "es": "Puedo igualarlo, pero tendríamos que reducir el alcance. Podríamos entregar el sistema base primero y agregar los reportes después."
+            },
+            {
+              "en": "That's possible with a smaller scope. What if we extend the timeline instead, and keep everything?",
+              "es": "Es posible con un alcance menor. ¿Y si en cambio extendemos el plazo, y mantenemos todo?"
+            }
           ]
         },
         {
@@ -3976,6 +5390,20 @@
             "I can offer X% discount",
             "That's the best I can do",
             "Let's meet in the middle"
+          ],
+          "answer_options": [
+            {
+              "en": "Okay, if we extend the timeline by one month, I can offer a 10% discount. That's the best I can do.",
+              "es": "Bien, si extendemos el plazo un mes, puedo ofrecer un 10% de descuento. Es lo mejor que puedo hacer."
+            },
+            {
+              "en": "Let's meet in the middle. With two extra months, I can offer 12%. Does that work for your team?",
+              "es": "Encontrémonos en el medio. Con dos meses extra, puedo ofrecer un 12%. ¿Le sirve a su equipo?"
+            },
+            {
+              "en": "I can do 10% with a longer timeline, but I need fifty percent paid up front. That's the best I can do.",
+              "es": "Puedo hacer un 10% con un plazo más largo, pero necesito el cincuenta por ciento adelantado. Es lo mejor que puedo hacer."
+            }
           ]
         },
         {
@@ -4006,6 +5434,20 @@
             "I'll send a summary",
             "Looking forward to your reply",
             "Talk tomorrow"
+          ],
+          "answer_options": [
+            {
+              "en": "Sounds good. I'll send a written summary of what we discussed. Looking forward to your reply.",
+              "es": "Suena bien. Le mando un resumen escrito de lo que hablamos. Espero su respuesta."
+            },
+            {
+              "en": "Sounds good. I'll send a summary today. Talk tomorrow.",
+              "es": "Suena bien. Le mando el resumen hoy. Hablamos mañana."
+            },
+            {
+              "en": "Perfect. I'll send the updated proposal by email tonight. Looking forward to your reply.",
+              "es": "Perfecto. Le mando la propuesta actualizada por mail esta noche. Espero su respuesta."
+            }
           ]
         }
       ],
@@ -4101,6 +5543,20 @@
             "I need an ambulance",
             "There's a fire",
             "Someone is hurt"
+          ],
+          "answer_options": [
+            {
+              "en": "I need an ambulance. My friend collapsed and isn't breathing well.",
+              "es": "Necesito una ambulancia. Mi amigo se desmayó y no respira bien."
+            },
+            {
+              "en": "There's a fire in my building. I need the fire department now.",
+              "es": "Hay un incendio en mi edificio. Necesito los bomberos ya."
+            },
+            {
+              "en": "Someone is hurt. There was a car accident in front of my house.",
+              "es": "Hay alguien herido. Hubo un accidente de auto frente a mi casa."
+            }
           ]
         },
         {
@@ -4127,6 +5583,20 @@
             "I'm at...",
             "The address is...",
             "I'm at the corner of..."
+          ],
+          "answer_options": [
+            {
+              "en": "I'm at 1234 Oak Street, Miami. Second floor, apartment 5B. Across from a CVS pharmacy.",
+              "es": "Estoy en 1234 Oak Street, Miami. Segundo piso, departamento 5B. Frente a una farmacia CVS."
+            },
+            {
+              "en": "The address is 890 Main Street, near the central park. It's the blue building.",
+              "es": "La dirección es 890 Main Street, cerca del parque central. Es el edificio azul."
+            },
+            {
+              "en": "I'm at the corner of Fifth and Oak, in front of the gas station.",
+              "es": "Estoy en la esquina de Fifth y Oak, frente a la estación de servicio."
+            }
           ]
         },
         {
@@ -4159,6 +5629,20 @@
             "He's unconscious but breathing",
             "She's bleeding",
             "He fell and..."
+          ],
+          "answer_options": [
+            {
+              "en": "He's about 35. He's unconscious but breathing. He fell and hit his head.",
+              "es": "Tiene unos 35. Está inconsciente pero respira. Se cayó y se golpeó la cabeza."
+            },
+            {
+              "en": "She's 60 years old. She's conscious but she can't speak well and she's bleeding.",
+              "es": "Tiene 60 años. Está consciente pero no puede hablar bien y está sangrando."
+            },
+            {
+              "en": "He's 35 and he's awake now, but he's confused and very pale.",
+              "es": "Tiene 35 y ahora está despierto, pero está confundido y muy pálido."
+            }
           ]
         },
         {
@@ -4187,6 +5671,20 @@
             "Yes, I'll stay on the line",
             "Please hurry",
             "I'm not hanging up"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I'll stay on the line. Please hurry.",
+              "es": "Sí, me quedo en la línea. Por favor, apúrense."
+            },
+            {
+              "en": "Yes, I'm not hanging up. What should I do while I wait?",
+              "es": "Sí, no voy a cortar. ¿Qué hago mientras espero?"
+            },
+            {
+              "en": "Understood, I won't move him. I'll stay on the line.",
+              "es": "Entendido, no lo voy a mover. Me quedo en la línea."
+            }
           ]
         }
       ],
@@ -4274,6 +5772,20 @@
             "Yesterday I worked on...",
             "I finished the ticket about...",
             "I opened a PR"
+          ],
+          "answer_options": [
+            {
+              "en": "Yesterday I finished the user authentication ticket and opened a pull request. I also helped Carlos debug the data pipeline.",
+              "es": "Ayer terminé el ticket de autenticación de usuarios y abrí un pull request. También ayudé a Carlos a debuggear el pipeline de datos."
+            },
+            {
+              "en": "Yesterday I worked on the login bug. I found the cause but I haven't fixed it yet.",
+              "es": "Ayer trabajé en el bug del login. Encontré la causa pero todavía no lo arreglé."
+            },
+            {
+              "en": "I finished the ticket about the report export, and I opened a PR for review.",
+              "es": "Terminé el ticket de exportar reportes, y abrí un PR para revisión."
+            }
           ]
         },
         {
@@ -4298,6 +5810,20 @@
             "Today I'll focus on...",
             "I plan to...",
             "After that I'll review..."
+          ],
+          "answer_options": [
+            {
+              "en": "Today I'll focus on the reporting dashboard. After that, I'll review Maria's pull request.",
+              "es": "Hoy me voy a enfocar en el dashboard de reportes. Después voy a revisar el pull request de María."
+            },
+            {
+              "en": "Today I plan to finish the login fix and write the tests for it.",
+              "es": "Hoy planeo terminar el fix del login y escribir los tests."
+            },
+            {
+              "en": "I'll start the new ticket about notifications. After that I'll review two PRs.",
+              "es": "Voy a arrancar el ticket nuevo de notificaciones. Después reviso dos PRs."
+            }
           ]
         },
         {
@@ -4322,6 +5848,20 @@
             "No blockers",
             "I'm blocked by...",
             "I need help with..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, one. I'm blocked by the staging database credentials. I can't deploy without them.",
+              "es": "Sí, uno. Estoy bloqueado por las credenciales de la base de staging. No puedo deployar sin eso."
+            },
+            {
+              "en": "No blockers, everything is moving fine.",
+              "es": "Sin bloqueos, todo va bien."
+            },
+            {
+              "en": "I need help with the deployment config. I've been stuck on it since yesterday.",
+              "es": "Necesito ayuda con la configuración del deploy. Estoy trabado desde ayer."
+            }
           ]
         },
         {
@@ -4346,6 +5886,20 @@
             "That's it from me",
             "Nothing else, thanks",
             "Let's take that offline"
+          ],
+          "answer_options": [
+            {
+              "en": "That's it from me. Thanks!",
+              "es": "Eso es todo de mi parte. ¡Gracias!"
+            },
+            {
+              "en": "Nothing else, thanks. Let's take the database topic offline.",
+              "es": "Nada más, gracias. El tema de la base lo hablamos después aparte."
+            },
+            {
+              "en": "That's all. If anyone needs me, I'm on Slack.",
+              "es": "Eso es todo. Si alguien me necesita, estoy en Slack."
+            }
           ]
         }
       ],
@@ -4455,6 +6009,20 @@
             "You're driving me crazy",
             "I can't stop thinking about you",
             "What are you wearing?"
+          ],
+          "answer_options": [
+            {
+              "en": "Same here. You're driving me crazy and you're not even next to me. What are you doing right now?",
+              "es": "Yo igual. Me estás volviendo loco y ni estás al lado mío. ¿Qué estás haciendo ahora?"
+            },
+            {
+              "en": "Same. I can't stop thinking about you either. What are you wearing?",
+              "es": "Igual. Yo tampoco puedo dejar de pensar en vos. ¿Qué tenés puesto?"
+            },
+            {
+              "en": "You're driving me crazy. I have two meetings and I can't focus on anything.",
+              "es": "Me estás volviendo loco. Tengo dos reuniones y no me puedo concentrar en nada."
+            }
           ]
         },
         {
@@ -4484,6 +6052,20 @@
             "You're such a tease",
             "Save it for tonight",
             "Behave yourself"
+          ],
+          "answer_options": [
+            {
+              "en": "You're such a tease. You'd better save all that energy for when I get home tonight.",
+              "es": "Sos muy provocadora. Mejor guardá toda esa energía para cuando llegue esta noche."
+            },
+            {
+              "en": "You're such a tease. Save it for tonight — I mean it.",
+              "es": "Sos muy provocadora. Guardalo para esta noche, en serio."
+            },
+            {
+              "en": "Behave yourself. Or at least wait until I'm home.",
+              "es": "Portate bien. O al menos esperá a que llegue a casa."
+            }
           ]
         },
         {
@@ -4514,6 +6096,20 @@
             "I'll show you when I get home",
             "I'll make you beg for it",
             "You don't want to find out"
+          ],
+          "answer_options": [
+            {
+              "en": "Trust me, you don't want to find out. I'll show you exactly what when I get home — and I'll make you beg for it.",
+              "es": "Creeme, no querés averiguarlo. Te voy a mostrar exactamente qué cuando llegue, y te voy a hacer rogar."
+            },
+            {
+              "en": "You don't want to find out. But I'll show you when I get home.",
+              "es": "No querés averiguarlo. Pero te lo voy a mostrar cuando llegue."
+            },
+            {
+              "en": "I'll make you beg for it. That's all I'm saying right now.",
+              "es": "Te voy a hacer rogar. Es todo lo que voy a decir ahora."
+            }
           ]
         },
         {
@@ -4543,6 +6139,20 @@
             "Three more hours",
             "You'd better be ready",
             "Don't start without me"
+          ],
+          "answer_options": [
+            {
+              "en": "Three more hours. You'd better be ready for me when I walk through that door.",
+              "es": "Tres horas más. Mejor estate lista para cuando cruce esa puerta."
+            },
+            {
+              "en": "Three more hours. Don't start without me.",
+              "es": "Tres horas más. No empieces sin mí."
+            },
+            {
+              "en": "Two hours if traffic is good. You'd better be ready.",
+              "es": "Dos horas si hay poco tráfico. Mejor estate lista."
+            }
           ]
         },
         {
@@ -4574,6 +6184,20 @@
             "Dinner can wait",
             "You're mine the moment I walk in",
             "Deal?"
+          ],
+          "answer_options": [
+            {
+              "en": "Dinner can wait. The moment I walk in, you're mine. Deal?",
+              "es": "La cena puede esperar. En el momento que entre, sos mía. ¿Trato?"
+            },
+            {
+              "en": "Dinner can wait tonight. You're mine the moment I walk in.",
+              "es": "Esta noche la cena puede esperar. Sos mía en el momento que entre."
+            },
+            {
+              "en": "I promise. Dinner is after, not before. Deal?",
+              "es": "Te lo prometo. La cena es después, no antes. ¿Trato?"
+            }
           ]
         },
         {
@@ -4597,6 +6221,20 @@
             "Behave yourself",
             "Wait for me",
             "See you soon"
+          ],
+          "answer_options": [
+            {
+              "en": "On my way mentally already. Behave yourself until I'm there.",
+              "es": "Mentalmente ya estoy en camino. Portate bien hasta que llegue."
+            },
+            {
+              "en": "Back to work now. Wait for me — I'll be there soon.",
+              "es": "Vuelvo al trabajo. Esperame, llego pronto."
+            },
+            {
+              "en": "Okay, I really have to work now. Behave yourself. See you soon.",
+              "es": "Bueno, ahora sí tengo que trabajar. Portate bien. Nos vemos pronto."
+            }
           ]
         }
       ],
@@ -4690,6 +6328,20 @@
             "You look beautiful tonight",
             "You're stunning",
             "I'm the lucky one"
+          ],
+          "answer_options": [
+            {
+              "en": "You're welcome. Honestly, the place is nice, but you look absolutely beautiful tonight.",
+              "es": "De nada. La verdad, el lugar está lindo, pero vos estás realmente hermosa esta noche."
+            },
+            {
+              "en": "My pleasure. But honestly, you're stunning tonight — the place doesn't compare.",
+              "es": "Un placer. Pero la verdad, estás preciosa esta noche, el lugar no se compara."
+            },
+            {
+              "en": "I'm glad you like it. And I'm the lucky one — you look beautiful tonight.",
+              "es": "Me alegra que te guste. Y el afortunado soy yo, estás hermosa esta noche."
+            }
           ]
         },
         {
@@ -4720,6 +6372,20 @@
             "Being here with you is enough",
             "These last months meant a lot to me",
             "I feel lucky"
+          ],
+          "answer_options": [
+            {
+              "en": "Just being here with you is reason enough. The last few months have meant a lot to me.",
+              "es": "Solo estar acá con vos ya es razón suficiente. Estos últimos meses significaron mucho para mí."
+            },
+            {
+              "en": "Nothing special — being here with you is enough. I feel lucky lately.",
+              "es": "Nada especial, estar acá con vos ya es suficiente. Últimamente me siento afortunado."
+            },
+            {
+              "en": "These last months meant a lot to me. I wanted a night just for us.",
+              "es": "Estos últimos meses significaron mucho para mí. Quería una noche solo para nosotros."
+            }
           ]
         },
         {
@@ -4746,6 +6412,20 @@
             "I love the way you laugh",
             "I love how you listen",
             "I love your kindness"
+          ],
+          "answer_options": [
+            {
+              "en": "Can I tell you something? I love the way you listen — really listen. And your laugh makes my whole day better.",
+              "es": "¿Te puedo decir algo? Me encanta cómo escuchás, de verdad escuchás. Y tu risa me mejora todo el día."
+            },
+            {
+              "en": "I love how you listen to people. You make everyone feel important. That's rare.",
+              "es": "Me encanta cómo escuchás a la gente. Hacés que todos se sientan importantes. Eso es raro."
+            },
+            {
+              "en": "I love your kindness. You're the calmest person I know, and I need that.",
+              "es": "Me encanta tu bondad. Sos la persona más tranquila que conozco, y yo necesito eso."
+            }
           ]
         },
         {
@@ -4774,6 +6454,20 @@
             "There's something I've wanted to ask you",
             "Can I ask you something?",
             "I want to be honest with you"
+          ],
+          "answer_options": [
+            {
+              "en": "Actually, there's something I've wanted to ask you for a while. Can I?",
+              "es": "En realidad, hay algo que hace un rato te quiero preguntar. ¿Puedo?"
+            },
+            {
+              "en": "Can I ask you something? I've been thinking about it for weeks.",
+              "es": "¿Te puedo preguntar algo? Lo estuve pensando por semanas."
+            },
+            {
+              "en": "I want to be honest with you. There's something I've wanted to ask you.",
+              "es": "Quiero ser honesto con vos. Hay algo que te quiero preguntar."
+            }
           ]
         },
         {
@@ -4803,6 +6497,20 @@
             "Would you be my girlfriend?",
             "I want to make it official",
             "Will you be mine?"
+          ],
+          "answer_options": [
+            {
+              "en": "I've never felt like this before. When I'm with you, everything feels right. Would you be my girlfriend?",
+              "es": "Nunca sentí esto antes. Cuando estoy con vos, todo se siente bien. ¿Querés ser mi novia?"
+            },
+            {
+              "en": "I want to make it official. You make my life better. Will you be mine?",
+              "es": "Quiero que sea oficial. Hacés mi vida mejor. ¿Querés ser mía?"
+            },
+            {
+              "en": "I'm sure about you. Would you be my girlfriend?",
+              "es": "Estoy seguro de vos. ¿Querés ser mi novia?"
+            }
           ]
         },
         {
@@ -4833,6 +6541,20 @@
             "You made me the happiest guy",
             "Cheers to us",
             "I'm the lucky one"
+          ],
+          "answer_options": [
+            {
+              "en": "You just made me the happiest guy in the world. Cheers to us — to the start of something amazing.",
+              "es": "Me acabás de hacer el tipo más feliz del mundo. Salud por nosotros, por el comienzo de algo increíble."
+            },
+            {
+              "en": "You made me the happiest guy tonight. Cheers to us!",
+              "es": "Me hiciste el tipo más feliz esta noche. ¡Salud por nosotros!"
+            },
+            {
+              "en": "I'm the lucky one. Cheers to us — and to many more nights like this.",
+              "es": "El afortunado soy yo. Salud por nosotros, y por muchas noches más como esta."
+            }
           ]
         }
       ],
@@ -4922,6 +6644,20 @@
             "I missed my flight",
             "I didn't make it in time",
             "What are my options?"
+          ],
+          "answer_options": [
+            {
+              "en": "Hi. I just missed my flight to Miami, flight 384. Traffic was terrible. What are my options?",
+              "es": "Hola. Recién perdí mi vuelo a Miami, vuelo 384. El tráfico estaba terrible. ¿Qué opciones tengo?"
+            },
+            {
+              "en": "Hi. I missed my flight, number 384 to Miami. What are my options?",
+              "es": "Hola. Perdí mi vuelo, el 384 a Miami. ¿Qué opciones tengo?"
+            },
+            {
+              "en": "Excuse me. I didn't make it in time for flight 384. Can you help me find another one?",
+              "es": "Perdón. No llegué a tiempo al vuelo 384. ¿Me puede ayudar a encontrar otro?"
+            }
           ]
         },
         {
@@ -4950,6 +6686,20 @@
             "Is there any way to waive the fee?",
             "Can you make an exception?",
             "I understand it's not your fault"
+          ],
+          "answer_options": [
+            {
+              "en": "I understand it's not your fault, but the delay was due to a major accident on the highway. Is there any way to waive the fee?",
+              "es": "Entiendo que no es su culpa, pero la demora fue por un accidente grande en la autopista. ¿Hay alguna forma de que no me cobren la multa?"
+            },
+            {
+              "en": "I understand it's not your fault. Is there any way to waive the fee? There was an accident on the highway.",
+              "es": "Entiendo que no es su culpa. ¿Hay alguna forma de eximir la multa? Hubo un accidente en la autopista."
+            },
+            {
+              "en": "Can you make an exception? I've flown with this airline for years and this is my first time.",
+              "es": "¿Puede hacer una excepción? Vuelo con esta aerolínea desde hace años y es mi primera vez."
+            }
           ]
         },
         {
@@ -4977,6 +6727,20 @@
             "I appreciate that",
             "Let's go with the rebooking",
             "Can I get a window seat?"
+          ],
+          "answer_options": [
+            {
+              "en": "I appreciate that, thank you. Let's go with the rebooking. Is there a seat near the window?",
+              "es": "Se lo agradezco, gracias. Hagamos el cambio. ¿Hay un asiento de ventanilla?"
+            },
+            {
+              "en": "I appreciate that. Let's go with the rebooking, please.",
+              "es": "Se lo agradezco. Hagamos el cambio, por favor."
+            },
+            {
+              "en": "Thank you, that helps a lot. Can I get a window seat on the new flight?",
+              "es": "Gracias, eso ayuda mucho. ¿Me puede dar ventanilla en el vuelo nuevo?"
+            }
           ]
         },
         {
@@ -4999,6 +6763,20 @@
             "Thanks for your help",
             "Is there a meal voucher?",
             "I really appreciate it"
+          ],
+          "answer_options": [
+            {
+              "en": "Just one thing — is there a meal voucher I can get while I wait? Either way, thanks for your help.",
+              "es": "Solo una cosa, ¿hay algún voucher de comida para mientras espero? De cualquier forma, gracias por su ayuda."
+            },
+            {
+              "en": "Thanks for your help. What happens with my checked suitcase?",
+              "es": "Gracias por su ayuda. ¿Qué pasa con mi valija despachada?"
+            },
+            {
+              "en": "That's everything. I really appreciate it. Have a good day.",
+              "es": "Eso es todo. Se lo agradezco de verdad. Que tenga un buen día."
+            }
           ]
         }
       ],
@@ -5105,6 +6883,20 @@
             "My dog isn't eating",
             "She isn't acting normal",
             "He seems lethargic"
+          ],
+          "answer_options": [
+            {
+              "en": "Hi. My dog Rocky hasn't been acting normal for two days. He isn't eating and he seems really lethargic.",
+              "es": "Hola. Mi perro Rocky no está normal desde hace dos días. No está comiendo y se ve muy decaído."
+            },
+            {
+              "en": "Hi. My dog isn't eating and he seems very tired. It started two days ago.",
+              "es": "Hola. Mi perro no come y se ve muy cansado. Empezó hace dos días."
+            },
+            {
+              "en": "Hi doctor. My dog is limping and he cries when I touch his back leg.",
+              "es": "Hola doctor. Mi perro está rengueando y llora cuando le toco la pata de atrás."
+            }
           ]
         },
         {
@@ -5135,6 +6927,20 @@
             "He vomited twice",
             "No diarrhea",
             "He's drinking less water"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, he vomited twice yesterday. No diarrhea, but he's drinking less water than usual.",
+              "es": "Sí, vomitó dos veces ayer. Sin diarrea, pero está tomando menos agua que lo normal."
+            },
+            {
+              "en": "No vomiting, but he has diarrhea since yesterday. He's still drinking water.",
+              "es": "Sin vómitos, pero tiene diarrea desde ayer. Todavía toma agua."
+            },
+            {
+              "en": "He vomited once this morning. No diarrhea. He's also breathing faster than normal.",
+              "es": "Vomitó una vez esta mañana. Sin diarrea. También respira más rápido de lo normal."
+            }
           ]
         },
         {
@@ -5160,6 +6966,20 @@
             "He's four years old",
             "His shots are up to date",
             "He's neutered"
+          ],
+          "answer_options": [
+            {
+              "en": "He's four years old. Yes, his shots are up to date. He's also neutered.",
+              "es": "Tiene cuatro años. Sí, tiene las vacunas al día. También está castrado."
+            },
+            {
+              "en": "He's four years old and his shots are up to date. We came last year.",
+              "es": "Tiene cuatro años y las vacunas están al día. Vinimos el año pasado."
+            },
+            {
+              "en": "He's seven. I'm not sure about his shots — I think he's late on one.",
+              "es": "Tiene siete. No estoy seguro de las vacunas, creo que le falta una."
+            }
           ]
         },
         {
@@ -5185,6 +7005,20 @@
             "Please do whatever is needed",
             "How much will it cost?",
             "When will we have results?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, please do whatever is needed. How much will it cost, and when will we have the results?",
+              "es": "Sí, haga lo que sea necesario. ¿Cuánto va a costar, y cuándo tendremos los resultados?"
+            },
+            {
+              "en": "Yes, of course. How much will it cost? And should I wait here?",
+              "es": "Sí, por supuesto. ¿Cuánto va a costar? ¿Y espero acá?"
+            },
+            {
+              "en": "Please do whatever is needed. When will we have the results?",
+              "es": "Haga lo que sea necesario. ¿Cuándo tendremos los resultados?"
+            }
           ]
         }
       ],
@@ -5276,6 +7110,20 @@
             "I owe you an apology",
             "Thank you for seeing me",
             "I want to say this to your face"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you for seeing me. I came here because I owe you an apology, and I want to say it to your face.",
+              "es": "Gracias por recibirme. Vine porque te debo una disculpa, y quiero decirla en persona."
+            },
+            {
+              "en": "Thank you for seeing me. I owe you an apology, and I'm not here to make excuses.",
+              "es": "Gracias por recibirme. Te debo una disculpa, y no vengo a poner excusas."
+            },
+            {
+              "en": "I owe you an apology. I wanted to say this to your face, not by message.",
+              "es": "Te debo una disculpa. Quería decírtelo en persona, no por mensaje."
+            }
           ]
         },
         {
@@ -5307,6 +7155,20 @@
             "I hurt you",
             "There's no excuse",
             "I take full responsibility"
+          ],
+          "answer_options": [
+            {
+              "en": "What I said the other night was wrong. I hurt you, and there's no excuse for it. I take full responsibility.",
+              "es": "Lo que dije la otra noche estuvo mal. Te lastimé, y no hay excusa. Asumo toda la responsabilidad."
+            },
+            {
+              "en": "What I did was wrong. I broke your trust, and I take full responsibility for it.",
+              "es": "Lo que hice estuvo mal. Rompí tu confianza, y asumo toda la responsabilidad."
+            },
+            {
+              "en": "I hurt you when I talked about you behind your back. There's no excuse. It was my fault.",
+              "es": "Te lastimé cuando hablé de vos a tus espaldas. No hay excusa. Fue mi culpa."
+            }
           ]
         },
         {
@@ -5336,6 +7198,20 @@
             "I was stressed, but that's no excuse",
             "I should have walked away",
             "It's not a justification"
+          ],
+          "answer_options": [
+            {
+              "en": "I was stressed and tired, but that doesn't justify what I said. I should have walked away instead of taking it out on you.",
+              "es": "Estaba estresado y cansado, pero eso no justifica lo que dije. Debería haberme ido en vez de descargarme con vos."
+            },
+            {
+              "en": "I was stressed, but that's no excuse. I should have talked to you instead of reacting.",
+              "es": "Estaba estresado, pero eso no es excusa. Debería haber hablado con vos en vez de reaccionar."
+            },
+            {
+              "en": "Honestly, I was scared to tell you the truth. It's not a justification, I know that.",
+              "es": "La verdad, tenía miedo de decirte la verdad. No es una justificación, lo sé."
+            }
           ]
         },
         {
@@ -5370,6 +7246,20 @@
             "I don't expect you to forgive me right away",
             "Give me a chance to make it up to you",
             "What can I do to make it right?"
+          ],
+          "answer_options": [
+            {
+              "en": "I don't expect you to forgive me right away. I just want a chance to show you I'll do better. What can I do to make it right?",
+              "es": "No espero que me perdones ya. Solo quiero una oportunidad de demostrarte que voy a hacerlo mejor. ¿Qué puedo hacer para arreglarlo?"
+            },
+            {
+              "en": "I don't expect you to forgive me right away. Take the time you need.",
+              "es": "No espero que me perdones ya. Tomate el tiempo que necesites."
+            },
+            {
+              "en": "That's fair. What can I do to make it right? I'd rather do something than just say sorry.",
+              "es": "Es justo. ¿Qué puedo hacer para arreglarlo? Prefiero hacer algo antes que solo pedir perdón."
+            }
           ]
         },
         {
@@ -5398,6 +7288,20 @@
             "Take all the time you need",
             "I'm here whenever you're ready",
             "I'm truly sorry"
+          ],
+          "answer_options": [
+            {
+              "en": "Take all the time you need. I'm here whenever you're ready. I'm sorry, truly.",
+              "es": "Tomate todo el tiempo que necesites. Estoy acá cuando estés listo. Perdón, de verdad."
+            },
+            {
+              "en": "Take all the time you need. Thank you for listening to me today.",
+              "es": "Tomate todo el tiempo que necesites. Gracias por escucharme hoy."
+            },
+            {
+              "en": "I understand. I'm truly sorry, and I'm here whenever you're ready to talk.",
+              "es": "Entiendo. Perdón de verdad, y estoy acá cuando quieras hablar."
+            }
           ]
         }
       ],
@@ -5511,6 +7415,20 @@
             "I'm looking at cameras",
             "What's the difference between X and Y?",
             "Which one is better for...?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I'm looking at cameras. What's the difference between the Sony A7 III and the A7 IV?",
+              "es": "Sí, estoy mirando cámaras. ¿Cuál es la diferencia entre la Sony A7 III y la A7 IV?"
+            },
+            {
+              "en": "Yes, I'm looking at cameras for video. Which one is better for low light?",
+              "es": "Sí, estoy mirando cámaras para video. ¿Cuál es mejor con poca luz?"
+            },
+            {
+              "en": "I'm just looking at cameras for now. What's the difference between these two models?",
+              "es": "Por ahora solo estoy mirando cámaras. ¿Cuál es la diferencia entre estos dos modelos?"
+            }
           ]
         },
         {
@@ -5545,6 +7463,20 @@
             "I'm not fully convinced",
             "Is it worth the price difference?",
             "What about the sensor?"
+          ],
+          "answer_options": [
+            {
+              "en": "Hmm, I'm not fully convinced. Is it really worth 800 dollars more just for the processor? What about the sensor and dynamic range?",
+              "es": "Mmm, no me convence del todo. ¿Realmente vale 800 dólares más solo por el procesador? ¿Y el sensor y el rango dinámico?"
+            },
+            {
+              "en": "I'm not fully convinced. Is it worth the price difference for someone who shoots photos, not video?",
+              "es": "No me convence del todo. ¿Vale la diferencia de precio para alguien que saca fotos, no video?"
+            },
+            {
+              "en": "What about the sensor? Is it the same one in both models, or did they change it?",
+              "es": "¿Y el sensor? ¿Es el mismo en los dos modelos, o lo cambiaron?"
+            }
           ]
         },
         {
@@ -5577,6 +7509,20 @@
             "Can you show me hi-res headphones?",
             "I care about fidelity",
             "Something for audiophiles"
+          ],
+          "answer_options": [
+            {
+              "en": "Got it, thanks for being honest. Let me think about it. While I'm here — can you show me some hi-res audio headphones? I care about fidelity, not just bass.",
+              "es": "Entendido, gracias por ser honesto. Dejame pensarlo. Ya que estoy, ¿me puede mostrar audífonos de audio hi-res? Me importa la fidelidad, no solo los graves."
+            },
+            {
+              "en": "Thanks for being honest. Can you show me hi-res headphones? Something for audiophiles.",
+              "es": "Gracias por ser honesto. ¿Me puede mostrar audífonos hi-res? Algo para audiófilos."
+            },
+            {
+              "en": "That helps, thank you. Let me think about the camera. Can you show me headphones? I care about fidelity.",
+              "es": "Eso ayuda, gracias. Dejame pensar la cámara. ¿Me puede mostrar audífonos? Me importa la fidelidad."
+            }
           ]
         },
         {
@@ -5605,6 +7551,20 @@
             "What's the driver size?",
             "Do they support FLAC?",
             "Can I try them on?"
+          ],
+          "answer_options": [
+            {
+              "en": "Interesting. What's the driver size on the Sennheiser? And do both support FLAC over Bluetooth? Can I try them?",
+              "es": "Interesante. ¿Qué tamaño de driver tiene el Sennheiser? ¿Y los dos soportan FLAC por Bluetooth? ¿Los puedo probar?"
+            },
+            {
+              "en": "What's the driver size on each one? And can I try them on before deciding?",
+              "es": "¿Qué tamaño de driver tiene cada uno? ¿Y los puedo probar antes de decidir?"
+            },
+            {
+              "en": "Do they support FLAC over Bluetooth? And what's the frequency response on the Sony?",
+              "es": "¿Soportan FLAC por Bluetooth? ¿Y cuál es la respuesta de frecuencia del Sony?"
+            }
           ]
         },
         {
@@ -5632,6 +7592,20 @@
             "I'd rather hear them first",
             "These aren't cheap",
             "Thanks for the patience"
+          ],
+          "answer_options": [
+            {
+              "en": "Perfect, thank you. I'd rather hear them before I decide — these aren't cheap.",
+              "es": "Perfecto, gracias. Prefiero escucharlos antes de decidir, no son baratos."
+            },
+            {
+              "en": "Thanks for the patience. I'd rather hear them first before I spend that much.",
+              "es": "Gracias por la paciencia. Prefiero escucharlos primero antes de gastar tanto."
+            },
+            {
+              "en": "Great, thank you. These aren't cheap, so I want to be sure.",
+              "es": "Genial, gracias. No son baratos, así que quiero estar seguro."
+            }
           ]
         }
       ],
@@ -5720,6 +7694,20 @@
             "I'm so sorry for your loss",
             "My deepest condolences",
             "I'm thinking of you and your family"
+          ],
+          "answer_options": [
+            {
+              "en": "I'm so sorry for your loss. I came as soon as I heard. I'm thinking of you and your family.",
+              "es": "Lamento mucho tu pérdida. Vine en cuanto me enteré. Estoy pensando en vos y en tu familia."
+            },
+            {
+              "en": "I'm so sorry for your loss. My deepest condolences to you and your family.",
+              "es": "Lamento mucho tu pérdida. Mis más sentidas condolencias para vos y tu familia."
+            },
+            {
+              "en": "I'm so sorry. There are no good words for this. I'm thinking of you.",
+              "es": "Lo siento mucho. No hay buenas palabras para esto. Estoy pensando en vos."
+            }
           ]
         },
         {
@@ -5749,6 +7737,20 @@
             "I can't imagine what you're going through",
             "She was a wonderful person",
             "I'll never forget..."
+          ],
+          "answer_options": [
+            {
+              "en": "Of course it's hard. She was such a wonderful person — I'll never forget how kind she was to me.",
+              "es": "Por supuesto que es difícil. Era una persona maravillosa, nunca me voy a olvidar de lo amable que fue conmigo."
+            },
+            {
+              "en": "Of course it's still hard. I can't imagine what you're going through.",
+              "es": "Por supuesto que sigue siendo difícil. No puedo imaginar lo que estás pasando."
+            },
+            {
+              "en": "She was a wonderful person. I'll never forget the way she talked about you.",
+              "es": "Era una persona maravillosa. Nunca me voy a olvidar de cómo hablaba de vos."
+            }
           ]
         },
         {
@@ -5780,6 +7782,20 @@
             "I'm here for you",
             "Can I bring you dinner?",
             "Let me know if you need anything specific"
+          ],
+          "answer_options": [
+            {
+              "en": "There's no right way to feel right now. Can I bring you dinner this week, or just sit with you sometime? I'm here for you, whatever you need.",
+              "es": "No hay una forma correcta de sentirse ahora. ¿Te puedo llevar la cena esta semana, o sentarme con vos un rato? Estoy acá para lo que necesites."
+            },
+            {
+              "en": "Can I bring you dinner on Thursday? I don't want to just say 'call me if you need anything'.",
+              "es": "¿Te puedo llevar la cena el jueves? No quiero solo decir «avisame si necesitás algo»."
+            },
+            {
+              "en": "I'm here for you. Can I help with the paperwork, or drive you somewhere this week?",
+              "es": "Estoy acá para vos. ¿Te puedo ayudar con los trámites, o llevarte a algún lado esta semana?"
+            }
           ]
         },
         {
@@ -5808,6 +7824,20 @@
             "Take all the time you need",
             "You're not alone",
             "I'll bring it Thursday"
+          ],
+          "answer_options": [
+            {
+              "en": "I'll bring it Thursday. Take all the time you need. You're not alone in this.",
+              "es": "Te la llevo el jueves. Tomate todo el tiempo que necesites. No estás solo en esto."
+            },
+            {
+              "en": "I'll bring it Thursday, around seven. You're not alone.",
+              "es": "Te la llevo el jueves, cerca de las siete. No estás solo."
+            },
+            {
+              "en": "Take all the time you need. I'll text you Thursday before I come.",
+              "es": "Tomate todo el tiempo que necesites. Te escribo el jueves antes de ir."
+            }
           ]
         }
       ],
@@ -5893,6 +7923,20 @@
             "I want to share some honest feedback",
             "This might be hard to hear",
             "I'm telling you because I believe in you"
+          ],
+          "answer_options": [
+            {
+              "en": "Thanks for making time. I want to share some honest feedback about the last project. It might be hard to hear, but I'm telling you because I believe in you.",
+              "es": "Gracias por hacerte el tiempo. Quiero darte un feedback honesto sobre el último proyecto. Puede ser difícil de escuchar, pero te lo digo porque creo en vos."
+            },
+            {
+              "en": "Thanks for making time. I want to share some honest feedback about the last deliverable.",
+              "es": "Gracias por hacerte el tiempo. Quiero darte un feedback honesto sobre la última entrega."
+            },
+            {
+              "en": "I asked for this meeting to give you feedback on the last project. This might be hard to hear.",
+              "es": "Pedí esta reunión para darte feedback del último proyecto. Puede ser difícil de escuchar."
+            }
           ]
         },
         {
@@ -5923,6 +7967,20 @@
             "The work missed the mark",
             "I expected X but got Y",
             "The deliverable didn't include..."
+          ],
+          "answer_options": [
+            {
+              "en": "The report you delivered missed the mark. I expected an analysis with clear recommendations, but what I got was mostly raw numbers. The reader couldn't tell what to do next.",
+              "es": "El reporte que entregaste no dio en el blanco. Yo esperaba un análisis con recomendaciones claras, pero lo que recibí fueron básicamente números crudos. El lector no podía saber qué hacer después."
+            },
+            {
+              "en": "The work missed the mark. I expected recommendations, but the deliverable didn't include any conclusions.",
+              "es": "El trabajo no dio en el blanco. Esperaba recomendaciones, pero la entrega no incluyó ninguna conclusión."
+            },
+            {
+              "en": "I expected an analysis with a clear recommendation, but I got a list of numbers. The deliverable didn't answer the question we had.",
+              "es": "Esperaba un análisis con una recomendación clara, pero recibí una lista de números. La entrega no respondió la pregunta que teníamos."
+            }
           ]
         },
         {
@@ -5957,6 +8015,20 @@
             "I appreciate you owning that",
             "Here's what I'd like you to do differently",
             "Going forward, please..."
+          ],
+          "answer_options": [
+            {
+              "en": "I appreciate you owning that. Here's what I'd like you to do differently next time: ask three clarifying questions before you start, and send me a one-page outline before you build the full thing.",
+              "es": "Te agradezco que lo asumas. Esto es lo que me gustaría que hagas distinto la próxima: hacé tres preguntas aclaratorias antes de arrancar, y mandame un esquema de una página antes de armar todo."
+            },
+            {
+              "en": "I appreciate you owning that. Going forward, please send me an outline before you write the full report.",
+              "es": "Te agradezco que lo asumas. De ahora en más, mandame un esquema antes de escribir el reporte completo."
+            },
+            {
+              "en": "Thanks for saying that. Here's what I'd like you to do differently: ask me before you start, and show me a draft halfway through.",
+              "es": "Gracias por decirlo. Esto es lo que me gustaría que hagas distinto: preguntame antes de arrancar, y mostrame un borrador a mitad de camino."
+            }
           ]
         },
         {
@@ -5986,6 +8058,20 @@
             "This is fixable",
             "We'll work on it together",
             "You're going to grow from this"
+          ],
+          "answer_options": [
+            {
+              "en": "Don't be. Every senior here has been here. This is fixable, and we'll work on it together. You're going to grow from this.",
+              "es": "No lo estés. Todos los seniors de acá pasaron por esto. Es arreglable, y vamos a trabajarlo juntos. Vas a crecer con esto."
+            },
+            {
+              "en": "Don't be embarrassed. This is fixable, and I've made the same mistake before.",
+              "es": "No te avergüences. Es arreglable, y yo cometí el mismo error antes."
+            },
+            {
+              "en": "Don't be. We'll work on it together, and you're going to grow from this.",
+              "es": "No lo estés. Vamos a trabajarlo juntos, y vas a crecer con esto."
+            }
           ]
         }
       ],
@@ -6080,6 +8166,20 @@
             "I have a serious allergy",
             "I'm allergic to shellfish",
             "I'm gluten-intolerant"
+          ],
+          "answer_options": [
+            {
+              "en": "Before I order, I want to let you know I have serious allergies. I'm allergic to shellfish — especially shrimp — and I'm also gluten-intolerant.",
+              "es": "Antes de pedir, quiero avisarle que tengo alergias serias. Soy alérgico a los mariscos, sobre todo al camarón, y también soy intolerante al gluten."
+            },
+            {
+              "en": "Before I order, I have a serious allergy. I'm allergic to peanuts — it's not a preference, it's medical.",
+              "es": "Antes de pedir, tengo una alergia seria. Soy alérgico al maní, no es una preferencia, es médico."
+            },
+            {
+              "en": "A few more minutes, but first: I'm gluten-intolerant and I'm allergic to shellfish. Is that a problem here?",
+              "es": "Unos minutos más, pero primero: soy intolerante al gluten y alérgico a los mariscos. ¿Es un problema acá?"
+            }
           ]
         },
         {
@@ -6104,6 +8204,20 @@
             "It's a serious allergy",
             "I could have a bad reaction",
             "I carry an EpiPen"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, with shellfish it can be serious — my throat swells up and I might need an EpiPen. The gluten one just makes me sick for days.",
+              "es": "Sí, con los mariscos puede ser grave: se me hincha la garganta y podría necesitar una EpiPen. Lo del gluten solo me hace sentir mal por días."
+            },
+            {
+              "en": "Yes, it's a serious allergy. I carry an EpiPen, and I've been to the hospital before.",
+              "es": "Sí, es una alergia seria. Llevo una EpiPen, y ya estuve en el hospital antes."
+            },
+            {
+              "en": "I could have a bad reaction. It starts with my throat and my face, so please be careful.",
+              "es": "Podría tener una reacción fuerte. Empieza en la garganta y la cara, así que por favor tengan cuidado."
+            }
           ]
         },
         {
@@ -6131,6 +8245,20 @@
             "Does it contain gluten?",
             "Can you avoid cross-contamination?",
             "Is it cooked on the same surface?"
+          ],
+          "answer_options": [
+            {
+              "en": "I'd like the grilled chicken with vegetables. Does it have any wheat or breading? And can the kitchen avoid cross-contamination with shellfish?",
+              "es": "Quisiera el pollo a la parrilla con verduras. ¿Tiene harina o rebozado? ¿Y la cocina puede evitar contaminación cruzada con mariscos?"
+            },
+            {
+              "en": "I'll have the steak and salad. Does the sauce contain gluten? And is it cooked on the same surface as the shrimp?",
+              "es": "Voy a pedir el bife con ensalada. ¿La salsa contiene gluten? ¿Y se cocina en la misma superficie que el camarón?"
+            },
+            {
+              "en": "The grilled chicken, please. Can you avoid cross-contamination? A clean grill and clean utensils.",
+              "es": "El pollo a la parrilla, por favor. ¿Puede evitar la contaminación cruzada? Parrilla limpia y utensilios limpios."
+            }
           ]
         },
         {
@@ -6154,6 +8282,20 @@
             "Thank you for the care",
             "I really appreciate it",
             "My health depends on it"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you so much. I really appreciate the care. My health depends on it.",
+              "es": "Muchas gracias. Aprecio de verdad el cuidado. Mi salud depende de esto."
+            },
+            {
+              "en": "Thank you for the care. I really appreciate it — it makes eating out much easier.",
+              "es": "Gracias por el cuidado. Se lo agradezco de verdad, hace que comer afuera sea mucho más fácil."
+            },
+            {
+              "en": "Thank you. My health depends on it, so it means a lot that you're taking it seriously.",
+              "es": "Gracias. Mi salud depende de esto, así que significa mucho que lo tomen en serio."
+            }
           ]
         }
       ],
@@ -6253,6 +8395,20 @@
             "What's the asking price?",
             "How many miles does it have?",
             "Do you have the service history?"
+          ],
+          "answer_options": [
+            {
+              "en": "Thanks. What's the asking price? How many miles does it have, and do you have the service history?",
+              "es": "Gracias. ¿Cuánto pide? ¿Cuántas millas tiene, y tiene el historial de servicio?"
+            },
+            {
+              "en": "Thanks for having me. What's the asking price, and has it ever been in an accident?",
+              "es": "Gracias por recibirme. ¿Cuánto pide, y tuvo algún accidente?"
+            },
+            {
+              "en": "How many miles does it have? And do you have the service history and the title?",
+              "es": "¿Cuántas millas tiene? ¿Y tiene el historial de servicio y el título?"
+            }
           ]
         },
         {
@@ -6279,6 +8435,20 @@
             "The check engine light is on",
             "What's that about?",
             "When was the last inspection?"
+          ],
+          "answer_options": [
+            {
+              "en": "I see the check engine light is on. What's that about? When was the last time a mechanic looked at it?",
+              "es": "Veo que el testigo del motor está encendido. ¿Qué es eso? ¿Cuándo fue la última vez que lo vio un mecánico?"
+            },
+            {
+              "en": "The check engine light is on. What's that about?",
+              "es": "El testigo del motor está encendido. ¿Qué es eso?"
+            },
+            {
+              "en": "One thing — the check engine light is on. When was the last inspection?",
+              "es": "Una cosa: el testigo del motor está encendido. ¿Cuándo fue la última inspección?"
+            }
           ]
         },
         {
@@ -6308,6 +8478,20 @@
             "Yes, let's go",
             "I want to test the brakes",
             "I'll listen for any noises"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, definitely. I'd like to test the brakes, the transmission, and listen for any noises.",
+              "es": "Sí, por supuesto. Quisiera probar los frenos, la transmisión, y escuchar si hace ruidos."
+            },
+            {
+              "en": "Yes, let's go. I want to test the brakes and drive on the highway if that's okay.",
+              "es": "Sí, vamos. Quiero probar los frenos y manejar en la autopista si le parece bien."
+            },
+            {
+              "en": "Sure, let's go. I'll listen for any noises and check how it shifts.",
+              "es": "Claro, vamos. Voy a escuchar si hace ruidos y ver cómo cambia de marcha."
+            }
           ]
         },
         {
@@ -6343,6 +8527,20 @@
             "I hear a knocking sound",
             "There's a vibration",
             "Would you take 8,000?"
+          ],
+          "answer_options": [
+            {
+              "en": "It drives okay, but I hear a knocking sound when I turn left, and there's a small vibration in the steering wheel at high speed. With the check engine light and these issues, would you take 8,000?",
+              "es": "Anda bien, pero escucho un golpeteo cuando doblo a la izquierda, y hay una vibración chica en el volante a alta velocidad. Con el testigo del motor y estos temas, ¿aceptaría 8.000?"
+            },
+            {
+              "en": "It drives fine, but I hear a knocking sound when I turn. Would you take 8,000?",
+              "es": "Anda bien, pero escucho un golpeteo cuando doblo. ¿Aceptaría 8.000?"
+            },
+            {
+              "en": "There's a vibration in the steering wheel at high speed. With that and the engine light, 8,000 feels fair to me.",
+              "es": "Hay una vibración en el volante a alta velocidad. Con eso y el testigo del motor, 8.000 me parece justo."
+            }
           ]
         },
         {
@@ -6371,6 +8569,20 @@
             "Let me think about it",
             "I want a mechanic to check it",
             "Can I get back to you tomorrow?"
+          ],
+          "answer_options": [
+            {
+              "en": "Let me think about it overnight. I want to have a mechanic check it first. Can I get back to you tomorrow?",
+              "es": "Dejame pensarlo esta noche. Quiero que lo revise un mecánico primero. ¿Lo llamo mañana?"
+            },
+            {
+              "en": "I want a mechanic to check it before I decide. Can I get back to you tomorrow?",
+              "es": "Quiero que un mecánico lo revise antes de decidir. ¿Lo llamo mañana?"
+            },
+            {
+              "en": "Let's do 8,500 and I'll take it today. Otherwise let me think about it.",
+              "es": "Hagamos 8.500 y me lo llevo hoy. Si no, dejame pensarlo."
+            }
           ]
         }
       ],
@@ -6459,6 +8671,20 @@
             "Long time no talk!",
             "What a nice surprise",
             "Life has been crazy"
+          ],
+          "answer_options": [
+            {
+              "en": "Diego! Long time no talk, what a nice surprise. I've been good — life has been crazy with work. How about you?",
+              "es": "¡Diego! Cuánto tiempo sin hablar, qué linda sorpresa. Ando bien, la vida está una locura con el trabajo. ¿Y vos?"
+            },
+            {
+              "en": "Diego! What a nice surprise. I've been good, just busy. How have you been?",
+              "es": "¡Diego! Qué linda sorpresa. Ando bien, solo ocupado. ¿Cómo estuviste?"
+            },
+            {
+              "en": "Long time no talk! I was thinking about you too, honestly. Life has been crazy. And you?",
+              "es": "¡Cuánto tiempo sin hablar! Yo también estuve pensando en vos, la verdad. La vida está una locura. ¿Y vos?"
+            }
           ]
         },
         {
@@ -6482,6 +8708,20 @@
             "Still in...",
             "I moved to...",
             "What about you?"
+          ],
+          "answer_options": [
+            {
+              "en": "Still here in El Salvador, working as a developer. Just got engaged, actually. What about you — are you still in design?",
+              "es": "Sigo acá en El Salvador, trabajando como desarrollador. De hecho, me acabo de comprometer. ¿Y vos, seguís en diseño?"
+            },
+            {
+              "en": "Still in El Salvador, same city. I work as a developer now. What about you?",
+              "es": "Sigo en El Salvador, misma ciudad. Ahora trabajo como desarrollador. ¿Y vos?"
+            },
+            {
+              "en": "I moved to the capital two years ago for work. What about you — are you still designing?",
+              "es": "Me mudé a la capital hace dos años por trabajo. ¿Y vos, seguís diseñando?"
+            }
           ]
         },
         {
@@ -6511,6 +8751,20 @@
             "That's awesome!",
             "Remember when...",
             "Glad to see it happened"
+          ],
+          "answer_options": [
+            {
+              "en": "Your own studio, that's awesome! Remember when we used to talk about doing our own thing back in school? Glad to see it actually happened.",
+              "es": "¡Tu propio estudio, qué genial! ¿Te acordás cuando hablábamos de hacer lo nuestro en la escuela? Me alegra que pasó de verdad."
+            },
+            {
+              "en": "That's awesome! Remember when we said we'd never work for anyone? You actually did it.",
+              "es": "¡Qué genial! ¿Te acordás cuando decíamos que nunca íbamos a trabajar para nadie? Vos lo hiciste."
+            },
+            {
+              "en": "Your own studio in Mexico — that's huge! Glad to see it happened. How's living there?",
+              "es": "¡Tu propio estudio en México, es enorme! Me alegra que pasó. ¿Cómo es vivir ahí?"
+            }
           ]
         },
         {
@@ -6541,6 +8795,20 @@
             "Absolutely, let's do it",
             "Send me your dates",
             "Let's not lose touch again"
+          ],
+          "answer_options": [
+            {
+              "en": "Absolutely, send me your dates. Let's not lose touch again — six years was too long.",
+              "es": "Por supuesto, mandame las fechas. No perdamos el contacto otra vez, seis años fue demasiado."
+            },
+            {
+              "en": "Absolutely, let's do it. Send me your dates and I'll clear my calendar.",
+              "es": "Por supuesto, hagámoslo. Mandame las fechas y me libero la agenda."
+            },
+            {
+              "en": "Yes! Send me your dates. And let's not lose touch again after that.",
+              "es": "¡Sí! Mandame las fechas. Y después no perdamos el contacto otra vez."
+            }
           ]
         }
       ],
@@ -6612,6 +8880,20 @@
             "I grew up in...",
             "I studied...",
             "I've been working as..."
+          ],
+          "answer_options": [
+            {
+              "en": "I grew up in El Salvador and I studied software development. I've been working as a developer for about five years now, mostly with data systems.",
+              "es": "Crecí en El Salvador y estudié desarrollo de software. Llevo unos cinco años trabajando como desarrollador, sobre todo con sistemas de datos."
+            },
+            {
+              "en": "I grew up in El Salvador. I studied engineering, and I've been working in software for five years.",
+              "es": "Crecí en El Salvador. Estudié ingeniería, y llevo cinco años trabajando en software."
+            },
+            {
+              "en": "Short version: I'm from El Salvador, I taught myself to code, and I've been a developer for five years.",
+              "es": "Versión corta: soy de El Salvador, aprendí a programar solo, y hace cinco años que soy desarrollador."
+            }
           ]
         },
         {
@@ -6646,6 +8928,20 @@
             "Two years ago I switched to...",
             "It changed how I...",
             "Since then I've..."
+          ],
+          "answer_options": [
+            {
+              "en": "Two years ago I switched from backend to data engineering. It was hard at first, but I've learned so much since then. It changed how I think about problems.",
+              "es": "Hace dos años pasé de backend a ingeniería de datos. Al principio fue difícil, pero desde entonces aprendí muchísimo. Cambió cómo pienso los problemas."
+            },
+            {
+              "en": "Two years ago I switched to data work. Since then I've learned more than in my whole career before.",
+              "es": "Hace dos años pasé al trabajo con datos. Desde entonces aprendí más que en toda mi carrera anterior."
+            },
+            {
+              "en": "The biggest change was when I started leading projects. It changed how I talk to people, not just how I code.",
+              "es": "El cambio más grande fue cuando empecé a liderar proyectos. Cambió cómo hablo con la gente, no solo cómo programo."
+            }
           ]
         },
         {
@@ -6675,6 +8971,20 @@
             "I'd like to...",
             "I'm planning to...",
             "In the next year..."
+          ],
+          "answer_options": [
+            {
+              "en": "I'd like to lead a small team next year. I'm also planning to improve my English so I can work with international clients.",
+              "es": "Me gustaría liderar un equipo chico el año que viene. También planeo mejorar mi inglés para poder trabajar con clientes internacionales."
+            },
+            {
+              "en": "In the next year, I'm planning to improve my English and work with clients from other countries.",
+              "es": "En el próximo año, planeo mejorar mi inglés y trabajar con clientes de otros países."
+            },
+            {
+              "en": "I'd like to build my own product one day. For now, I'm planning to grow as a data engineer.",
+              "es": "Me gustaría hacer mi propio producto algún día. Por ahora, planeo crecer como ingeniero de datos."
+            }
           ]
         }
       ],
@@ -6754,6 +9064,20 @@
             "Last year...",
             "I had to...",
             "As a result..."
+          ],
+          "answer_options": [
+            {
+              "en": "Last year, our main system crashed during a product launch. I had to fix it under pressure. I worked with the DevOps team and we restored service in two hours. As a result, we lost less than 5% of the day's sales.",
+              "es": "El año pasado, nuestro sistema principal se cayó durante un lanzamiento. Tuve que arreglarlo bajo presión. Trabajé con el equipo de DevOps y restauramos el servicio en dos horas. Como resultado, perdimos menos del 5% de las ventas del día."
+            },
+            {
+              "en": "Last year I had to migrate our database with almost no downtime. I planned it for two weeks, ran it at night, and as a result we had only ten minutes offline.",
+              "es": "El año pasado tuve que migrar nuestra base de datos casi sin caída de servicio. Lo planifiqué dos semanas, lo corrí de noche, y como resultado solo tuvimos diez minutos fuera de servicio."
+            },
+            {
+              "en": "A client asked for a feature in one week that normally takes a month. I had to negotiate the scope. We delivered the core part on time, and as a result the client stayed with us.",
+              "es": "Un cliente pidió una funcionalidad en una semana que normalmente lleva un mes. Tuve que negociar el alcance. Entregamos la parte central a tiempo, y como resultado el cliente se quedó con nosotros."
+            }
           ]
         },
         {
@@ -6781,6 +9105,20 @@
             "I learned that...",
             "Since then, I've...",
             "It taught me..."
+          ],
+          "answer_options": [
+            {
+              "en": "I learned that having alerts in place is more important than fixing things fast. Ever since then, I've been pushing for better monitoring on every project.",
+              "es": "Aprendí que tener alertas puestas es más importante que arreglar rápido. Desde entonces, empujo por mejor monitoreo en todos los proyectos."
+            },
+            {
+              "en": "I learned that I should ask for help sooner. Since then, I've been much more open with my team.",
+              "es": "Aprendí que tengo que pedir ayuda más temprano. Desde entonces, soy mucho más abierto con mi equipo."
+            },
+            {
+              "en": "It taught me to write things down. Since then, I've documented every incident so the next person doesn't start from zero.",
+              "es": "Me enseñó a escribir las cosas. Desde entonces documento cada incidente para que el próximo no arranque de cero."
+            }
           ]
         },
         {
@@ -6814,6 +9152,20 @@
             "I once...",
             "I told my manager",
             "I owned it"
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, I once deployed a change without proper testing and it broke a feature for some users. I told my manager right away, rolled it back within ten minutes, and wrote a post-mortem so the team could avoid it.",
+              "es": "Sí, una vez deployé un cambio sin testear bien y rompió una funcionalidad para algunos usuarios. Le avisé a mi jefe enseguida, lo revertí en diez minutos, y escribí un post-mortem para que el equipo lo evitara."
+            },
+            {
+              "en": "Yes. I once gave a wrong estimate and the project was two weeks late. I told my manager as soon as I knew, and I owned it in front of the client.",
+              "es": "Sí. Una vez di una estimación equivocada y el proyecto se atrasó dos semanas. Le avisé a mi jefe en cuanto lo supe, y lo asumí frente al cliente."
+            },
+            {
+              "en": "I once deleted test data that turned out to be real. I told my manager right away and we restored the backup in an hour. Since then I always check the environment twice.",
+              "es": "Una vez borré datos de prueba que resultaron ser reales. Le avisé a mi jefe enseguida y restauramos el backup en una hora. Desde entonces siempre chequeo dos veces el ambiente."
+            }
           ]
         }
       ],
@@ -6883,6 +9235,20 @@
             "I would travel...",
             "I'd probably...",
             "If I had the chance..."
+          ],
+          "answer_options": [
+            {
+              "en": "Honestly, if I had that chance, I would travel for six months and then build my own project. I'd probably learn a new language too — maybe Portuguese.",
+              "es": "La verdad, si tuviera esa oportunidad, viajaría seis meses y después haría mi propio proyecto. Probablemente también aprendería un idioma nuevo, quizá portugués."
+            },
+            {
+              "en": "If I had the chance, I would study full time for a year. I'd probably focus on English and music.",
+              "es": "Si tuviera la oportunidad, estudiaría a tiempo completo por un año. Probablemente me enfocaría en inglés y música."
+            },
+            {
+              "en": "I would travel with my partner for a few months, and then I'd start my own small business.",
+              "es": "Viajaría con mi pareja unos meses, y después arrancaría mi propio negocio chico."
+            }
           ]
         },
         {
@@ -6910,6 +9276,20 @@
             "It would change...",
             "I wouldn't worry...",
             "I'd still want..."
+          ],
+          "answer_options": [
+            {
+              "en": "It would change a bit. If money wasn't a problem, I wouldn't worry about coming back to the same job. But I'd still want to do something meaningful, not just relax.",
+              "es": "Cambiaría un poco. Si la plata no fuera problema, no me preocuparía por volver al mismo trabajo. Pero igual querría hacer algo que valga la pena, no solo descansar."
+            },
+            {
+              "en": "Not really. I wouldn't worry about the money, but I'd still want to work on something I care about.",
+              "es": "No mucho. No me preocuparía por la plata, pero igual querría trabajar en algo que me importe."
+            },
+            {
+              "en": "It would change everything, honestly. I'd help my family first, and then I'd take my time to decide.",
+              "es": "Cambiaría todo, la verdad. Primero ayudaría a mi familia, y después me tomaría el tiempo para decidir."
+            }
           ]
         },
         {
@@ -6936,6 +9316,20 @@
             "If I were you, I'd...",
             "I would tell you to...",
             "My advice would be..."
+          ],
+          "answer_options": [
+            {
+              "en": "If I were you, I'd take a break before making any big decision. You've been working non-stop. I'd also talk to your partner about what you really want.",
+              "es": "Si yo fuera vos, me tomaría un descanso antes de tomar cualquier decisión grande. Estuviste trabajando sin parar. También hablaría con tu pareja de lo que querés de verdad."
+            },
+            {
+              "en": "If I were you, I'd say no to the new project. My advice would be to protect your time first.",
+              "es": "Si yo fuera vos, diría no al proyecto nuevo. Mi consejo sería proteger tu tiempo primero."
+            },
+            {
+              "en": "I would tell you to write down what you actually want, not what others expect. Then decide.",
+              "es": "Te diría que escribas lo que realmente querés, no lo que otros esperan. Y después decidas."
+            }
           ]
         }
       ],
@@ -7007,6 +9401,20 @@
             "The project was designed to...",
             "Before, it took...",
             "We built a system that..."
+          ],
+          "answer_options": [
+            {
+              "en": "Sure. The project was designed to reduce the time the operations team spends preparing daily reports. Before, it took them three hours each morning. We built a system that does it automatically.",
+              "es": "Claro. El proyecto fue diseñado para reducir el tiempo que el equipo de operaciones gasta armando reportes diarios. Antes les llevaba tres horas cada mañana. Construimos un sistema que lo hace automáticamente."
+            },
+            {
+              "en": "Of course. Before, the team prepared the reports by hand every morning. We built a system that does it automatically and sends them by email.",
+              "es": "Por supuesto. Antes el equipo armaba los reportes a mano cada mañana. Construimos un sistema que lo hace solo y los manda por mail."
+            },
+            {
+              "en": "The project was designed to remove manual work from the reporting process. In simple words: the computer now does what three people used to do by hand.",
+              "es": "El proyecto fue diseñado para sacar el trabajo manual del proceso de reportes. En palabras simples: ahora la computadora hace lo que tres personas hacían a mano."
+            }
           ]
         },
         {
@@ -7036,6 +9444,20 @@
             "Since launch, we've...",
             "We've saved X hours",
             "It has reduced..."
+          ],
+          "answer_options": [
+            {
+              "en": "Since launch, we've reduced report preparation from three hours to ten minutes. The team has saved about 60 hours per month, which is roughly two thousand dollars in salary cost.",
+              "es": "Desde el lanzamiento, bajamos la preparación de reportes de tres horas a diez minutos. El equipo ahorró unas 60 horas por mes, que son unos dos mil dólares en costo salarial."
+            },
+            {
+              "en": "Since launch, we've saved about 60 hours per month. It has also reduced errors in the numbers almost to zero.",
+              "es": "Desde el lanzamiento ahorramos unas 60 horas por mes. También bajó los errores en los números casi a cero."
+            },
+            {
+              "en": "We've saved around 15 hours per week, and the reports now arrive before the morning meeting instead of after it.",
+              "es": "Ahorramos unas 15 horas por semana, y ahora los reportes llegan antes de la reunión de la mañana en vez de después."
+            }
           ]
         },
         {
@@ -7063,6 +9485,20 @@
             "The main challenge has been...",
             "We're working on...",
             "Our plan is..."
+          ],
+          "answer_options": [
+            {
+              "en": "The main challenge has been data quality from one external source. We're working on adding validation rules so bad data doesn't break the report.",
+              "es": "El desafío principal ha sido la calidad de datos de una fuente externa. Estamos trabajando en agregar reglas de validación para que los datos malos no rompan el reporte."
+            },
+            {
+              "en": "The main challenge has been data quality. Our plan is to add automatic checks and alert the team when something looks wrong.",
+              "es": "El desafío principal ha sido la calidad de los datos. Nuestro plan es agregar chequeos automáticos y avisarle al equipo cuando algo se ve mal."
+            },
+            {
+              "en": "Moving forward, the challenge is people, not technology. We're working on training the team so they don't go back to the old process.",
+              "es": "De acá en adelante, el desafío es la gente, no la tecnología. Estamos trabajando en capacitar al equipo para que no vuelva al proceso viejo."
+            }
           ]
         }
       ],
@@ -7137,6 +9573,20 @@
             "I'm most proud of...",
             "I've finally...",
             "This year I..."
+          ],
+          "answer_options": [
+            {
+              "en": "Honestly, I'm most proud that I finally started learning English seriously. I've been postponing it for years. This time I stuck with it.",
+              "es": "La verdad, lo que más me orgullece es que finalmente empecé a aprender inglés en serio. Lo venía postergando por años. Esta vez me mantuve."
+            },
+            {
+              "en": "I'm most proud of a project I finished at work. I've finally learned to ask for help instead of doing everything alone.",
+              "es": "Lo que más me orgullece es un proyecto que terminé en el trabajo. Finalmente aprendí a pedir ayuda en vez de hacer todo solo."
+            },
+            {
+              "en": "This year I took care of my health for the first time. I've finally built a routine that I actually keep.",
+              "es": "Este año me cuidé la salud por primera vez. Finalmente armé una rutina que de verdad mantengo."
+            }
           ]
         },
         {
@@ -7160,6 +9610,20 @@
             "I wish I had...",
             "I should have...",
             "I regret not..."
+          ],
+          "answer_options": [
+            {
+              "en": "I wish I had spent more time with my family. I should have visited my parents more often. I was too focused on work.",
+              "es": "Ojalá hubiera pasado más tiempo con mi familia. Debería haber visitado a mis padres más seguido. Estuve demasiado enfocado en el trabajo."
+            },
+            {
+              "en": "I wish I had rested more. I should have taken a real vacation instead of working every weekend.",
+              "es": "Ojalá hubiera descansado más. Debería haberme tomado unas vacaciones de verdad en vez de trabajar todos los fines de semana."
+            },
+            {
+              "en": "I regret not speaking up at work when I disagreed. I should have said what I thought.",
+              "es": "Me arrepiento de no haber hablado en el trabajo cuando no estaba de acuerdo. Debería haber dicho lo que pensaba."
+            }
           ]
         },
         {
@@ -7186,6 +9650,20 @@
             "I'd tell myself to...",
             "Slow down",
             "If I focused on..."
+          ],
+          "answer_options": [
+            {
+              "en": "I'd tell myself to slow down. Not everything is urgent. If I focused on fewer things, I'd probably get better at all of them.",
+              "es": "Me diría que vaya más despacio. No todo es urgente. Si me enfocara en menos cosas, probablemente sería mejor en todas."
+            },
+            {
+              "en": "I'd tell myself to start before I feel ready. If I waited for the perfect moment, I'd never begin.",
+              "es": "Me diría que empiece antes de sentirme listo. Si esperara el momento perfecto, nunca arrancaría."
+            },
+            {
+              "en": "Slow down and say no more often. If I protected my time, I'd have more energy for what matters.",
+              "es": "Ir más despacio y decir no más seguido. Si protegiera mi tiempo, tendría más energía para lo que importa."
+            }
           ]
         }
       ],
@@ -7261,6 +9739,20 @@
             "I'd like to file a complaint",
             "My internet has been down for...",
             "This is unacceptable"
+          ],
+          "answer_options": [
+            {
+              "en": "Hi. I'd like to file a complaint. My internet has been down for three days, and I've already called twice this week. This is unacceptable for what I'm paying.",
+              "es": "Hola. Quisiera hacer un reclamo. Mi internet está caído desde hace tres días, y ya llamé dos veces esta semana. Es inaceptable por lo que pago."
+            },
+            {
+              "en": "Hi. My internet has been down for three days. I'd like to file a complaint and get it fixed today.",
+              "es": "Hola. Mi internet está caído desde hace tres días. Quisiera hacer un reclamo y que se arregle hoy."
+            },
+            {
+              "en": "Good morning. This is my third call this week. My internet has been down since Monday and nobody has come.",
+              "es": "Buen día. Es mi tercer llamado esta semana. Mi internet está caído desde el lunes y no vino nadie."
+            }
           ]
         },
         {
@@ -7288,6 +9780,20 @@
             "Monday is not acceptable",
             "I need someone today",
             "I'd like compensation"
+          ],
+          "answer_options": [
+            {
+              "en": "Monday is not acceptable. I work from home and I've lost three days of productivity already. I'd like a technician today, or compensation on this month's bill.",
+              "es": "El lunes no es aceptable. Trabajo desde casa y ya perdí tres días de productividad. Quiero un técnico hoy, o una compensación en la factura de este mes."
+            },
+            {
+              "en": "Monday is not acceptable. I need someone today or tomorrow. I work from home.",
+              "es": "El lunes no es aceptable. Necesito a alguien hoy o mañana. Trabajo desde casa."
+            },
+            {
+              "en": "That's five more days without service. I'd like compensation on this month's bill, and an earlier visit.",
+              "es": "Son cinco días más sin servicio. Quiero una compensación en la factura de este mes, y una visita más temprana."
+            }
           ]
         },
         {
@@ -7317,6 +9823,20 @@
             "Tomorrow works",
             "I want a credit",
             "I'd like to speak to a supervisor"
+          ],
+          "answer_options": [
+            {
+              "en": "Tomorrow works. But I also want a credit for the three days without service. If you can't approve that, I'd like to speak to a supervisor.",
+              "es": "Mañana me sirve. Pero también quiero un crédito por los tres días sin servicio. Si no lo puede aprobar, quisiera hablar con un supervisor."
+            },
+            {
+              "en": "Tomorrow works, thank you. I want a credit for the days without service — can you confirm that now?",
+              "es": "Mañana me sirve, gracias. Quiero un crédito por los días sin servicio, ¿me lo puede confirmar ahora?"
+            },
+            {
+              "en": "Tomorrow afternoon is fine. But I'd like to speak to a supervisor about the compensation.",
+              "es": "Mañana a la tarde está bien. Pero quisiera hablar con un supervisor sobre la compensación."
+            }
           ]
         }
       ],
@@ -7387,6 +9907,20 @@
             "You won't believe...",
             "She told me that...",
             "She said..."
+          ],
+          "answer_options": [
+            {
+              "en": "You won't believe what happened at work. My manager told me she's leaving the company. She said the announcement is on Friday.",
+              "es": "No vas a creer lo que pasó en el trabajo. Mi jefa me dijo que se va de la empresa. Dijo que el anuncio es el viernes."
+            },
+            {
+              "en": "You won't believe this. My manager told me that she's quitting. Nobody else knows yet.",
+              "es": "No vas a creer esto. Mi jefa me dijo que se va. Nadie más lo sabe todavía."
+            },
+            {
+              "en": "Something big happened at work. She told me that she's leaving, and she asked me not to say anything.",
+              "es": "Pasó algo grande en el trabajo. Me dijo que se va, y me pidió que no diga nada."
+            }
           ]
         },
         {
@@ -7410,6 +9944,20 @@
             "She said that she had...",
             "She told me that...",
             "She mentioned that..."
+          ],
+          "answer_options": [
+            {
+              "en": "She said that she had received another offer with better pay and remote work. She also told me she had been thinking about it for months.",
+              "es": "Dijo que había recibido otra oferta con mejor sueldo y trabajo remoto. También me contó que lo había estado pensando por meses."
+            },
+            {
+              "en": "She told me that she had gotten a better offer. She mentioned that the pay was almost double.",
+              "es": "Me dijo que había conseguido una oferta mejor. Mencionó que el sueldo era casi el doble."
+            },
+            {
+              "en": "She said that she had been unhappy for a long time. She mentioned that nobody listened to her ideas.",
+              "es": "Dijo que había estado a disgusto por mucho tiempo. Mencionó que nadie escuchaba sus ideas."
+            }
           ]
         },
         {
@@ -7431,6 +9979,20 @@
           "helper_phrases": [
             "She asked me if I could...",
             "She asked me to..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes, she asked me if I could keep it quiet until Friday. She also asked me to recommend someone for her replacement.",
+              "es": "Sí, me preguntó si podía guardarlo hasta el viernes. También me pidió que recomiende a alguien para reemplazarla."
+            },
+            {
+              "en": "Yes, she asked me if I could keep it to myself. So please don't tell anyone.",
+              "es": "Sí, me preguntó si podía guardármelo. Así que por favor no le cuentes a nadie."
+            },
+            {
+              "en": "She asked me to wait until the announcement. She also asked me if I wanted her position.",
+              "es": "Me pidió que espere hasta el anuncio. También me preguntó si quería su puesto."
+            }
           ]
         }
       ],
@@ -7508,6 +10070,20 @@
             "Thank you for the offer",
             "I was hoping for...",
             "Is there room to negotiate?"
+          ],
+          "answer_options": [
+            {
+              "en": "Thank you so much for the offer, I really appreciate it. Based on my experience and what I'm seeing in the market, I was hoping for something closer to 5,500. Is there room to negotiate?",
+              "es": "Muchas gracias por la oferta, la aprecio de verdad. En base a mi experiencia y a lo que veo en el mercado, esperaba algo más cerca de 5.500. ¿Hay margen para negociar?"
+            },
+            {
+              "en": "Thank you for the offer. Before I answer, is there room to negotiate the base salary? I was hoping for 5,500.",
+              "es": "Gracias por la oferta. Antes de responder, ¿hay margen para negociar el sueldo base? Esperaba 5.500."
+            },
+            {
+              "en": "Thank you for the offer, I'm glad to hear it. Can I have 24 hours to review it? I was hoping for a higher base.",
+              "es": "Gracias por la oferta, me alegra escucharlo. ¿Puedo tener 24 horas para revisarla? Esperaba un base más alto."
+            }
           ]
         },
         {
@@ -7543,6 +10119,20 @@
             "Could we discuss other things?",
             "What about a signing bonus?",
             "What about extra vacation days?"
+          ],
+          "answer_options": [
+            {
+              "en": "I appreciate the move. Could we also discuss other things — like a signing bonus, additional vacation days, or a budget for training?",
+              "es": "Aprecio el gesto. ¿Podríamos hablar de otras cosas también, como un bono de ingreso, días extra de vacaciones, o un presupuesto para capacitación?"
+            },
+            {
+              "en": "Thank you for moving on that. What about a signing bonus, or a budget for courses and certifications?",
+              "es": "Gracias por moverse en eso. ¿Qué tal un bono de ingreso, o un presupuesto para cursos y certificaciones?"
+            },
+            {
+              "en": "That helps. Could we discuss other things? What about extra vacation days and a review in six months?",
+              "es": "Eso ayuda. ¿Podríamos hablar de otras cosas? ¿Qué tal días extra de vacaciones y una revisión en seis meses?"
+            }
           ]
         },
         {
@@ -7577,6 +10167,20 @@
             "That sounds fair",
             "Can you send it in writing?",
             "I'll give you an answer by tomorrow"
+          ],
+          "answer_options": [
+            {
+              "en": "That sounds fair. Can you send me the full offer in writing? I'd like to review it carefully and give you an answer by tomorrow.",
+              "es": "Suena justo. ¿Me puede mandar la oferta completa por escrito? Quisiera revisarla con calma y darle una respuesta mañana."
+            },
+            {
+              "en": "That sounds fair, thank you. Can you send it in writing? I'll give you an answer by tomorrow.",
+              "es": "Suena justo, gracias. ¿Me lo puede mandar por escrito? Le doy una respuesta mañana."
+            },
+            {
+              "en": "I'm happy with that. Send me the written offer and I'll sign it today.",
+              "es": "Estoy conforme con eso. Mándeme la oferta escrita y la firmo hoy."
+            }
           ]
         }
       ],
@@ -7653,6 +10257,20 @@
             "The problem is...",
             "Right now, small businesses...",
             "Currently, people..."
+          ],
+          "answer_options": [
+            {
+              "en": "Sure. Right now, small business owners in Latin America lose about ten hours a week doing manual accounting. They can't afford expensive software, and free tools don't fit their context.",
+              "es": "Claro. Ahora mismo, los dueños de pequeños negocios en Latinoamérica pierden unas diez horas por semana haciendo contabilidad a mano. No pueden pagar software caro, y las herramientas gratis no encajan con su realidad."
+            },
+            {
+              "en": "The problem is simple. Small businesses here still track everything on paper. They lose money and they don't know why.",
+              "es": "El problema es simple. Los pequeños negocios acá todavía anotan todo en papel. Pierden plata y no saben por qué."
+            },
+            {
+              "en": "Right now, small businesses in my country pay accountants for work that software could do. It costs them hundreds of dollars every month.",
+              "es": "Ahora mismo, los pequeños negocios de mi país le pagan a contadores por trabajo que podría hacer un software. Les cuesta cientos de dólares por mes."
+            }
           ]
         },
         {
@@ -7682,6 +10300,20 @@
             "We've built...",
             "Our solution is...",
             "What makes us different is..."
+          ],
+          "answer_options": [
+            {
+              "en": "We've built a simple accounting app in Spanish, designed for businesses with less than ten employees. What makes us different is it works without internet and costs a tenth of the alternatives.",
+              "es": "Construimos una app de contabilidad simple en español, diseñada para negocios de menos de diez empleados. Lo que nos hace distintos es que funciona sin internet y cuesta la décima parte de las alternativas."
+            },
+            {
+              "en": "Our solution is a mobile app in Spanish that does the accounting automatically. What makes us different is that it works offline.",
+              "es": "Nuestra solución es una app móvil en español que hace la contabilidad automáticamente. Lo que nos hace distintos es que funciona sin conexión."
+            },
+            {
+              "en": "We've built an app that turns a photo of a receipt into an accounting entry. What makes us different is the price — five dollars a month.",
+              "es": "Construimos una app que convierte la foto de un ticket en un asiento contable. Lo que nos hace distintos es el precio: cinco dólares por mes."
+            }
           ]
         },
         {
@@ -7711,6 +10343,20 @@
             "We've signed up X customers",
             "Revenue is X",
             "Growing X% month over month"
+          ],
+          "answer_options": [
+            {
+              "en": "We've signed up 300 businesses in the last six months. Monthly revenue is 4,000 dollars and growing 20 percent month over month.",
+              "es": "Sumamos 300 negocios en los últimos seis meses. El ingreso mensual es de 4.000 dólares y crece 20 por ciento mes a mes."
+            },
+            {
+              "en": "We've signed up 300 customers, and revenue is 4,000 dollars per month. We're growing about 20 percent month over month.",
+              "es": "Sumamos 300 clientes, y el ingreso es de 4.000 dólares por mes. Crecemos cerca del 20 por ciento mes a mes."
+            },
+            {
+              "en": "We're early. We've signed up 80 paying customers in three months, growing 30 percent month over month.",
+              "es": "Estamos temprano. Sumamos 80 clientes que pagan en tres meses, creciendo 30 por ciento mes a mes."
+            }
           ]
         },
         {
@@ -7740,6 +10386,20 @@
             "We're looking to raise...",
             "Would you be open to a follow-up?",
             "Can we schedule a call?"
+          ],
+          "answer_options": [
+            {
+              "en": "We're looking to raise 150,000 dollars to expand to two more countries. Would you be open to a follow-up call next week to discuss the details?",
+              "es": "Estamos buscando levantar 150.000 dólares para expandirnos a dos países más. ¿Estaría abierto a una llamada la semana que viene para ver los detalles?"
+            },
+            {
+              "en": "We're looking to raise 150,000 dollars. Can we schedule a call next week so I can show you the numbers?",
+              "es": "Estamos buscando levantar 150.000 dólares. ¿Podemos agendar una llamada la semana que viene para mostrarle los números?"
+            },
+            {
+              "en": "I'm not raising yet. But would you be open to a follow-up call? I'd value your feedback and an introduction to one customer.",
+              "es": "Todavía no estoy levantando. ¿Pero estaría abierto a una llamada de seguimiento? Valoraría su feedback y una presentación a un cliente."
+            }
           ]
         }
       ],
@@ -7816,6 +10476,20 @@
             "On one hand... on the other hand...",
             "In my opinion...",
             "I tend to think..."
+          ],
+          "answer_options": [
+            {
+              "en": "I read that article too. On one hand, I think AI will change a lot of jobs. On the other hand, history shows new jobs always appear. I tend to be more optimistic than pessimistic.",
+              "es": "Yo también leí ese artículo. Por un lado, creo que la IA va a cambiar muchos trabajos. Por otro lado, la historia muestra que siempre aparecen trabajos nuevos. Tiendo a ser más optimista que pesimista."
+            },
+            {
+              "en": "I saw it. In my opinion, some tasks will disappear, but not whole jobs. I tend to think the change will be slower than people say.",
+              "es": "Lo vi. En mi opinión, algunas tareas van a desaparecer, pero no trabajos enteros. Tiendo a pensar que el cambio va a ser más lento de lo que dicen."
+            },
+            {
+              "en": "Yes, I read it. On one hand it worries me, on the other hand I use these tools every day and they still need a person.",
+              "es": "Sí, lo leí. Por un lado me preocupa, por otro lado uso estas herramientas todos los días y todavía necesitan una persona."
+            }
           ]
         },
         {
@@ -7848,6 +10522,20 @@
             "I see your point, but...",
             "I'm not sure I fully agree",
             "I'd argue that..."
+          ],
+          "answer_options": [
+            {
+              "en": "I see your point, but I'm not sure I fully agree. The same was said about computers in the 80s, and we adapted. The key is education and being willing to learn new skills.",
+              "es": "Entiendo tu punto, pero no estoy seguro de estar del todo de acuerdo. Lo mismo se dijo de las computadoras en los 80, y nos adaptamos. La clave es la educación y estar dispuesto a aprender."
+            },
+            {
+              "en": "I see your point, but I'd argue that companies move slower than the technology. That gives people time to adapt.",
+              "es": "Entiendo tu punto, pero yo diría que las empresas se mueven más lento que la tecnología. Eso le da tiempo a la gente para adaptarse."
+            },
+            {
+              "en": "That's fair, and I'm not sure I fully agree with myself either. Maybe you're right that the speed is the real problem.",
+              "es": "Es justo, y tampoco estoy seguro de estar de acuerdo conmigo mismo. Quizá tenés razón en que la velocidad es el verdadero problema."
+            }
           ]
         },
         {
@@ -7877,6 +10565,20 @@
             "First, ...",
             "Second, ...",
             "I'd say two things"
+          ],
+          "answer_options": [
+            {
+              "en": "Two things, I'd say. First, learn how to USE these tools instead of fearing them. Second, focus on skills that are uniquely human — like creativity and leadership.",
+              "es": "Dos cosas, diría. Primero, aprender a USAR estas herramientas en vez de temerlas. Segundo, enfocarse en habilidades que son únicamente humanas, como la creatividad y el liderazgo."
+            },
+            {
+              "en": "First, keep learning — even one hour a week. Second, build relationships, because networks matter more than tools.",
+              "es": "Primero, seguir aprendiendo, aunque sea una hora por semana. Segundo, construir relaciones, porque las redes importan más que las herramientas."
+            },
+            {
+              "en": "I'd say two things. First, learn to work with the tools. Second, choose problems that need judgment, not just repetition.",
+              "es": "Diría dos cosas. Primero, aprender a trabajar con las herramientas. Segundo, elegir problemas que necesiten criterio, no solo repetición."
+            }
           ]
         }
       ],
@@ -7944,6 +10646,20 @@
             "I met a woman who...",
             "There was a guy that...",
             "Someone who really stood out..."
+          ],
+          "answer_options": [
+            {
+              "en": "Yes! I met a woman who works in AI for a big hospital. She's someone who really stood out — she explained complex things in a way that anyone could understand.",
+              "es": "¡Sí! Conocí a una mujer que trabaja en IA para un hospital grande. Es alguien que realmente se destacó, explicaba cosas complejas de una forma que cualquiera entendía."
+            },
+            {
+              "en": "Yes, there was a guy that works in robotics. He was someone who really stood out, because he asked questions instead of talking about himself.",
+              "es": "Sí, había un tipo que trabaja en robótica. Era alguien que realmente se destacó, porque hacía preguntas en vez de hablar de sí mismo."
+            },
+            {
+              "en": "I met a woman who runs her own company. Someone who really stood out — she started with nothing ten years ago.",
+              "es": "Conocí a una mujer que tiene su propia empresa. Alguien que realmente se destacó, empezó de la nada hace diez años."
+            }
           ]
         },
         {
@@ -7965,6 +10681,20 @@
             "A project whose goal is...",
             "A guy who's hiring...",
             "Someone whose job is..."
+          ],
+          "answer_options": [
+            {
+              "en": "She told me about a project whose goal is to detect rare diseases earlier. She also introduced me to a guy who's hiring developers in his startup.",
+              "es": "Me contó de un proyecto cuyo objetivo es detectar enfermedades raras más temprano. También me presentó a un tipo que está contratando desarrolladores en su startup."
+            },
+            {
+              "en": "We talked about a project whose goal is to help small clinics. She's someone whose job is basically translating data into decisions.",
+              "es": "Hablamos de un proyecto cuyo objetivo es ayudar a clínicas chicas. Es alguien cuyo trabajo es básicamente traducir datos en decisiones."
+            },
+            {
+              "en": "Mostly her work. She introduced me to a guy who's hiring, and she gave me the name of a course whose focus is exactly what I need.",
+              "es": "Sobre todo su trabajo. Me presentó a un tipo que está contratando, y me dio el nombre de un curso cuyo foco es justo lo que necesito."
+            }
           ]
         },
         {
@@ -7987,6 +10717,20 @@
             "She reminded me of my friend who...",
             "Like the one that...",
             "Similar to the person who..."
+          ],
+          "answer_options": [
+            {
+              "en": "Actually yes — she reminded me of my friend Maria, the one who studied medicine but ended up in tech. Same kind of energy.",
+              "es": "En realidad sí, me hizo acordar a mi amiga María, la que estudió medicina pero terminó en tecnología. La misma energía."
+            },
+            {
+              "en": "Yes, like the one that used to work with me — Carlos. Similar to the person who always has a plan for everything.",
+              "es": "Sí, como el que trabajaba conmigo, Carlos. Parecido a la persona que siempre tiene un plan para todo."
+            },
+            {
+              "en": "She reminded me of your cousin, the one who talks with her hands. Same kind of energy.",
+              "es": "Me hizo acordar a tu prima, la que habla con las manos. La misma energía."
+            }
           ]
         }
       ],
@@ -8053,6 +10797,20 @@
             "He must be sick",
             "He might have...",
             "He could be without..."
+          ],
+          "answer_options": [
+            {
+              "en": "No, nothing. He must be sick — he was coughing a lot last week. Or he might have a family emergency. He could be without internet, but two days is too long.",
+              "es": "No, nada. Debe estar enfermo, la semana pasada tosía mucho. O podría tener una emergencia familiar. Podría estar sin internet, pero dos días es demasiado."
+            },
+            {
+              "en": "Nothing from him. He must be sick, he looked terrible on Friday. Or he might have a problem at home.",
+              "es": "Nada de él. Debe estar enfermo, el viernes se veía terrible. O podría tener un problema en casa."
+            },
+            {
+              "en": "No message. He might have taken vacation and forgotten to tell us. But he could be sick too.",
+              "es": "Ningún mensaje. Podría haberse tomado vacaciones y olvidado avisarnos. Pero también podría estar enfermo."
+            }
           ]
         },
         {
@@ -8079,6 +10837,20 @@
             "So it can't be...",
             "It might be personal",
             "He could be dealing with..."
+          ],
+          "answer_options": [
+            {
+              "en": "Okay, so it can't be a serious illness. It might be something personal he doesn't want to share. Or he could be dealing with a family issue.",
+              "es": "Bien, entonces no puede ser una enfermedad grave. Podría ser algo personal que no quiere compartir. O podría estar lidiando con un tema familiar."
+            },
+            {
+              "en": "So it can't be an emergency. It might be personal — maybe he's looking for another job.",
+              "es": "Entonces no puede ser una emergencia. Podría ser algo personal, quizá está buscando otro trabajo."
+            },
+            {
+              "en": "If he answered, it can't be that bad. He could be dealing with something at home and he needs quiet.",
+              "es": "Si respondió, no puede ser tan grave. Podría estar lidiando con algo en casa y necesita tranquilidad."
+            }
           ]
         },
         {
@@ -8105,6 +10877,20 @@
             "I think we should...",
             "He must be going through...",
             "Let's give him space if..."
+          ],
+          "answer_options": [
+            {
+              "en": "I think we should send a short message — no pressure. He must be going through something. If he doesn't answer, we give him space.",
+              "es": "Creo que deberíamos mandarle un mensaje corto, sin presión. Debe estar pasando por algo. Si no contesta, le damos espacio."
+            },
+            {
+              "en": "I think we should reach out once, just to say we're here. He must be going through something private.",
+              "es": "Creo que deberíamos escribirle una vez, solo para decir que estamos. Debe estar pasando por algo privado."
+            },
+            {
+              "en": "Let's give him space if he asked to be alone. But I think we should tell the manager he's okay.",
+              "es": "Démosle espacio si pidió estar solo. Pero creo que deberíamos decirle al jefe que está bien."
+            }
           ]
         }
       ],
@@ -8184,6 +10970,20 @@
             "I ended up at...",
             "It's working out well",
             "I settled down"
+          ],
+          "answer_options": [
+            {
+              "en": "Diego! What a surprise. I've been good. I ended up at a new company last year and it's working out well. I also settled down — got engaged a few months ago.",
+              "es": "¡Diego! Qué sorpresa. Ando bien. Terminé en una empresa nueva el año pasado y está funcionando bien. También me asenté, me comprometí hace unos meses."
+            },
+            {
+              "en": "Diego! I've been good. I ended up moving to a bigger company, and it's working out well so far.",
+              "es": "¡Diego! Ando bien. Terminé mudándome a una empresa más grande, y por ahora está funcionando bien."
+            },
+            {
+              "en": "What a surprise! I've been busy. I ended up changing careers a bit, and I finally settled down here.",
+              "es": "¡Qué sorpresa! Estuve ocupado. Terminé cambiando un poco de carrera, y finalmente me asenté acá."
+            }
           ]
         },
         {
@@ -8211,6 +11011,20 @@
             "We came up with...",
             "We're figuring out if...",
             "I'm still working on..."
+          ],
+          "answer_options": [
+            {
+              "en": "She works in design. We came up with a small side project together last month — a tool to look up local services. Still figuring out if we'll launch it.",
+              "es": "Ella trabaja en diseño. El mes pasado se nos ocurrió un proyecto chico juntos, una herramienta para buscar servicios locales. Todavía estamos viendo si lo lanzamos."
+            },
+            {
+              "en": "She's a designer. We came up with an idea for an app, and we're figuring out if it's worth building.",
+              "es": "Es diseñadora. Se nos ocurrió una idea para una app, y estamos viendo si vale la pena hacerla."
+            },
+            {
+              "en": "She works in marketing. I'm still working on a side project, and I'm figuring out how to find the first users.",
+              "es": "Trabaja en marketing. Yo sigo con un proyecto aparte, y estoy viendo cómo conseguir los primeros usuarios."
+            }
           ]
         },
         {
@@ -8239,6 +11053,20 @@
             "Let's pick a day",
             "I'll text you to set it up",
             "Let's stay in touch this time"
+          ],
+          "answer_options": [
+            {
+              "en": "Totally. Let's pick a day next week. I'll text you tonight to set it up. And let's stay in touch this time — for real.",
+              "es": "Totalmente. Elijamos un día la semana que viene. Te escribo esta noche para arreglarlo. Y esta vez mantengamos el contacto, en serio."
+            },
+            {
+              "en": "Definitely. Let's pick a day — Thursday works for me. I'll text you to set it up.",
+              "es": "Sin dudas. Elijamos un día, el jueves me sirve. Te escribo para arreglarlo."
+            },
+            {
+              "en": "Yes, let's do it. I'll text you to set it up, and let's stay in touch this time.",
+              "es": "Sí, hagámoslo. Te escribo para arreglarlo, y esta vez mantengamos el contacto."
+            }
           ]
         }
       ],
@@ -8319,6 +11147,20 @@
             "I'm on it",
             "Let me look into it",
             "Can you send me a stack trace?"
+          ],
+          "answer_options": [
+            {
+              "en": "Yeah, I'm on it. Let me look at the logs first. Can you send me a stack trace? I want to narrow down where it's failing.",
+              "es": "Sí, me pongo con eso. Primero dejame mirar los logs. ¿Me mandás un stack trace? Quiero acotar dónde está fallando."
+            },
+            {
+              "en": "I'm on it. Can you send me a stack trace and the exact time it started?",
+              "es": "Me pongo con eso. ¿Me mandás un stack trace y la hora exacta en que empezó?"
+            },
+            {
+              "en": "Let me look into it. Is it failing for every user, or only some requests?",
+              "es": "Dejame revisarlo. ¿Está fallando para todos los usuarios, o solo para algunos requests?"
+            }
           ]
         },
         {
@@ -8342,6 +11184,20 @@
             "It can't be the DB",
             "It must be a slow query",
             "There might be a lock"
+          ],
+          "answer_options": [
+            {
+              "en": "If the DB is healthy, it can't be the connection itself. It must be a slow query somewhere. Or there might be a lock we're not seeing.",
+              "es": "Si la base está sana, no puede ser la conexión en sí. Debe ser una query lenta en algún lado. O puede haber un lock que no estamos viendo."
+            },
+            {
+              "en": "It can't be the DB itself then. It must be a slow query, or a connection pool that's full.",
+              "es": "Entonces no puede ser la base en sí. Debe ser una query lenta, o un pool de conexiones lleno."
+            },
+            {
+              "en": "There might be a lock from the last migration. It can't be the network if the DB looks healthy.",
+              "es": "Puede haber un lock de la última migración. No puede ser la red si la base se ve sana."
+            }
           ]
         },
         {
@@ -8371,6 +11227,20 @@
             "Let's not roll back yet",
             "Let's rule out...",
             "I'll follow up with the team"
+          ],
+          "answer_options": [
+            {
+              "en": "Let's not roll back yet. First, let's rule out a few things. Kill the long query and see if it comes back. If it does, we roll back. I'll come up with a proper fix after lunch and follow up with the team.",
+              "es": "No hagamos rollback todavía. Primero descartemos algunas cosas. Matá la query larga y mirá si vuelve. Si vuelve, hacemos rollback. Después del almuerzo armo un fix como corresponde y le hago seguimiento con el equipo."
+            },
+            {
+              "en": "Let's not roll back yet. Let's rule out the slow query first — kill it and watch for five minutes.",
+              "es": "No hagamos rollback todavía. Primero descartemos la query lenta: matala y mirá cinco minutos."
+            },
+            {
+              "en": "Let's roll back now and investigate after. Production first. I'll follow up with the team once it's stable.",
+              "es": "Hagamos rollback ahora e investigamos después. Producción primero. Le hago seguimiento con el equipo cuando esté estable."
+            }
           ]
         }
       ],

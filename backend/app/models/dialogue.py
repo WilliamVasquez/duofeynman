@@ -60,5 +60,9 @@ class DialogueTurn(Base):
     required_keywords: Mapped[list] = mapped_column(JSON, default=list)
     # Pistas que el frontend muestra ANTES de responder
     helper_phrases: Mapped[list] = mapped_column(JSON, default=list)
+    # Respuestas completas y VÁLIDAS entre las que el usuario elige (modo Choose,
+    # estilo Duolingo). Forma: [{"en": "...", "es": "..."}]. Todas pasan el
+    # scoring: son parte de `accepted_answers` en dialogue_engine.
+    answer_options: Mapped[list] = mapped_column(JSON, default=list)
 
     dialogue = relationship("Dialogue", back_populates="turns")

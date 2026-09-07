@@ -70,6 +70,7 @@ def get_dialogue(
                 "user_hint_es": t.user_hint_es,
                 "user_example_en": t.user_example_en,
                 "helper_phrases": t.helper_phrases,
+                "answer_options": t.answer_options or [],
                 # NO devolvemos required_keywords — para no "hacer trampa"
             }
             for t in d.turns
@@ -91,10 +92,18 @@ def check_turn(
     turn = db.get(DialogueTurn, payload.turn_id)
     if not turn or turn.speaker != "USER":
         raise HTTPException(404, "Turno no encontrado o no es del usuario")
+    # Todo lo que la app le ofreció al usuario cuenta como respuesta válida:
+    # las opciones del modo Choose y las helper_phrases. Sin esto la app
+    # rechaza sus propias sugerencias (ver dialogue_engine).
+    accepted = [
+        *(o.get("en", "") for o in (turn.answer_options or []) if isinstance(o, dict)),
+        *(turn.helper_phrases or []),
+    ]
     result = dialogue_engine.evaluate_turn(
         user_text=payload.user_text,
         required_keywords=turn.required_keywords or [],
         user_example_en=turn.user_example_en or "",
+        accepted_answers=accepted,
     )
     return {
         **result,

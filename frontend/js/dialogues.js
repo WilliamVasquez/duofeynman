@@ -53,8 +53,17 @@ const Dialogues = (() => {
   function _categoryForSlug(slug) {
     return LIFE_AXES.find(a => a.slugs.includes(slug));
   }
-  // Modo de input: "type" | "order"
-  let inputMode = Store.get("duofeynman_input_mode") || "type";
+  // Modo de input: "choose" | "type" | "order"
+  // Default "choose": el usuario siempre ve qué puede responder. Antes
+  // arrancaba en "type" con la pantalla en blanco y sin guía.
+  // Key con sufijo _v2 a propósito: la vieja guardaba "type" y hacía que
+  // quien ya usó la app nunca viera el modo nuevo. Con el bump, todos
+  // vuelven al default una vez y después se respeta lo que elijan.
+  const INPUT_MODE_KEY = "duofeynman_input_mode_v2";
+  let inputMode = Store.get(INPUT_MODE_KEY) || "choose";
+  // Estado del modo choose
+  let answerOptions = [];      // [{en, es}]
+  let chosenIndex = -1;
   // Estado del word-order
   let bankWords = [];      // palabras disponibles {id, text}
   let outputWords = [];    // palabras seleccionadas en orden
@@ -350,17 +359,116 @@ const Dialogues = (() => {
     // Preparar word bank desde la respuesta modelo (personalizada)
     const exampleEn = Profile.personalize(turn.user_example_en || "");
     _setupWordBank(exampleEn);
+    _setupChoices(turn);
 
     // Sesgar el STT hacia lo que esperamos en este turno: frases de ayuda +
-    // palabras de la respuesta modelo. Se recalcula en cada turno.
+    // PALABRAS (no frases completas) de la respuesta modelo y de las opciones.
+    // Sesgar con la oración objetivo entera hace que Whisper la "escuche"
+    // igual: el ejercicio se autoaprueba y le esconde al usuario sus errores.
     Speech.setExpectedVocab([
       ...(turn.helper_phrases || []).map(p => Profile.personalize(p)),
+      ...answerOptions.flatMap(o => o.en.split(/\s+/)).filter(w => w.length > 2),
       ...exampleEn.split(/\s+/).filter(w => w.length > 2),
     ]);
     _applyInputMode();
 
     if (inputMode === "type") document.getElementById("chat-input").focus();
     _scrollChat();
+  }
+
+  // ---- Modo Choose: elegir una respuesta completa ----
+
+  /** Arma las opciones del turno.
+   * Fuente principal: `answer_options` del curriculum ([{en, es}]), todas
+   * válidas y todas aceptadas por el motor.
+   * Fallback (turnos que todavía no tienen opciones escritas): la respuesta
+   * modelo + las helper_phrases, sin traducción.
+   */
+  function _setupChoices(turn) {
+    const opts = (turn.answer_options || [])
+      .filter(o => o && o.en)
+      .map(o => ({ en: Profile.personalize(o.en), es: Profile.personalize(o.es || "") }));
+
+    if (opts.length) {
+      answerOptions = opts;
+    } else {
+      const seen = new Set();
+      answerOptions = [
+        turn.user_example_en || "",
+        ...(turn.helper_phrases || []),
+      ]
+        .map(t => Profile.personalize(t))
+        .filter(t => {
+          const key = t.trim().toLowerCase();
+          if (!key || seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        })
+        .map(t => ({ en: t, es: "" }));
+    }
+    chosenIndex = -1;
+    _renderChoices();
+  }
+
+  function _renderChoices() {
+    const box = document.getElementById("choose-options");
+    if (!box) return;
+    box.innerHTML = "";
+    if (!answerOptions.length) {
+      box.innerHTML = `<span class="choose-empty">No options for this turn. Use ✍️ Write / Speak.</span>`;
+      return;
+    }
+    answerOptions.forEach((opt, i) => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "choose-option" + (i === chosenIndex ? " chosen" : "");
+      card.setAttribute("role", "option");
+      card.setAttribute("aria-selected", i === chosenIndex ? "true" : "false");
+      // Inmersión: solo inglés visible. El español se agrega debajo con el
+      // botón ES, sin ocultar el inglés (convención del proyecto).
+      card.innerHTML = `<span class="choose-option-en">${_escapeHtml(opt.en)}</span>`;
+      card.onclick = () => {
+        chosenIndex = (chosenIndex === i) ? -1 : i;
+        _renderChoices();
+      };
+
+      const row = document.createElement("div");
+      row.className = "choose-option-row";
+      row.appendChild(card);
+
+      if (opt.es) {
+        const esBtn = document.createElement("button");
+        esBtn.type = "button";
+        esBtn.className = "choose-es-btn";
+        esBtn.textContent = "ES";
+        esBtn.title = `${opt.es} (click para ver en español)`;
+        esBtn.onclick = (e) => {
+          e.stopPropagation();
+          const existing = row.nextElementSibling;
+          if (existing && existing.classList.contains("es-inline")) {
+            existing.remove();
+            return;
+          }
+          const span = document.createElement("div");
+          span.className = "es-inline";
+          span.lang = "es";
+          span.textContent = opt.es;
+          row.insertAdjacentElement("afterend", span);
+        };
+        row.appendChild(esBtn);
+      }
+      box.appendChild(row);
+    });
+  }
+
+  function _getChosenText() {
+    return chosenIndex >= 0 ? (answerOptions[chosenIndex].en || "").trim() : "";
+  }
+
+  function _listenChosen() {
+    const text = _getChosenText();
+    if (!text) { UI.toast("Pick an answer first.", { type: "warn" }); return; }
+    TTS.speak(text);
   }
 
   // ---- Word ordering (modo Duolingo) ----
@@ -457,13 +565,18 @@ const Dialogues = (() => {
     document.querySelectorAll(".input-mode-btn").forEach(b => {
       b.classList.toggle("active", b.dataset.inputMode === inputMode);
     });
+    document.getElementById("chat-toolbar-choose").classList.toggle("hidden", inputMode !== "choose");
     document.getElementById("chat-toolbar-type").classList.toggle("hidden", inputMode !== "type");
     document.getElementById("chat-toolbar-order").classList.toggle("hidden", inputMode !== "order");
+    // Las helper_phrases son atajos para escribir; en modo choose estorban
+    // (ya tenés respuestas completas) y en order no aplican.
+    const chips = document.getElementById("helper-chips");
+    if (chips) chips.classList.toggle("hidden", inputMode !== "type");
   }
 
   function _setInputMode(mode) {
     inputMode = mode;
-    Store.set("duofeynman_input_mode", mode);
+    Store.set(INPUT_MODE_KEY, mode);
     _applyInputMode();
   }
 
@@ -474,7 +587,10 @@ const Dialogues = (() => {
     if (!turn || turn.speaker !== "USER") return;
     const input = document.getElementById("chat-input");
     let text = "";
-    if (inputMode === "order") {
+    if (inputMode === "choose") {
+      text = _getChosenText();
+      if (!text) { UI.toast("Pick one of the answers first.", { type: "warn" }); return; }
+    } else if (inputMode === "order") {
       text = _getOrderedText().trim();
       if (!text) { UI.toast("Tap the words to build a sentence.", { type: "warn" }); return; }
     } else {
@@ -492,14 +608,11 @@ const Dialogues = (() => {
       input.value = "";
 
       if (result.passed) {
-        turnIndex++;
-        document.getElementById("chat-input-zone").classList.add("hidden");
-        outputWords = []; bankWords = [];
-        _later(() => { submitting = false; _nextTurn(); }, 1200);
+        _advanceTurn();
       } else {
         submitting = false;
-        // No avanzamos; le damos una segunda oportunidad
-        // (puede reintentar o saltar)
+        // No avanzamos automáticamente, pero el feedback muestra un botón
+        // "Continue" (ver _renderTurnFeedback): nunca queda trabado.
       }
     } catch (err) {
       submitting = false;
@@ -507,16 +620,65 @@ const Dialogues = (() => {
     }
   }
 
+  /** Avanza al turno siguiente y limpia el estado de todos los modos de input. */
+  function _advanceTurn() {
+    turnIndex++;
+    document.getElementById("chat-input-zone").classList.add("hidden");
+    outputWords = []; bankWords = [];
+    answerOptions = []; chosenIndex = -1;
+    _later(() => { submitting = false; _nextTurn(); }, 1200);
+  }
+
   function _renderTurnFeedback(r) {
     const fb = document.getElementById("chat-turn-feedback");
     fb.classList.remove("hidden");
     fb.classList.toggle("pass", r.passed);
     fb.classList.toggle("fail", !r.passed);
-    let html = `<strong>${Math.round(r.score * 100)}%</strong> · <span class="translatable" title="${_escapeAttr(r.feedback_es)}">${r.passed ? "Good!" : "Try again"}</span>`;
-    if (!r.passed && r.example_en) {
-      html += `<div style='margin-top:6px;font-size:13px'>💡 <em class="translatable" title="Ejemplo">${_escapeHtml(Profile.personalize(r.example_en))}</em></div>`;
+    fb.innerHTML = "";
+
+    const head = document.createElement("div");
+    head.className = "fb-head";
+    head.innerHTML = `<strong>${Math.round(r.score * 100)}%</strong> · <span>${r.passed ? "Good!" : "Hmm, not quite"}</span>`;
+    fb.appendChild(head);
+
+    // El motivo VA VISIBLE. Antes vivía en un title= y en móvil no se veía:
+    // el usuario veía "Try again" sin saber qué arreglar.
+    if (r.feedback_es) {
+      const why = document.createElement("div");
+      why.className = "fb-why";
+      why.lang = "es";
+      why.textContent = r.feedback_es;
+      fb.appendChild(why);
     }
-    fb.innerHTML = html;
+
+    if (!r.passed && r.example_en) {
+      const ex = document.createElement("div");
+      ex.className = "fb-example";
+      ex.innerHTML = `💡 <em>${_escapeHtml(Profile.personalize(r.example_en))}</em>`;
+      const listen = document.createElement("button");
+      listen.type = "button";
+      listen.className = "fb-listen";
+      listen.textContent = "🔊";
+      listen.title = "Escuchar el ejemplo";
+      listen.onclick = () => TTS.speak(Profile.personalize(r.example_en));
+      ex.appendChild(listen);
+      fb.appendChild(ex);
+    }
+
+    // Salida de emergencia: si el motor rule-based no reconoce una respuesta
+    // igualmente válida, el usuario puede seguir. Nunca callejón sin salida.
+    if (!r.passed && r.can_continue) {
+      const actions = document.createElement("div");
+      actions.className = "fb-actions";
+      const cont = document.createElement("button");
+      cont.type = "button";
+      cont.className = "btn-ghost fb-continue";
+      cont.textContent = "Continue anyway →";
+      cont.title = "Seguir igual: tu respuesta puede estar bien aunque no la reconozca";
+      cont.onclick = () => { if (!submitting) { submitting = true; _advanceTurn(); } };
+      actions.appendChild(cont);
+      fb.appendChild(actions);
+    }
   }
 
   function _finish() {
@@ -593,6 +755,8 @@ const Dialogues = (() => {
     document.querySelectorAll(".input-mode-btn").forEach(b => {
       b.onclick = () => _setInputMode(b.dataset.inputMode);
     });
+    document.getElementById("btn-choose-send").onclick = _submitUserTurn;
+    document.getElementById("btn-choose-listen").onclick = _listenChosen;
     document.getElementById("btn-order-send").onclick = _submitUserTurn;
     document.getElementById("btn-order-clear").onclick = _clearOutput;
     document.getElementById("btn-order-shuffle").onclick = _shuffleBank;

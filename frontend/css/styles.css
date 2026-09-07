@@ -684,17 +684,23 @@ input { font-family: inherit; font-size: 16px; }
   padding: 0;
   margin-bottom: 8px;
 }
+/* Colores por token: en claro queda ámbar suave, en oscuro un ámbar
+   apagado sobre la superficie. Antes eran #fef3c7/#92400e fijos y el chip
+   se veía como un parche claro arriba del tema oscuro. */
 .user-hint .hint-toggle {
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+  background: color-mix(in srgb, var(--warn) 16%, var(--surface));
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--warn) 45%, var(--surface));
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
 }
-.user-hint .hint-toggle:hover { background: #fde68a; }
+.user-hint .hint-toggle:hover {
+  background: color-mix(in srgb, var(--warn) 28%, var(--surface));
+  border-color: var(--warn);
+}
 
 /* Scene context: siempre visible en inglés, click para ES inline */
 .chat-setting {
@@ -787,6 +793,58 @@ input { font-family: inherit; font-size: 16px; }
   box-shadow: var(--shadow-sm);
 }
 
+/* === Modo Choose: elegir una respuesta completa === */
+.choose-zone { display: block; }
+.choose-zone.hidden { display: none; }
+.choose-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.choose-options { display: flex; flex-direction: column; gap: 8px; }
+.choose-option-row { display: flex; align-items: stretch; gap: 6px; }
+.choose-option {
+  flex: 1;
+  text-align: left;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.35;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.choose-option:hover { border-color: var(--primary); }
+.choose-option:active { transform: translateY(1px); }
+.choose-option.chosen {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+.choose-es-btn {
+  flex-shrink: 0;
+  padding: 0 10px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+.choose-es-btn:hover { border-color: var(--primary); color: var(--primary); }
+.choose-empty { font-size: 13px; color: var(--text-muted); }
+.choose-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.choose-actions .btn-primary { flex: 1; }
+
 /* Word-order zone */
 .word-order-zone { display: block; }
 .word-order-zone.hidden { display: none; }
@@ -873,14 +931,13 @@ input { font-family: inherit; font-size: 16px; }
   flex-wrap: wrap;
 }
 .word-order-actions .btn-primary { flex: 1; min-width: 100px; }
+/* Ojo: el contenedor va SIN fondo. Tenía un background amarillo fijo que
+   pintaba una banda detrás del chip — doble amarillo, y en dark mode un
+   bloque claro. El único contenido es el chip .hint-toggle. */
 .user-hint {
   font-size: 13px;
   color: var(--text-soft);
   margin-bottom: 8px;
-  padding: 8px 10px;
-  background: #fef3c7;
-  border-radius: 8px;
-  border-left: 3px solid var(--warn);
 }
 .helper-chips {
   display: flex;
@@ -935,15 +992,46 @@ input { font-family: inherit; font-size: 16px; }
   border-radius: 10px;
   font-size: 14px;
 }
+/* Colores por token: hardcodeados en claro se veían como un bloque blanco
+   arriba del tema oscuro. */
 #chat-turn-feedback.pass {
-  background: #ecfdf5;
+  background: color-mix(in srgb, var(--success) 12%, var(--surface));
   border-left: 3px solid var(--success);
-  color: var(--success-dark);
+  color: var(--text);
 }
 #chat-turn-feedback.fail {
-  background: #fef3c7;
+  background: color-mix(in srgb, var(--warn) 14%, var(--surface));
   border-left: 3px solid var(--warn);
-  color: #b45309;
+  color: var(--text);
+}
+#chat-turn-feedback .fb-head { font-size: 14px; }
+#chat-turn-feedback .fb-why {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.4;
+}
+#chat-turn-feedback .fb-example {
+  margin-top: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+#chat-turn-feedback .fb-listen {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: 12px;
+}
+#chat-turn-feedback .fb-actions { margin-top: 10px; }
+#chat-turn-feedback .fb-continue {
+  font-size: 13px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
 }
 
 .chat-complete {
@@ -1629,6 +1717,8 @@ textarea:focus-visible,
     min-height: 44px;
   }
   .word-chip, .helper-chip { padding: 11px 15px; }
+  .choose-option { padding: 14px 15px; font-size: 16px; }
+  .choose-es-btn { padding: 0 13px; }
 }
 
 /* --- Feedback emocional: shake al errar, latido al acertar --- */
