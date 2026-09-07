@@ -1,161 +1,232 @@
-# Graph Report - .  (2026-06-18)
+# Graph Report - ingles  (2026-09-07)
 
 ## Corpus Check
-- 61 files · ~59,476 words
+- 76 files · ~99,820 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 354 nodes · 603 edges · 33 communities (21 shown, 12 thin omitted)
-- Extraction: 74% EXTRACTED · 26% INFERRED · 0% AMBIGUOUS · INFERRED: 156 edges (avg confidence: 0.55)
-- Token cost: 4,200 input · 1,800 output
+- 600 nodes · 1259 edges · 46 communities (30 shown, 16 thin omitted)
+- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 122 edges (avg confidence: 0.9)
+- Token cost: 277,488 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_DB + Seeds|DB + Seeds]]
-- [[_COMMUNITY_Attempt Schemas + Routing|Attempt Schemas + Routing]]
-- [[_COMMUNITY_Progress + Auth Routing|Progress + Auth Routing]]
-- [[_COMMUNITY_App Concepts + Docs|App Concepts + Docs]]
-- [[_COMMUNITY_Transcript Analyzer|Transcript Analyzer]]
-- [[_COMMUNITY_Config + Settings|Config + Settings]]
-- [[_COMMUNITY_Pydantic Schemas|Pydantic Schemas]]
-- [[_COMMUNITY_Feynman Engine|Feynman Engine]]
-- [[_COMMUNITY_Frontend Orchestrator|Frontend Orchestrator]]
-- [[_COMMUNITY_TTS Service|TTS Service]]
-- [[_COMMUNITY_Vosk STT Service|Vosk STT Service]]
-- [[_COMMUNITY_Gamification + Progress Models|Gamification + Progress Models]]
-- [[_COMMUNITY_Auth Router|Auth Router]]
-- [[_COMMUNITY_Dictation Router|Dictation Router]]
-- [[_COMMUNITY_PWA Manifest|PWA Manifest]]
-- [[_COMMUNITY_SRS Router|SRS Router]]
-- [[_COMMUNITY_SRS Algorithm SM-2|SRS Algorithm SM-2]]
-- [[_COMMUNITY_Frontend API Client|Frontend API Client]]
-- [[_COMMUNITY_Dashboard UI|Dashboard UI]]
-- [[_COMMUNITY_Dialogues UI|Dialogues UI]]
-- [[_COMMUNITY_Dictation UI|Dictation UI]]
-- [[_COMMUNITY_Profile State|Profile State]]
-- [[_COMMUNITY_Profile View|Profile View]]
-- [[_COMMUNITY_Speech Recognition|Speech Recognition]]
-- [[_COMMUNITY_SRS UI|SRS UI]]
-- [[_COMMUNITY_TTS Frontend|TTS Frontend]]
-- [[_COMMUNITY_UI Utilities|UI Utilities]]
-- [[_COMMUNITY_ORM Models Init|ORM Models Init]]
-- [[_COMMUNITY_Rate Limiting|Rate Limiting]]
+- App Core & Data Models
+- Auth & User Records
+- Audio Pipeline & STT Orchestration
+- Feynman Attempts & SRS Cards
+- TTS Synthesis & Audio Cache
+- Config & Whisper Engine
+- Linguistic Analyzer
+- Feynman Scoring Engine
+- Frontend Orchestrator
+- Dialogue Engine & Text Matching
+- Zero-Cost Voice Stack Decisions
+- Pydantic Schemas
+- User Profile Endpoints
+- App Icon Visual Identity
+- PWA Manifest
+- Dialogue Regression Tests
+- Frontend Regression Tests
+- Product Stack Overview
+- Feynman Cycle Stages
+- Curriculum & Migration Rules
+- Browser Smoke Test
+- Error Handling Middleware
+- Security Hardening
+- Auth & Frontend Conventions
+- Test Scaffolding
+- Curriculum Assessment Tests
+- Immersion UI & Input Modes
+- Standalone Icon Asset
+- Project Identity
+- Production Deployment Rules
+- API Client Module
+- Curriculum Translations
+- Progress Dashboard
+- Dialogues UI Module
+- Dictation UI Module
+- i18n Module
+- Profile State Module
+- Profile Editor View
+- Speech Capture Module
+- SRS Review Panel
+- LocalStorage Wrapper
+- TTS Playback Module
+- UI Rendering & Toasts
+- Orphan Pydantic Base
 
 ## God Nodes (most connected - your core abstractions)
-1. `User` - 38 edges
-2. `Topic` - 20 edges
-3. `Base` - 18 edges
-4. `DuoFeynman App` - 17 edges
-5. `Attempt` - 14 edges
-6. `SrsCard` - 14 edges
-7. `AttemptError` - 12 edges
-8. `UserProgress` - 12 edges
-9. `evaluate_round()` - 12 edges
-10. `Session` - 11 edges
+1. `User` - 48 edges
+2. `Base` - 30 edges
+3. `Topic` - 26 edges
+4. `utcnow()` - 22 edges
+5. `Attempt` - 17 edges
+6. `submit_round()` - 17 edges
+7. `evaluate_round()` - 17 edges
+8. `DuoFeynman App` - 14 edges
+9. `SrsCard` - 14 edges
+10. `Lesson` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `DuoFeynman App Icon 192px (SVG)` --brand_icon_for--> `DuoFeynman App`  [EXTRACTED]
-  frontend/assets/icon-192.svg → README.md
-- `DuoFeynman App Icon 512px (SVG)` --brand_icon_for--> `DuoFeynman App`  [EXTRACTED]
-  frontend/assets/icon-512.svg → README.md
-- `DuoFeynman App Icon (SVG)` --brand_icon_for--> `DuoFeynman App`  [EXTRACTED]
-  frontend/assets/icon.svg → README.md
-- `DuoFeynman App Icon 192px (SVG)` --used_by--> `PWA (Progressive Web App)`  [INFERRED]
-  frontend/assets/icon-192.svg → README.md
-- `DuoFeynman App Icon 512px (SVG)` --used_by--> `PWA (Progressive Web App)`  [INFERRED]
-  frontend/assets/icon-512.svg → README.md
+- `Rate Limiting por IP` --semantically_similar_to--> `language-tool-python (chequeo gramatical)`  [INFERRED] [semantically similar]
+  SECURITY.md → backend/requirements.txt
+- `DuoFeynman App` --implements--> `JWT Authentication (bcrypt rounds=12)`  [INFERRED]
+  README.md → SECURITY.md
+- `Estrategia de pruebas de regresion` --conceptually_related_to--> `Restriccion 100% gratis (sin APIs pagas)`  [INFERRED]
+  README.md → CLAUDE.md
+- `DuoFeynman App` --implements--> `Rate Limiting por IP`  [INFERRED]
+  README.md → SECURITY.md
+- `Ciclo Feynman 5 Etapas` --references--> `language-tool-python (chequeo gramatical)`  [EXTRACTED]
+  README.md → backend/requirements.txt
 
 ## Import Cycles
 - None detected.
 
-## Communities (33 total, 12 thin omitted)
+## Hyperedges (group relationships)
+- **Stack de fallback de voz (STT + TTS) impuesto por la restriccion de costo cero** — claude_zero_cost_constraint, claude_stt_fallback_chain, claude_tts_fallback_chain, backend_requirements_faster_whisper_dep, backend_requirements_edge_tts_pin, readme_piper_windows_standalone, readme_browser_support_matrix [INFERRED 0.85]
+- **Flujo del modo Choose en dialogos (datos, motor, migracion y UI)** — claude_dialogue_engine_guide_not_exam, claude_answer_options_requirement, claude_add_column_if_missing, claude_localstorage_key_bump, frontend_index_chat_input_modes, readme_dialogue_input_modes, claude_visible_feedback_rule [EXTRACTED 0.95]
+- **Hardening de produccion (config, transporte, DB, auth, observabilidad)** — security_production_config_validation, security_https_reverse_proxy, security_least_privilege_db_user, security_rate_limiting, security_password_policy, security_jwt_bearer_architecture, security_audit_log, security_known_gaps [EXTRACTED 1.00]
+- **DuoFeynman Icon Visual Identity System** — frontend_assets_icon_192_app_icon, frontend_assets_icon_192_brand_gradient, frontend_assets_icon_192_df_monogram, frontend_assets_icon_192_microphone_badge [EXTRACTED 1.00]
+- **DuoFeynman Visual Identity System (gradient + monogram + mic badge)** — frontend_assets_icon_512_app_icon, frontend_assets_icon_192_brand_gradient, frontend_assets_icon_192_df_monogram, frontend_assets_icon_512_mic_badge [INFERRED 0.85]
+- **App Icon Visual Identity System (gradient tile + DF monogram + mic badge)** — frontend_assets_icon_gradient_g, frontend_assets_icon_df_monogram, frontend_assets_icon_mic_badge, frontend_assets_icon_app_icon [EXTRACTED 1.00]
 
-### Community 0 - "DB + Seeds"
-Cohesion: 0.11
-Nodes (26): Base, Conexión a MySQL vía SQLAlchemy., Carga inicial del curriculum desde JSON.  Uso:     python -m app.seed, seed(), Session, User, Session, User (+18 more)
+## Communities (46 total, 16 thin omitted)
 
-### Community 1 - "Attempt Schemas + Routing"
-Cohesion: 0.16
-Nodes (27): AttemptRoundIn, AttemptStartIn, Request, Session, User, Session, User, Attempt (+19 more)
+### Community 0 - "App Core & Data Models"
+Cohesion: 0.07
+Nodes (69): Base, get_db(), Conexión a MySQL vía SQLAlchemy., on_startup(), DuoFeynman — backend principal., AttemptError, Errores específicos detectados (para análisis y SRS targeted)., Lesson (+61 more)
 
-### Community 2 - "Progress + Auth Routing"
-Cohesion: 0.11
-Nodes (25): Session, User, Session, User, Request, User, User, Perfil del usuario para personalizar la experiencia.  Es opcional — el usuario p (+17 more)
-
-### Community 3 - "App Concepts + Docs"
+### Community 1 - "Auth & User Records"
 Cohesion: 0.08
-Nodes (29): DuoFeynman App Icon 192px (SVG), DuoFeynman App Icon 512px (SVG), DuoFeynman App Icon (SVG), Android WebView (migración futura), Backend Stack (Python/FastAPI/MySQL), Etapa CONSOLIDATE, Curriculum A1 Principiante, Etapa DETECT (+21 more)
+Nodes (40): Intentos del usuario explicando un Topic (ciclo Feynman)., DictationExercise, Ejercicios de dictado: respuesta y recompensa controladas por el servidor., Perfil del usuario para personalizar la experiencia. Es opcional — el usuario…, login(), limit, post, Request (+32 more)
 
-### Community 4 - "Transcript Analyzer"
-Cohesion: 0.11
-Nodes (25): analyze_transcript(), apply_custom_rules(), check_grammar(), compute_fluency(), count_fillers(), count_sentences(), detect_code_switching(), has_question() (+17 more)
+### Community 2 - "Audio Pipeline & STT Orchestration"
+Cohesion: 0.08
+Nodes (42): health(), get, root(), get, stt_status(), AudioError, has_ffmpeg(), Exception (+34 more)
 
-### Community 5 - "Config + Settings"
-Cohesion: 0.11
-Nodes (13): get_settings(), Configuración central de la app. Lee variables desde .env., Valida la config crítica al arranque. Falla rápido si algo es inseguro., Settings, _validate_settings(), global_exception_handler(), rate_limit_handler(), DuoFeynman — backend principal. (+5 more)
+### Community 3 - "Feynman Attempts & SRS Cards"
+Cohesion: 0.08
+Nodes (32): Attempt, Un intento = una sesión de explicación de un Topic. El ciclo Feynman puede…, Una tarjeta SRS = algo que el usuario debe recordar/practicar. Puede ser: - Un…, SrsCard, limit, post, Request, Session (+24 more)
 
-### Community 6 - "Pydantic Schemas"
+### Community 4 - "TTS Synthesis & Audio Cache"
+Cohesion: 0.10
+Nodes (39): get, limit, Request, status(), synthesize(), _cache_dir(), _cache_get(), _cache_key() (+31 more)
+
+### Community 5 - "Config & Whisper Engine"
+Cohesion: 0.09
+Nodes (24): get_settings(), Configuración central de la app. Lee variables desde .env., Valida la config crítica al arranque. Falla rápido si algo es inseguro., Settings, _validate_settings(), available(), build_hotwords(), _clean() (+16 more)
+
+### Community 6 - "Linguistic Analyzer"
+Cohesion: 0.13
+Nodes (21): analyze_transcript(), apply_custom_rules(), check_grammar(), compute_fluency(), count_fillers(), count_sentences(), detect_code_switching(), detect_self_corrections() (+13 more)
+
+### Community 7 - "Feynman Scoring Engine"
 Cohesion: 0.15
-Nodes (16): BaseModel, AttemptOut, AttemptRoundIn, AttemptStartIn, Config, ErrorOut, FeedbackOut, Config (+8 more)
-
-### Community 7 - "Feynman Engine"
-Cohesion: 0.16
-Nodes (18): Any, build_corrections(), build_socratic_questions(), compute_overall_score(), compute_subscores(), _coverage(), decide_next_action(), evaluate_round() (+10 more)
+Nodes (20): Any, build_corrections(), build_socratic_questions(), check_objective(), compute_overall_score(), compute_subscores(), _coverage(), decide_next_action() (+12 more)
 
 ### Community 8 - "Frontend Orchestrator"
 Cohesion: 0.18
-Nodes (11): ensureAttempt(), enterApp(), openTopic(), _pickN(), refreshHeader(), _renderProfileCard(), _renderWeekPanel(), sendRound() (+3 more)
+Nodes (17): ensureAttempt(), enterApp(), _findAxisInList(), _loadPath(), openTopic(), openTopicFromPath(), _openView(), _pickN() (+9 more)
 
-### Community 9 - "TTS Service"
-Cohesion: 0.28
-Nodes (15): Path, _pcm_to_wav(), _piper_binary_path(), _piper_model_path(), _piper_ready(), Text-to-Speech con dos backends en cascada.  1. Edge TTS — voces Microsoft Neura, Envuelve PCM s16le mono en un contenedor WAV., Genera MP3 con Microsoft Edge TTS (online, neural).      No hacemos pre-check de (+7 more)
+### Community 9 - "Dialogue Engine & Text Matching"
+Cohesion: 0.18
+Nodes (15): _best_similarity(), evaluate_turn(), _keyword_coverage(), Motor de validación de respuestas en diálogos guionados. Rule-based, sin IA.…, Devuelve (cobertura, grupos_no_cubiertos). `groups` es una lista de listas.…, Similitud contra la mejor respuesta aceptada. Devuelve (ratio, cual)., Evalúa una respuesta de usuario en un diálogo. `accepted_answers`: todas las…, _digits_to_words() (+7 more)
 
-### Community 10 - "Vosk STT Service"
+### Community 10 - "Zero-Cost Voice Stack Decisions"
+Cohesion: 0.13
+Nodes (18): edge-tts>=7.0.2 (pin obligatorio), faster-whisper (motor STT principal), piper-tts comentado en requirements, Colores por token CSS, nunca hex fijo, Sin IA generativa en runtime, STT y Piper sincronos -> run_in_threadpool, Cadena de fallback STT (Web Speech -> faster-whisper -> Vosk), text_utils.normalize() (numeros a palabras) (+10 more)
+
+### Community 11 - "Pydantic Schemas"
 Cohesion: 0.23
-Nodes (14): Path, Model, available(), diagnose(), get_model(), _has_ffmpeg(), _model_dir(), Speech-to-Text offline con Vosk.  Descargá el modelo `vosk-model-small-en-us-0.1 (+6 more)
+Nodes (13): Config, LessonOut, ModuleOut, BaseModel, TopicOut, Config, BaseModel, field_validator (+5 more)
 
-### Community 11 - "Gamification + Progress Models"
-Cohesion: 0.23
-Nodes (12): Attempt, Session, User, Achievement, Progreso del usuario y gamificación., Logros desbloqueables (gamificación)., UserAchievement, award_achievements() (+4 more)
+### Community 12 - "User Profile Endpoints"
+Cohesion: 0.20
+Nodes (13): UserProfile, Config, get_profile(), ProfileIn, ProfileOut, put_profile(), BaseModel, field_validator (+5 more)
 
-### Community 12 - "Auth Router"
-Cohesion: 0.23
-Nodes (12): Request, Session, login(), register(), Token, create_access_token(), hash_password(), Hash de contraseñas (bcrypt directo) y JWT.  Usamos `bcrypt` directamente en vez (+4 more)
-
-### Community 13 - "Dictation Router"
-Cohesion: 0.23
-Nodes (13): Session, User, check(), DictationCheckIn, func_random(), next_sentence(), _normalize(), Modo dictado: TTS lee una frase, usuario escribe lo que escuchó.  Es independien (+5 more)
+### Community 13 - "App Icon Visual Identity"
+Cohesion: 0.26
+Nodes (12): DuoFeynman App Icon (192px SVG), Brand Gradient (sky #0ea5e9 to indigo #6366f1), DF Monogram Wordmark, Microphone Badge (amber circle, speaking affordance), PWA / Android WebView Launcher Identity, Scalable Vector Asset (512 viewBox, no raster dependency), Speaking-First Product Positioning, System Font Stack (-apple-system, Segoe UI, sans-serif) (+4 more)
 
 ### Community 14 - "PWA Manifest"
 Cohesion: 0.17
 Nodes (11): background_color, description, display, icons, lang, name, orientation, scope (+3 more)
 
-### Community 15 - "SRS Router"
-Cohesion: 0.38
-Nodes (6): Session, User, due_cards(), Endpoints de Spaced Repetition System., Tarjetas SRS que vencen hoy o antes., stats()
+### Community 15 - "Dialogue Regression Tests"
+Cohesion: 0.27
+Nodes (4): DialogueAssessmentTests, La app no puede rechazar las respuestas que ella misma ofrece. Regresión…, Todo lo que la app le muestra al usuario como respuesta válida., El modo Choose es el default: un turno sin opciones deja al usuario sin guía,…
 
-### Community 16 - "SRS Algorithm SM-2"
+### Community 16 - "Frontend Regression Tests"
+Cohesion: 0.18
+Nodes (5): assert, fs, path, { test }, vm
+
+### Community 17 - "Product Stack Overview"
+Cohesion: 0.18
+Nodes (11): Android WebView (migración futura), Backend Stack (Python/FastAPI/MySQL), Curriculum A1 Principiante, DuoFeynman App, Método Feynman + Output Hypothesis, Frontend Stack (HTML/CSS/JS vanilla), PWA (Progressive Web App), STT Vosk Offline (+3 more)
+
+### Community 18 - "Feynman Cycle Stages"
+Cohesion: 0.22
+Nodes (10): Etapa CONSOLIDATE, Etapa DETECT, Etapa EXPLAIN, Etapa EXPOSE, Ciclo Feynman 5 Etapas, Motor Feynman Rule-Based, LanguageTool API (Gramática), Output Hypothesis (+2 more)
+
+### Community 19 - "Curriculum & Migration Rules"
+Cohesion: 0.22
+Nodes (9): Migracion con _add_column_if_missing() en seed.py, answer_options obligatorio por turno USER, Techo en B1 (no agregar B2 todavia), Code-switch detector (ES->EN), Estructura del curriculum (modules -> lessons -> topics), El motor de dialogos es guia, no examen, MySQL TEXT/BLOB/JSON no admite DEFAULT, Estrategia de pruebas de regresion (+1 more)
+
+### Community 20 - "Browser Smoke Test"
+Cohesion: 0.22
+Nodes (8): assert, {chromium}, data, fs, path, profile, topics, user
+
+### Community 21 - "Error Handling Middleware"
+Cohesion: 0.29
+Nodes (8): global_exception_handler(), Exception, Request, rate_limit_handler(), security_headers(), exception_handler, middleware, RateLimitExceeded
+
+### Community 22 - "Security Hardening"
 Cohesion: 0.33
-Nodes (5): Algoritmo de repetición espaciada (SM-2 simplificado).  Calidad de respuesta (q), Mapea score 0-1 a calidad SM-2 0-5., review_card(), score_to_quality(), SrsCard
+Nodes (7): language-tool-python (chequeo gramatical), Audit Log de intentos de login, DuoFeynman Security Guide, HTTPS Reverse Proxy (Caddy/Nginx), JWT Authentication (bcrypt rounds=12), Rate Limiting por IP, SQLAlchemy ORM (protección SQL injection)
+
+### Community 23 - "Auth & Frontend Conventions"
+Cohesion: 0.29
+Nodes (7): bcrypt directo (no passlib), Convencion frontend: IIFE con objeto global, Orden de carga de scripts globales, Shell de vistas single-page (#app + section.view), Arquitectura JWT-bearer (sin cookies de sesion), Limitaciones de seguridad conscientes, Password policy + login error generico
+
+### Community 26 - "Immersion UI & Input Modes"
+Cohesion: 0.40
+Nodes (6): Inmersion total en ingles en la UI, Bump de key en localStorage al cambiar defaults, Feedback visible, no en title=, Toolbars de los tres modos de input del chat, Traduccion inline con data-es, Tres modos de respuesta en dialogos (Choose / Write-Speak / Order words)
+
+### Community 27 - "Standalone Icon Asset"
+Cohesion: 0.47
+Nodes (6): DuoFeynman App Icon (512x512 SVG), Dependency-Free Inline SVG Asset, DF Monogram Wordmark, Brand Linear Gradient (sky #0ea5e9 to indigo #6366f1), Microphone Badge (amber circle, bottom-right), Speech-First Product Branding
+
+### Community 28 - "Project Identity"
+Cohesion: 0.67
+Nodes (4): DuoFeynman (project), Feynman Method (pedagogical core), Formulario de perfil (contexto Feynman), Superficie de endpoints REST
+
+### Community 29 - "Production Deployment Rules"
+Cohesion: 0.50
+Nodes (4): Archivos sensibles que nunca se commitean, HTTPS via reverse proxy (Caddy/Nginx/Cloudflare), Usuario de DB dedicado con privilegios minimos, Validacion de config con APP_ENV=production
+
+## Ambiguous Edges - Review These
+- `Colores por token CSS, nunca hex fijo` → `Metadatos PWA e instalabilidad`  [AMBIGUOUS]
+  frontend/index.html · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **42 isolated node(s):** `Config`, `Config`, `Config`, `Path`, `Model` (+37 more)
+- **60 isolated node(s):** `Etapa EXPOSE`, `Etapa EXPLAIN`, `Etapa REFINE`, `Backend Stack (Python/FastAPI/MySQL)`, `Frontend Stack (HTML/CSS/JS vanilla)` (+55 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `User` connect `Progress + Auth Routing` to `DB + Seeds`, `Attempt Schemas + Routing`, `Gamification + Progress Models`, `Auth Router`, `Dictation Router`, `SRS Router`?**
-  _High betweenness centrality (0.130) - this node is a cross-community bridge._
-- **Why does `Base` connect `DB + Seeds` to `Attempt Schemas + Routing`, `Progress + Auth Routing`, `Gamification + Progress Models`, `Config + Settings`?**
-  _High betweenness centrality (0.112) - this node is a cross-community bridge._
-- **Why does `Topic` connect `DB + Seeds` to `Attempt Schemas + Routing`, `SRS Router`, `Dictation Router`, `Feynman Engine`?**
-  _High betweenness centrality (0.097) - this node is a cross-community bridge._
-- **Are the 37 inferred relationships involving `User` (e.g. with `Attempt` and `AttemptRoundIn`) actually correct?**
-  _`User` has 37 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 18 inferred relationships involving `Topic` (e.g. with `Any` and `AttemptRoundIn`) actually correct?**
-  _`Topic` has 18 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 16 inferred relationships involving `Base` (e.g. with `Exception` and `Request`) actually correct?**
-  _`Base` has 16 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `DuoFeynman App` (e.g. with `JWT Authentication (bcrypt rounds=12)` and `Rate Limiting por IP`) actually correct?**
-  _`DuoFeynman App` has 2 INFERRED edges - model-reasoned connections that need verification._
+- **What is the exact relationship between `Colores por token CSS, nunca hex fijo` and `Metadatos PWA e instalabilidad`?**
+  _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
+- **Why does `User` connect `App Core & Data Models` to `Auth & User Records`, `Audio Pipeline & STT Orchestration`, `Feynman Attempts & SRS Cards`, `TTS Synthesis & Audio Cache`, `User Profile Endpoints`?**
+  _High betweenness centrality (0.078) - this node is a cross-community bridge._
+- **Why does `Topic` connect `App Core & Data Models` to `Test Scaffolding`, `Auth & User Records`, `Feynman Attempts & SRS Cards`, `Feynman Scoring Engine`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+- **Why does `DialogueAssessmentTests` connect `Dialogue Regression Tests` to `Test Scaffolding`?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Are the 31 inferred relationships involving `User` (e.g. with `start_attempt()` and `stt_status()`) actually correct?**
+  _`User` has 31 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `Base` (e.g. with `on_startup()` and `seed()`) actually correct?**
+  _`Base` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 10 inferred relationships involving `Topic` (e.g. with `start_attempt()` and `submit_round()`) actually correct?**
+  _`Topic` has 10 INFERRED edges - model-reasoned connections that need verification._

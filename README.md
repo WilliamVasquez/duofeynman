@@ -43,7 +43,21 @@ Cada **Topic** del curriculum se ataca con un ciclo de 5 etapas:
 4. **REFINE** — Preguntas socráticas: combinación de `socratic_hints` fijas del curriculum + sugerencias generadas por templates (ej: *"Try saying it again using 'because'"*).
 5. **CONSOLIDATE** — Si dominó (score ≥ 0.78), creamos una card SRS (algoritmo SM-2) que vuelve a aparecer en 1d, 3d, 7d, 21d...
 
-Además del ciclo Feynman, hay **diálogos guionados** (51 escenarios): conversás por turnos con un personaje (NPC rule-based), con modos hablar / escribir / ordenar-palabras. La UI está en **inmersión total en inglés**, con la traducción al español disponible al hacer clic/hover en cada línea.
+Además del ciclo Feynman, hay **diálogos guionados** (51 escenarios): conversás por turnos con un
+personaje (NPC rule-based). Cada turno tuyo se puede responder en tres modos:
+
+- 💬 **Choose** (default) — 3 respuestas completas y **todas válidas**, con intenciones distintas
+  (aceptar, rechazar, preguntar algo). Tocás una y la decis. Nunca te quedas sin saber qué responder.
+- ✍️🎤 **Write / Speak** — escribis o hablas libre. Es el modo de producción real.
+- 🧩 **Order words** — armas la oración tocando las palabras desordenadas.
+
+El motor de validación es una **guía, no un examen**: acepta siempre cualquier respuesta que la app
+haya ofrecido, mide la similitud contra la mejor de todas ellas (no contra una única respuesta modelo),
+explica **en pantalla y en español** qué faltó, y si igual no reconoce tu respuesta te deja avanzar
+con *Continue anyway* — nunca hay callejón sin salida.
+
+La UI está en **inmersión total en inglés**, con la traducción al español disponible al hacer
+clic/hover en cada línea (también en cada opción de respuesta, con su botón `ES`).
 
 ## Setup paso a paso
 
@@ -214,7 +228,7 @@ duofeynman/
 
 ## Curriculum incluido (A1 → B1)
 
-**16 módulos · 32 lecciones · 62 topics · 51 diálogos guionados**
+**16 módulos · 32 lecciones · 62 topics · 51 diálogos guionados (205 turnos, 615 respuestas escritas)**
 
 | Nivel | Módulos |
 |---|---|
@@ -244,7 +258,8 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 - [x] Logros desbloqueables automáticos + confetti
 - [x] Panel SRS de repaso diario (SM-2)
 - [x] Modo Dictado para entrenar el oído
-- [x] **Diálogos guionados (51 escenarios, hablar/escribir/ordenar palabras)**
+- [x] **Diálogos guionados (51 escenarios; elegir / hablar / escribir / ordenar palabras)**
+- [x] **Modo Choose: 3 respuestas válidas por turno, con feedback visible y salida sin trabarse**
 - [x] **Inmersión total en inglés con traducción al clic/hover**
 - [x] **Dark mode + animaciones + skeleton loaders + mascota**
 - [x] **Hardening de seguridad (ver SECURITY.md)**
@@ -267,7 +282,8 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 | `GET /api/srs/due` `/stats` | Cards SRS que vencen hoy |
 | `POST /api/dictation/next` `POST /api/dictation/check` | Crear y corregir un dictado por ID; recompensa única |
 | `GET /api/dictation/{id}/audio` | Audio del dictado autenticado (`?slow=true` para más lento) |
-| `GET /api/dialogues` `POST /check` | Diálogos guionados (turnos con NPC) |
+| `GET /api/dialogues` `/{id}` | Diálogos guionados; cada turno USER trae `answer_options` (nunca `required_keywords`) |
+| `POST /api/dialogues/turn/check` | Corrige un turno: score, motivo en español, `passed` y `can_continue` |
 | `GET/PUT /api/me/profile` | Perfil personalizado (contexto Feynman) |
 | `GET /api/tts?text=...&voice=aria` | TTS neural (MP3 o WAV) |
 | `GET /api/tts/status` | Qué backends TTS están disponibles |
@@ -278,7 +294,12 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 
 Desde `backend/`, actualizá el entorno con `python -m pip install -r requirements.txt`
 y reiniciá el backend. El arranque existente crea la nueva tabla `dictation_exercises`
-si falta; conserva las tablas y datos actuales. No hace falta ejecutar el seed.
+si falta; conserva las tablas y datos actuales.
+
+**Ahora sí hace falta correr el seed** (`python -m app.seed`): agrega la columna
+`dialogue_turns.answer_options` a las bases que ya existían y carga las 615 respuestas
+del modo Choose. Es idempotente y no borra progreso. Sin eso, los diálogos caen al
+fallback (respuesta modelo + helper_phrases) en vez de mostrar las opciones escritas.
 
 Las pruebas usan SQLite en memoria y servicios de voz/gramática simulados:
 

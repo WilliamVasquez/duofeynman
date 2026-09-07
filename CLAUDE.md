@@ -65,8 +65,36 @@ y huecos de vocabulario.
 - **edge-tts exige signo en el rate:** `"0%"` lanza `ValueError`, va `"+0%"`.
 - **Code-switch detector:** cuidado con falsos positivos en nombres propios ("El Salvador").
   Hay PROPER_NOUNS_WHITELIST + chequeo de mayúsculas.
-- **Detección de "passed":** los keywords requeridos NO deben ser demasiado estrictos. Se relajó
-  a `score >= 0.75` o falta 1 grupo con `score >= 0.6`.
+- **El motor de diálogos es una GUÍA, no un examen.** Nunca puede rechazar algo que la app misma
+  ofreció. Antes `required_keywords` pesaba 0.50 del score y funcionaba como compuerta: codíficaba
+  UNA respuesta esperada y mataba cualquier otra respuesta válida — **316 de 599 `helper_phrases` y
+  5 de 205 respuestas modelo se rechazaban a sí mismas**. Reglas actuales:
+  - keywords pesan 0.30 (bonus, no compuerta);
+  - la similitud se mide contra la MEJOR de todas las `accepted_answers`
+    (`user_example_en` + `answer_options` + `helper_phrases`), nunca contra una sola;
+  - `similarity >= 0.90` → pasa siempre (dijo algo que la app ofreció);
+  - `cs_rate >= 0.20` corta el paso: sin eso "no sé qué decir" cubría el grupo
+    `["yes","no","please"]` con el "no" y pasaba;
+  - si igual no pasa, `can_continue` deja avanzar. **Nunca callejón sin salida.**
+  Al tocar el motor, correr `tests/test_learning.py::DialogueAssessmentTests`: valida las 1419
+  respuestas ofrecidas y que la basura siga sin pasar.
+- **`answer_options` es obligatorio en cada turno USER** (modo Choose, el default). Forma
+  `[{"en": ..., "es": ...}]`, mínimo 2, siempre con traducción. Las opciones tienen que ser
+  **intenciones distintas** (aceptar / rechazar / preguntar), no paráfrasis de la misma cosa:
+  si todas dicen lo mismo, el usuario no elige nada. El frontend tiene fallback (modelo +
+  `helper_phrases`) pero es pobre a propósito: si ves ese fallback, faltan datos.
+- **`create_all` NO agrega columnas a tablas que ya existen.** Las columnas nuevas se migran con
+  `_add_column_if_missing()` en `seed.py`. En MySQL las columnas TEXT/BLOB/**JSON** no admiten
+  DEFAULT: se agregan NULL y se rellenan con un UPDATE aparte.
+- **Cambiar un default que vive en `localStorage` necesita bump de key.** `duofeynman_input_mode`
+  tenía `"type"` guardado, así que el nuevo default `"choose"` no le iba a aparecer a nadie que ya
+  hubiera usado la app. Va `duofeynman_input_mode_v2`.
+- **Colores por token, nunca hex fijo.** Varios paneles tenían `#fef3c7` / `#b45309` / `#92400e`
+  hardcodeados y se veían como bloques claros arriba del tema oscuro. Para tintes va
+  `color-mix(in srgb, var(--warn) 16%, var(--surface))`. Ojo con reglas duplicadas del mismo
+  selector en distintas partes de `styles.css` (`.user-hint` estaba dos veces).
+- **El feedback va VISIBLE, no en `title=`.** El motivo del rechazo vivía en un tooltip: en móvil
+  el usuario veía "Try again" sin saber qué arreglar.
 
 ## Comandos clave
 
@@ -80,11 +108,17 @@ python -m app.seed
 
 # Verificar sintaxis de un módulo editado
 python -m py_compile app\services\gamification.py
+
+# Tests (SQLite en memoria, sin servicios externos)
+python -B -m unittest discover -s tests
 ```
 
 ```bash
 # Validar JS (no hay build, es vanilla)
 node --check frontend/js/app.js
+
+# Regresiones de frontend
+node --test frontend/tests/regressions.test.cjs
 ```
 
 La app se sirve en http://localhost:8000 (FastAPI sirve el frontend estático).
@@ -104,6 +138,8 @@ La app se sirve en http://localhost:8000 (FastAPI sirve el frontend estático).
 
 - `backend/app/data/curriculum/a1_curriculum.json` — 16 módulos A1→B1, 62 topics.
 - `backend/app/data/curriculum/dialogues.json` — 51 diálogos guionados (con `setting_en`/`setting_es`).
+  Cada turno USER lleva `user_hint_es`, `user_example_en`, `required_keywords`, `helper_phrases` y
+  `answer_options` (205 turnos · 615 respuestas).
 - Estructura: `modules → lessons → topics`. Cada topic tiene `prompt_en/es`, `key_vocabulary`,
   `connectors`, `socratic_hints`, `difficulty`.
 
@@ -111,6 +147,10 @@ La app se sirve en http://localhost:8000 (FastAPI sirve el frontend estático).
 
 Cubierto hasta **B1**. No agregar B2 todavía (decisión del usuario: "lleguemos hasta B1").
 Features pendientes priorizadas: listening comprehension, dificultad adaptativa.
+
+Los diálogos ya tienen **modo Choose por default** (3 respuestas válidas por turno) y feedback
+visible con salida `Continue anyway`. Si vas a agregar diálogos nuevos, escribirí las
+`answer_options` en el mismo commit: sin ellas el turno arranca sin guía.
 
 ## Archivos sensibles (NUNCA commitear)
 

@@ -15,7 +15,7 @@ from app.routers import attempts
 from app.schemas.attempt import AttemptRoundIn
 from app.services import analyzer, feynman_engine
 from app.services.text_utils import matches_term
-from app.services.dialogue_engine import _keyword_coverage
+from app.services.dialogue_engine import _keyword_coverage, evaluate_turn
 from app.routers import dictation
 from app.models.dictation import DictationExercise
 from fastapi import HTTPException
@@ -161,6 +161,72 @@ class AssessmentTests(unittest.TestCase):
         self.assertTrue(matches_term("I haven't called my mom yet.", "I haven't ... yet"))
         self.assertTrue(matches_term("I kept going and it is paying off.", "keep going"))
         self.assertTrue(matches_term("I wake up at 6:30.", "at six thirty"))
+
+
+class DialogueAssessmentTests(unittest.TestCase):
+    """La app no puede rechazar las respuestas que ella misma ofrece.
+
+    Regresión concreta: cuando `required_keywords` pesaba 0.50 del score,
+    316 de 599 helper_phrases y 5 de 205 respuestas modelo NO pasaban su
+    propio scoring. El usuario tocaba una sugerencia y la app le decía
+    "Try again" sin explicar nada.
+    """
+
+    def setUp(self):
+        path = Path(__file__).parents[1] / "app/data/curriculum/dialogues.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        self.user_turns = [
+            t
+            for d in data["dialogues"]
+            for t in d["turns"]
+            if t["speaker"] == "USER"
+        ]
+
+    def _offered(self, turn):
+        """Todo lo que la app le muestra al usuario como respuesta válida."""
+        return [o["en"] for o in turn.get("answer_options") or []] + (
+            turn.get("helper_phrases") or []
+        )
+
+    def _evaluate(self, turn, text):
+        return evaluate_turn(
+            text,
+            turn.get("required_keywords") or [],
+            turn.get("user_example_en") or "",
+            self._offered(turn),
+        )
+
+    def test_every_offered_answer_passes(self):
+        self.assertTrue(self.user_turns, "no se cargaron turnos USER")
+        for turn in self.user_turns:
+            for text in [turn.get("user_example_en") or "", *self._offered(turn)]:
+                with self.subTest(text=text):
+                    self.assertTrue(self._evaluate(turn, text)["passed"])
+
+    def test_every_user_turn_has_answer_options(self):
+        """El modo Choose es el default: un turno sin opciones deja al
+        usuario sin guía, que es justo el bug que esto arregla."""
+        for turn in self.user_turns:
+            with self.subTest(hint=turn.get("user_hint_es")):
+                options = turn.get("answer_options") or []
+                self.assertGreaterEqual(len(options), 2)
+                for o in options:
+                    self.assertTrue(o.get("en"))
+                    self.assertTrue(o.get("es"), "falta la traducción al español")
+
+    def test_garbage_and_spanish_do_not_pass(self):
+        # "no se que decir" cubría el grupo ["yes","no","please"] con el "no":
+        # sin el corte por code-switch, pasaba.
+        for text in ("asdf", "banana tractor purple sleeps", "no se que decir", "yo quiero comer"):
+            for turn in self.user_turns:
+                with self.subTest(text=text, hint=turn.get("user_hint_es")):
+                    self.assertFalse(self._evaluate(turn, text)["passed"])
+
+    def test_can_continue_offers_a_way_out_when_it_fails(self):
+        turn = self.user_turns[0]
+        result = self._evaluate(turn, "banana tractor purple sleeps")
+        self.assertFalse(result["passed"])
+        self.assertTrue(result["can_continue"], "el usuario quedaría trabado en el turno")
 
 
 if __name__ == "__main__":

@@ -128,3 +128,7 @@ backend/alembic/versions/__pycache__/
 *_backup/
 _backup/
 *.old
+
+# --- Config y contexto de agentes (local, no se comparte) ---
+.claude/
+AGENTS.md
