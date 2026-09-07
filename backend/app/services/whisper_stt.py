@@ -98,13 +98,13 @@ def get_model() -> WhisperModel:
     return _model
 
 
-def _clean(text: str) -> str:
-    """Recorta espacios y descarta alucinaciones de silencio."""
+def _clean(text: str, *, silence_likely: bool = False) -> str:
+    """No descartar saludos reales solo por coincidir con una frase frecuente."""
     text = text.strip()
     if not text:
         return ""
     bare = re.sub(r"[^a-z\s']", "", text.lower()).strip()
-    if bare in _HALLUCINATIONS:
+    if silence_likely and bare in _HALLUCINATIONS:
         log.info("Whisper alucinó sobre silencio (%r), lo descarto.", text)
         return ""
     return text
@@ -170,7 +170,14 @@ def transcribe(audio_bytes: bytes, hints: list[str] | None = None) -> str:
             temperature=0.0,            # determinístico
             hotwords=hotwords,
         )
-        parts = [seg.text for seg in segments]
+        parts = []
+        for seg in segments:
+            weak = (getattr(seg, "no_speech_prob", 0) >= 0.6
+                    and getattr(seg, "avg_logprob", 0) < -1.0)
+            parts.append(_clean(seg.text, silence_likely=weak))
+        # VAD sin voz: ninguna frase debe contar como respuesta.
+        if getattr(info, "duration_after_vad", None) == 0:
+            return ""
     except STTUnavailable:
         raise
     except Exception as e:

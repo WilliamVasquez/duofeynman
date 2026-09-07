@@ -8,6 +8,10 @@
 const Profile = (() => {
   const CACHE_KEY = "duofeynman_profile_cache";
   const DIRTY_KEY = "duofeynman_profile_dirty";
+  const pushes = new Map();
+  const owner = () => API.getUser()?.id ?? null;
+  const key = (base, id) => `${base}:${id}`;
+  const revision = id => Number(Store.get(key("duofeynman_profile_revision", id)) || 0);
 
   const DEFAULT = {
     nickname: "",
@@ -27,23 +31,34 @@ const Profile = (() => {
     hidden_items: { dialogues: [], topics: [] },
   };
 
-  function _readCache() {
-    const cached = Store.getJSON(CACHE_KEY, null);
-    return cached ? { ...DEFAULT, ...cached } : { ...DEFAULT };
+  function _readCache(id = owner()) {
+    if (id == null) return JSON.parse(JSON.stringify(DEFAULT));
+    let cached = Store.getJSON(key(CACHE_KEY, id), null);
+    // Migrar solamente un caché antiguo cuyo dueño esté identificado.
+    if (!cached) {
+      const legacy = Store.getJSON(CACHE_KEY, null);
+      if (legacy?.user_id === id) {
+        cached = legacy;
+        Store.setJSON(key(CACHE_KEY, id), cached);
+        if (Store.get(DIRTY_KEY)) Store.set(key(DIRTY_KEY, id), "1");
+      }
+    }
+    return { ...JSON.parse(JSON.stringify(DEFAULT)), ...cached };
   }
 
-  function _writeCache(data) {
-    const merged = { ...DEFAULT, ..._readCache(), ...data };
-    Store.setJSON(CACHE_KEY, merged);
+  function _writeCache(data, id = owner()) {
+    if (id == null) return;
+    const merged = { ...DEFAULT, ..._readCache(id), ...data, user_id: id };
+    Store.setJSON(key(CACHE_KEY, id), merged);
   }
 
-  function _markDirty(flag) {
-    if (flag) Store.set(DIRTY_KEY, "1");
-    else Store.remove(DIRTY_KEY);
+  function _markDirty(flag, id = owner()) {
+    if (flag) Store.set(key(DIRTY_KEY, id), "1");
+    else Store.remove(key(DIRTY_KEY, id));
   }
 
-  function _isDirty() {
-    return !!Store.get(DIRTY_KEY);
+  function _isDirty(id = owner()) {
+    return !!Store.get(key(DIRTY_KEY, id));
   }
 
   // === API pública ===
@@ -53,13 +68,16 @@ const Profile = (() => {
 
   /** Trae del server y refresca el caché. Llamar al entrar a la app. */
   async function loadFromServer() {
+    const id = owner();
+    if (id == null) return _readCache();
+    _readCache(id); // migración segura si corresponde
     try {
+      if (_isDirty(id)) return await pushToServer();
       const data = await API.getProfile();
-      _writeCache(data);
-      // Si había cambios pendientes, intentar pushearlos primero antes de sobreescribir.
-      if (_isDirty()) {
-        await pushToServer();
-      }
+      if (owner() !== id || data.user_id !== id) return _readCache();
+      // También proteger cambios hechos mientras el GET estaba en vuelo.
+      if (_isDirty(id)) return await pushToServer();
+      _writeCache(data, id);
       return data;
     } catch (err) {
       console.warn("Profile: no se pudo leer del server, usando caché local.", err.message);
@@ -69,30 +87,44 @@ const Profile = (() => {
 
   /** Push del caché al server. */
   async function pushToServer() {
-    const data = _readCache();
-    try {
-      const resp = await API.putProfile(data);
-      _writeCache(resp);
-      _markDirty(false);
-      return resp;
-    } catch (err) {
-      console.warn("Profile: no se pudo guardar en server, queda en cola.", err.message);
-      _markDirty(true);
-      return data;
-    }
+    const id = owner();
+    if (id == null) throw new Error("Please sign in to save your profile.");
+    if (pushes.has(id)) return pushes.get(id);
+    const task = (async () => {
+      while (owner() === id) {
+        const rev = revision(id);
+        const data = _readCache(id);
+        try {
+          const resp = await API.putProfile(data);
+          if (owner() !== id) return _readCache();
+          if (revision(id) !== rev) continue;
+          _writeCache(resp, id);
+          _markDirty(false, id);
+          return resp;
+        } catch (err) {
+          _markDirty(true, id);
+          return { ..._readCache(id), sync_pending: true };
+        }
+      }
+      return _readCache();
+    })();
+    pushes.set(id, task);
+    try { return await task; } finally { pushes.delete(id); }
   }
 
   /** Guarda cambios. Actualiza caché instantáneo + intenta sync server. */
   async function save(partial) {
+    const id = owner();
+    if (id == null) throw new Error("Please sign in to save your profile.");
     _writeCache(partial);
+    Store.set(key("duofeynman_profile_revision", id), String(revision(id) + 1));
+    _markDirty(true, id);
     return pushToServer();
   }
 
   function reset() {
-    Store.remove(CACHE_KEY);
-    _markDirty(false);
     // Persistimos el reset también en server
-    return save(DEFAULT);
+    return save(JSON.parse(JSON.stringify(DEFAULT)));
   }
 
   function isFilled() {

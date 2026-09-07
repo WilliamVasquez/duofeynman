@@ -14,7 +14,7 @@ from app.models.progress import Achievement, UserAchievement
 log = logging.getLogger(__name__)
 
 
-def update_streak(db: Session, user: User) -> int:
+def calculate_streak(db: Session, user: User) -> int:
     """Recalcula la racha de días consecutivos practicados.
 
     Llamar después de completar un intento (el intento de hoy ya tiene
@@ -26,7 +26,7 @@ def update_streak(db: Session, user: User) -> int:
     # 400 días alcanza para cualquier racha humanamente posible.
     rows = (
         db.query(func.date(Attempt.completed_at))
-        .filter(Attempt.user_id == user.id, Attempt.completed_at.isnot(None))
+        .filter(Attempt.user_id == user.id, Attempt.completed_at.isnot(None), Attempt.mastered.is_(True))
         .distinct()
         .order_by(func.date(Attempt.completed_at).desc())
         .limit(400)
@@ -43,8 +43,7 @@ def update_streak(db: Session, user: User) -> int:
 
     today = date.today()
     if not dates:
-        user.streak_days = 1
-        return user.streak_days
+        return 0
 
     # Contar días consecutivos hacia atrás. La racha sigue viva si la
     # última práctica fue hoy o ayer (ayer = todavía no la perdió).
@@ -57,7 +56,13 @@ def update_streak(db: Session, user: User) -> int:
         elif d < expected:
             break
 
-    user.streak_days = max(streak, 1)
+    return streak
+
+
+def update_streak(db: Session, user: User) -> int:
+    # autoflush=False: la consulta debe incluir la finalización de hoy.
+    db.flush()
+    user.streak_days = calculate_streak(db, user)
     return user.streak_days
 
 

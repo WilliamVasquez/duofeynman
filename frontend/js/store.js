@@ -17,6 +17,7 @@ const Store = (() => {
   }
 
   function get(key) {
+    if (mem.has(key)) return mem.get(key);
     try {
       return backend ? backend.getItem(key) : (mem.has(key) ? mem.get(key) : null);
     } catch {
@@ -26,7 +27,7 @@ const Store = (() => {
 
   function set(key, value) {
     try {
-      if (backend) backend.setItem(key, value);
+      if (backend) { backend.setItem(key, value); mem.delete(key); }
       else mem.set(key, value);
     } catch {
       mem.set(key, value); // cuota llena o bloqueado → memoria
@@ -34,6 +35,7 @@ const Store = (() => {
   }
 
   function remove(key) {
+    mem.delete(key);
     try {
       if (backend) backend.removeItem(key);
       else mem.delete(key);

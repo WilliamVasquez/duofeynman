@@ -1,14 +1,14 @@
 {
   "name": "DuoFeynman",
   "short_name": "DuoFeynman",
-  "description": "Aprendé inglés hablándolo y escribiéndolo con el método Feynman",
+  "description": "Learn English by speaking and writing with the Feynman method",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0ea5e9",
   "theme_color": "#0ea5e9",
-  "lang": "es",
+  "lang": "en",
   "icons": [
     {
       "src": "/static/assets/icon.svg",

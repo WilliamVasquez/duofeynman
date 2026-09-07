@@ -22,8 +22,7 @@ const SRS = (() => {
       }
       root.innerHTML = `
         <p style="color:var(--text-soft);margin-bottom:16px">
-          Tenés <strong>${cards.length}</strong> ${cards.length === 1 ? "tema" : "temas"} para repasar.
-          Tocá uno para practicarlo de nuevo — el algoritmo lo reagenda según cómo te salga.
+          ${I18n.html(`You have ${cards.length} ${cards.length === 1 ? "topic" : "topics"} to review. Choose one to practice. Your result sets the next review date.`, `Tenés ${cards.length} temas para repasar. Elegí uno para practicar; el resultado define la próxima fecha de repaso.`)}
         </p>
         <div id="srs-list"></div>
       `;
@@ -32,7 +31,7 @@ const SRS = (() => {
         const div = document.createElement("div");
         div.className = "srs-card-item";
         div.innerHTML = `
-          <h5>🗣️ ${c.topic ? c.topic.prompt_es : c.front}</h5>
+          <h5>🗣️ ${c.topic ? I18n.html(c.topic.prompt_en, c.topic.prompt_es) : UI.escape(c.front)}</h5>
           <div class="srs-meta">
             <span>Visto ${c.repetitions} veces</span>
             <span>Intervalo ${c.interval_days}d</span>
@@ -40,6 +39,10 @@ const SRS = (() => {
         `;
         if (c.topic) {
           div.onclick = () => openTopicFn(c.topic);
+          const start = document.createElement("button");
+          start.type = "button"; start.className = "btn btn-small"; start.textContent = "Practice";
+          start.onclick = e => { e.stopPropagation(); openTopicFn(c.topic); };
+          div.appendChild(start);
         }
         list.appendChild(div);
       });

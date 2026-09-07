@@ -76,7 +76,14 @@ const API = (() => {
     insights: () => request("/api/progress/insights"),
     srsDue: () => request("/api/srs/due"),
     srsStats: () => request("/api/srs/stats"),
-    dictationNext: () => request("/api/dictation/next"),
+    dictationNext: () => request("/api/dictation/next", { method: "POST" }),
+    async dictationAudio(id, slow = false) {
+      const res = await fetch(`/api/dictation/${encodeURIComponent(id)}/audio?slow=${slow}`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+      if (!res.ok) throw new Error("Audio unavailable. Please try again.");
+      return res.blob();
+    },
     dictationCheck: (data) => request("/api/dictation/check", { method: "POST", body: data }),
     dialoguesList: () => request("/api/dialogues"),
     dialogue: (id) => request(`/api/dialogues/${id}`),

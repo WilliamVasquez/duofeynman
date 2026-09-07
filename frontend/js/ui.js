@@ -1,6 +1,9 @@
 // Helpers de UI.
 const UI = (() => {
   function show(viewId) {
+    TTS.stop();
+    if (viewId !== "view-chat" && typeof Dialogues !== "undefined") Dialogues.stop();
+    if (viewId !== "view-dictation" && typeof Dictation !== "undefined") Dictation.stop();
     document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
     document.getElementById(viewId).classList.add("active");
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -64,7 +67,7 @@ const UI = (() => {
       card.className = "module-card";
       card.innerHTML = `
         <span class="module-level">${escape(m.level)}</span>
-        <h4>${escape(m.title_es)}</h4>
+        <h4>${I18n.html(m.title_en, m.title_es)}</h4>
         <div class="lesson-list"></div>
       `;
       const lessonList = card.querySelector(".lesson-list");
@@ -80,7 +83,7 @@ const UI = (() => {
         det.innerHTML = `
           <summary>
             <span class="lesson-check">${l.completed ? "✅" : (hasCurrent ? "▶️" : "○")}</span>
-            <span class="lesson-summary-title">${escape(l.title_es)}</span>
+            <span class="lesson-summary-title">${I18n.html(l.title_en, l.title_es)}</span>
             <span class="lesson-progress-count">${l.done_count}/${l.total_count}</span>
             <span class="lesson-progress-bar"><span style="width:${l.total_count ? Math.round(l.done_count / l.total_count * 100) : 0}%"></span></span>
           </summary>
@@ -93,7 +96,7 @@ const UI = (() => {
           btn.className = `topic-btn topic-${t.status}`;
           btn.innerHTML = `
             <span class="topic-status">${STATUS_ICON[t.status] || "⚪"}</span>
-            <span class="topic-prompt">${escape(t.prompt_es)}</span>
+            <span class="topic-prompt">${I18n.html(t.prompt_en, t.prompt_es)}</span>
             <span class="difficulty">${"●".repeat(t.difficulty)}</span>
           `;
           btn.onclick = () => onTopicClick(t);
@@ -116,14 +119,22 @@ const UI = (() => {
     promptEsEl.innerHTML = "";  // se llena dinámicamente al hacer click en el prompt
     // Click handler: inserta el ES debajo
     const enSpan = promptEnEl.querySelector(".translatable");
+    enSpan.tabIndex = 0;
+    enSpan.setAttribute("role", "button");
+    enSpan.setAttribute("aria-expanded", "false");
+    enSpan.addEventListener("keydown", e => {
+      if (["Enter", " "].includes(e.key)) { e.preventDefault(); enSpan.click(); }
+    });
     enSpan.addEventListener("click", (e) => {
       e.stopPropagation();
       const existing = promptEsEl.querySelector(".es-inline");
-      if (existing) { existing.remove(); return; }
+      if (existing) { existing.remove(); enSpan.setAttribute("aria-expanded", "false"); return; }
       const span = document.createElement("div");
       span.className = "es-inline";
+      span.lang = "es";
       span.textContent = promptEs;
       promptEsEl.appendChild(span);
+      enSpan.setAttribute("aria-expanded", "true");
     });
 
     // Personalizar el ejemplo para que cuando le des "Escuchar ejemplo" diga tu nombre
@@ -133,7 +144,7 @@ const UI = (() => {
     vocab.innerHTML = "";
     (topic.key_vocabulary || []).forEach(v => {
       const li = document.createElement("li");
-      li.innerHTML = `<strong>${escape(v.en)}</strong> — ${escape(v.es)}`;
+      li.innerHTML = `<strong>${I18n.html(v.en, v.es)}</strong>`;
       vocab.appendChild(li);
     });
 

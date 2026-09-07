@@ -16,7 +16,7 @@
     const btn = document.createElement("button");
     btn.className = "theme-toggle";
     btn.title = "Cambiar tema claro/oscuro";
-    btn.setAttribute("aria-label", "Cambiar tema");
+    btn.setAttribute("aria-label", "Change theme");
     btn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "☀️" : "🌙";
     btn.onclick = () => _applyTheme(document.documentElement.getAttribute("data-theme") !== "dark");
     (tb.querySelector(".user-info") || tb).appendChild(btn);
@@ -150,7 +150,7 @@
       return;
     }
     el.classList.remove("hidden");
-    el.innerHTML = `<span class="profile-icon">👤</span><span>${summary}</span>`;
+    el.innerHTML = `<span class="profile-icon">👤</span><span>${UI.escape(summary)}</span>`;
   }
 
   function _renderWeekPanel(dialogues) {
@@ -206,7 +206,7 @@
             <span class="week-day">${days[i]}</span>
             <span class="week-icon">${d.icon}</span>
             <div class="week-body">
-              <div class="week-title">${d.title_es}</div>
+              <div class="week-title">${I18n.html(d.title_en, d.title_es)}</div>
               <div class="week-meta">${d.level} · Dificultad ${"●".repeat(d.difficulty)}</div>
             </div>
             <span class="week-go">→</span>
@@ -332,7 +332,7 @@
     // Sesgar el STT hacia el vocabulario del topic: Chrome elige entre sus
     // alternativas la que más se parece a lo que esperamos escuchar.
     Speech.setExpectedVocab([
-      ...(topic.key_vocabulary || []),
+      ...(topic.key_vocabulary || []).map(v => typeof v === "string" ? v : v.en).filter(Boolean),
       ...(topic.connectors || []),
     ]);
     setMode("speak");
@@ -564,6 +564,7 @@
   ProfileView.init();
 
   // ---- Boot ----
+  I18n.init();
   if (API.getToken() && API.getUser()) {
     enterApp().catch(() => {
       API.clear();

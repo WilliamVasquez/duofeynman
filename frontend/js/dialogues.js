@@ -5,6 +5,19 @@ const Dialogues = (() => {
   let turnIndex = 0;           // turno actual
   let scores = [];             // scores de cada turno user
   let chatRecording = false;
+  let sessionVersion = 0;
+  let submitting = false;
+
+  function stop() {
+    sessionVersion++;
+    current = null;
+    submitting = false;
+  }
+
+  function _later(callback, delay) {
+    const version = sessionVersion;
+    setTimeout(() => { if (version === sessionVersion) callback(); }, delay);
+  }
 
   // === Ejes de vida: cada slug de diálogo se mapea a una categoría ===
   // Las categorías cruzan con los "interests" del perfil para filtrar.
@@ -124,19 +137,21 @@ const Dialogues = (() => {
       <div class="dlg-icon">${d.icon}</div>
       <div class="dlg-body">
         <div class="dlg-title">
-          ${Profile.personalize(d.title_es)}
+          ${I18n.html(Profile.personalize(d.title_en), Profile.personalize(d.title_es))}
           ${d.is_adult ? '<span class="adult-badge">+18</span>' : ''}
         </div>
-        <div class="dlg-desc">${Profile.personalize(d.description_es)}</div>
-        <div class="dlg-meta">${d.level} · Dificultad ${"●".repeat(d.difficulty)} · con ${Profile.personalize(d.npc_role_es)}</div>
+        <div class="dlg-desc">${I18n.html(Profile.personalize(d.setting_en), Profile.personalize(d.setting_es))}</div>
+        <div class="dlg-meta">${d.level} · Difficulty ${"●".repeat(d.difficulty)} · ${_escapeHtml(Profile.personalize(d.npc_name))}</div>
+        <button type="button" class="btn btn-small dlg-start">Start conversation</button>
       </div>
       <button class="dlg-hide-btn" title="No me sirve, ocultar">✕</button>
     `;
     card.querySelector(".dlg-body").onclick = () => start(d.id);
+    card.querySelector(".dlg-start").onclick = e => { e.stopPropagation(); start(d.id); };
     card.querySelector(".dlg-icon").onclick = () => start(d.id);
     card.querySelector(".dlg-hide-btn").onclick = async (e) => {
       e.stopPropagation();
-      if (confirm(`¿Ocultar "${d.title_es}"? Lo podés recuperar desde Mi perfil.`)) {
+      if (confirm(`Hide "${d.title_en}"? You can restore it from My profile.`)) {
         await Profile.hideItem("dialogues", d.slug);
         _renderFiltered();
       }
@@ -145,8 +160,12 @@ const Dialogues = (() => {
   }
 
   async function start(dialogueId) {
+    const version = ++sessionVersion;
+    submitting = false;
     try {
-      current = await API.dialogue(dialogueId);
+      const data = await API.dialogue(dialogueId);
+      if (version !== sessionVersion) return;
+      current = data;
       turnIndex = 0;
       scores = [];
       UI.show("view-chat");
@@ -157,8 +176,7 @@ const Dialogues = (() => {
       const titleEn = Profile.personalize(current.title_en);
       const titleEs = Profile.personalize(current.title_es);
       const titleEl = document.getElementById("chat-title");
-      titleEl.innerHTML = `<span class="translatable" title="${_escapeAttr(titleEs)}">${titleEn}</span>`;
-      _wireTranslatable(titleEl.querySelector(".translatable"), titleEs);
+      titleEl.innerHTML = I18n.html(titleEn, titleEs);
 
       // Scene context: SIEMPRE VISIBLE en inglés. Click sobre el texto inglés
       // → muestra la traducción ES inline debajo (sin ocultar el inglés).
@@ -167,9 +185,8 @@ const Dialogues = (() => {
       const settingEn = Profile.personalize(current.setting_en || current.setting_es);
       setting.innerHTML = `
         <div class="setting-label">📍 Scene context</div>
-        <div class="setting-text translatable" title="${_escapeAttr(settingEs)} (click for Spanish)">${settingEn}</div>
+        <div class="setting-text">${I18n.html(settingEn, settingEs)}</div>
       `;
-      _wireTranslatable(setting.querySelector(".setting-text"), settingEs);
 
       // Banner de perfil: chip "Your profile" en inglés. Click → expande EN.
       // Ese EN es a su vez translatable → click → muestra ES inline debajo.
@@ -198,7 +215,7 @@ const Dialogues = (() => {
       document.getElementById("chat-input").value = "";
       _nextTurn();
     } catch (err) {
-      alert("Error: " + err.message);
+      UI.toast("Error: " + err.message, { type: "error" });
     }
   }
 
@@ -210,7 +227,7 @@ const Dialogues = (() => {
     if (turn.speaker === "NPC") {
       _renderNpcMessage(turn);
       // Auto-speak
-      setTimeout(() => TTS.speak(turn.npc_text_en), 200);
+      _later(() => TTS.speak(Profile.personalize(turn.npc_text_en)), 200);
       turnIndex++;
       // Si el siguiente es USER, mostrar input
       const nextTurn = current.turns[turnIndex];
@@ -218,7 +235,7 @@ const Dialogues = (() => {
         _showUserInput(nextTurn);
       } else if (nextTurn && nextTurn.speaker === "NPC") {
         // Dos NPC seguidos: esperar un poco y mostrar
-        setTimeout(() => _nextTurn(), 1800);
+        _later(() => _nextTurn(), 1800);
       } else {
         _finish();
       }
@@ -242,6 +259,12 @@ const Dialogues = (() => {
    */
   function _wireTranslatable(el, esText) {
     if (!el || !esText) return;
+    el.tabIndex = 0;
+    if (el.tagName !== "BUTTON") el.setAttribute("role", "button");
+    el.setAttribute("aria-expanded", "false");
+    el.addEventListener("keydown", e => {
+      if (el.tagName !== "BUTTON" && ["Enter", " "].includes(e.key)) { e.preventDefault(); el.click(); }
+    });
     el.classList.add("translatable");
     el.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -249,12 +272,15 @@ const Dialogues = (() => {
       const next = el.nextElementSibling;
       if (next && next.classList.contains("es-inline")) {
         next.remove();
+        el.setAttribute("aria-expanded", "false");
         return;
       }
       const span = document.createElement("div");
       span.className = "es-inline";
+      span.lang = "es";
       span.textContent = esText;
       el.insertAdjacentElement("afterend", span);
+      el.setAttribute("aria-expanded", "true");
     });
   }
 
@@ -442,20 +468,24 @@ const Dialogues = (() => {
   }
 
   async function _submitUserTurn() {
+    if (!current || submitting) return;
+    const version = sessionVersion;
     const turn = current.turns[turnIndex];
     if (!turn || turn.speaker !== "USER") return;
     const input = document.getElementById("chat-input");
     let text = "";
     if (inputMode === "order") {
       text = _getOrderedText().trim();
-      if (!text) { alert("Tocá las palabras para armar la oración."); return; }
+      if (!text) { UI.toast("Tap the words to build a sentence.", { type: "warn" }); return; }
     } else {
       text = input.value.trim();
       if (!text) return;
     }
 
+    submitting = true;
     try {
       const result = await API.dialogueCheck({ turn_id: turn.id, user_text: text });
+      if (version !== sessionVersion) return;
       _renderUserMessage(text);
       _renderTurnFeedback(result);
       scores.push(result.score);
@@ -465,13 +495,15 @@ const Dialogues = (() => {
         turnIndex++;
         document.getElementById("chat-input-zone").classList.add("hidden");
         outputWords = []; bankWords = [];
-        setTimeout(() => _nextTurn(), 1200);
+        _later(() => { submitting = false; _nextTurn(); }, 1200);
       } else {
+        submitting = false;
         // No avanzamos; le damos una segunda oportunidad
         // (puede reintentar o saltar)
       }
     } catch (err) {
-      alert("Error: " + err.message);
+      submitting = false;
+      UI.toast("Error: " + err.message, { type: "error" });
     }
   }
 
@@ -573,5 +605,5 @@ const Dialogues = (() => {
     _initMic();
   }
 
-  return { renderList, start, init };
+  return { renderList, start, init, stop };
 })();

@@ -40,7 +40,7 @@ const ProfileView = (() => {
         ALL_DIALOGUES_REF.list = all;
         hidden.dialogues.forEach(slug => {
           const d = all.find(x => x.slug === slug);
-          if (d) items.push({ kind: "dialogues", slug, label: `${d.icon} ${d.title_es}` });
+          if (d) items.push({ kind: "dialogues", slug, label: `${d.icon} ${d.title_en}` });
         });
       } catch {}
     }
@@ -54,7 +54,7 @@ const ProfileView = (() => {
     items.forEach(it => {
       const row = document.createElement("div");
       row.className = "hidden-item-row";
-      row.innerHTML = `<span>${it.label}</span><button class="btn-ghost">Mostrar</button>`;
+      row.innerHTML = `<span>${UI.escape(it.label)}</span><button class="btn-ghost">Show</button>`;
       row.querySelector("button").onclick = async () => {
         await Profile.unhideItem(it.kind, it.slug);
         _renderHidden();
@@ -100,7 +100,11 @@ const ProfileView = (() => {
       let okMessage = "Perfil guardado correctamente";
       let savedOk = true;
       try {
-        await Profile.save(data);
+        const saved = await Profile.save(data);
+        if (saved.sync_pending) {
+          okMessage = "Saved on this device. Sync pending.";
+          savedOk = false;
+        }
       } catch {
         okMessage = "Guardado solo en este dispositivo (sin internet)";
         savedOk = false;
@@ -117,7 +121,7 @@ const ProfileView = (() => {
     };
 
     document.getElementById("btn-profile-reset").onclick = async () => {
-      if (confirm("¿Borrar todos los datos de tu perfil? Esto NO borra tus progresos.")) {
+      if (confirm("Reset your profile? Your learning progress will be kept.")) {
         await Profile.reset();
         _fillForm();
         _renderHidden();

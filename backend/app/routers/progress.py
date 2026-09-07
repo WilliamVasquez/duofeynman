@@ -11,6 +11,7 @@ from app.models.curriculum import Topic
 from app.models.progress import UserProgress, Achievement, UserAchievement
 from app.models.srs import SrsCard
 from app.routers.deps import get_current_user
+from app.services.gamification import calculate_streak
 
 
 router = APIRouter(prefix="/api/progress", tags=["progress"])
@@ -24,12 +25,12 @@ def summary(
     total_attempts = db.query(func.count(Attempt.id)).filter_by(user_id=user.id).scalar() or 0
     mastered = (
         db.query(func.count(UserProgress.id))
-        .filter(UserProgress.user_id == user.id, UserProgress.mastery_level >= 3)
+        .filter(UserProgress.user_id == user.id, UserProgress.mastery_level >= 1)
         .scalar() or 0
     )
     avg_score = (
         db.query(func.avg(Attempt.overall_score))
-        .filter(Attempt.user_id == user.id, Attempt.completed_at.isnot(None))
+        .filter(Attempt.user_id == user.id, Attempt.word_count > 0)
         .scalar()
     )
     due_cards = (
@@ -41,7 +42,7 @@ def summary(
         "username": user.username,
         "current_level": user.current_level,
         "target_level": user.target_level,
-        "streak_days": user.streak_days,
+        "streak_days": calculate_streak(db, user),
         "total_xp": user.total_xp,
         "total_attempts": total_attempts,
         "mastered_topics": mastered,
@@ -74,6 +75,7 @@ def dashboard(
             Attempt.user_id == user.id,
             Attempt.completed_at.isnot(None),
             Attempt.completed_at >= seven_days_ago,
+            Attempt.word_count > 0,
         )
         .group_by(func.date(Attempt.completed_at))
         .all()
@@ -200,7 +202,7 @@ def insights(
             func.count(Attempt.id).label("attempts"),
         )
         .join(Attempt, Attempt.topic_id == Topic.id)
-        .filter(Attempt.user_id == user.id, Attempt.completed_at.isnot(None))
+        .filter(Attempt.user_id == user.id, Attempt.word_count > 0)
         .group_by(Topic.id, Topic.prompt_es, Topic.slug)
         .having(func.count(Attempt.id) >= 1)
         .order_by("avg_score")
@@ -222,7 +224,7 @@ def insights(
         .join(UserProgress, UserProgress.topic_id == Topic.id)
         .filter(
             UserProgress.user_id == user.id,
-            UserProgress.mastery_level >= 3,
+            UserProgress.mastery_level >= 1,
             UserProgress.attempts_count <= 2,
         )
         .order_by(desc(UserProgress.best_score))
@@ -242,7 +244,7 @@ def insights(
             func.avg(Attempt.overall_score).label("score"),
             func.avg(Attempt.word_count).label("words"),
         )
-        .filter(Attempt.user_id == user.id, Attempt.completed_at.isnot(None))
+        .filter(Attempt.user_id == user.id, Attempt.word_count > 0)
         .first()
     )
     averages = {

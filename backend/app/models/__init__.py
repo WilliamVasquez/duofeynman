@@ -6,6 +6,7 @@ from app.models.srs import SrsCard
 from app.models.progress import UserProgress, Achievement, UserAchievement
 from app.models.dialogue import Dialogue, DialogueTurn
 from app.models.profile import UserProfile
+from app.models.dictation import DictationExercise
 
 __all__ = [
     "User",
@@ -21,4 +22,5 @@ __all__ = [
     "Dialogue",
     "DialogueTurn",
     "UserProfile",
+    "DictationExercise",
 ]

@@ -21,14 +21,33 @@ from __future__ import annotations
 import logging
 import random
 import re
+import json
+from pathlib import Path
 from typing import Any
 
 from app.models.curriculum import Topic
 from app.services import analyzer
-from app.services.text_utils import normalize as _tnorm
+from app.services.text_utils import normalize as _tnorm, matches_term
 
 
 log = logging.getLogger(__name__)
+
+# Criterios editoriales de contenido: alternativas OR dentro de cada grupo.
+# No evalúan semántica libre; el feedback explica qué evidencia falta.
+ASSESSMENT = json.loads((Path(__file__).parents[1] / "data/curriculum/assessment.json").read_text(encoding="utf-8"))
+
+
+def check_objective(topic: Topic, text: str) -> tuple[bool, list[list[str]]]:
+    normalized = " " + _tnorm(text) + " "
+    groups = ASSESSMENT.get(topic.slug)
+    if groups is None:
+        groups = [_vocab_strings(topic)] if _vocab_strings(topic) else []
+    def matches(term):
+        if term == "i am <number>":
+            return bool(re.search(r"\bi am (?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b", normalized))
+        return matches_term(text, term)
+    missing = [group for group in groups if not any(matches(term) for term in group)]
+    return not missing, missing
 
 
 # Pool de mensajes motivacionales en español, según rango de score.
@@ -70,9 +89,8 @@ def _coverage(text: str, items: list[str]) -> tuple[float, list[str]]:
     """
     if not items:
         return 1.0, []
-    t = _tnorm(text)
-    found = [it for it in items if _tnorm(it) in t]
-    missing = [it for it in items if _tnorm(it) not in t]
+    found = [it for it in items if matches_term(text, it)]
+    missing = [it for it in items if not matches_term(text, it)]
     return len(found) / len(items), missing
 
 
@@ -86,7 +104,8 @@ def _vocab_strings(topic: Topic) -> list[str]:
 
 
 def compute_subscores(
-    metrics: dict, vocab_cov: float, connector_cov: float, difficulty: int = 3
+    metrics: dict, vocab_cov: float, connector_cov: float, difficulty: int = 3,
+    reference: dict | None = None,
 ) -> dict:
     """Calcula 4 sub-scores (0-1) que se le muestran al usuario.
 
@@ -104,10 +123,11 @@ def compute_subscores(
     vocabulary = (vocab_cov * 0.6 + lex_div_norm * 0.4)
 
     # Estructura: objetivos escalados por dificultad
-    tense_target = 2.0 if difficulty <= 2 else 3.0
-    sentence_target = 2.0 if difficulty <= 2 else 3.0
+    reference = reference or {}
+    tense_target = min(3, reference.get("tense_diversity", 1))
+    sentence_target = max(1, min(3, reference.get("sentence_count", 2)))
     tenses = metrics.get("tense_diversity", 0)
-    tense_score = min(tenses / tense_target, 1.0)
+    tense_score = min(tenses / tense_target, 1.0) if tense_target else 1.0
     sentences = metrics.get("sentence_count", 1)
     sentence_score = min(sentences / sentence_target, 1.0)
     structure = (connector_cov * 0.4 + tense_score * 0.3 + sentence_score * 0.3)
@@ -124,7 +144,8 @@ def compute_subscores(
     naturalness = (cs_score * 0.6 + grammar_score * 0.4)
 
     # Fluidez (longitud + velocidad)
-    length_score = min(word_count / 20.0, 1.0)
+    length_target = max(5, min(20, reference.get("word_count", 20)))
+    length_score = min(word_count / length_target, 1.0)
     fluency_raw = metrics.get("fluency_score", 0)
     fluency_combined = (length_score * 0.5 + fluency_raw * 0.5)
 
@@ -244,12 +265,13 @@ async def evaluate_round(
     En modo 'write' la fluidez no se mide por wpm (penalizaría injustamente).
     """
     local_metrics = analyzer.analyze_transcript(transcript, duration_seconds)
+    reference = analyzer.analyze_transcript(topic.example_en or "", 0)
     grammar_errors = await analyzer.check_grammar(transcript)
 
     # En modo escrito ignoramos fluidez por tiempo y la basamos en longitud
     if mode == "write":
         wc = local_metrics["word_count"]
-        local_metrics["fluency_score"] = min(wc / 30.0, 1.0)
+        local_metrics["fluency_score"] = min(wc / max(5, min(30, reference["word_count"])), 1.0)
 
     local_metrics["grammar_errors_count"] = len(grammar_errors)
 
@@ -260,13 +282,22 @@ async def evaluate_round(
 
     difficulty = int(topic.difficulty or 3)
     threshold = mastery_threshold(difficulty)
-    subscores = compute_subscores(local_metrics, vocab_cov, connector_cov, difficulty)
+    # Los conectores son sugerencias. No exigir más de los que usa el modelo.
+    reference_connectors, _ = _coverage(topic.example_en or "", connectors)
+    connector_score = min(1.0, connector_cov / reference_connectors) if reference_connectors else 1.0
+    subscores = compute_subscores(local_metrics, vocab_cov, connector_score, difficulty, reference)
     score = compute_overall_score(subscores)
+    objective_met, missing_objective = check_objective(topic, transcript)
+    if not objective_met:
+        score = min(score, round(threshold - 0.01, 2))
     action = decide_next_action(score, local_metrics["word_count"], difficulty)
     encouragement = pick_encouragement(score, local_metrics, threshold)
     socratic = build_socratic_questions(
         topic, score, missing_vocab, missing_connectors, threshold
     )
+    if not objective_met:
+        suggestions = "; ".join(" / ".join(g[:3]) for g in missing_objective)
+        socratic = [f"Answer this task: {topic.prompt_en}", f"Try using: {suggestions}."]
 
     errors = build_corrections(
         grammar_errors,
@@ -280,6 +311,7 @@ async def evaluate_round(
 
     return {
         "overall_score": score,
+        "objective_met": objective_met,
         "fluency_score": local_metrics["fluency_score"],
         "code_switch_rate": local_metrics["code_switch_rate"],
         "self_correction_rate": local_metrics.get("self_correction_rate", 0.0),

@@ -3,6 +3,7 @@ const TTS = (() => {
   const cache = new Map();   // key="voice|text" → blobUrl
   const CACHE_MAX = 40;      // tope: al superarlo se libera el blob más viejo
   let currentAudio = null;
+  let playbackVersion = 0;
 
   function _cachePut(key, url) {
     if (cache.size >= CACHE_MAX) {
@@ -39,6 +40,7 @@ const TTS = (() => {
   }
 
   function stop() {
+    playbackVersion++;
     if (currentAudio) {
       currentAudio.pause();
       currentAudio.currentTime = 0;
@@ -54,9 +56,8 @@ const TTS = (() => {
     u.rate = 0.9;
     const voices = window.speechSynthesis.getVoices();
     // Preferir voces que parezcan más naturales (Google, "Natural", "Online")
-    const best = voices.find(v => /google.*english/i.test(v.name))
-              || voices.find(v => /natural|online|neural/i.test(v.name))
-              || voices.find(v => v.lang.startsWith("en"));
+    const english = voices.filter(v => v.lang.startsWith("en"));
+    const best = english.find(v => /google|natural|online|neural/i.test(v.name)) || english[0];
     if (best) u.voice = best;
     window.speechSynthesis.speak(u);
   }
@@ -64,29 +65,32 @@ const TTS = (() => {
   async function speak(text, voiceOverride) {
     if (!text) return;
     stop();
+    const version = playbackVersion;
     const voice = voiceOverride || preferredVoice;
     const key = `${voice}|${level}|${text}`;
 
     // Cache hit
     if (cache.has(key)) {
       currentAudio = new Audio(cache.get(key));
-      currentAudio.play().catch(() => _fallbackBrowser(text));
+      currentAudio.play().catch(() => { if (version === playbackVersion) _fallbackBrowser(text); });
       return;
     }
 
     let url = null;
     try {
       const blob = await API.tts(text, voice, level);
+      if (version !== playbackVersion) return;
       url = URL.createObjectURL(blob);
       currentAudio = new Audio(url);
       await currentAudio.play();
+      if (version !== playbackVersion) { URL.revokeObjectURL(url); return; }
       // Cachear recién DESPUÉS de que play() funcione: si falla, revocamos
       // el blob URL (sino queda huérfano en memoria — leak progresivo).
       _cachePut(key, url);
     } catch (e) {
       if (url && !cache.has(key)) URL.revokeObjectURL(url);
       console.warn("TTS backend no disponible, usando navegador:", e.message);
-      _fallbackBrowser(text);
+      if (version === playbackVersion) _fallbackBrowser(text);
     }
   }
 

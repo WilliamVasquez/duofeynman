@@ -265,12 +265,37 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 | `POST /api/attempts/transcribe` | Sube audio → Whisper/Vosk transcribe (Firefox) |
 | `GET /api/progress/summary` `/dashboard` | Stats + gráficos + logros |
 | `GET /api/srs/due` `/stats` | Cards SRS que vencen hoy |
-| `GET /api/dictation/next` `POST /check` | Modo escucha-y-escribí |
+| `POST /api/dictation/next` `POST /api/dictation/check` | Crear y corregir un dictado por ID; recompensa única |
+| `GET /api/dictation/{id}/audio` | Audio del dictado autenticado (`?slow=true` para más lento) |
 | `GET /api/dialogues` `POST /check` | Diálogos guionados (turnos con NPC) |
 | `GET/PUT /api/me/profile` | Perfil personalizado (contexto Feynman) |
 | `GET /api/tts?text=...&voice=aria` | TTS neural (MP3 o WAV) |
 | `GET /api/tts/status` | Qué backends TTS están disponibles |
 
 ---
+
+## Actualización y pruebas de regresión
+
+Desde `backend/`, actualizá el entorno con `python -m pip install -r requirements.txt`
+y reiniciá el backend. El arranque existente crea la nueva tabla `dictation_exercises`
+si falta; conserva las tablas y datos actuales. No hace falta ejecutar el seed.
+
+Las pruebas usan SQLite en memoria y servicios de voz/gramática simulados:
+
+```powershell
+# Desde backend/
+python -B -m unittest discover -s tests -v
+python -m pip check
+```
+
+```powershell
+# Desde la raíz
+node --test frontend/tests/regressions.test.cjs
+```
+
+La prueba opcional `frontend/tests/browser-smoke.cjs` usa Playwright y Chrome,
+una API simulada y un servidor estático en `PREVIEW_URL` (por defecto
+`http://127.0.0.1:8765`). El servidor debe mapear `/static/` a `frontend/`.
+La captura se guarda en la carpeta temporal del sistema.
 
 Hecho con ❤️ para William, que quiere por fin **hablar y escribir inglés** sin pagar suscripciones.

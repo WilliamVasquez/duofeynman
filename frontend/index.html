@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -9,21 +9,10 @@
   <meta name="apple-mobile-web-app-title" content="DuoFeynman" />
   <link rel="manifest" href="/static/manifest.json" />
   <link rel="icon" type="image/svg+xml" href="/static/assets/icon.svg" />
-  <link rel="apple-touch-icon" href="/static/assets/icon-192.png" />
-  <title>DuoFeynman — Aprendé inglés hablándolo y escribiéndolo</title>
+  <link rel="apple-touch-icon" href="/static/assets/icon-192.svg" />
+  <title>DuoFeynman — Learn English by speaking and writing</title>
   <link rel="stylesheet" href="/static/css/styles.css" />
-  <script>
-    // Aplicar tema guardado ANTES de pintar para evitar flash blanco/negro
-    (function () {
-      // try/catch: localStorage lanza en modo privado / WebView restringido.
-      var saved = null;
-      try { saved = localStorage.getItem("duofeynman_theme"); } catch (e) {}
-      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (saved === "dark" || (!saved && prefersDark)) {
-        document.documentElement.setAttribute("data-theme", "dark");
-      }
-    })();
-  </script>
+  <script src="/static/js/theme.js"></script>
 </head>
 <body>
   <div id="app">
@@ -31,21 +20,21 @@
     <section id="view-auth" class="view active">
       <div class="auth-card">
         <h1 class="brand">Duo<span>Feynman</span></h1>
-        <p class="tagline">Aprendé inglés <strong>hablándolo y escribiéndolo</strong>.</p>
+        <p class="tagline">Learn English <strong>by speaking and writing</strong>.</p>
         <div class="tabs">
-          <button class="tab active" data-tab="login">Ingresar</button>
-          <button class="tab" data-tab="register">Crear cuenta</button>
+          <button class="tab active" data-tab="login">Sign in</button>
+          <button class="tab" data-tab="register">Create account</button>
         </div>
         <form id="form-login" class="auth-form active">
           <input type="email" name="email" placeholder="Email" required autocomplete="email" />
-          <input type="password" name="password" placeholder="Contraseña" required autocomplete="current-password" />
-          <button type="submit" class="btn-primary">Entrar</button>
+          <input type="password" name="password" placeholder="Password" required autocomplete="current-password" />
+          <button type="submit" class="btn-primary">Sign in</button>
         </form>
         <form id="form-register" class="auth-form">
-          <input type="text" name="username" placeholder="Usuario (letras, números, _, ., -)" required minlength="3" maxlength="60" pattern="[A-Za-z0-9_.\-]+" />
+          <input type="text" name="username" placeholder="Username (letters, numbers, _, ., -)" required minlength="3" maxlength="60" pattern="[A-Za-z0-9_.\-]+" />
           <input type="email" name="email" placeholder="Email" required />
-          <input type="password" name="password" placeholder="Contraseña (mín 8, letras + números)" required minlength="8" maxlength="128" />
-          <button type="submit" class="btn-primary">Crear cuenta</button>
+          <input type="password" name="password" placeholder="Password (8+ characters, letters and numbers)" required minlength="8" maxlength="128" />
+          <button type="submit" class="btn-primary">Create account</button>
         </form>
         <p class="auth-error" id="auth-error"></p>
       </div>
@@ -58,7 +47,7 @@
         <div class="user-info">
           <span class="streak">🔥 <span id="streak-days">0</span></span>
           <span class="xp">⭐ <span id="total-xp">0</span></span>
-          <button id="btn-logout" class="btn-ghost">Salir</button>
+          <button id="btn-logout" class="btn-ghost">Sign out</button>
         </div>
       </header>
 
@@ -66,8 +55,8 @@
         <div class="hero">
           <div class="mascot" aria-hidden="true">🧑‍🔬</div>
           <div class="hero-text">
-            <h3>Hola, <span id="user-name">amigo</span> 👋</h3>
-            <p class="hero-sub">Seguí tu camino — un tema a la vez.</p>
+            <h3>Hello, <span id="user-name">friend</span> 👋</h3>
+            <p class="hero-sub">Follow your path — one topic at a time.</p>
           </div>
         </div>
 
@@ -78,23 +67,23 @@
         <div class="quick-actions">
           <button class="quick-btn" data-action="dashboard">
             <span class="qa-icon">📊</span>
-            <span>Mi progreso</span>
+            <span>My progress</span>
           </button>
           <button class="quick-btn" data-action="srs">
             <span class="qa-icon">📚</span>
-            <span>Repasar (<span id="srs-due-count">0</span>)</span>
+            <span>Review (<span id="srs-due-count">0</span>)</span>
           </button>
           <button class="quick-btn" data-action="dictation">
             <span class="qa-icon">🎧</span>
-            <span>Dictado</span>
+            <span>Dictation</span>
           </button>
           <button class="quick-btn" data-action="dialogues">
             <span class="qa-icon">💬</span>
-            <span>Conversaciones</span>
+            <span>Conversations</span>
           </button>
           <button class="quick-btn" data-action="profile">
             <span class="qa-icon">👤</span>
-            <span>Mi perfil</span>
+            <span>My profile</span>
           </button>
         </div>
 
@@ -102,7 +91,7 @@
         <div id="profile-card" class="profile-card hidden"></div>
         <div id="week-panel" class="week-panel"></div>
 
-        <h4 class="section-title">🗺️ Tu camino</h4>
+        <h4 class="section-title">🗺️ Your learning path</h4>
         <div id="modules" class="modules"></div>
       </main>
     </section>
@@ -110,8 +99,8 @@
     <!-- Dashboard -->
     <section id="view-dashboard" class="view">
       <header class="topbar">
-        <button class="btn-ghost btn-back-home">← Volver</button>
-        <h3>Mi progreso</h3>
+        <button class="btn-ghost btn-back-home">← Back</button>
+        <h3>My progress</h3>
         <span></span>
       </header>
       <main class="container">
@@ -122,8 +111,8 @@
     <!-- SRS Review -->
     <section id="view-srs" class="view">
       <header class="topbar">
-        <button class="btn-ghost btn-back-home">← Volver</button>
-        <h3>Repaso del día</h3>
+        <button class="btn-ghost btn-back-home">← Back</button>
+        <h3>Today's review</h3>
         <span></span>
       </header>
       <main class="container">
@@ -134,22 +123,22 @@
     <!-- Dictation -->
     <section id="view-dictation" class="view">
       <header class="topbar">
-        <button class="btn-ghost btn-back-home">← Volver</button>
-        <h3>🎧 Dictado</h3>
+        <button class="btn-ghost btn-back-home">← Back</button>
+        <h3>🎧 Dictation</h3>
         <span></span>
       </header>
       <main class="container">
         <div class="topic-card">
-          <p class="prompt-es">Escuchá la frase y escribí <strong>exactamente</strong> lo que oís.</p>
-          <p class="prompt-en" id="dictation-hint">Cargando...</p>
-          <button id="btn-dict-play" class="btn-primary">🔊 Reproducir</button>
-          <button id="btn-dict-slow" class="btn-secondary">🐢 Más lento</button>
+          <p class="prompt-es">Listen to the sentence and write <strong>exactly</strong> what you hear.</p>
+          <p class="prompt-en" id="dictation-hint">Loading...</p>
+          <button id="btn-dict-play" class="btn-primary">🔊 Play</button>
+          <button id="btn-dict-slow" class="btn-secondary">🐢 Slower</button>
         </div>
         <div class="practice-zone active">
-          <textarea id="dict-input" placeholder="Escribí lo que escuchaste..." rows="3"></textarea>
+          <textarea id="dict-input" placeholder="Type what you heard..." rows="3"></textarea>
           <div class="write-meta">
-            <span><span id="dict-words">0</span> palabras</span>
-            <button id="btn-dict-check" class="btn-primary">Comprobar</button>
+            <span><span id="dict-words">0</span> words</span>
+            <button id="btn-dict-check" class="btn-primary">Check</button>
           </div>
         </div>
         <div id="dict-feedback" class="feedback hidden">
@@ -157,7 +146,7 @@
           <p class="encouragement" id="dict-encouragement" aria-live="polite"></p>
           <div id="dict-diff"></div>
           <div class="feedback-actions">
-            <button id="btn-dict-next" class="btn-primary">Otra frase →</button>
+            <button id="btn-dict-next" class="btn-primary">Next sentence →</button>
           </div>
         </div>
       </main>
@@ -166,66 +155,65 @@
     <!-- Mi perfil -->
     <section id="view-profile" class="view">
       <header class="topbar">
-        <button class="btn-ghost btn-back-home">← Volver</button>
-        <h3>Mi perfil</h3>
+        <button class="btn-ghost btn-back-home">← Back</button>
+        <h3>My profile</h3>
         <span></span>
       </header>
       <main class="container">
         <p style="color:var(--text-soft);font-size:14px;margin-bottom:14px">
-          🔒 Estos datos viven <strong>solo en tu navegador</strong>. La app los usa para personalizar
-          tu práctica (mostrar tu nombre, ocultar lo que no te sirve). Nunca se envían a ningún server.
+          <span data-es="Tu perfil se guarda en tu cuenta y en este dispositivo. Los cambios sin conexión se sincronizan al reconectar.">Your profile is saved in your account and on this device. Offline changes sync when you reconnect.</span>
         </p>
         <form id="profile-form" class="profile-form">
-          <label>Cómo te llamamos
+          <label>Your name
             <input type="text" name="nickname" placeholder="Ej: William" />
           </label>
-          <label>Tu trabajo
+          <label>Your job
             <input type="text" name="job" placeholder="Ej: desarrollador IT, dashboards y automatización" />
           </label>
-          <label>Ciudad
+          <label>City
             <input type="text" name="city" placeholder="Ej: San Salvador" />
           </label>
           <label class="check-row">
-            <input type="checkbox" name="has_partner" /> Tengo pareja
+            <input type="checkbox" name="has_partner" /> I have a partner
           </label>
-          <label class="indent">Nombre de tu pareja (opcional)
+          <label class="indent">Partner's name (optional)
             <input type="text" name="partner_name" placeholder="Ej: Sofia" />
           </label>
           <label class="check-row">
-            <input type="checkbox" name="has_kids" /> Tengo hijos
+            <input type="checkbox" name="has_kids" /> I have children
           </label>
-          <label>Hobbies / actividades fuera del trabajo
+          <label>Hobbies / activities outside work
             <input type="text" name="hobbies" placeholder="Ej: cine, motos, cocinar" />
           </label>
           <label class="check-row">
-            <input type="checkbox" name="travels_often" /> Viajo a menudo
+            <input type="checkbox" name="travels_often" /> I travel often
           </label>
 
-          <p class="form-section-title">¿Qué áreas te interesan? <small>(desactivá lo que no te suma)</small></p>
+          <p class="form-section-title">What are you interested in? <small>(turn off what you don't need)</small></p>
           <div class="interests-grid">
-            <label class="check-row"><input type="checkbox" name="interests.work" /> 💻 Laboral</label>
-            <label class="check-row"><input type="checkbox" name="interests.relationship" /> ❤️ Pareja</label>
-            <label class="check-row"><input type="checkbox" name="interests.family" /> 👨‍👩‍👧 Familia</label>
-            <label class="check-row"><input type="checkbox" name="interests.health" /> 🏥 Salud / emergencias</label>
-            <label class="check-row"><input type="checkbox" name="interests.travel" /> ✈️ Viajes</label>
+            <label class="check-row"><input type="checkbox" name="interests.work" /> 💻 Work</label>
+            <label class="check-row"><input type="checkbox" name="interests.relationship" /> ❤️ Relationships</label>
+            <label class="check-row"><input type="checkbox" name="interests.family" /> 👨‍👩‍👧 Family</label>
+            <label class="check-row"><input type="checkbox" name="interests.health" /> 🏥 Health / emergencies</label>
+            <label class="check-row"><input type="checkbox" name="interests.travel" /> ✈️ Travel</label>
             <label class="check-row"><input type="checkbox" name="interests.social" /> 👥 Social</label>
-            <label class="check-row"><input type="checkbox" name="interests.shopping" /> 🛒 Consumidor</label>
-            <label class="check-row"><input type="checkbox" name="interests.adult" /> 🔞 Adulto</label>
+            <label class="check-row"><input type="checkbox" name="interests.shopping" /> 🛒 Shopping</label>
+            <label class="check-row"><input type="checkbox" name="interests.adult" /> 🔞 Adult</label>
           </div>
 
-          <label>Tu meta diaria (minutos)
+          <label>Daily goal (minutes)
             <input type="number" name="daily_goal_minutes" min="5" max="120" value="15" />
           </label>
 
           <div class="form-actions">
-            <button type="button" id="btn-profile-reset" class="btn-ghost">Borrar perfil</button>
-            <button type="submit" class="btn-primary">Guardar</button>
+            <button type="button" id="btn-profile-reset" class="btn-ghost">Reset profile</button>
+            <button type="submit" class="btn-primary">Save</button>
           </div>
         </form>
 
-        <h4 class="section-title" style="margin-top:24px">🙈 Items ocultos</h4>
+        <h4 class="section-title" style="margin-top:24px">🙈 Hidden items</h4>
         <p style="color:var(--text-soft);font-size:13px;margin-bottom:10px">
-          Lo que marcaste como "no me sirve" se acumula acá. Tocá para mostrar de nuevo.
+          Your hidden conversations appear here. Select one to show it again.
         </p>
         <div id="hidden-items-list"></div>
       </main>
@@ -234,16 +222,16 @@
     <!-- Lista de diálogos -->
     <section id="view-dialogues" class="view">
       <header class="topbar">
-        <button class="btn-ghost btn-back-home">← Volver</button>
-        <h3>Conversaciones</h3>
+        <button class="btn-ghost btn-back-home">← Back</button>
+        <h3>Conversations</h3>
         <span></span>
       </header>
       <main class="container">
         <p style="color:var(--text-soft);margin-bottom:14px">
-          Elegí una escena. Vas a hablar (o escribir) con un personaje turno a turno.
+          Choose a scene. Speak or write with a character, one turn at a time.
         </p>
         <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px;color:var(--text-soft)">
-          <input type="checkbox" id="show-adult" /> Mostrar contenido adulto 🔞
+          <input type="checkbox" id="show-adult" /> Show adult content 🔞
         </label>
         <div id="dialogues-list"></div>
       </main>
@@ -313,8 +301,8 @@
     <!-- Práctica -->
     <section id="view-practice" class="view">
       <header class="topbar">
-        <button class="btn-ghost btn-back-home">← Volver</button>
-        <h3 id="practice-title">Práctica</h3>
+        <button class="btn-ghost btn-back-home">← Back</button>
+        <h3 id="practice-title">Practice</h3>
         <select id="voice-select" class="voice-select" title="Elegí la voz">
           <option value="aria">🎙️ Aria (US)</option>
           <option value="jenny">🎙️ Jenny (US)</option>
@@ -331,38 +319,38 @@
           <p class="prompt-en" id="prompt-en"></p>
           <p class="prompt-es" id="prompt-es"></p>
           <details class="vocab-details">
-            <summary>Vocabulario clave 🔑</summary>
+            <summary>Key vocabulary 🔑</summary>
             <ul id="vocab-list"></ul>
           </details>
           <details class="vocab-details">
-            <summary>Conectores sugeridos 🔗</summary>
+            <summary>Suggested connectors 🔗</summary>
             <p id="connectors-list"></p>
           </details>
-          <button id="btn-listen-example" class="btn-secondary">🔊 Escuchar ejemplo</button>
+          <button id="btn-listen-example" class="btn-secondary">🔊 Listen to the example</button>
         </div>
 
         <div class="mode-toggle" role="tablist">
-          <button class="mode-btn active" data-mode="speak" role="tab">🎤 Hablar</button>
-          <button class="mode-btn" data-mode="write" role="tab">✍️ Escribir</button>
+          <button class="mode-btn active" data-mode="speak" role="tab">🎤 Speak</button>
+          <button class="mode-btn" data-mode="write" role="tab">✍️ Write</button>
         </div>
 
         <div id="mode-speak" class="practice-zone active">
-          <button id="btn-record" class="btn-record" aria-label="Grabar">
+          <button id="btn-record" class="btn-record" aria-label="Record">
             <span class="mic-icon">🎤</span>
-            <span class="record-label">Mantené presionado para hablar</span>
+            <span class="record-label">Hold to speak</span>
           </button>
-          <p class="record-hint" id="record-hint" aria-live="polite">Hablá en inglés. Lo más simple que puedas.</p>
+          <p class="record-hint" id="record-hint" aria-live="polite">Speak in English. Keep it simple.</p>
           <div class="transcript-box">
-            <p class="transcript-label">Lo que dijiste:</p>
+            <p class="transcript-label">What you said:</p>
             <p id="transcript" class="transcript" aria-live="polite"></p>
           </div>
         </div>
 
         <div id="mode-write" class="practice-zone">
-          <textarea id="write-area" placeholder="Escribí en inglés tu explicación." rows="6" maxlength="2000"></textarea>
+          <textarea id="write-area" placeholder="Write your explanation in English." rows="6" maxlength="2000"></textarea>
           <div class="write-meta">
-            <span><span id="write-words">0</span> palabras</span>
-            <button id="btn-submit-write" class="btn-primary">Enviar</button>
+            <span><span id="write-words">0</span> words</span>
+            <button id="btn-submit-write" class="btn-primary">Send</button>
           </div>
         </div>
 
@@ -371,29 +359,29 @@
           <p class="encouragement" id="encouragement" aria-live="polite"></p>
           <div class="metrics">
             <div class="metric"><span class="metric-label">Score</span><span id="m-score">–</span></div>
-            <div class="metric"><span class="metric-label">Palabras</span><span id="m-words">–</span></div>
+            <div class="metric"><span class="metric-label">Words</span><span id="m-words">–</span></div>
             <div class="metric"><span class="metric-label">Vocab</span><span id="m-vocab">–</span></div>
-            <div class="metric"><span class="metric-label">Conectores</span><span id="m-connectors">–</span></div>
-            <div class="metric"><span class="metric-label">Español</span><span id="m-cs">–</span></div>
-            <div class="metric"><span class="metric-label">Fluidez</span><span id="m-fluency">–</span></div>
+            <div class="metric"><span class="metric-label">Connectors</span><span id="m-connectors">–</span></div>
+            <div class="metric"><span class="metric-label">Spanish</span><span id="m-cs">–</span></div>
+            <div class="metric"><span class="metric-label">Fluency</span><span id="m-fluency">–</span></div>
           </div>
           <div id="achievements-toast" class="hidden"></div>
           <div id="errors-section">
-            <h4>Correcciones 📝</h4>
+            <h4>Corrections 📝</h4>
             <ul id="errors-list"></ul>
           </div>
           <div id="socratic-section">
-            <h4>Reformulá respondiendo esto 🧠</h4>
+            <h4>Try again with these questions 🧠</h4>
             <ul id="socratic-list"></ul>
           </div>
           <div id="model-section" class="hidden">
-            <h4>Cómo lo diría un nativo 💡</h4>
+            <h4>Example answer 💡</h4>
             <p id="model-answer"></p>
-            <button id="btn-listen-model" class="btn-secondary">🔊 Escuchar</button>
+            <button id="btn-listen-model" class="btn-secondary">🔊 Listen</button>
           </div>
           <div class="feedback-actions">
-            <button id="btn-try-again" class="btn-primary">Intentar de nuevo</button>
-            <button id="btn-next" class="btn-success hidden">Siguiente tema →</button>
+            <button id="btn-try-again" class="btn-primary">Try again</button>
+            <button id="btn-next" class="btn-success hidden">Next topic →</button>
           </div>
         </div>
       </main>
@@ -401,6 +389,8 @@
   </div>
 
   <script src="/static/js/store.js"></script>
+  <script src="/static/js/curriculum-translations.js"></script>
+  <script src="/static/js/i18n.js"></script>
   <script src="/static/js/api.js"></script>
   <script src="/static/js/speech.js"></script>
   <script src="/static/js/tts.js"></script>

@@ -1,64 +1,76 @@
-// Modo Dictado: el backend nos da una frase + texto para TTS; el usuario escribe.
+// Dictado: el servidor conserva la respuesta y sirve el audio por ID.
 const Dictation = (() => {
-  let currentTarget = null;
-  let currentTopic = null;
-  let slowMode = false;
+  let exerciseId = null;
+  let currentAudio = null;
+  let audioUrl = null;
+  let version = 0;
+  let audioVersion = 0;
+
+  function stop() {
+    version++;
+    audioVersion++;
+    if (currentAudio) currentAudio.pause();
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
+    currentAudio = null;
+    audioUrl = null;
+  }
 
   async function load() {
+    stop();
+    const requestVersion = version;
+    exerciseId = null;
     const hintEl = document.getElementById("dictation-hint");
     hintEl.textContent = "Cargando frase...";
     document.getElementById("dict-input").value = "";
     document.getElementById("dict-words").textContent = "0";
     document.getElementById("dict-feedback").classList.add("hidden");
-    slowMode = false;
     try {
       const data = await API.dictationNext();
-      currentTarget = data.tts_text;
-      currentTopic = data.topic_id;
-      hintEl.textContent = `Pista: tema sobre "${data.hint_es}" — ${data.word_count} palabras.`;
-      // Auto-play
-      setTimeout(() => play(), 400);
+      if (requestVersion !== version) return;
+      exerciseId = data.dictation_id;
+      hintEl.textContent = `${data.hint_en} — ${data.word_count} words.`;
+      hintEl.title = data.hint_es;
+      play();
     } catch (err) {
       hintEl.textContent = "Error: " + err.message;
     }
   }
 
-  function play() {
-    if (!currentTarget) return;
-    TTS.speak(currentTarget);
-  }
-
-  function playSlow() {
-    if (!currentTarget) return;
-    slowMode = true;
-    // El TTS del backend ya viene con rate=-10%. Para "más lento" usamos
-    // el speechSynthesis del navegador con rate bajo (siempre funciona).
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(currentTarget);
-      u.lang = "en-US";
-      u.rate = 0.6;
-      const voices = window.speechSynthesis.getVoices();
-      const v = voices.find(x => x.lang.startsWith("en"));
-      if (v) u.voice = v;
-      window.speechSynthesis.speak(u);
-    } else {
-      TTS.speak(currentTarget);
+  async function play(slow = false) {
+    if (!exerciseId) return;
+    const requestVersion = ++audioVersion;
+    TTS.stop();
+    if (currentAudio) currentAudio.pause();
+    if (audioUrl) URL.revokeObjectURL(audioUrl);
+    audioUrl = null;
+    try {
+      const blob = await API.dictationAudio(exerciseId, slow);
+      if (requestVersion !== audioVersion) return;
+      audioUrl = URL.createObjectURL(blob);
+      currentAudio = new Audio(audioUrl);
+      await currentAudio.play();
+    } catch (err) {
+      if (requestVersion === audioVersion) UI.toast("Tap Play to hear the dictation. " + err.message, { type: "warn" });
     }
   }
 
   async function check() {
     const input = document.getElementById("dict-input").value.trim();
-    if (input.length < 1 || !currentTarget) return;
+    if (input.length < 1 || !exerciseId) return;
+    const id = exerciseId;
+    const btn = document.getElementById("btn-dict-check");
+    if (btn.disabled) return;
+    btn.disabled = true;
     try {
       const res = await API.dictationCheck({
-        topic_id: currentTopic,
+        dictation_id: id,
         user_input: input,
-        target_sentence: currentTarget,
       });
-      _renderFeedback(res);
+      if (id === exerciseId) _renderFeedback(res);
     } catch (err) {
       UI.toast("Error: " + err.message, { type: "error", duration: 4000 });
+    } finally {
+      btn.disabled = false;
     }
   }
 
@@ -74,13 +86,13 @@ const Dictation = (() => {
       <h4>Frase correcta:</h4>
       <p style="background:#ecfdf5;padding:10px;border-radius:8px;font-style:italic">${esc(r.target)}</p>
       <h4 style="margin-top:12px">Tu respuesta:</h4>
-      <p style="background:#fef3c7;padding:10px;border-radius:8px">${esc(r.you_wrote)}</p>
+      <p data-i18n-ignore style="background:#fef3c7;padding:10px;border-radius:8px">${esc(r.you_wrote)}</p>
     `;
     if (r.word_diff.missing && r.word_diff.missing.length) {
       html += `<p style="margin-top:10px"><strong>Te faltaron:</strong> <span style="color:#ef4444">${esc(r.word_diff.missing.join(", "))}</span></p>`;
     }
     if (r.word_diff.extra && r.word_diff.extra.length) {
-      html += `<p><strong>De más:</strong> <span style="color:#f59e0b">${esc(r.word_diff.extra.join(", "))}</span></p>`;
+      html += `<p><strong>De más:</strong> <span data-i18n-ignore style="color:#f59e0b">${esc(r.word_diff.extra.join(", "))}</span></p>`;
     }
     diff.innerHTML = html;
   }
@@ -89,8 +101,8 @@ const Dictation = (() => {
   function init() {
     if (_inited) return;   // evitar listeners duplicados
     _inited = true;
-    document.getElementById("btn-dict-play").onclick = play;
-    document.getElementById("btn-dict-slow").onclick = playSlow;
+    document.getElementById("btn-dict-play").onclick = () => play();
+    document.getElementById("btn-dict-slow").onclick = () => play(true);
     document.getElementById("btn-dict-check").onclick = check;
     document.getElementById("btn-dict-next").onclick = load;
     document.getElementById("dict-input").addEventListener("input", (e) => {
@@ -99,5 +111,5 @@ const Dictation = (() => {
     });
   }
 
-  return { load, init };
+  return { load, init, stop };
 })();

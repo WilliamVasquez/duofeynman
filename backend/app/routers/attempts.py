@@ -127,7 +127,11 @@ async def submit_round(
             .first()
         )
         if not progress:
-            progress = UserProgress(user_id=user.id, topic_id=topic.id)
+            # Los defaults del ORM se aplican al INSERT, no al constructor.
+            progress = UserProgress(
+                user_id=user.id, topic_id=topic.id,
+                attempts_count=0, best_score=0.0, last_score=0.0, mastery_level=0,
+            )
             db.add(progress)
         progress.attempts_count += 1
         progress.last_score = result["overall_score"]
@@ -200,7 +204,7 @@ async def transcribe_audio(
     hints: str | None = Form(None, max_length=1000),
     _user: User = Depends(get_current_user),
 ):
-    audio = await file.read()
+    audio = await file.read(10 * 1024 * 1024 + 1)
     if len(audio) > 10 * 1024 * 1024:
         raise HTTPException(413, "Audio demasiado grande (máx 10MB)")
     hint_list = [h for h in (hints or "").split("|") if h.strip()] or None

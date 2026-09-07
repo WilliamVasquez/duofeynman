@@ -12,7 +12,7 @@ from __future__ import annotations
 from difflib import SequenceMatcher
 
 from app.services.analyzer import detect_code_switching
-from app.services.text_utils import normalize as _normalize
+from app.services.text_utils import normalize as _normalize, matches_term
 
 
 def _keyword_coverage(text_norm: str, groups: list) -> tuple[float, list[list[str]]]:
@@ -29,7 +29,7 @@ def _keyword_coverage(text_norm: str, groups: list) -> tuple[float, list[list[st
         if not grp:
             covered += 1
             continue
-        if any(_normalize(k) in text_norm for k in grp):
+        if any(matches_term(text_norm, k) for k in grp):
             covered += 1
         else:
             missing.append(grp)

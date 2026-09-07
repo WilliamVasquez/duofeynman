@@ -83,3 +83,43 @@ def normalize(s: str) -> str:
     s = _digits_to_words(s)
     s = re.sub(r"\s+", " ", s).strip()
     return s
+
+
+# Variantes explícitas del curriculum: evitamos stemming que confunda go/good.
+TERM_VARIANTS = {
+    "dollar": ["dollars"], "costs": ["cost"], "favorite": ["favourite"],
+    "wake up": ["woke up", "woken up", "waking up"],
+    "get up": ["got up", "getting up"],
+    "give up": ["gave up", "given up", "giving up"],
+    "keep going": ["kept going"],
+    "work out": ["worked out", "working out", "works out"],
+    "pay off": ["paid off", "paying off", "pays off"],
+    "figure out": ["figured out", "figuring out"],
+    "run into": ["ran into", "running into"],
+    "catch up": ["caught up", "catching up"],
+    "hang out": ["hung out", "hanging out"],
+    "show up": ["showed up", "showing up"],
+    "let down": ["let ... down"],
+    "come up with": ["came up with", "coming up with"],
+    "deal with": ["dealt with", "dealing with"],
+    "follow up": ["followed up", "following up"],
+    "look into": ["looked into", "looking into"],
+    "get along with": ["get along ... with", "got along with"],
+    "back up": ["back ... up", "backed ... up"],
+    "take over": ["took over", "taken over", "taking over"],
+    "he/she told me": ["he told me", "she told me", "boss told me"],
+    "he/she said that": ["he said", "she said"],
+}
+
+
+def matches_term(text: str, term: str) -> bool:
+    """Busca palabras/frases completas; '...' permite hasta 8 palabras intermedias."""
+    normalized = normalize(text)
+    for variant in [term, *TERM_VARIANTS.get(term.lower(), [])]:
+        chunks = [normalize(p) for p in variant.split("...")]
+        if not all(chunks):
+            continue
+        pattern = r"(?:\s+\w+){0,8}\s+".join(re.escape(p) for p in chunks)
+        if re.search(r"(?<!\w)" + pattern + r"(?!\w)", normalized):
+            return True
+    return False
