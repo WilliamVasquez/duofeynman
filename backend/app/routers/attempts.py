@@ -1,6 +1,6 @@
 """Núcleo del producto: ciclo Feynman (modo hablar o escribir)."""
 from datetime import datetime, date
-from app.timeutils import utcnow
+from app.timeutils import utcnow, learning_day
 from fastapi import APIRouter, Depends, Form, HTTPException, UploadFile, File
 from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.orm import Session
@@ -115,6 +115,8 @@ async def submit_round(
             severity=e.get("severity", 1),
         ))
 
+    from app.services import error_drills
+    error_drills.capture(db, user.id, result["errors"], topic.id)
     unlocked: list[dict] = []
     if result["next_action"] == "MASTERED":
         attempt.stage = "DONE"
@@ -160,7 +162,7 @@ async def submit_round(
                 front=topic.prompt_en,
                 back=topic.example_en,
                 payload={"last_transcript": payload.transcript, "mode": payload.mode},
-                due_date=date.today(),
+                due_date=learning_day(),
             ))
 
         # Actualizar racha y otorgar logros

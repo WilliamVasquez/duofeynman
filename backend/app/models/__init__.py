@@ -7,6 +7,7 @@ from app.models.progress import UserProgress, Achievement, UserAchievement
 from app.models.dialogue import Dialogue, DialogueTurn
 from app.models.profile import UserProfile
 from app.models.dictation import DictationExercise
+from app.models.practice import DialogueSession, DialogueResponse, ListeningAttempt, DailyPlan
 
 __all__ = [
     "User",
@@ -23,4 +24,5 @@ __all__ = [
     "DialogueTurn",
     "UserProfile",
     "DictationExercise",
+    "DialogueSession", "DialogueResponse", "ListeningAttempt", "DailyPlan",
 ]

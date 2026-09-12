@@ -296,7 +296,9 @@
   document.querySelectorAll(".quick-btn").forEach(b => {
     b.onclick = async () => {
       const a = b.dataset.action;
-      if (a === "dashboard") {
+      if (a === "listening") {
+        await Listening.load();
+      } else if (a === "dashboard") {
         UI.show("view-dashboard");
         await Dashboard.render();
       } else if (a === "srs") {
@@ -560,6 +562,8 @@
 
   // ---- Dictation + Dialogues + Profile init ----
   Dictation.init();
+  Daily.init(openTopic);
+  document.getElementById('btn-daily').onclick = () => Daily.render();
   Dialogues.init();
   ProfileView.init();
 

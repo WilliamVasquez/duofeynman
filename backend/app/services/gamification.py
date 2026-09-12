@@ -9,6 +9,7 @@ from sqlalchemy import func
 from app.models.user import User
 from app.models.attempt import Attempt
 from app.models.progress import Achievement, UserAchievement
+from app.timeutils import learning_day, learning_day_start
 
 
 log = logging.getLogger(__name__)
@@ -25,23 +26,19 @@ def calculate_streak(db: Session, user: User) -> int:
     # Fechas distintas con práctica, más recientes primero.
     # 400 días alcanza para cualquier racha humanamente posible.
     rows = (
-        db.query(func.date(Attempt.completed_at))
+        db.query(Attempt.completed_at)
         .filter(Attempt.user_id == user.id, Attempt.completed_at.isnot(None), Attempt.mastered.is_(True))
-        .distinct()
-        .order_by(func.date(Attempt.completed_at).desc())
-        .limit(400)
+        .filter(Attempt.completed_at >= learning_day_start() - timedelta(days=400))
         .all()
     )
     dates = []
     for (d,) in rows:
         if d is None:
             continue
-        if isinstance(d, str):
-            d = datetime.strptime(d, "%Y-%m-%d").date()
-        dates.append(d)
+        dates.append(learning_day(d))
     dates = sorted(set(dates), reverse=True)
 
-    today = date.today()
+    today = learning_day()
     if not dates:
         return 0
 

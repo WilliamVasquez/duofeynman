@@ -1,5 +1,5 @@
 from datetime import date, timedelta, datetime
-from app.timeutils import utcnow
+from app.timeutils import utcnow, learning_day, learning_day_start
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import func, desc
@@ -12,6 +12,7 @@ from app.models.progress import UserProgress, Achievement, UserAchievement
 from app.models.srs import SrsCard
 from app.routers.deps import get_current_user
 from app.services.gamification import calculate_streak
+from app.models import DialogueSession, DialogueResponse, ListeningAttempt
 
 
 router = APIRouter(prefix="/api/progress", tags=["progress"])
@@ -35,7 +36,7 @@ def summary(
     )
     due_cards = (
         db.query(func.count(SrsCard.id))
-        .filter(SrsCard.user_id == user.id, SrsCard.due_date <= date.today())
+        .filter(SrsCard.user_id == user.id, SrsCard.due_date <= learning_day())
         .scalar() or 0
     )
     return {
@@ -63,13 +64,12 @@ def dashboard(
     summary_data = summary(db, user)
 
     # Últimos 7 días: agrupar por fecha
-    seven_days_ago = utcnow() - timedelta(days=7)
+    seven_days_ago = learning_day_start(learning_day() - timedelta(days=6))
     daily_rows = (
         db.query(
-            func.date(Attempt.completed_at).label("d"),
-            func.avg(Attempt.fluency_score).label("fluency"),
-            func.avg(Attempt.overall_score).label("score"),
-            func.count(Attempt.id).label("count"),
+            Attempt.completed_at,
+            Attempt.fluency_score,
+            Attempt.overall_score,
         )
         .filter(
             Attempt.user_id == user.id,
@@ -77,24 +77,23 @@ def dashboard(
             Attempt.completed_at >= seven_days_ago,
             Attempt.word_count > 0,
         )
-        .group_by(func.date(Attempt.completed_at))
         .all()
     )
     daily_map = {}
     for r in daily_rows:
-        d = r.d
-        if hasattr(d, "isoformat"):
-            d = d.isoformat()
-        daily_map[str(d)] = {
-            "fluency": round(float(r.fluency or 0), 2),
-            "score": round(float(r.score or 0), 2),
-            "count": int(r.count or 0),
-        }
+        key = learning_day(r.completed_at).isoformat()
+        day = daily_map.setdefault(key, {"fluency": 0, "score": 0, "count": 0})
+        day['fluency'] += r.fluency_score or 0
+        day['score'] += r.overall_score or 0
+        day['count'] += 1
+    for day in daily_map.values():
+        day['fluency'] = round(day['fluency'] / day['count'], 2)
+        day['score'] = round(day['score'] / day['count'], 2)
 
     # Generar 7 días continuos (incluso si no hay datos)
     last_7_days = []
     for i in range(6, -1, -1):
-        d = (date.today() - timedelta(days=i)).isoformat()
+        d = (learning_day() - timedelta(days=i)).isoformat()
         info = daily_map.get(d, {"fluency": 0, "score": 0, "count": 0})
         last_7_days.append({"date": d, **info})
 
@@ -135,6 +134,12 @@ def dashboard(
 
     return {
         "summary": summary_data,
+        "practice": {
+            "dialogue_runs": db.query(func.sum(DialogueSession.completed_runs)).filter_by(user_id=user.id).scalar() or 0,
+            "dialogue_answers": db.query(func.count(DialogueResponse.id)).join(DialogueSession).filter(DialogueSession.user_id == user.id).scalar() or 0,
+            "listening_completed": db.query(func.count(ListeningAttempt.id)).filter(ListeningAttempt.user_id == user.id, ListeningAttempt.completed_at.isnot(None)).scalar() or 0,
+            "listening_independent_correct": db.query(func.count(ListeningAttempt.id)).filter(ListeningAttempt.user_id == user.id, ListeningAttempt.completed_at.isnot(None), ListeningAttempt.revealed.is_(False), ListeningAttempt.score == 1).scalar() or 0,
+        },
         "last_7_days": last_7_days,
         "achievements_unlocked": unlocked_list,
         "achievements_pending": pending_list,

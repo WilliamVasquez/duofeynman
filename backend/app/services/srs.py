@@ -6,6 +6,7 @@ Calidad de respuesta (q):
   4 = correcto fluido         → avanzar
   5 = perfecto                → avanzar más rápido
 """
+from app.timeutils import learning_day
 from datetime import date, timedelta
 
 from app.models.srs import SrsCard
@@ -30,7 +31,7 @@ def review_card(card: SrsCard, quality: int) -> SrsCard:
         1.3,
         card.ease_factor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)),
     )
-    card.due_date = date.today() + timedelta(days=card.interval_days)
+    card.due_date = learning_day() + timedelta(days=card.interval_days)
     return card
 
 

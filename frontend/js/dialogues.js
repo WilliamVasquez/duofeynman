@@ -7,10 +7,25 @@ const Dialogues = (() => {
   let chatRecording = false;
   let sessionVersion = 0;
   let submitting = false;
+  let savedSession = null;
+  let pendingResponse = null;
+  let usedHelp = false;
+  let typedWithMic = false;
+
+  function responseId() {
+    if (crypto.randomUUID) return crypto.randomUUID();
+    // randomUUID exige HTTPS; getRandomValues también sirve en la LAN local.
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    bytes[6] = (bytes[6] & 15) | 64; bytes[8] = (bytes[8] & 63) | 128;
+    const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+  }
 
   function stop() {
     sessionVersion++;
     current = null;
+    savedSession = null;
+    pendingResponse = null;
     submitting = false;
   }
 
@@ -151,7 +166,8 @@ const Dialogues = (() => {
         </div>
         <div class="dlg-desc">${I18n.html(Profile.personalize(d.setting_en), Profile.personalize(d.setting_es))}</div>
         <div class="dlg-meta">${d.level} · Difficulty ${"●".repeat(d.difficulty)} · ${_escapeHtml(Profile.personalize(d.npc_name))}</div>
-        <button type="button" class="btn btn-small dlg-start">Start conversation</button>
+        <div class="dlg-progress">${d.progress ? `${d.progress.completed_runs} completed · ${d.progress.recommended_mode === 'type' ? 'Write / Speak' : d.progress.recommended_mode}` : ''}</div>
+        <button type="button" class="btn btn-small dlg-start">${d.progress?.resumable ? 'Resume conversation' : 'Start conversation'}</button>
       </div>
       <button class="dlg-hide-btn" title="No me sirve, ocultar">✕</button>
     `;
@@ -172,11 +188,16 @@ const Dialogues = (() => {
     const version = ++sessionVersion;
     submitting = false;
     try {
-      const data = await API.dialogue(dialogueId);
+      const saved = await API.dialogueStart(dialogueId);
       if (version !== sessionVersion) return;
-      current = data;
-      turnIndex = 0;
-      scores = [];
+      current = saved.dialogue;
+      savedSession = saved.session;
+      pendingResponse = null;
+      turnIndex = savedSession.cursor;
+      usedHelp = false; typedWithMic = false;
+      scores = savedSession.responses.map(r => r.score);
+      inputMode = savedSession.recommended_mode;
+      _applyInputMode();
       UI.show("view-chat");
       const oldBanner = document.getElementById("profile-banner");
       if (oldBanner) oldBanner.remove();
@@ -222,7 +243,27 @@ const Dialogues = (() => {
       document.getElementById("chat-complete").classList.add("hidden");
       document.getElementById("chat-input-zone").classList.add("hidden");
       document.getElementById("chat-input").value = "";
+      const advice = document.createElement('p');
+      advice.className = 'practice-advice';
+      advice.innerHTML = I18n.html(`Suggested: ${inputMode === 'type' ? 'Write / Speak' : inputMode}. Two clean conversations unlock less support. You can change modes anytime.`, 'Sugerencia según tu progreso. Dos conversaciones sin errores permiten reducir ayudas. Podés cambiar de modo cuando quieras.');
+      document.getElementById('chat-messages').appendChild(advice);
+      // El guion guardado no depende de IDs de turnos que el seed recree.
+      for (let i = 0; i < turnIndex; i++) {
+        const previous = current.turns[i];
+        if (previous.speaker === 'NPC') _renderNpcMessage(previous);
+        else savedSession.responses.filter(r => r.turn_index === i).forEach(r => _renderUserMessage(r.text));
+      }
+      if (turnIndex > 0 && current.turns[turnIndex - 1]?.speaker === 'NPC') {
+        _later(() => TTS.speak(Profile.personalize(current.turns[turnIndex - 1].npc_text_en)), 200);
+      }
       _nextTurn();
+      const unfinished = savedSession.responses.filter(r => r.turn_index === turnIndex);
+      unfinished.forEach(r => _renderUserMessage(r.text));
+      if (unfinished.length) {
+        const last = unfinished[unfinished.length - 1];
+        usedHelp = unfinished.some(r => r.used_help);
+        _renderTurnFeedback({...last.result, response_id: last.id});
+      }
     } catch (err) {
       UI.toast("Error: " + err.message, { type: "error" });
     }
@@ -338,6 +379,7 @@ const Dialogues = (() => {
       <button type="button" class="hint-toggle translatable" title="${_escapeAttr(hintText)} (click for hint in Spanish)">💡 Need a hint?</button>
     `;
     const hintBtn = hintEl.querySelector(".hint-toggle");
+    hintBtn.addEventListener('click', () => { usedHelp = true; _applyInputMode(); });
     _wireTranslatable(hintBtn, hintText);
     const chips = document.getElementById("helper-chips");
     chips.innerHTML = "";
@@ -347,6 +389,7 @@ const Dialogues = (() => {
       b.className = "helper-chip";
       b.textContent = personalizedPhrase;
       b.onclick = () => {
+        usedHelp = true;
         const inp = document.getElementById("chat-input");
         inp.value = inp.value ? inp.value + " " + personalizedPhrase : personalizedPhrase;
         inp.focus();
@@ -571,7 +614,7 @@ const Dialogues = (() => {
     // Las helper_phrases son atajos para escribir; en modo choose estorban
     // (ya tenés respuestas completas) y en order no aplican.
     const chips = document.getElementById("helper-chips");
-    if (chips) chips.classList.toggle("hidden", inputMode !== "type");
+    if (chips) chips.classList.toggle("hidden", inputMode !== "type" || !usedHelp);
   }
 
   function _setInputMode(mode) {
@@ -600,8 +643,15 @@ const Dialogues = (() => {
 
     submitting = true;
     try {
-      const result = await API.dialogueCheck({ turn_id: turn.id, user_text: text });
+      const mode = inputMode === 'type' && typedWithMic ? 'speak' : inputMode;
+      if (!pendingResponse || pendingResponse.user_text !== text || pendingResponse.mode !== mode) {
+        pendingResponse = {turn_id: turn.id, user_text: text, mode, used_help: usedHelp,
+          session_id: savedSession.id, run_number: savedSession.run_number, response_id: responseId()};
+      }
+      const result = await API.dialogueCheck(pendingResponse);
       if (version !== sessionVersion) return;
+      savedSession = result.session;
+      pendingResponse = null;
       _renderUserMessage(text);
       _renderTurnFeedback(result);
       scores.push(result.score);
@@ -615,6 +665,7 @@ const Dialogues = (() => {
         // "Continue" (ver _renderTurnFeedback): nunca queda trabado.
       }
     } catch (err) {
+      if (version !== sessionVersion) return;
       submitting = false;
       UI.toast("Error: " + err.message, { type: "error" });
     }
@@ -626,6 +677,7 @@ const Dialogues = (() => {
     document.getElementById("chat-input-zone").classList.add("hidden");
     outputWords = []; bankWords = [];
     answerOptions = []; chosenIndex = -1;
+    usedHelp = false; typedWithMic = false;
     _later(() => { submitting = false; _nextTurn(); }, 1200);
   }
 
@@ -646,8 +698,7 @@ const Dialogues = (() => {
     if (r.feedback_es) {
       const why = document.createElement("div");
       why.className = "fb-why";
-      why.lang = "es";
-      why.textContent = r.feedback_es;
+      why.innerHTML = I18n.html(r.feedback_en || 'Review this answer and try again.', r.feedback_es);
       fb.appendChild(why);
     }
 
@@ -675,7 +726,16 @@ const Dialogues = (() => {
       cont.className = "btn-ghost fb-continue";
       cont.textContent = "Continue anyway →";
       cont.title = "Seguir igual: tu respuesta puede estar bien aunque no la reconozca";
-      cont.onclick = () => { if (!submitting) { submitting = true; _advanceTurn(); } };
+      cont.onclick = async () => {
+        if (submitting) return;
+        const version = sessionVersion;
+        submitting = true;
+        try {
+          const state = await API.dialogueContinue(savedSession.id, r.response_id);
+          if (version !== sessionVersion) return;
+          savedSession = state; _advanceTurn();
+        } catch (err) { if (version !== sessionVersion) return; submitting = false; UI.toast(err.message, {type: 'error'}); }
+      };
       actions.appendChild(cont);
       fb.appendChild(actions);
     }
@@ -687,6 +747,8 @@ const Dialogues = (() => {
     const avg = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
     document.getElementById("chat-final-score").innerHTML =
       `<span class="translatable" title="Tu score promedio">Your average score: <strong>${Math.round(avg * 100)}%</strong></span>`;
+    if (savedSession) document.getElementById('chat-final-score').insertAdjacentHTML('beforeend',
+      `<p>${I18n.html(`Saved · ${savedSession.completed_runs} conversations completed. Next suggestion: ${savedSession.recommended_mode === 'type' ? 'Write / Speak' : savedSession.recommended_mode}.`, 'Progreso guardado. Las ayudas sugeridas cambian según tus recorridos sin errores.')}</p>`);
     _scrollChat();
   }
 
@@ -722,7 +784,7 @@ const Dialogues = (() => {
         onEnd: ({ transcript }) => {
           chatRecording = false;
           btn.classList.remove("recording");
-          if (transcript) input.value = transcript;
+          if (transcript) { input.value = transcript; typedWithMic = true; }
         },
       });
     }
@@ -742,6 +804,10 @@ const Dialogues = (() => {
   function init() {
     if (_inited) return;   // evitar listeners duplicados si se llama de nuevo
     _inited = true;
+    document.getElementById('chat-input-zone').addEventListener('click', e => {
+      if (e.target.closest('#helper-chips,.user-hint,.hint-chip')) usedHelp = true;
+    });
+    document.getElementById('chat-input').addEventListener('input', () => { typedWithMic = false; });
     document.getElementById("show-adult").addEventListener("change", _renderFiltered);
     document.getElementById("btn-chat-send").onclick = _submitUserTurn;
     document.getElementById("chat-input").addEventListener("keydown", (e) => {

@@ -1851,6 +1851,17 @@ textarea:focus-visible,
 }
 .translation-toggle { border: 1px solid var(--border); background: var(--surface); color: var(--text-soft); border-radius: 6px; padding: 5px 7px; font-size: 11px; cursor: pointer; flex-shrink: 0; }
 .translation-toggle[hidden] { display: none; }
+.practice-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin: 20px 0; display: grid; gap: 14px; }
+.practice-panel form { display: grid; gap: 12px; }
+.practice-panel .translation-toggle { justify-self: start; align-self: center; width: auto; }
+.practice-panel fieldset { border: 1px solid var(--border); padding: 12px; border-radius: 8px; display: grid; gap: 12px; min-width: 0; }
+.listening-option { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px; background: color-mix(in srgb, var(--primary) 8%, var(--surface)); border-radius: 8px; }
+.listening-option input { width: auto; }
+.practice-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.practice-advice, .dlg-progress { color: var(--text-soft); font-size: 13px; margin: 8px 0; }
+.practice-panel blockquote { padding: 12px; border-left: 3px solid var(--warn); background: color-mix(in srgb, var(--warn) 12%, var(--surface)); }
+.daily-item { display: grid; gap: 8px; padding: 14px; border: 1px solid var(--border); border-radius: 10px; }
+.daily-item.done { border-color: var(--success); }
 .translated-action { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px; min-width: 0; }
 .translated-action > .es-inline { grid-column: 1 / -1; }
 .translated-quick { position: relative; display: block; }

@@ -4,6 +4,7 @@ from sqlalchemy import String, Integer, Text, ForeignKey, DateTime, Float, Date,
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
+from app.timeutils import learning_day
 
 
 class SrsCard(Base):
@@ -31,7 +32,7 @@ class SrsCard(Base):
     ease_factor: Mapped[float] = mapped_column(Float, default=2.5)
     interval_days: Mapped[int] = mapped_column(Integer, default=0)
     repetitions: Mapped[int] = mapped_column(Integer, default=0)
-    due_date: Mapped[date] = mapped_column(Date, default=date.today, index=True)
+    due_date: Mapped[date] = mapped_column(Date, default=learning_day, index=True)
     last_reviewed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="srs_cards")

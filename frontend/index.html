@@ -62,9 +62,11 @@
 
         <!-- Continuar donde ibas (camino guiado) -->
         <div id="continue-card"></div>
+        <button id="btn-daily" class="btn-primary"><span data-es="Empezar la práctica de hoy">Start today's practice</span></button>
 
         <!-- Acciones rápidas -->
         <div class="quick-actions">
+          <button class="quick-btn" data-action="listening"><span class="qa-icon">👂</span><span data-es="Comprensión auditiva">Listening</span></button>
           <button class="quick-btn" data-action="dashboard">
             <span class="qa-icon">📊</span>
             <span>My progress</span>
@@ -399,6 +401,8 @@
     </section>
   </div>
 
+  <section id="view-listening" class="view"><header class="topbar"><button class="btn-ghost btn-back-home">← Back</button><h2><span data-es="Comprensión auditiva">Listening</span></h2></header><main class="container" id="listening-content"></main></section>
+  <section id="view-daily" class="view"><header class="topbar"><button class="btn-ghost btn-back-home">← Back</button><h2><span data-es="Práctica de hoy">Today's practice</span></h2></header><main class="container" id="daily-content"></main></section>
   <script src="/static/js/store.js"></script>
   <script src="/static/js/curriculum-translations.js"></script>
   <script src="/static/js/i18n.js"></script>
@@ -410,8 +414,10 @@
   <script src="/static/js/dashboard.js"></script>
   <script src="/static/js/srs.js"></script>
   <script src="/static/js/dictation.js"></script>
+  <script src="/static/js/listening.js"></script>
   <script src="/static/js/dialogues.js"></script>
   <script src="/static/js/profile-view.js"></script>
+  <script src="/static/js/daily.js"></script>
   <script src="/static/js/app.js"></script>
 </body>
 </html>

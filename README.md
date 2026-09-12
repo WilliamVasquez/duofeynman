@@ -264,8 +264,11 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 - [x] **Dark mode + animaciones + skeleton loaders + mascota**
 - [x] **Hardening de seguridad (ver SECURITY.md)**
 - [x] PWA: instalable en celu como app
-- [ ] Listening comprehension (audio → opción múltiple)
-- [ ] Dificultad adaptativa (topics con bajo score salen más seguido)
+- [x] Comprensión auditiva: 12 situaciones A1–B1, explicación bilingüe y práctica con/sin texto
+- [x] Diálogos guardados: reanudar turno, conservar respuestas, errores y modo
+- [x] Ayudas graduales: Choose → Order → Write / Speak, siempre con cambio libre
+- [x] Mini ejercicios SRS de errores concretos, además del repaso de temas
+- [x] Sesión diaria adaptativa: repaso vencido, respuesta débil, siguiente tema y escucha
 - [ ] Curriculum B2
 - [ ] Build de Android (WebView wrapper)
 
@@ -284,6 +287,13 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 | `GET /api/dictation/{id}/audio` | Audio del dictado autenticado (`?slow=true` para más lento) |
 | `GET /api/dialogues` `/{id}` | Diálogos guionados; cada turno USER trae `answer_options` (nunca `required_keywords`) |
 | `POST /api/dialogues/turn/check` | Corrige un turno: score, motivo en español, `passed` y `can_continue` |
+| `POST /api/dialogues/{id}/session` | Inicia/reanuda; devuelve guion guardado y progreso |
+| `POST /api/dialogues/session/{id}/continue` | Guarda “Continue anyway” sin contar como dominio |
+| `POST /api/listening/next` | Crea ejercicio de comprensión, sin revelar audio escrito ni respuesta |
+| `GET /api/listening/{id}/audio` | Audio autenticado; admite `?slow=true` |
+| `POST /api/listening/{id}/check` `/reveal` | Corrige una elección o revela texto como ayuda |
+| `GET /api/srs/drills/{id}` `POST /api/srs/drills/{id}/check` | Mini ejercicio de corrección y reprogramación |
+| `POST /api/daily/today` | Crea/reanuda un plan estable del día con progreso verificado |
 | `GET/PUT /api/me/profile` | Perfil personalizado (contexto Feynman) |
 | `GET /api/tts?text=...&voice=aria` | TTS neural (MP3 o WAV) |
 | `GET /api/tts/status` | Qué backends TTS están disponibles |
@@ -292,11 +302,36 @@ El frontend está pensado para vivir dentro de un `WebView` de Android sin cambi
 
 ## Actualización y pruebas de regresión
 
+Las cinco mejoras nuevas requieren **reiniciar el backend y recargar la página**.
+El arranque crea `dialogue_sessions`, `dialogue_responses`, `listening_attempts` y
+`daily_plans`. No agregan columnas a tablas existentes ni requieren volver a sembrar
+un curriculum que ya tiene las opciones de Choose. Las sesiones guardan una copia
+del guion: un seed posterior no invalida los turnos pendientes.
+
+Dos conversaciones completas, sin errores, omisiones ni ayudas adicionales, permiten
+pasar a la siguiente sugerencia: Choose → Order → Write / Speak. Elegir otro modo
+sigue permitido. “Continue anyway” guarda la respuesta y avanza, pero no aumenta
+dominio. Las respuestas se guardan por cuenta; un reenvío del mismo ID es idempotente.
+
+Escucha propone situaciones del nivel actual y sube hasta B1 después de tres audios
+distintos correctos sin texto. Revelar el texto registra práctica guiada. La primera
+respuesta corregida queda fija; se puede iniciar otro ejercicio para seguir practicando.
+El banco y las explicaciones son editoriales, sin generación ni servicios pagos.
+
+Los mini ejercicios se crean desde errores nuevos con una corrección explícita.
+Repetir el mismo error reutiliza su tarjeta. La reprogramación ocurre una vez por día;
+reintentar después de ver la solución no multiplica el intervalo ni da XP.
+
+El plan diario conserva sus actividades durante el día, respeta temas ocultos y usa
+la meta de minutos del perfil como estimación. Completar significa practicar, no
+necesariamente dominar. Al dominar A1, el siguiente tema puede ser A2, hasta B1.
+Rachas, repasos y planes usan el día de El Salvador (UTC−6); los timestamps siguen en UTC.
+
 Desde `backend/`, actualizá el entorno con `python -m pip install -r requirements.txt`
 y reiniciá el backend. El arranque existente crea la nueva tabla `dictation_exercises`
 si falta; conserva las tablas y datos actuales.
 
-**Ahora sí hace falta correr el seed** (`python -m app.seed`): agrega la columna
+**Sólo si todavía falta el modo Choose**, corré el seed (`python -m app.seed`): agrega la columna
 `dialogue_turns.answer_options` a las bases que ya existían y carga las 615 respuestas
 del modo Choose. Es idempotente y no borra progreso. Sin eso, los diálogos caen al
 fallback (respuesta modelo + helper_phrases) en vez de mostrar las opciones escritas.
@@ -318,5 +353,18 @@ La prueba opcional `frontend/tests/browser-smoke.cjs` usa Playwright y Chrome,
 una API simulada y un servidor estático en `PREVIEW_URL` (por defecto
 `http://127.0.0.1:8765`). El servidor debe mapear `/static/` a `frontend/`.
 La captura se guarda en la carpeta temporal del sistema.
+
+Prueba E2E de las cinco mejoras, con API real y SQLite en memoria (no toca MySQL):
+
+```powershell
+# Terminal 1, desde backend/
+python -B -m uvicorn tests.preview_app:app --host 127.0.0.1 --port 8766
+# Terminal 2, desde la raíz, con Playwright instalado y Chrome disponible
+node frontend/tests/practice-browser.cjs
+```
+
+Reiniciá ese servidor de prueba entre ejecuciones para recrear sus datos ficticios.
+La voz se simula: estas pruebas no validan precisión del micrófono ni disponibilidad
+de Edge TTS. No se debe publicar `tests.preview_app`.
 
 Hecho con ❤️ para William, que quiere por fin **hablar y escribir inglés** sin pagar suscripciones.

@@ -36,6 +36,7 @@ let profile={user_id:1,nickname:'Alex',job:'Developer',city:'San Salvador',inter
    else if(p==='/api/srs/stats')body={due_today:0};
    else if(p==='/api/srs/due')body=[{topic:topics[0],repetitions:1,interval_days:3}];
    else if(p==='/api/dialogues')body=dialogues;
+   else if(/^\/api\/dialogues\/\d+\/session$/.test(p))body={dialogue:dialogues[Number(p.split('/')[3])-1],session:{id:'12345678-1234-1234-1234-123456789012',cursor:1,run_number:1,completed:false,completed_runs:0,recommended_mode:'choose',responses:[]}};
    else if(p.startsWith('/api/dialogues/'))body=dialogues[Number(p.split('/').pop())-1];
    else if(p==='/api/progress/dashboard')body={summary:{...user,mastered_topics:0,average_score:0},last_7_days:[],achievements_unlocked:[],achievements_pending:[]};
    else if(p==='/api/progress/insights')body={averages:{score:0,fluency:0,code_switch_rate:0,avg_words_per_attempt:0},spanish_leaks:[],grammar_drills:[],weak_topics:[],fast_mastered:[],errors_by_category:[]};

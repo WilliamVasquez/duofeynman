@@ -24,6 +24,7 @@ from datetime import datetime, date, timedelta
 from app.services import gamification
 from app.routers import progress as progress_router, curriculum
 from app.services import whisper_stt
+from app.timeutils import learning_day, learning_day_start
 
 
 class DatabaseCase(unittest.TestCase):
@@ -65,7 +66,7 @@ class ProgressTests(DatabaseCase):
         for days in range(1, 7):
             self.db.add(Attempt(user_id=self.user.id, topic_id=self.topic.id,
                                 mastered=True, stage="DONE", word_count=20,
-                                completed_at=datetime.combine(date.today() - timedelta(days=days), datetime.min.time())))
+                                completed_at=learning_day_start(learning_day() - timedelta(days=days))))
         self.db.commit()
         self.submit_mastered(self.new_attempt())
         self.assertEqual(self.user.streak_days, 7)

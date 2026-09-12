@@ -14,6 +14,7 @@ from app.database import Base, engine
 from app import models  # noqa: F401
 from app.routers import auth, users, curriculum, attempts, progress, tts, srs, dictation, dialogues, profile as profile_router
 from app.services.rate_limit import limiter
+from app.routers import listening, daily
 
 
 logging.basicConfig(
@@ -145,6 +146,8 @@ app.include_router(srs.router)
 app.include_router(dictation.router)
 app.include_router(dialogues.router)
 app.include_router(profile_router.router)
+app.include_router(listening.router)
+app.include_router(daily.router)
 
 
 # Servir frontend estático (mismo dominio = sin lío de CORS)

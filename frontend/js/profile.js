@@ -181,15 +181,15 @@ const Profile = (() => {
     // Sofia → partner_name (si está definido)
     if (p.partner_name && p.partner_name.trim()) {
       const name = p.partner_name.trim();
-      out = out.replace(/\bSofia\b/g, name);
-      out = out.replace(/\bsofia\b/g, name.toLowerCase());
+      out = out.replace(/\bSofia\b/g, () => name);
+      out = out.replace(/\bsofia\b/g, () => name.toLowerCase());
     }
 
     // William → nickname (si está definido)
     if (p.nickname && p.nickname.trim()) {
       const nick = p.nickname.trim();
-      out = out.replace(/\bWilliam\b/g, nick);
-      out = out.replace(/\bwilliam\b/g, nick.toLowerCase());
+      out = out.replace(/\bWilliam\b/g, () => nick);
+      out = out.replace(/\bwilliam\b/g, () => nick.toLowerCase());
     }
 
     return out;

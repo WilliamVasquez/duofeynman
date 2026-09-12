@@ -39,6 +39,15 @@ const Dashboard = (() => {
       `;
 
       _renderChart("chart-fluency", data.last_7_days, "fluency");
+      if (data.practice) {
+        const p = data.practice;
+        const section = document.createElement('section');
+        section.className = 'practice-panel';
+        section.innerHTML = `<h3>${I18n.html('Practice history', 'Historial de práctica')}</h3>
+          <p>${I18n.html(`${p.dialogue_runs} conversations completed · ${p.dialogue_answers} answers saved`, `${p.dialogue_runs} conversaciones completadas · ${p.dialogue_answers} respuestas guardadas`)}</p>
+          <p>${I18n.html(`${p.listening_completed} listening exercises · ${p.listening_independent_correct} correct without text`, `${p.listening_completed} ejercicios de escucha · ${p.listening_independent_correct} correctos sin texto`)}</p>`;
+        root.prepend(section);
+      }
       _renderChart("chart-score", data.last_7_days, "score");
       _renderAchievements("ach-unlocked", data.achievements_unlocked, false);
       _renderAchievements("ach-locked", data.achievements_pending, true);

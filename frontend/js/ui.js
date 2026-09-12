@@ -1,6 +1,7 @@
 // Helpers de UI.
 const UI = (() => {
   function show(viewId) {
+    if (viewId !== 'view-listening' && typeof Listening !== 'undefined') Listening.stop();
     TTS.stop();
     if (viewId !== "view-chat" && typeof Dialogues !== "undefined") Dialogues.stop();
     if (viewId !== "view-dictation" && typeof Dictation !== "undefined") Dictation.stop();

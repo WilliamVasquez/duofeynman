@@ -76,6 +76,17 @@ const API = (() => {
     insights: () => request("/api/progress/insights"),
     srsDue: () => request("/api/srs/due"),
     srsStats: () => request("/api/srs/stats"),
+    daily: () => request('/api/daily/today', {method: 'POST'}),
+    drill: (id) => request(`/api/srs/drills/${id}`),
+    drillCheck: (id, answer) => request(`/api/srs/drills/${id}/check`, {method: 'POST', body: {answer}}),
+    listeningNext: (slug) => request('/api/listening/next', {method: 'POST', body: {slug}}),
+    listeningReveal: (id) => request(`/api/listening/${id}/reveal`, {method: 'POST'}),
+    listeningCheck: (id, choice) => request(`/api/listening/${id}/check`, {method: 'POST', body: {choice}}),
+    async listeningAudio(id, slow = false) {
+      const res = await fetch(`/api/listening/${id}/audio?slow=${slow}`, {headers: {Authorization: `Bearer ${getToken()}`}});
+      if (!res.ok) throw new Error('Audio unavailable. Try again or reveal the text.');
+      return res.blob();
+    },
     dictationNext: () => request("/api/dictation/next", { method: "POST" }),
     async dictationAudio(id, slow = false) {
       const res = await fetch(`/api/dictation/${encodeURIComponent(id)}/audio?slow=${slow}`, {
@@ -87,6 +98,8 @@ const API = (() => {
     dictationCheck: (data) => request("/api/dictation/check", { method: "POST", body: data }),
     dialoguesList: () => request("/api/dialogues"),
     dialogue: (id) => request(`/api/dialogues/${id}`),
+    dialogueStart: (id) => request(`/api/dialogues/${id}/session`, { method: "POST" }),
+    dialogueContinue: (id, responseId) => request(`/api/dialogues/session/${id}/continue`, { method: "POST", body: { response_id: responseId } }),
     dialogueCheck: (data) => request("/api/dialogues/turn/check", { method: "POST", body: data }),
     getProfile: () => request("/api/me/profile"),
     putProfile: (data) => request("/api/me/profile", { method: "PUT", body: data }),
